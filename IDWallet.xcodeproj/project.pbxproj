@@ -9,14 +9,37 @@
 /* Begin PBXBuildFile section */
 		88064B54274BD42600566F55 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88064B53274BD42600566F55 /* ContentView.swift */; };
 		88064B57274BD43300566F55 /* empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88064B56274BD43200566F55 /* empty.swift */; };
+		88099F8A274BE08E0044C04B /* SampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88099F88274BE0880044C04B /* SampleTests.swift */; };
+		88099F9B274BE2AF0044C04B /* SampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88099F8B274BE2370044C04B /* SampleUITests.swift */; };
 		88BEF6FD274BCDE7003C4A0B /* IDWalletApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88BEF6FC274BCDE7003C4A0B /* IDWalletApp.swift */; };
 		88BEF701274BCDE8003C4A0B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88BEF700274BCDE8003C4A0B /* Assets.xcassets */; };
 		88BEF704274BCDE8003C4A0B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88BEF703274BCDE8003C4A0B /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		88099F83274BDC820044C04B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 88BEF6F1274BCDE7003C4A0B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 88BEF6F8274BCDE7003C4A0B;
+			remoteInfo = IDWallet;
+		};
+		88099F96274BE2A60044C04B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 88BEF6F1274BCDE7003C4A0B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 88BEF6F8274BCDE7003C4A0B;
+			remoteInfo = IDWallet;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		88064B53274BD42600566F55 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		88064B56274BD43200566F55 /* empty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = empty.swift; sourceTree = "<group>"; };
+		88099F7F274BDC820044C04B /* IDWalletTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IDWalletTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		88099F88274BE0880044C04B /* SampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTests.swift; sourceTree = "<group>"; };
+		88099F8B274BE2370044C04B /* SampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleUITests.swift; sourceTree = "<group>"; };
+		88099F90274BE2A60044C04B /* IDWalletUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IDWalletUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		88BEF6F9274BCDE7003C4A0B /* IDWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IDWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88BEF6FC274BCDE7003C4A0B /* IDWalletApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IDWalletApp.swift; sourceTree = "<group>"; };
 		88BEF700274BCDE8003C4A0B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -24,6 +47,20 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		88099F7C274BDC820044C04B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88099F8D274BE2A60044C04B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		88BEF6F6274BCDE7003C4A0B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -58,10 +95,52 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
+		88099F76274BDC630044C04B /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				88099F77274BDC630044C04B /* IDWalletTests */,
+				88099F79274BDC630044C04B /* IDWalletUITests */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		88099F77274BDC630044C04B /* IDWalletTests */ = {
+			isa = PBXGroup;
+			children = (
+				88099F78274BDC630044C04B /* ContentViewTests */,
+			);
+			path = IDWalletTests;
+			sourceTree = "<group>";
+		};
+		88099F78274BDC630044C04B /* ContentViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				88099F88274BE0880044C04B /* SampleTests.swift */,
+			);
+			path = ContentViewTests;
+			sourceTree = "<group>";
+		};
+		88099F79274BDC630044C04B /* IDWalletUITests */ = {
+			isa = PBXGroup;
+			children = (
+				88099F7A274BDC630044C04B /* ContentViewTests */,
+			);
+			path = IDWalletUITests;
+			sourceTree = "<group>";
+		};
+		88099F7A274BDC630044C04B /* ContentViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				88099F8B274BE2370044C04B /* SampleUITests.swift */,
+			);
+			path = ContentViewTests;
+			sourceTree = "<group>";
+		};
 		88BEF6F0274BCDE7003C4A0B = {
 			isa = PBXGroup;
 			children = (
 				88BEF6FB274BCDE7003C4A0B /* IDWallet */,
+				88099F76274BDC630044C04B /* Tests */,
 				88BEF6FA274BCDE7003C4A0B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -70,6 +149,8 @@
 			isa = PBXGroup;
 			children = (
 				88BEF6F9274BCDE7003C4A0B /* IDWallet.app */,
+				88099F7F274BDC820044C04B /* IDWalletTests.xctest */,
+				88099F90274BE2A60044C04B /* IDWalletUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,6 +179,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		88099F7E274BDC820044C04B /* IDWalletTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88099F85274BDC820044C04B /* Build configuration list for PBXNativeTarget "IDWalletTests" */;
+			buildPhases = (
+				88099F7B274BDC820044C04B /* Sources */,
+				88099F7C274BDC820044C04B /* Frameworks */,
+				88099F7D274BDC820044C04B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				88099F84274BDC820044C04B /* PBXTargetDependency */,
+			);
+			name = IDWalletTests;
+			productName = IDWalletTests;
+			productReference = 88099F7F274BDC820044C04B /* IDWalletTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		88099F8F274BE2A60044C04B /* IDWalletUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 88099F98274BE2A60044C04B /* Build configuration list for PBXNativeTarget "IDWalletUITests" */;
+			buildPhases = (
+				88099F8C274BE2A60044C04B /* Sources */,
+				88099F8D274BE2A60044C04B /* Frameworks */,
+				88099F8E274BE2A60044C04B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				88099F97274BE2A60044C04B /* PBXTargetDependency */,
+			);
+			name = IDWalletUITests;
+			productName = IDWalletUITests;
+			productReference = 88099F90274BE2A60044C04B /* IDWalletUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		88BEF6F8274BCDE7003C4A0B /* IDWallet */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 88BEF707274BCDE8003C4A0B /* Build configuration list for PBXNativeTarget "IDWallet" */;
@@ -125,6 +242,14 @@
 				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
+					88099F7E274BDC820044C04B = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = 88BEF6F8274BCDE7003C4A0B;
+					};
+					88099F8F274BE2A60044C04B = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = 88BEF6F8274BCDE7003C4A0B;
+					};
 					88BEF6F8274BCDE7003C4A0B = {
 						CreatedOnToolsVersion = 13.1;
 					};
@@ -144,11 +269,27 @@
 			projectRoot = "";
 			targets = (
 				88BEF6F8274BCDE7003C4A0B /* IDWallet */,
+				88099F7E274BDC820044C04B /* IDWalletTests */,
+				88099F8F274BE2A60044C04B /* IDWalletUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		88099F7D274BDC820044C04B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88099F8E274BE2A60044C04B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		88BEF6F7274BCDE7003C4A0B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -161,6 +302,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		88099F7B274BDC820044C04B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88099F8A274BE08E0044C04B /* SampleTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		88099F8C274BE2A60044C04B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				88099F9B274BE2AF0044C04B /* SampleUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		88BEF6F5274BCDE7003C4A0B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -173,7 +330,116 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		88099F84274BDC820044C04B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 88BEF6F8274BCDE7003C4A0B /* IDWallet */;
+			targetProxy = 88099F83274BDC820044C04B /* PBXContainerItemProxy */;
+		};
+		88099F97274BE2A60044C04B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 88BEF6F8274BCDE7003C4A0B /* IDWallet */;
+			targetProxy = 88099F96274BE2A60044C04B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		88099F86274BDC820044C04B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.bsi.IDWalletTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IDWallet.app/IDWallet";
+			};
+			name = Debug;
+		};
+		88099F87274BDC820044C04B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.bsi.IDWalletTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IDWallet.app/IDWallet";
+			};
+			name = Release;
+		};
+		88099F99274BE2A60044C04B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.bsi.IDWalletUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = IDWallet;
+			};
+			name = Debug;
+		};
+		88099F9A274BE2A60044C04B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.bsi.IDWalletUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = IDWallet;
+			};
+			name = Release;
+		};
 		88BEF705274BCDE8003C4A0B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -351,6 +617,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		88099F85274BDC820044C04B /* Build configuration list for PBXNativeTarget "IDWalletTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88099F86274BDC820044C04B /* Debug */,
+				88099F87274BDC820044C04B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		88099F98274BE2A60044C04B /* Build configuration list for PBXNativeTarget "IDWalletUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				88099F99274BE2A60044C04B /* Debug */,
+				88099F9A274BE2A60044C04B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		88BEF6F4274BCDE7003C4A0B /* Build configuration list for PBXProject "IDWallet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
