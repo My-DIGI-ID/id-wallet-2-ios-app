@@ -1,6 +1,6 @@
 import XCTest
 
-class SampleUITests: XCTestCase {
+class IDWalletUITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -15,7 +15,7 @@ class SampleUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testContentView_WhenAppLaunches_MustNotFails() throws {
+    func testViewController_WhenAppLaunches_MustNotFails() throws {
         // Initial States
         let app = XCUIApplication()
         
@@ -25,7 +25,7 @@ class SampleUITests: XCTestCase {
         // Expectations
     }
 
-    func testContentView_WhenAppLaunches_MustYieldExpectedPerformance() throws {
+    func testViewController_WhenAppLaunches_MustYieldExpectedPerformance() throws {
         // Initial States
         
         // Actions
