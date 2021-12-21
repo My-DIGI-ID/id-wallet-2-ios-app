@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6FA511362771B7A100D068BD /* AusweisApp2 in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA511352771B7A100D068BD /* AusweisApp2 */; };
 		8847D7782756376000C2A25B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8847D7772756376000C2A25B /* AppDelegate.swift */; };
 		8847D77A2756376000C2A25B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8847D7792756376000C2A25B /* SceneDelegate.swift */; };
 		8847D7812756376200C2A25B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8847D7802756376200C2A25B /* Assets.xcassets */; };
@@ -59,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FA511362771B7A100D068BD /* AusweisApp2 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +226,9 @@
 			dependencies = (
 			);
 			name = IDWallet;
+			packageProductDependencies = (
+				6FA511352771B7A100D068BD /* AusweisApp2 */,
+			);
 			productName = IDWallet;
 			productReference = 8847D7742756376000C2A25B /* IDWallet.app */;
 			productType = "com.apple.product-type.application";
@@ -296,6 +301,9 @@
 				Base,
 			);
 			mainGroup = 8847D76B2756376000C2A25B;
+			packageReferences = (
+				6FA511342771B7A100D068BD /* XCRemoteSwiftPackageReference "AusweisApp2-SDK-iOS" */,
+			);
 			productRefGroup = 8847D7752756376000C2A25B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -699,6 +707,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6FA511342771B7A100D068BD /* XCRemoteSwiftPackageReference "AusweisApp2-SDK-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Governikus/AusweisApp2-SDK-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6FA511352771B7A100D068BD /* AusweisApp2 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FA511342771B7A100D068BD /* XCRemoteSwiftPackageReference "AusweisApp2-SDK-iOS" */;
+			productName = AusweisApp2;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8847D76C2756376000C2A25B /* Project object */;
 }
