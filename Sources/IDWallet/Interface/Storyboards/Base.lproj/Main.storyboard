@@ -1,24 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="fki-Aw-ghL">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="IBMPlexSans-Bold.ttf">
+            <string>IBMPlexSans-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Main Navigation Controller-->
+        <scene sceneID="mik-24-qv8">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <navigationController id="fki-Aw-ghL" customClass="MainNavigationController" customModule="IDWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="4RW-el-BED">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="DiE-nj-Kv6" kind="relationship" relationship="rootViewController" id="Amt-rj-MGa"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m6r-zv-261" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="-2438" y="-210"/>
+        </scene>
+        <!--Bare Base View Controller-->
+        <scene sceneID="boG-f3-u4G">
+            <objects>
+                <viewController storyboardIdentifier="BareBaseViewController" id="DiE-nj-Kv6" customClass="BareBaseViewController" customModule="IDWallet" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8Na-fq-y5R">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImagePageBGGradient" translatesAutoresizingMaskIntoConstraints="NO" id="J2W-Zb-YAX">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.050000000000000003" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ImageSplashLogo" translatesAutoresizingMaskIntoConstraints="NO" id="Wc6-vm-5vb">
+                                <rect key="frame" x="138" y="288" width="138" height="142.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Wc6-vm-5vb" secondAttribute="height" multiplier="152:157" id="Oxx-IP-cpH"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.050000000000000003" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID Wallet" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="027-Gr-OP4">
+                                <rect key="frame" x="149.5" y="754" width="115" height="34"/>
+                                <fontDescription key="fontDescription" name="IBMPlexSans-Bold" family="IBM Plex Sans" pointSize="26"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ypg-zv-Q2o"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Wc6-vm-5vb" firstAttribute="width" secondItem="8Na-fq-y5R" secondAttribute="width" multiplier="0.333333" id="1Lm-48-J0n"/>
+                            <constraint firstItem="027-Gr-OP4" firstAttribute="centerX" secondItem="8Na-fq-y5R" secondAttribute="centerX" id="1ve-gf-pSp"/>
+                            <constraint firstItem="Ypg-zv-Q2o" firstAttribute="bottom" secondItem="027-Gr-OP4" secondAttribute="bottom" constant="74" id="LwU-lL-44N"/>
+                            <constraint firstAttribute="bottom" secondItem="J2W-Zb-YAX" secondAttribute="bottom" id="Pnb-N4-zGw"/>
+                            <constraint firstItem="J2W-Zb-YAX" firstAttribute="top" secondItem="8Na-fq-y5R" secondAttribute="top" id="QWG-nc-W99"/>
+                            <constraint firstItem="Wc6-vm-5vb" firstAttribute="centerX" secondItem="8Na-fq-y5R" secondAttribute="centerX" id="ghF-h7-AHP"/>
+                            <constraint firstItem="J2W-Zb-YAX" firstAttribute="leading" secondItem="Ypg-zv-Q2o" secondAttribute="leading" id="jBk-Fs-RdG"/>
+                            <constraint firstItem="Wc6-vm-5vb" firstAttribute="centerY" secondItem="8Na-fq-y5R" secondAttribute="centerY" multiplier="0.8" constant="1" id="kCE-re-vSq"/>
+                            <constraint firstItem="J2W-Zb-YAX" firstAttribute="trailing" secondItem="Ypg-zv-Q2o" secondAttribute="trailing" id="vpo-rI-vZy"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="xqs-JI-Sv7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OGc-rV-EvJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1626" y="-210"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ImagePageBGGradient" width="414" height="896"/>
+        <image name="ImageSplashLogo" width="152" height="160"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>

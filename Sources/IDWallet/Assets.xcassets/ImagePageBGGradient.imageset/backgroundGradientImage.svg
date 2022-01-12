@@ -1,0 +1,13 @@
+<svg width="414px" height="896px" viewBox="0 0 414 896" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <linearGradient x1="45.1199926%" y1="0%" x2="42.4893338%" y2="90.2156903%" id="linearGradient-ywpq2pjjef-1">
+            <stop stop-color="#4A38D2" offset="0%"></stop>
+            <stop stop-color="#2E2099" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="BasisID" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="0000_splash-screen" fill="url(#linearGradient-ywpq2pjjef-1)">
+            <rect id="Rectangle-Copy-3" x="0" y="0" width="414" height="896"></rect>
+        </g>
+    </g>
+</svg>
