@@ -50,5 +50,4 @@ extension AppDelegate {
     DDLogDebug("Logging initialized, application did finish launching")
     dynamicLogLevel = DDLogLevel.info
   }
-
 }

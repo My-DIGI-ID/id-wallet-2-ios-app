@@ -45,18 +45,10 @@ extension SetupCoordinator {
   private func startOnboardingShowAdditionalInformation(
     from viewController: OnboardingViewController
   ) {
-    let alert = UIAlertController(
-      title: "TODO: Mehr erfahren",
-      message: "Lorem ipsum?",
-      preferredStyle: .alert)
-    alert.addAction(
-      UIAlertAction(
-        title: "OK", style: .default,
-        handler: { _ in
-          // nothing to do
-        }
-      ))
-    viewController.present(alert, animated: true)
+      guard let url = Bundle.main.url(forResource: "learn-more-de", withExtension: "html") else { return }
+      let viewModel = WebViewModel(title: "Mehr erfahren", url: url)
+      let vc = WebViewController(viewModel: viewModel)
+      viewController.present(vc, animated: true)
   }
 
   private func startPinEntryInstructions(from previous: UIViewController) {

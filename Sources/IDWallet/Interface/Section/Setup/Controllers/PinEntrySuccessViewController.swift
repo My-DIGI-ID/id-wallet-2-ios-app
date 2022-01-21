@@ -223,7 +223,6 @@ class PinEntrySuccessViewController: BaseViewController<
           commitButton.translatesAutoresizingMaskIntoConstraints = false
           footerContainer.arrangedView = commitButton
         }
-
       }
     }
   }

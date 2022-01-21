@@ -87,6 +87,14 @@ extension UIColor {
     requiredColor(named: "AppAlt1TintInactiveContrast")
   }
 
+    static var primaryBlue: UIColor {
+        requiredColor(named: "primaryBlue")
+    }
+
+    static var dark: UIColor {
+        requiredColor(named: "dark")
+    }
+
   private static var disabledAlpha: CGFloat {
     return 100 / 255
   }

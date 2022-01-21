@@ -14,27 +14,45 @@ protocol PresenterProtocol: AnyObject {
   func present(
     _ viewController: UIViewController,
     replacing: UIViewController,
+    modalPresentationStyle: UIModalPresentationStyle,
+    modalTransitionStyle: UIModalTransitionStyle,
     animated: Bool,
     completion: (() -> Void)?
   )
+
   func present(
     _ viewController: UIViewController,
+    modalPresentationStyle: UIModalPresentationStyle,
+    modalTransitionStyle: UIModalTransitionStyle,
     animated: Bool,
     completion: (() -> Void)?
   )
+    
+    func dismiss(completion: (() -> Void)?)
 }
 
 extension PresenterProtocol {
+    
   func present(
     _ viewController: UIViewController,
     replacing: UIViewController? = nil,
     animated: Bool = true,
+    modalPresentationStyle: UIModalPresentationStyle = .fullScreen,
+    modalTransitionStyle: UIModalTransitionStyle = .crossDissolve,
     completion: (() -> Void)? = nil
   ) {
     if let replacing = replacing {
-      present(viewController, replacing: replacing, animated: true, completion: nil)
+      present(viewController, replacing: replacing,
+              modalPresentationStyle: modalPresentationStyle,
+              modalTransitionStyle: modalTransitionStyle,
+              animated: true,
+              completion: nil)
     } else {
-      present(viewController, animated: true, completion: nil)
+      present(viewController,
+              modalPresentationStyle: modalPresentationStyle,
+              modalTransitionStyle: modalTransitionStyle,
+              animated: true,
+              completion: nil)
     }
   }
 }
@@ -56,6 +74,8 @@ class Presenter: PresenterProtocol {
   func present(
     _ viewController: UIViewController,
     replacing currentViewController: UIViewController,
+    modalPresentationStyle: UIModalPresentationStyle = .fullScreen,
+    modalTransitionStyle: UIModalTransitionStyle = .crossDissolve,
     animated: Bool = true,
     completion: (() -> Void)? = nil
   ) {
@@ -68,9 +88,9 @@ class Presenter: PresenterProtocol {
       ContractError.guardAssertionFailed().fatal()
     }
 
-    currentViewController.modalTransitionStyle = .crossDissolve
-    viewController.modalPresentationStyle = .fullScreen
-    viewController.modalTransitionStyle = .crossDissolve
+    currentViewController.modalTransitionStyle = modalTransitionStyle
+    viewController.modalPresentationStyle = modalPresentationStyle
+    viewController.modalTransitionStyle = modalTransitionStyle
     currentViewController.dismiss(animated: false) {
       top.present(viewController, animated: true, completion: completion)
     }
@@ -78,6 +98,8 @@ class Presenter: PresenterProtocol {
 
   func present(
     _ viewController: UIViewController,
+    modalPresentationStyle: UIModalPresentationStyle = .fullScreen,
+    modalTransitionStyle: UIModalTransitionStyle = .crossDissolve,
     animated: Bool = true,
     completion: (() -> Void)? = nil
   ) {
@@ -90,11 +112,16 @@ class Presenter: PresenterProtocol {
         ).fatal()
       }
 
-      viewController.modalPresentationStyle = .fullScreen
-      viewController.modalTransitionStyle = .crossDissolve
+      viewController.modalPresentationStyle = modalPresentationStyle
+      viewController.modalTransitionStyle = modalTransitionStyle
       top.present(viewController, animated: animated) {
         completion?()
       }
     }
   }
+    
+    func dismiss(completion: (() -> Void)? = nil) {
+        let nav = self.navigationController
+        nav.topViewController?.dismiss(animated: true, completion: completion)
+    }
 }

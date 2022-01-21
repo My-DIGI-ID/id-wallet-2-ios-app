@@ -5,6 +5,7 @@
 //  Created by Michael Utech on 07.12.21.
 //
 
+import CoreGraphics
 import UIKit
 
 // MARK: - Conversions between UIColor and hex strings
@@ -100,4 +101,13 @@ extension UIColor {
 
     ContractError.missingColor(named).fatal()
   }
+}
+
+extension UIColor {
+    func image(size: CGSize = CGSize(width: 1, height: 1)) -> UIImage {
+        return UIGraphicsImageRenderer(size: size).image { context in
+            setFill()
+            context.fill(CGRect(origin: .zero, size: size))
+        }
+    }
 }

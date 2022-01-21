@@ -41,6 +41,14 @@ struct Images {
   var iconArrowUp: UIImage {
     UIImage.requiredImage(name: "ImageIconArrowUp")
   }
+    
+    var iconFail: UIImage {
+        UIImage.requiredImage(name: "fail")
+    }
+    
+    var close: UIImage {
+        UIImage.requiredImage(name: "close")
+    }
 
   var externalLinkIcon: UIImage {
     iconArrowUp

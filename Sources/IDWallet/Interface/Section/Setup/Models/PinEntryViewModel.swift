@@ -145,7 +145,7 @@ class PinEntryViewModel {
       ((minimumLength == nil || pin.count >= minimumLength!)
         && (maximumLength == nil || pin.count <= maximumLength!) && isValidPin(self.clearTextPin))
     canAdd = maximumLength == nil || clearTextPin.count < maximumLength!
-    canRemove = clearTextPin.count > 0
+      canRemove = !clearTextPin.isEmpty
     var newPin: [PinCharacterRepresentation] = []
     for _ in 0..<clearTextPin.count {
       newPin.append(.setHidden)
@@ -176,7 +176,7 @@ extension PinEntryViewModel {
           in: character,
           options: NSRegularExpression.MatchingOptions(),
           range: range)
-        if matches.count == 0 {
+          if matches.isEmpty {
           // No problem to let the character enter logs, since it's not valid and reveals nothing
           throw PinValidationError.invalidPinCharacter(
             actual: character,

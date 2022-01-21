@@ -17,7 +17,6 @@ protocol LayoutFactory {
   func addControlledConstraints(
     _ constraints: [NSLayoutConstraint], identifier: String, activate: Bool
   ) -> [NSLayoutConstraint]
-
 }
 
 extension LayoutFactory {

@@ -167,6 +167,21 @@
 		8EF119A527718A8B00BDC5CE /* PinEntrySuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF119A22771857E00BDC5CE /* PinEntrySuccessViewController.swift */; };
 		8EF5CD30275777B900F464B7 /* PinEntryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5CD2F275777B900F464B7 /* PinEntryVC.swift */; };
 		8EF5CD3427577BBB00F464B7 /* NumberPadKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5CD3327577BBB00F464B7 /* NumberPadKey.swift */; };
+		9519372A279187D200ED0AF2 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95193729279187D200ED0AF2 /* WebViewController.swift */; };
+		952FF66B2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
+		952FF66C2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
+		952FF66D2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
+		9542C7E327988FF400784147 /* String+AttributedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E227988FF400784147 /* String+AttributedStyle.swift */; };
+		9542C7E5279890E300784147 /* NSAttributedString+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */; };
+		9542C7E727997A8800784147 /* Sequence+NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */; };
+		95873EB42791A98700A924C8 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95873EB32791A98700A924C8 /* WebView.swift */; };
+		95873EBA2791B23300A924C8 /* HelpViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95873EB92791B23300A924C8 /* HelpViewCoordinator.swift */; };
+		95873EBC2791C01400A924C8 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95873EBB2791C01400A924C8 /* UIView+Layout.swift */; };
+		95C107DA2795896300FB02AD /* learn-more-de.html in Resources */ = {isa = PBXBuildFile; fileRef = 95873EBF2791F8A000A924C8 /* learn-more-de.html */; };
+		95C107DC27958FCB00FB02AD /* WalletAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107DB27958FCB00FB02AD /* WalletAlertViewController.swift */; };
+		95C107E02795B7E300FB02AD /* ErrorAlertCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107DF2795B7E300FB02AD /* ErrorAlertCoordinator.swift */; };
+		95C107E52796CEE200FB02AD /* ErrorType+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107E42796CEE200FB02AD /* ErrorType+Image.swift */; };
+		95C107E72796CF0E00FB02AD /* ErrorAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107E62796CF0E00FB02AD /* ErrorAlertViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -265,6 +280,19 @@
 		8EF119A22771857E00BDC5CE /* PinEntrySuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinEntrySuccessViewController.swift; sourceTree = "<group>"; };
 		8EF5CD2F275777B900F464B7 /* PinEntryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinEntryVC.swift; sourceTree = "<group>"; };
 		8EF5CD3327577BBB00F464B7 /* NumberPadKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadKey.swift; sourceTree = "<group>"; };
+		95193729279187D200ED0AF2 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		952FF66A2796E703003840F9 /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
+		9542C7E227988FF400784147 /* String+AttributedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+AttributedStyle.swift"; sourceTree = "<group>"; };
+		9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Alignment.swift"; sourceTree = "<group>"; };
+		9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+NSLayoutConstraint.swift"; sourceTree = "<group>"; };
+		95873EB32791A98700A924C8 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		95873EB92791B23300A924C8 /* HelpViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewCoordinator.swift; sourceTree = "<group>"; };
+		95873EBB2791C01400A924C8 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
+		95873EBF2791F8A000A924C8 /* learn-more-de.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "learn-more-de.html"; sourceTree = "<group>"; };
+		95C107DB27958FCB00FB02AD /* WalletAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAlertViewController.swift; sourceTree = "<group>"; };
+		95C107DF2795B7E300FB02AD /* ErrorAlertCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertCoordinator.swift; sourceTree = "<group>"; };
+		95C107E42796CEE200FB02AD /* ErrorType+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ErrorType+Image.swift"; sourceTree = "<group>"; };
+		95C107E62796CF0E00FB02AD /* ErrorAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,6 +351,7 @@
 		8847D7762756376000C2A25B /* IDWallet */ = {
 			isa = PBXGroup;
 			children = (
+				95873EBD2791F85100A924C8 /* Resources */,
 				8E43319E275914CF00D50127 /* Fonts */,
 				8847D7A827563C5B00C2A25B /* Interface */,
 				8847D7D127563EC100C2A25B /* Supporting Files */,
@@ -368,7 +397,9 @@
 		8847D7A927563C5B00C2A25B /* Section */ = {
 			isa = PBXGroup;
 			children = (
+				95C107DD2795B7CE00FB02AD /* Alert */,
 				8847D7AA27563C5B00C2A25B /* Main */,
+				95873EB72791B1EF00A924C8 /* Help */,
 				8E8C40472764BEDB00DBC979 /* Setup */,
 			);
 			path = Section;
@@ -412,6 +443,7 @@
 		8847D7B427563CAB00C2A25B /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				95C107E32796CECA00FB02AD /* Alerts */,
 				8E8C408F2769C1E800DBC979 /* Coordinators */,
 				8E4331BF2759164900D50127 /* Theme */,
 				8E8C405C27660DC300DBC979 /* ViewControllers */,
@@ -482,6 +514,7 @@
 			isa = PBXGroup;
 			children = (
 				8ECA227F276F3D9D00CB8D81 /* ZeroOrMore.swift */,
+				952FF66A2796E703003840F9 /* WebViewModel.swift */,
 			);
 			path = Structures;
 			sourceTree = "<group>";
@@ -503,6 +536,8 @@
 				8E8C4063276651CC00DBC979 /* README.md */,
 				8E8C40742767DB0D00DBC979 /* BaseVC */,
 				8E7554C927729A410016DEB0 /* BareBaseVC.swift */,
+				95193729279187D200ED0AF2 /* WebViewController.swift */,
+				95C107DB27958FCB00FB02AD /* WalletAlertViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -524,6 +559,7 @@
 				8EAF8414275F4A2D00283D0B /* PIN */,
 				8ECA2288277084A700CB8D81 /* Layout */,
 				8E8C40702767373600DBC979 /* Rounded.swift */,
+				95873EB32791A98700A924C8 /* WebView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -623,6 +659,10 @@
 				8E8C405427650CBB00DBC979 /* UIImageExtensions.swift */,
 				8E8C40872768AD6900DBC979 /* UIButtonExtensions.swift */,
 				8E83F4E8276B2EE200469187 /* UIViewExtensions.swift */,
+				95873EBB2791C01400A924C8 /* UIView+Layout.swift */,
+				9542C7E227988FF400784147 /* String+AttributedStyle.swift */,
+				9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */,
+				9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */,
 			);
 			path = "Convenience Extensions";
 			sourceTree = "<group>";
@@ -650,6 +690,63 @@
 			path = Layout;
 			sourceTree = "<group>";
 		};
+		95873EB72791B1EF00A924C8 /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				95873EB82791B20800A924C8 /* Coordinators */,
+			);
+			path = Help;
+			sourceTree = "<group>";
+		};
+		95873EB82791B20800A924C8 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				95873EB92791B23300A924C8 /* HelpViewCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		95873EBD2791F85100A924C8 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				95873EBE2791F85B00A924C8 /* Html */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		95873EBE2791F85B00A924C8 /* Html */ = {
+			isa = PBXGroup;
+			children = (
+				95873EBF2791F8A000A924C8 /* learn-more-de.html */,
+			);
+			path = Html;
+			sourceTree = "<group>";
+		};
+		95C107DD2795B7CE00FB02AD /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				95C107DE2795B7D300FB02AD /* Coordinators */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		95C107DE2795B7D300FB02AD /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				95C107DF2795B7E300FB02AD /* ErrorAlertCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		95C107E32796CECA00FB02AD /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				95C107E62796CF0E00FB02AD /* ErrorAlertViewModel.swift */,
+				95C107E42796CEE200FB02AD /* ErrorType+Image.swift */,
+			);
+			path = Alerts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -660,8 +757,8 @@
 				8847D7702756376000C2A25B /* Sources */,
 				8847D7712756376000C2A25B /* Frameworks */,
 				8847D7722756376000C2A25B /* Resources */,
-				8E88911D2773D2B800D0E6A3 /* ShellScript */,
-				8E88911E2773DD7800D0E6A3 /* ShellScript */,
+				8E88911D2773D2B800D0E6A3 /* swift-format */,
+				8E88911E2773DD7800D0E6A3 /* swiftlint */,
 			);
 			buildRules = (
 			);
@@ -775,6 +872,7 @@
 			files = (
 				8847D7D827563F6200C2A25B /* LaunchScreen.storyboard in Resources */,
 				8E4331BB2759152B00D50127 /* IBMPlexSans-Bold.ttf in Resources */,
+				95C107DA2795896300FB02AD /* learn-more-de.html in Resources */,
 				8847D7812756376200C2A25B /* Assets.xcassets in Resources */,
 				8E4331BA2759152B00D50127 /* IBMPlexSans-Regular.ttf in Resources */,
 				8847D7D727563F6200C2A25B /* Main.storyboard in Resources */,
@@ -804,7 +902,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8E88911D2773D2B800D0E6A3 /* ShellScript */ = {
+		8E88911D2773D2B800D0E6A3 /* swift-format */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -813,6 +911,7 @@
 			);
 			inputPaths = (
 			);
+			name = "swift-format";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -821,7 +920,7 @@
 			shellPath = /bin/sh;
 			shellScript = "(\nPATH=\"$PATH:/opt/homebrew/bin\"\nif which swift-format >/dev/null; then\n    exit 0 # contradictory warnings re. swiftlint - need to resolve rules for both tools\n    swift-format -m lint -r ${PROJECT_DIR}\n    exit 0\nelse\n    echo \"warning: swift-format not installed\"\nfi\n)\n";
 		};
-		8E88911E2773DD7800D0E6A3 /* ShellScript */ = {
+		8E88911E2773DD7800D0E6A3 /* swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -830,6 +929,7 @@
 			);
 			inputPaths = (
 			);
+			name = swiftlint;
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -846,6 +946,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E7554C2277291DA0016DEB0 /* BaseVCStyle.swift in Sources */,
+				95C107E52796CEE200FB02AD /* ErrorType+Image.swift in Sources */,
 				8E7554CA27729A410016DEB0 /* BareBaseVC.swift in Sources */,
 				8EAF8407275D927B00283D0B /* PinCodeDigitView.swift in Sources */,
 				8E98817D276AB3EB002F629C /* Authenticator.swift in Sources */,
@@ -856,6 +957,7 @@
 				8ECA2284276F596F00CB8D81 /* Layout.swift in Sources */,
 				8EAF841F275FE36F00283D0B /* ColorScheme.swift in Sources */,
 				8E88912C27745A6500D0E6A3 /* BindingFactory.swift in Sources */,
+				95873EB42791A98700A924C8 /* WebView.swift in Sources */,
 				8E8C40882768AD6900DBC979 /* UIButtonExtensions.swift in Sources */,
 				8EF1199F277168CA00BDC5CE /* PinEntryIntroViewController.swift in Sources */,
 				8E88912427744F2E00D0E6A3 /* ViewFactory.swift in Sources */,
@@ -864,7 +966,9 @@
 				8E8C408C2769C15400DBC979 /* Coordinator.swift in Sources */,
 				8EAF8405275D90FC00283D0B /* PinCodeView.swift in Sources */,
 				8E8C408427680AE400DBC979 /* OnboardingPageVC.swift in Sources */,
+				9542C7E5279890E300784147 /* NSAttributedString+Alignment.swift in Sources */,
 				8E43319D27590FB700D50127 /* NumberPad.swift in Sources */,
+				95C107DC27958FCB00FB02AD /* WalletAlertViewController.swift in Sources */,
 				8E988182276AB437002F629C /* AppCoordinator.swift in Sources */,
 				8E8C405527650CBB00DBC979 /* UIImageExtensions.swift in Sources */,
 				8EAF8413275F443A00283D0B /* ValidationError.swift in Sources */,
@@ -872,25 +976,33 @@
 				8E988175276A37B0002F629C /* MainNavigationController.swift in Sources */,
 				8EAF841D275FE2F400283D0B /* UIFontExtensions.swift in Sources */,
 				8E988188276AB53D002F629C /* SetupCoordinator.swift in Sources */,
+				9542C7E327988FF400784147 /* String+AttributedStyle.swift in Sources */,
 				8EAF8418275F4CC700283D0B /* PinCharacterRepresentation.swift in Sources */,
 				8ECA2280276F3E4200CB8D81 /* ZeroOrMore.swift in Sources */,
 				8847D7782756376000C2A25B /* AppDelegate.swift in Sources */,
+				95C107E02795B7E300FB02AD /* ErrorAlertCoordinator.swift in Sources */,
+				95C107E72796CF0E00FB02AD /* ErrorAlertViewModel.swift in Sources */,
 				8847D77A2756376000C2A25B /* SceneDelegate.swift in Sources */,
 				8EF119A327718A8A00BDC5CE /* PinEntrySuccessViewController.swift in Sources */,
 				8E83F4E9276B2EE300469187 /* UIViewExtensions.swift in Sources */,
+				9542C7E727997A8800784147 /* Sequence+NSLayoutConstraint.swift in Sources */,
 				8E8C404D2764BFB500DBC979 /* OnboardingPageControl.swift in Sources */,
 				8EAF841B275FE25600283D0B /* UIColorExtensions.swift in Sources */,
+				95873EBC2791C01400A924C8 /* UIView+Layout.swift in Sources */,
 				8EF5CD30275777B900F464B7 /* PinEntryVC.swift in Sources */,
 				8E8891282774572500D0E6A3 /* LayoutFactory.swift in Sources */,
 				8EAF8411275F421900283D0B /* AppError.swift in Sources */,
 				8ECA228A277084CB00CB8D81 /* AlignmentWrapperView.swift in Sources */,
 				8EAF8416275F4B5E00283D0B /* PinValidationError.swift in Sources */,
+				952FF66B2796E703003840F9 /* WebViewModel.swift in Sources */,
+				95873EBA2791B23300A924C8 /* HelpViewCoordinator.swift in Sources */,
 				8EAF8422275FE6D000283D0B /* Typography.swift in Sources */,
 				8E7554CE277305580016DEB0 /* ContractError.swift in Sources */,
 				8E988179276AB3CF002F629C /* AppState.swift in Sources */,
 				8E98818C276AB815002F629C /* Presenter.swift in Sources */,
 				8EF5CD3427577BBB00F464B7 /* NumberPadKey.swift in Sources */,
 				8E8C40422763264800DBC979 /* MultipleErrors.swift in Sources */,
+				9519372A279187D200ED0AF2 /* WebViewController.swift in Sources */,
 				8E7554C02772918E0016DEB0 /* BaseViewID.swift in Sources */,
 				8E7554BD277290D90016DEB0 /* BaseVCLayout.swift in Sources */,
 			);
@@ -919,6 +1031,7 @@
 				8E7554C3277291DA0016DEB0 /* BaseVCStyle.swift in Sources */,
 				8E8C405627650CBB00DBC979 /* UIImageExtensions.swift in Sources */,
 				8EAF843E276102CF00283D0B /* PinCodeDigitView.swift in Sources */,
+				952FF66C2796E703003840F9 /* WebViewModel.swift in Sources */,
 				8E83F4EA276B2EE300469187 /* UIViewExtensions.swift in Sources */,
 				8EF119A0277168CA00BDC5CE /* PinEntryIntroViewController.swift in Sources */,
 				8EAF8440276102CF00283D0B /* NumberPadKey.swift in Sources */,
@@ -987,6 +1100,7 @@
 				8EAF84262760B45D00283D0B /* DevicePinEntryProcessTest.swift in Sources */,
 				8ECA2282276F3E4300CB8D81 /* ZeroOrMore.swift in Sources */,
 				8E8C404F2764BFB500DBC979 /* OnboardingPageControl.swift in Sources */,
+				952FF66D2796E703003840F9 /* WebViewModel.swift in Sources */,
 				8E7554C4277291DA0016DEB0 /* BaseVCStyle.swift in Sources */,
 				8EAF8431276102BA00283D0B /* PinCodeView.swift in Sources */,
 				8E88912A2774572500D0E6A3 /* LayoutFactory.swift in Sources */,
@@ -1090,7 +1204,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1145,7 +1259,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1160,9 +1274,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 59M7GPP9B8;
+				DEVELOPMENT_TEAM = 3392FS42B6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/IDWallet/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1177,6 +1292,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.bsi.IDWallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1188,9 +1304,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 59M7GPP9B8;
+				DEVELOPMENT_TEAM = 3392FS42B6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/IDWallet/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1205,6 +1322,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.bsi.IDWallet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
