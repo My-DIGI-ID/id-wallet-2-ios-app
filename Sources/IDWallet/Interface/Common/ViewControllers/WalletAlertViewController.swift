@@ -52,7 +52,7 @@ class WalletAlertViewController: BareBaseViewController {
         let navigationBar = UINavigationBar(frame: .zero)
         navigationBar.barTintColor = .white
         navigationBar.isTranslucent = false
-        navigationBar.titleTextAttributes = [.foregroundColor: UIColor.dark,
+        navigationBar.titleTextAttributes = [.foregroundColor: UIColor.walBlack,
                                              .font: Constants.NavigationBar.titleFont]
         
         navigationBar.shadowImage = UIImage()

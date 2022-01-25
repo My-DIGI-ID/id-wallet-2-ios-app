@@ -85,15 +85,7 @@ extension UIColor {
 
   static var appAlt1TintInactiveContrast: UIColor {
     requiredColor(named: "AppAlt1TintInactiveContrast")
-  }
-
-    static var primaryBlue: UIColor {
-        requiredColor(named: "primaryBlue")
-    }
-
-    static var dark: UIColor {
-        requiredColor(named: "dark")
-    }
+  }    
 
   private static var disabledAlpha: CGFloat {
     return 100 / 255
@@ -114,32 +106,32 @@ struct ColorScheme: Equatable {
   }
   static var main = ColorScheme(
     preferredStatusBarStyle: .lightContent,
-    backgroundColor: .appMainBackground,
+    backgroundColor: .white,
     backgroundGradient: Gradient(
       gradientType: .axial,
       colors: [
-        UIColor.appMainGradientStart,
-        UIColor.appMainGradientEnd
+        UIColor.gradientStart,
+        UIColor.gradientEnd
       ],
       startPoint: CGPoint(x: 0, y: 0),
       endPoint: CGPoint(x: 0, y: 1000)
     ),
-    textColor: .appMainText,
-    textSecondaryColor: .appMainTextSecondary,
-    tintColor: .appMainTint,
-    tintContrastColor: .appMainTintContrast,
-    tintInactiveColor: .appMainTintInactive,
-    tintInactiveContrastColor: .appMainTintInactiveContrast
+    textColor: .walBlack,
+    textSecondaryColor: .grey1,
+    tintColor: .primaryBlue,
+    tintContrastColor: .white,
+    tintInactiveColor: .grey4,
+    tintInactiveContrastColor: .grey2
   )
   static var alternative = ColorScheme(
     preferredStatusBarStyle: .darkContent,
-    backgroundColor: .appAlt1Background,
-    textColor: .appAlt1Text,
-    textSecondaryColor: .appAlt1TextSecondary,
-    tintColor: .appAlt1Tint,
-    tintContrastColor: .appAlt1TintContrast,
-    tintInactiveColor: .appAlt1TintInactive,
-    tintInactiveContrastColor: .appAlt1TintInactiveContrast
+    backgroundColor: .white,
+    textColor: .black,
+    textSecondaryColor: .grey1,
+    tintColor: .primaryBlue,
+    tintContrastColor: .white,
+    tintInactiveColor: .grey4,
+    tintInactiveContrastColor: .grey2
   )
   let preferredStatusBarStyle: UIStatusBarStyle
   let backgroundColor: UIColor

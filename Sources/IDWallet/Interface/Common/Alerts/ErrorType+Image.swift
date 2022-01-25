@@ -14,13 +14,32 @@
 import Foundation
 import UIKit
 
+private enum Constants {
+    enum Image {
+        static let fail: UIImage = #imageLiteral(resourceName: "fail")
+        static let error: UIImage = #imageLiteral(resourceName: "error")
+        static let unkown: UIImage = #imageLiteral(resourceName: "unknownError")
+        static let jailbreak: UIImage = #imageLiteral(resourceName: "jailbreak")
+        static let noInternet: UIImage = #imageLiteral(resourceName: "noInternet")
+        static let timeout: UIImage = #imageLiteral(resourceName: "timeout")
+    }
+}
+
 extension ErrorType {
     var image: UIImage {
         switch self {
         case .fail:
-            return Images.regular.iconFail
-        default:
-            return UIImage()
+            return Constants.Image.fail
+        case .error:
+            return Constants.Image.error
+        case .unknownError:
+            return Constants.Image.unkown
+        case .jailbreak:
+            return Constants.Image.jailbreak
+        case .noInternet:
+            return Constants.Image.noInternet
+        case .timeout:
+            return Constants.Image.timeout
         }
     }
 }

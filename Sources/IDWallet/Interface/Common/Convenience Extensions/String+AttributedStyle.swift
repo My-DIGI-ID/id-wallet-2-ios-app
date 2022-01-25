@@ -21,10 +21,10 @@ enum AttributedStyle {
     var attributes: [NSAttributedString.Key: Any] {
         switch self {
         case .header:
-            return [.foregroundColor: UIColor.dark,
+            return [.foregroundColor: UIColor.walBlack,
                     .font: Typography.regular.headingFont]
         case .subHeading:
-            return [.foregroundColor: UIColor.dark,
+            return [.foregroundColor: UIColor.walBlack,
                     .font: Typography.regular.subHeadingFont]
         }
     }

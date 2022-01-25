@@ -182,6 +182,11 @@
 		95C107E02795B7E300FB02AD /* ErrorAlertCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107DF2795B7E300FB02AD /* ErrorAlertCoordinator.swift */; };
 		95C107E52796CEE200FB02AD /* ErrorType+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107E42796CEE200FB02AD /* ErrorType+Image.swift */; };
 		95C107E72796CF0E00FB02AD /* ErrorAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107E62796CF0E00FB02AD /* ErrorAlertViewModel.swift */; };
+		95F9A2AC27A05482003F15B5 /* UIColor+IDWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F9A2AB27A05482003F15B5 /* UIColor+IDWallet.swift */; };
+		95F9A2AD27A055DA003F15B5 /* UIColor+IDWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F9A2AB27A05482003F15B5 /* UIColor+IDWallet.swift */; };
+		95F9A2AE27A055DA003F15B5 /* UIColor+IDWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F9A2AB27A05482003F15B5 /* UIColor+IDWallet.swift */; };
+		95F9A2B027A05D98003F15B5 /* UIColor+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F9A2AF27A05D98003F15B5 /* UIColor+Image.swift */; };
+		95F9A2B227A05F2E003F15B5 /* CALayer+SketchShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F9A2B127A05F2E003F15B5 /* CALayer+SketchShadow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -293,6 +298,9 @@
 		95C107DF2795B7E300FB02AD /* ErrorAlertCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertCoordinator.swift; sourceTree = "<group>"; };
 		95C107E42796CEE200FB02AD /* ErrorType+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ErrorType+Image.swift"; sourceTree = "<group>"; };
 		95C107E62796CF0E00FB02AD /* ErrorAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertViewModel.swift; sourceTree = "<group>"; };
+		95F9A2AB27A05482003F15B5 /* UIColor+IDWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+IDWallet.swift"; sourceTree = "<group>"; };
+		95F9A2AF27A05D98003F15B5 /* UIColor+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Image.swift"; sourceTree = "<group>"; };
+		95F9A2B127A05F2E003F15B5 /* CALayer+SketchShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+SketchShadow.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -506,6 +514,7 @@
 				8E88912327744F2E00D0E6A3 /* ViewFactory.swift */,
 				8E8891272774572500D0E6A3 /* LayoutFactory.swift */,
 				8E88912B27745A6500D0E6A3 /* BindingFactory.swift */,
+				95F9A2AB27A05482003F15B5 /* UIColor+IDWallet.swift */,
 			);
 			path = Theme;
 			sourceTree = "<group>";
@@ -663,6 +672,8 @@
 				9542C7E227988FF400784147 /* String+AttributedStyle.swift */,
 				9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */,
 				9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */,
+				95F9A2AF27A05D98003F15B5 /* UIColor+Image.swift */,
+				95F9A2B127A05F2E003F15B5 /* CALayer+SketchShadow.swift */,
 			);
 			path = "Convenience Extensions";
 			sourceTree = "<group>";
@@ -968,6 +979,7 @@
 				8E8C408427680AE400DBC979 /* OnboardingPageVC.swift in Sources */,
 				9542C7E5279890E300784147 /* NSAttributedString+Alignment.swift in Sources */,
 				8E43319D27590FB700D50127 /* NumberPad.swift in Sources */,
+				95F9A2B227A05F2E003F15B5 /* CALayer+SketchShadow.swift in Sources */,
 				95C107DC27958FCB00FB02AD /* WalletAlertViewController.swift in Sources */,
 				8E988182276AB437002F629C /* AppCoordinator.swift in Sources */,
 				8E8C405527650CBB00DBC979 /* UIImageExtensions.swift in Sources */,
@@ -998,6 +1010,8 @@
 				95873EBA2791B23300A924C8 /* HelpViewCoordinator.swift in Sources */,
 				8EAF8422275FE6D000283D0B /* Typography.swift in Sources */,
 				8E7554CE277305580016DEB0 /* ContractError.swift in Sources */,
+				95F9A2B027A05D98003F15B5 /* UIColor+Image.swift in Sources */,
+				95F9A2AC27A05482003F15B5 /* UIColor+IDWallet.swift in Sources */,
 				8E988179276AB3CF002F629C /* AppState.swift in Sources */,
 				8E98818C276AB815002F629C /* Presenter.swift in Sources */,
 				8EF5CD3427577BBB00F464B7 /* NumberPadKey.swift in Sources */,
@@ -1043,6 +1057,7 @@
 				8EAF8441276102CF00283D0B /* PinValidationError.swift in Sources */,
 				8E7554C5277291E10016DEB0 /* BaseVCLayout.swift in Sources */,
 				8E8C408D2769C15400DBC979 /* Coordinator.swift in Sources */,
+				95F9A2AE27A055DA003F15B5 /* UIColor+IDWallet.swift in Sources */,
 				8E8C405A2765FA7000DBC979 /* BaseVC.swift in Sources */,
 				8EAF8444276102D700283D0B /* AppError.swift in Sources */,
 				8E8C408527680AE400DBC979 /* OnboardingPageVC.swift in Sources */,
@@ -1099,6 +1114,7 @@
 				8EAF8435276102BA00283D0B /* NumberPadKey.swift in Sources */,
 				8EAF84262760B45D00283D0B /* DevicePinEntryProcessTest.swift in Sources */,
 				8ECA2282276F3E4300CB8D81 /* ZeroOrMore.swift in Sources */,
+				95F9A2AD27A055DA003F15B5 /* UIColor+IDWallet.swift in Sources */,
 				8E8C404F2764BFB500DBC979 /* OnboardingPageControl.swift in Sources */,
 				952FF66D2796E703003840F9 /* WebViewModel.swift in Sources */,
 				8E7554C4277291DA0016DEB0 /* BaseVCStyle.swift in Sources */,

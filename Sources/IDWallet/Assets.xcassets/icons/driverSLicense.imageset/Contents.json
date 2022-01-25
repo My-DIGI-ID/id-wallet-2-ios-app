@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "driver-license.svg.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

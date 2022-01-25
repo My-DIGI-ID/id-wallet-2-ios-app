@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "activity.svg.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
