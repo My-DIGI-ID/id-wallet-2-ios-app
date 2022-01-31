@@ -90,6 +90,10 @@ extension UIColor {
   private static var disabledAlpha: CGFloat {
     return 100 / 255
   }
+
+  static var appGrey1: UIColor {
+    UIColor.init(hexString: "#55576B")!
+  }
 }
 
 struct ColorScheme: Equatable {

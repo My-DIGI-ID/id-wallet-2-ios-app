@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6F1A9B85279025EC009B3359 /* Aries in Frameworks */ = {isa = PBXBuildFile; productRef = 6F1A9B84279025EC009B3359 /* Aries */; };
 		6F1A9B8827902711009B3359 /* Mediator in Frameworks */ = {isa = PBXBuildFile; productRef = 6F1A9B8727902711009B3359 /* Mediator */; };
 		6FA511362771B7A100D068BD /* AusweisApp2 in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA511352771B7A100D068BD /* AusweisApp2 */; };
 		8847D7782756376000C2A25B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8847D7772756376000C2A25B /* AppDelegate.swift */; };
@@ -159,6 +158,10 @@
 		8ECA228A277084CB00CB8D81 /* AlignmentWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA2289277084CB00CB8D81 /* AlignmentWrapperView.swift */; };
 		8ECA228B277084CB00CB8D81 /* AlignmentWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA2289277084CB00CB8D81 /* AlignmentWrapperView.swift */; };
 		8ECA228C277084CB00CB8D81 /* AlignmentWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA2289277084CB00CB8D81 /* AlignmentWrapperView.swift */; };
+		8EDC79CA278F727F0032E348 /* WalletTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDC79C9278F727F0032E348 /* WalletTabBarController.swift */; };
+		8EDC79CD27916B620032E348 /* CustomBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDC79CC27916B620032E348 /* CustomBarButton.swift */; };
+		8EDC79D1279679A90032E348 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDC79D0279679A90032E348 /* CustomTabBar.swift */; };
+		8EDC79D42797EFC10032E348 /* EmptyWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EDC79D32797EFC00032E348 /* EmptyWalletViewController.swift */; };
 		8EF1199F277168CA00BDC5CE /* PinEntryIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF1199E277168CA00BDC5CE /* PinEntryIntroViewController.swift */; };
 		8EF119A0277168CA00BDC5CE /* PinEntryIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF1199E277168CA00BDC5CE /* PinEntryIntroViewController.swift */; };
 		8EF119A1277168CA00BDC5CE /* PinEntryIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF1199E277168CA00BDC5CE /* PinEntryIntroViewController.swift */; };
@@ -281,6 +284,10 @@
 		8ECA227F276F3D9D00CB8D81 /* ZeroOrMore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroOrMore.swift; sourceTree = "<group>"; };
 		8ECA2283276F596F00CB8D81 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		8ECA2289277084CB00CB8D81 /* AlignmentWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlignmentWrapperView.swift; sourceTree = "<group>"; };
+		8EDC79C9278F727F0032E348 /* WalletTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTabBarController.swift; sourceTree = "<group>"; };
+		8EDC79CC27916B620032E348 /* CustomBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBarButton.swift; sourceTree = "<group>"; };
+		8EDC79D0279679A90032E348 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		8EDC79D32797EFC00032E348 /* EmptyWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyWalletViewController.swift; sourceTree = "<group>"; };
 		8EF1199E277168CA00BDC5CE /* PinEntryIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinEntryIntroViewController.swift; sourceTree = "<group>"; };
 		8EF119A22771857E00BDC5CE /* PinEntrySuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinEntrySuccessViewController.swift; sourceTree = "<group>"; };
 		8EF5CD2F275777B900F464B7 /* PinEntryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinEntryVC.swift; sourceTree = "<group>"; };
@@ -310,7 +317,6 @@
 			files = (
 				8EAF840E275EEEA000283D0B /* CocoaLumberjackSwift in Frameworks */,
 				6F1A9B8827902711009B3359 /* Mediator in Frameworks */,
-				6F1A9B85279025EC009B3359 /* Aries in Frameworks */,
 				8EAF840C275EEEA000283D0B /* CocoaLumberjack in Frameworks */,
 				6FA511362771B7A100D068BD /* AusweisApp2 in Frameworks */,
 			);
@@ -409,6 +415,7 @@
 				8847D7AA27563C5B00C2A25B /* Main */,
 				95873EB72791B1EF00A924C8 /* Help */,
 				8E8C40472764BEDB00DBC979 /* Setup */,
+				8EDC79C7278F71F40032E348 /* Wallet */,
 			);
 			path = Section;
 			sourceTree = "<group>";
@@ -419,7 +426,6 @@
 				8E988180276AB41B002F629C /* Coordinators */,
 				8847D7AB27563C5B00C2A25B /* Models */,
 				8847D7AD27563C5B00C2A25B /* Controllers */,
-				8847D7AF27563C5B00C2A25B /* Views */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -439,13 +445,6 @@
 				8E988174276A37B0002F629C /* MainNavigationController.swift */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		8847D7AF27563C5B00C2A25B /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 		8847D7B427563CAB00C2A25B /* Common */ = {
@@ -564,6 +563,7 @@
 			isa = PBXGroup;
 			children = (
 				8E8C40622766516000DBC979 /* README.md */,
+				8EDC79D22796846D0032E348 /* TabBar */,
 				8E8C405D27664ED100DBC979 /* NumberPad */,
 				8EAF8414275F4A2D00283D0B /* PIN */,
 				8ECA2288277084A700CB8D81 /* Layout */,
@@ -701,6 +701,40 @@
 			path = Layout;
 			sourceTree = "<group>";
 		};
+		8EDC79C7278F71F40032E348 /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				8EDC79CB27916B3F0032E348 /* Views */,
+				8EDC79C8278F724B0032E348 /* Controllers */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		8EDC79C8278F724B0032E348 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8EDC79C9278F727F0032E348 /* WalletTabBarController.swift */,
+				8EDC79D32797EFC00032E348 /* EmptyWalletViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8EDC79CB27916B3F0032E348 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8EDC79D22796846D0032E348 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				8EDC79CC27916B620032E348 /* CustomBarButton.swift */,
+				8EDC79D0279679A90032E348 /* CustomTabBar.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
 		95873EB72791B1EF00A924C8 /* Help */ = {
 			isa = PBXGroup;
 			children = (
@@ -780,7 +814,6 @@
 				8EAF840B275EEEA000283D0B /* CocoaLumberjack */,
 				8EAF840D275EEEA000283D0B /* CocoaLumberjackSwift */,
 				6FA511352771B7A100D068BD /* AusweisApp2 */,
-				6F1A9B84279025EC009B3359 /* Aries */,
 				6F1A9B8727902711009B3359 /* Mediator */,
 			);
 			productName = IDWallet;
@@ -961,10 +994,12 @@
 				8E7554CA27729A410016DEB0 /* BareBaseVC.swift in Sources */,
 				8EAF8407275D927B00283D0B /* PinCodeDigitView.swift in Sources */,
 				8E98817D276AB3EB002F629C /* Authenticator.swift in Sources */,
+				8EDC79CD27916B620032E348 /* CustomBarButton.swift in Sources */,
 				8EAF8409275EE35A00283D0B /* PinEntryViewModel.swift in Sources */,
 				8E7554B927727AE90016DEB0 /* Documentation.docc in Sources */,
 				8EB4018D275CEFA100484161 /* ThemeContext.swift in Sources */,
 				8E8C405127650C7700DBC979 /* Images.swift in Sources */,
+				8EDC79D42797EFC10032E348 /* EmptyWalletViewController.swift in Sources */,
 				8ECA2284276F596F00CB8D81 /* Layout.swift in Sources */,
 				8EAF841F275FE36F00283D0B /* ColorScheme.swift in Sources */,
 				8E88912C27745A6500D0E6A3 /* BindingFactory.swift in Sources */,
@@ -985,6 +1020,7 @@
 				8E8C405527650CBB00DBC979 /* UIImageExtensions.swift in Sources */,
 				8EAF8413275F443A00283D0B /* ValidationError.swift in Sources */,
 				8E8C40492764BF6B00DBC979 /* OnboardingVC.swift in Sources */,
+				8EDC79D1279679A90032E348 /* CustomTabBar.swift in Sources */,
 				8E988175276A37B0002F629C /* MainNavigationController.swift in Sources */,
 				8EAF841D275FE2F400283D0B /* UIFontExtensions.swift in Sources */,
 				8E988188276AB53D002F629C /* SetupCoordinator.swift in Sources */,
@@ -995,6 +1031,7 @@
 				95C107E02795B7E300FB02AD /* ErrorAlertCoordinator.swift in Sources */,
 				95C107E72796CF0E00FB02AD /* ErrorAlertViewModel.swift in Sources */,
 				8847D77A2756376000C2A25B /* SceneDelegate.swift in Sources */,
+				8EDC79CA278F727F0032E348 /* WalletTabBarController.swift in Sources */,
 				8EF119A327718A8A00BDC5CE /* PinEntrySuccessViewController.swift in Sources */,
 				8E83F4E9276B2EE300469187 /* UIViewExtensions.swift in Sources */,
 				9542C7E727997A8800784147 /* Sequence+NSLayoutConstraint.swift in Sources */,
@@ -1514,11 +1551,6 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6F1A9B84279025EC009B3359 /* Aries */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6F1A9B83279025EC009B3359 /* XCRemoteSwiftPackageReference "ios-aries-sdk" */;
-			productName = Aries;
-		};
 		6F1A9B8727902711009B3359 /* Mediator */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6F1A9B8627902711009B3359 /* XCRemoteSwiftPackageReference "ios-mediator-sdk" */;

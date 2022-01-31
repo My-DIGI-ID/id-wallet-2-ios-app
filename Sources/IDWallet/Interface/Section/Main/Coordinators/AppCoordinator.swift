@@ -13,24 +13,24 @@ import SwiftUI
 
 @MainActor
 class AppCoordinator: Coordinator {
-  private let appState: AppState
-  private let presenter: PresenterProtocol
-  init(presenter: PresenterProtocol, appState: AppState) {
-    self.presenter = presenter
-    self.appState = appState
-  }
-  func start() {
-    Task {
-      switch await appState.authenticator.authenticationState() {
-      case .uninitialized:
-        startSetup()
-      case .unauthenticated, .authenticationFailed, .authenticationExpired:
-        startAuthentication()
-      case .authenticated:
-        startWallet()
-      }
+    private let appState: AppState
+    private let presenter: PresenterProtocol
+    init(presenter: PresenterProtocol, appState: AppState) {
+        self.presenter = presenter
+        self.appState = appState
     }
-  }
+    func start() {
+        Task {
+            switch await appState.authenticator.authenticationState() {
+            case .uninitialized:
+                startSetup()
+            case .unauthenticated, .authenticationFailed, .authenticationExpired:
+                startAuthentication()
+            case .authenticated:
+                startWallet()
+            }
+        }
+    }
 }
 
 // MARK: - Coordinator Workflow Implementation
@@ -47,54 +47,38 @@ extension AppCoordinator {
         alert.start()
     }
 
-  private func startSetup() {
-    let setupCoordinator = SetupCoordinator(
-      presenter: presenter,
-      model: appState.authenticator,
-      completion: { [weak self] in
-        self?.start()
-      }
-    )
-    setupCoordinator.start()
-  }
+    private func startSetup() {
+        let setupCoordinator = SetupCoordinator(
+            presenter: presenter,
+            model: appState.authenticator,
+            completion: { [weak self] in
+                self?.start()
+            }
+        )
+        setupCoordinator.start()
+    }
 
-  private func startAuthentication() {
-    let alert = UIAlertController(
-      title: "Anmeldung",
-      message:
-        "Die PIN wurde gesetzt wird aber zum Testen wieder gelöscht da " +
-        "die Wallet Funktionalität noch nicht implementiert ist.",
-      preferredStyle: .alert)
-    alert.addAction(
-      UIAlertAction(
-        title: "OK", style: .default,
-        handler: { [weak self] _ in
-          if let self = self {
-            self.appState.authenticator.reset()
-            self.start()
-          }
-        }
-      ))
-    presenter.present(alert)
-  }
+    private func startAuthentication() {
+        let alert = UIAlertController(
+            title: "Anmeldung",
+            message:
+                "Die PIN wurde gesetzt wird aber zum Testen wieder gelöscht da " +
+            "die Wallet Funktionalität noch nicht implementiert ist.",
+            preferredStyle: .alert)
+        alert.addAction(
+            UIAlertAction(
+                title: "OK", style: .default,
+                handler: { [weak self] _ in
+                    if let self = self {
+                        self.appState.authenticator.reset()
+                        self.start()
+                    }
+                }
+            ))
+        presenter.present(alert)
+    }
 
-  private func startWallet() {
-      
-      let primaryAction = UIAction(handler: { [weak self] _ in
-          self?.presenter.dismiss(completion: {
-              self?.appState.authenticator.reset()
-              self?.start()
-          })
-      })
-      let primaryButton: ErrorAlertViewModel.ButtonModel = ("App neustarten", primaryAction)
-      let errorText = """
-Das Gerät wurde mit einer PIN initialisiert. Die PIN wird zum Testen wieder gelöscht da weitere Funktionalität noch nicht implementiert ist.
-"""
-      let model = ErrorAlertViewModel(title: "Noch nicht implementiert",
-                                      alertType: .fail,
-                                      header: "Noch nicht implementiert",
-                                      text: errorText,
-                                      buttons: [primaryButton])
-      showError(viewModel: model)
-  }
+    private func startWallet() {
+        presenter.present(WalletTabBarController())
+    }
 }

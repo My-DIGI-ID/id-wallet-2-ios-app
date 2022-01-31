@@ -1,0 +1,14 @@
+
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="Wallet--Release-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="0010_wallet" transform="translate(-358.000000, -60.000000)">
+            <g id="icon/edit" transform="translate(358.000000, 60.000000)">
+                <path d="M0,16 C0,7.16533333 7.16533333,0 16,0 C24.8346667,0 32,7.16533333 32,16 C32,24.8346667 24.8346667,32 16,32 C7.16533333,32 0,24.8346667 0,16 Z" id="Stroke-8049" fill="#4A38D2"></path>
+                <g id="Group-3" transform="translate(9.000000, 7.000000)" stroke="#FFFFFF" stroke-linecap="round" stroke-width="2">
+                    <path d="M0,16 L0,15 C-3.38176876e-16,12.2385763 2.23857625,10 5,10 L9,10 C11.7614237,10 14,12.2385763 14,15 L14,16 L14,16" id="Path"></path>
+                    <rect id="Rectangle" x="3.5" y="0" width="7" height="7" rx="3.5"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
