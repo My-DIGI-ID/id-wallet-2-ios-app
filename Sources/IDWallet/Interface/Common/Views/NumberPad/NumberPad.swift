@@ -189,7 +189,7 @@ class NumberPad: UIView {
 
         func deleteKey() -> UIView {
             let result = UIButton.systemButton(
-                with: UIImage.requiredImage(name: "delete.backward"),
+                with: UIImage.requiredImage(name: "delete.backward.pdf").withSize(targetSize: CGSize(width: 30, height: 30)),
                 target: self,
                 action: #selector(didTapDeleteKey(sender:))
             )
