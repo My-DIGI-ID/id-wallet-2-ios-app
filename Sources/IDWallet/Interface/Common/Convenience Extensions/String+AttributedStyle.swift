@@ -17,7 +17,7 @@ import UIKit
 enum AttributedStyle {
     case header,
          subHeading
-    
+
     var attributes: [NSAttributedString.Key: Any] {
         switch self {
         case .header:

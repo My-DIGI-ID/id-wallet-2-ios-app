@@ -19,7 +19,7 @@ private enum Constants {
     enum NavigationBar {
         static let titleFont = Typography.regular.titleFont
     }
-    
+
     enum Layout {
         static let dividerHeight: CGFloat = 1
     }
@@ -50,7 +50,7 @@ class WebViewController: BareBaseViewController {
         navigationBar.isTranslucent = false
         navigationBar.titleTextAttributes = [.foregroundColor: UIColor.walBlack,
                                              .font: Constants.NavigationBar.titleFont]
-        
+
         navigationBar.shadowImage = Constants.Color.divder?.image()
 
         navigationBar.pushItem(navigationItem, animated: false)
@@ -78,14 +78,15 @@ class WebViewController: BareBaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupLayout()
 
         let request = URLRequest(url: viewModel.url)
         webview.load(request)
     }
 
-    @objc private func closeView() {
+    @objc
+    private func closeView() {
         dismiss(animated: true, completion: nil)
     }
 }
@@ -93,14 +94,15 @@ class WebViewController: BareBaseViewController {
 // MARK: Layout
 
 extension WebViewController {
-    
+
     private func setupLayout() {
         view.addAutolayoutSubviews(navigationBar, webview)
-        
+
         ["V:|-[navBar]-(spacing)-[webView]-|",
          "H:|[navBar]|",
          "H:|[webView]|"]
-            .constraints(with: ["navBar": navigationBar, "webView": webview],
+            .constraints(with: ["navBar": navigationBar,
+                                "webView": webview],
                          metrics: ["spacing": Constants.Layout.dividerHeight])
             .activate()
     }

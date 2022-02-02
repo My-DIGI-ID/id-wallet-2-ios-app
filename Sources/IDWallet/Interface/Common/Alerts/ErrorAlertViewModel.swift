@@ -15,7 +15,7 @@ import Foundation
 import UIKit
 
 enum ErrorType {
-    case error, fail, unknownError, jailbreak, noInternet, timeout    
+    case error, fail, unknownError, jailbreak, noInternet, timeout
 }
 
 protocol ErrorAlertModelProtocol {
@@ -28,13 +28,13 @@ protocol ErrorAlertModelProtocol {
 }
 
 struct ErrorAlertViewModel: ErrorAlertModelProtocol {
-    
+
     var title: String
     var alertType: ErrorType
     var header: String
     var text: String
     var buttons: [ButtonModel]
-    
+
     internal init(title: String, alertType: ErrorType, header: String, text: String, buttons: [ButtonModel]) {
         self.title = title
         self.alertType = alertType

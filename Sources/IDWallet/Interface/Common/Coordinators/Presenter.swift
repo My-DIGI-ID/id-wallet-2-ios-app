@@ -27,12 +27,12 @@ protocol PresenterProtocol: AnyObject {
     animated: Bool,
     completion: (() -> Void)?
   )
-    
+
     func dismiss(completion: (() -> Void)?)
 }
 
 extension PresenterProtocol {
-    
+
   func present(
     _ viewController: UIViewController,
     replacing: UIViewController? = nil,
@@ -119,7 +119,7 @@ class Presenter: PresenterProtocol {
       }
     }
   }
-    
+
     func dismiss(completion: (() -> Void)? = nil) {
         let nav = self.navigationController
         nav.topViewController?.dismiss(animated: true, completion: completion)

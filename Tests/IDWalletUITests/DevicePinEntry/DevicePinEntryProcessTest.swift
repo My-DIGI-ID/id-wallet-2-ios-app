@@ -19,7 +19,6 @@ class DevicePinEntryProcessTest: XCTestCase {
   }
 
   override func tearDownWithError() throws {
-
   }
 
   /// Verifies that the UI presents the required information and actions in its initial state

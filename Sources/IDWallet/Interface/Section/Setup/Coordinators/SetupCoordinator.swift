@@ -47,8 +47,9 @@ extension SetupCoordinator {
   ) {
       guard let url = Bundle.main.url(forResource: "learn-more-de", withExtension: "html") else { return }
       let viewModel = WebViewModel(title: "Mehr erfahren", url: url)
-      let vc = WebViewController(viewModel: viewModel)
-      viewController.present(vc, animated: true)
+      let webViewController = WebViewController(viewModel: viewModel)
+
+      viewController.present(webViewController, animated: true)
   }
 
   private func startPinEntryInstructions(from previous: UIViewController) {

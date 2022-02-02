@@ -47,19 +47,19 @@ extension UIColor {
         }
         self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
-    
+
     var hexString: String? {
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
         var alpha: CGFloat = 0
-        
+
         let multiplier = CGFloat(255.999999)
-        
+
         guard self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) else {
             return nil
         }
-        
+
         if alpha == 1.0 {
             return String(
                 format: "#%02lX%02lX%02lX",
@@ -86,7 +86,7 @@ extension UIColor {
             .scanHexInt64(&hexComponent)
         return CGFloat(Double(hexComponent) / 255.0)
     }
-    
+
     // MARK: - Mandatory Colors from Assets
     static func requiredColor(named: String) -> UIColor {
         // Explicitly providing the bundle to ensure UI tests can access styles (which in turn
