@@ -170,6 +170,7 @@
 		8EF119A527718A8B00BDC5CE /* PinEntrySuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF119A22771857E00BDC5CE /* PinEntrySuccessViewController.swift */; };
 		8EF5CD30275777B900F464B7 /* PinEntryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5CD2F275777B900F464B7 /* PinEntryVC.swift */; };
 		8EF5CD3427577BBB00F464B7 /* NumberPadKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5CD3327577BBB00F464B7 /* NumberPadKey.swift */; };
+		950C069427AC6145006D0CAB /* Strings+Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950C069327AC6145006D0CAB /* Strings+Localize.swift */; };
 		9519372A279187D200ED0AF2 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95193729279187D200ED0AF2 /* WebViewController.swift */; };
 		952FF66B2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
 		952FF66C2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
@@ -296,6 +297,7 @@
 		8EF119A22771857E00BDC5CE /* PinEntrySuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinEntrySuccessViewController.swift; sourceTree = "<group>"; };
 		8EF5CD2F275777B900F464B7 /* PinEntryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinEntryVC.swift; sourceTree = "<group>"; };
 		8EF5CD3327577BBB00F464B7 /* NumberPadKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadKey.swift; sourceTree = "<group>"; };
+		950C069327AC6145006D0CAB /* Strings+Localize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+Localize.swift"; sourceTree = "<group>"; };
 		95193729279187D200ED0AF2 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		952FF66A2796E703003840F9 /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		9542C7E227988FF400784147 /* String+AttributedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+AttributedStyle.swift"; sourceTree = "<group>"; };
@@ -685,6 +687,7 @@
 				9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */,
 				95F9A2AF27A05D98003F15B5 /* UIColor+Image.swift */,
 				95F9A2B127A05F2E003F15B5 /* CALayer+SketchShadow.swift */,
+				950C069327AC6145006D0CAB /* Strings+Localize.swift */,
 			);
 			path = "Convenience Extensions";
 			sourceTree = "<group>";
@@ -1007,6 +1010,7 @@
 				8EAF8409275EE35A00283D0B /* PinEntryViewModel.swift in Sources */,
 				8E7554B927727AE90016DEB0 /* Documentation.docc in Sources */,
 				8EB4018D275CEFA100484161 /* ThemeContext.swift in Sources */,
+				950C069427AC6145006D0CAB /* Strings+Localize.swift in Sources */,
 				8E8C405127650C7700DBC979 /* Images.swift in Sources */,
 				8EDC79D42797EFC10032E348 /* EmptyWalletViewController.swift in Sources */,
 				8ECA2284276F596F00CB8D81 /* Layout.swift in Sources */,
@@ -1346,7 +1350,7 @@
 				DEVELOPMENT_TEAM = 3392FS42B6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/IDWallet/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Zum Scannen von QR-Codes";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Erlaube den Zugriff, um QR-Codes scannen zu können.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1378,7 +1382,7 @@
 				DEVELOPMENT_TEAM = 3392FS42B6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/IDWallet/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "Zum Scannen von QR-Codes";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Erlaube den Zugriff, um QR-Codes scannen zu können.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

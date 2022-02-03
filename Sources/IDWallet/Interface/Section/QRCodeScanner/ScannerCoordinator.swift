@@ -61,8 +61,8 @@ class ScannerCoordinator: Coordinator {
                 }
             }
         case .denied:
-            let alert = UIAlertController(title: "Error",
-                                          message: "Wir benötigen den Zugriff auf die Kamera um Einladungen mittels QR Code scannen zu können.",
+            let alert = UIAlertController(title: "Fehler",
+                                          message: "Erlaube den Zugriff, um QR-Codes scannen zu können.",
                                           preferredStyle: UIAlertController.Style.alert)
 
                 alert.addAction(UIAlertAction(title: "Abbrechen", style: .default))
