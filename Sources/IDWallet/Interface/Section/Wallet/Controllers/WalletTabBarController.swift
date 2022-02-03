@@ -70,7 +70,7 @@ class WalletTabBarController: BareBaseViewController {
 
     private var controlledConstraints: [NSLayoutConstraint] = []
 
-    private var walletController = EmptyWalletViewController()
+    private var walletController = WalletViewController()
     private var walletBarItem = UITabBarItem(
         title: "Wallet",
         image: UIImage.requiredImage(name: "BarbuttonWallet").withRenderingMode(.alwaysOriginal),
