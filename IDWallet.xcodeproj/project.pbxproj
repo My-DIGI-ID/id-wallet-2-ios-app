@@ -177,6 +177,8 @@
 		9542C7E327988FF400784147 /* String+AttributedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E227988FF400784147 /* String+AttributedStyle.swift */; };
 		9542C7E5279890E300784147 /* NSAttributedString+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */; };
 		9542C7E727997A8800784147 /* Sequence+NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */; };
+		9586384227A9926C0030DCF3 /* ScannerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9586384127A9926C0030DCF3 /* ScannerCoordinator.swift */; };
+		9586384427A993AF0030DCF3 /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9586384327A993AF0030DCF3 /* QRScannerViewController.swift */; };
 		95873EB42791A98700A924C8 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95873EB32791A98700A924C8 /* WebView.swift */; };
 		95873EBA2791B23300A924C8 /* HelpViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95873EB92791B23300A924C8 /* HelpViewCoordinator.swift */; };
 		95873EBC2791C01400A924C8 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95873EBB2791C01400A924C8 /* UIView+Layout.swift */; };
@@ -191,6 +193,7 @@
 		95F9A2B027A05D98003F15B5 /* UIColor+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F9A2AF27A05D98003F15B5 /* UIColor+Image.swift */; };
 		95F9A2B227A05F2E003F15B5 /* CALayer+SketchShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F9A2B127A05F2E003F15B5 /* CALayer+SketchShadow.swift */; };
 		95F9A2B527A06CE4003F15B5 /* WalletButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F9A2B427A06CE4003F15B5 /* WalletButton.swift */; };
+		95F9FCDC27AAF27000C0603C /* BracketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F9FCDB27AAF27000C0603C /* BracketView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -298,6 +301,8 @@
 		9542C7E227988FF400784147 /* String+AttributedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+AttributedStyle.swift"; sourceTree = "<group>"; };
 		9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Alignment.swift"; sourceTree = "<group>"; };
 		9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+NSLayoutConstraint.swift"; sourceTree = "<group>"; };
+		9586384127A9926C0030DCF3 /* ScannerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerCoordinator.swift; sourceTree = "<group>"; };
+		9586384327A993AF0030DCF3 /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
 		95873EB32791A98700A924C8 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		95873EB92791B23300A924C8 /* HelpViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewCoordinator.swift; sourceTree = "<group>"; };
 		95873EBB2791C01400A924C8 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
@@ -310,6 +315,7 @@
 		95F9A2AF27A05D98003F15B5 /* UIColor+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Image.swift"; sourceTree = "<group>"; };
 		95F9A2B127A05F2E003F15B5 /* CALayer+SketchShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+SketchShadow.swift"; sourceTree = "<group>"; };
 		95F9A2B427A06CE4003F15B5 /* WalletButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletButton.swift; sourceTree = "<group>"; };
+		95F9FCDB27AAF27000C0603C /* BracketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BracketView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -413,6 +419,7 @@
 		8847D7A927563C5B00C2A25B /* Section */ = {
 			isa = PBXGroup;
 			children = (
+				9586384027A98C510030DCF3 /* QRCodeScanner */,
 				95C107DD2795B7CE00FB02AD /* Alert */,
 				8847D7AA27563C5B00C2A25B /* Main */,
 				95873EB72791B1EF00A924C8 /* Help */,
@@ -572,6 +579,7 @@
 				8ECA2288277084A700CB8D81 /* Layout */,
 				8E8C40702767373600DBC979 /* Rounded.swift */,
 				95873EB32791A98700A924C8 /* WebView.swift */,
+				95F9FCDB27AAF27000C0603C /* BracketView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -738,6 +746,15 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		9586384027A98C510030DCF3 /* QRCodeScanner */ = {
+			isa = PBXGroup;
+			children = (
+				9586384127A9926C0030DCF3 /* ScannerCoordinator.swift */,
+				9586384327A993AF0030DCF3 /* QRScannerViewController.swift */,
+			);
+			path = QRCodeScanner;
+			sourceTree = "<group>";
+		};
 		95873EB72791B1EF00A924C8 /* Help */ = {
 			isa = PBXGroup;
 			children = (
@@ -813,7 +830,6 @@
 				8847D7702756376000C2A25B /* Sources */,
 				8847D7712756376000C2A25B /* Frameworks */,
 				8847D7722756376000C2A25B /* Resources */,
-				8E88911D2773D2B800D0E6A3 /* swift-format */,
 				8E88911E2773DD7800D0E6A3 /* swiftlint */,
 			);
 			buildRules = (
@@ -957,24 +973,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8E88911D2773D2B800D0E6A3 /* swift-format */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "swift-format";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "(\nPATH=\"$PATH:/opt/homebrew/bin\"\nif which swift-format >/dev/null; then\n    exit 0 # contradictory warnings re. swiftlint - need to resolve rules for both tools\n    swift-format -m lint -r ${PROJECT_DIR}\n    exit 0\nelse\n    echo \"warning: swift-format not installed\"\nfi\n)\n";
-		};
 		8E88911E2773DD7800D0E6A3 /* swiftlint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -991,7 +989,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "(\nPATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n)\n";
+			shellScript = "PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1013,6 +1011,7 @@
 				8EDC79D42797EFC10032E348 /* EmptyWalletViewController.swift in Sources */,
 				8ECA2284276F596F00CB8D81 /* Layout.swift in Sources */,
 				8EAF841F275FE36F00283D0B /* ColorScheme.swift in Sources */,
+				9586384227A9926C0030DCF3 /* ScannerCoordinator.swift in Sources */,
 				8E88912C27745A6500D0E6A3 /* BindingFactory.swift in Sources */,
 				95873EB42791A98700A924C8 /* WebView.swift in Sources */,
 				8E8C40882768AD6900DBC979 /* UIButtonExtensions.swift in Sources */,
@@ -1049,10 +1048,12 @@
 				9542C7E727997A8800784147 /* Sequence+NSLayoutConstraint.swift in Sources */,
 				8E8C404D2764BFB500DBC979 /* OnboardingPageControl.swift in Sources */,
 				8EAF841B275FE25600283D0B /* UIColorExtensions.swift in Sources */,
+				95F9FCDC27AAF27000C0603C /* BracketView.swift in Sources */,
 				95873EBC2791C01400A924C8 /* UIView+Layout.swift in Sources */,
 				8EF5CD30275777B900F464B7 /* PinEntryVC.swift in Sources */,
 				8E8891282774572500D0E6A3 /* LayoutFactory.swift in Sources */,
 				8EAF8411275F421900283D0B /* AppError.swift in Sources */,
+				9586384427A993AF0030DCF3 /* QRScannerViewController.swift in Sources */,
 				8ECA228A277084CB00CB8D81 /* AlignmentWrapperView.swift in Sources */,
 				8EAF8416275F4B5E00283D0B /* PinValidationError.swift in Sources */,
 				952FF66B2796E703003840F9 /* WebViewModel.swift in Sources */,
@@ -1342,12 +1343,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3392FS42B6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/IDWallet/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Zum Scannen von QR-Codes";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1372,12 +1375,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 3392FS42B6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/IDWallet/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Zum Scannen von QR-Codes";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

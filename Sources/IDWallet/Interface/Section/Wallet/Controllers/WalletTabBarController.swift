@@ -9,6 +9,9 @@ import UIKit
 
 @MainActor
 class WalletTabBarController: BareBaseViewController {
+
+    private(set) var scannerCoordinator: ScannerCoordinator?
+
     var viewControllers: [UIViewController] = [] {
         didSet {
             // See tabBar.items for how selection is updated:
@@ -76,8 +79,8 @@ class WalletTabBarController: BareBaseViewController {
     private var qrcodeScanController = UIViewController()
     private var qrcodeScanBarItem = UITabBarItem(
         title: "QR-Code Scan",
-        image: UIImage.requiredImage(name: "BarButtonQrcodeBig").withRenderingMode(.alwaysOriginal),
-        selectedImage: UIImage.requiredImage(name: "BarbuttonQrcodeBigSelected").withRenderingMode(.alwaysOriginal))
+        image: UIImage.requiredImage(name: "BarbuttonQrcode").withRenderingMode(.alwaysOriginal),
+        selectedImage: UIImage.requiredImage(name: "BarbuttonQrcodeSelected").withRenderingMode(.alwaysOriginal))
 
     private var activitiesController = UIViewController()
     private var activitiesBarItem = UITabBarItem(
@@ -85,12 +88,14 @@ class WalletTabBarController: BareBaseViewController {
         image: UIImage.requiredImage(name: "BarbuttonActivities").withRenderingMode(.alwaysOriginal),
         selectedImage: UIImage.requiredImage(name: "BarbuttonActivitiesSelected").withRenderingMode(.alwaysOriginal))
 
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupOnce()
     }
 
-    init() {
+    init(scannerCoordinator: ScannerCoordinator?) {
+        self.scannerCoordinator = scannerCoordinator
         super.init(style: nil)
         setupOnce()
     }
@@ -138,6 +143,9 @@ class WalletTabBarController: BareBaseViewController {
 
 extension WalletTabBarController: CustomTabBarDelegate {
     func customTabBar(_ tabBar: CustomTabBar, didSelect item: UITabBarItem) {
+        if item == qrcodeScanBarItem {
+            self.scannerCoordinator?.start()
+        }
         if let index = viewControllers.firstIndex(where: { viewController in viewController.tabBarItem == item }) {
             selectedIndex = index
         }

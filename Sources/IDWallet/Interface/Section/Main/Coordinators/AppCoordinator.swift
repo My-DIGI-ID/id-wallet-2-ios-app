@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-import SwiftUI
+import Combine
 
 // MARK: - Coordinator Interface
 
@@ -15,6 +15,10 @@ import SwiftUI
 class AppCoordinator: Coordinator {
     private let appState: AppState
     private let presenter: PresenterProtocol
+    var cancelable: AnyCancellable?
+
+    private var scannerCoordinator: ScannerCoordinator?
+
     init(presenter: PresenterProtocol, appState: AppState) {
         self.presenter = presenter
         self.appState = appState
@@ -78,7 +82,30 @@ extension AppCoordinator {
         presenter.present(alert)
     }
 
+    private func startScanner() {
+
+       scannerCoordinator = ScannerCoordinator.init(presenter: presenter) { result in
+            switch result {
+            case .success(let scanned):
+                print(scanned)
+            case .failure(let error):
+                print(error)
+            }
+        }
+        scannerCoordinator?.start()
+    }
+
     private func startWallet() {
-        presenter.present(WalletTabBarController())
+
+        scannerCoordinator = ScannerCoordinator.init(presenter: presenter) { result in
+             switch result {
+             case .success(let scanned):
+                 print(scanned)
+             case .failure(let error):
+                 print(error)
+             }
+         }
+
+        presenter.present(WalletTabBarController(scannerCoordinator: scannerCoordinator))
     }
 }

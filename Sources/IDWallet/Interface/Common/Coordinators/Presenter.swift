@@ -104,7 +104,7 @@ class Presenter: PresenterProtocol {
     completion: (() -> Void)? = nil
   ) {
     let navigationController = self.navigationController
-
+      
     if let top = navigationController.topViewController {
       guard top.presentedViewController == nil else {
         ContractError.guardAssertionFailed(
