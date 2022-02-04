@@ -30,6 +30,9 @@ class ContentWalletView: UIView {
         let content: WalletCardModel
     }
     
+    /// Delegate that forwards `addDocument(:_)` calls from the `AddDocumentSupplementaryView`
+    weak var delegate: AddDocumentDelegate?
+    
     private lazy var dataSource: DataSource = {
         let walletCardCell = UICollectionView.CellRegistration<WalletEntryCollectionViewCell, WalletCardModel> {
 //            $0.delegate = self // TODO: Interaction Delegate for Card Details
@@ -41,11 +44,9 @@ class ContentWalletView: UIView {
         }
         
         let footerRegistration = UICollectionView
-            .SupplementaryRegistration<AddDocumentSupplementaryView>(elementKind: UICollectionView.elementKindSectionFooter) { [weak self] in
+            .SupplementaryRegistration<AddDocumentSupplementaryView>(elementKind: UICollectionView.elementKindSectionFooter) { [weak self] (supplementView, _, _) in
             guard let self = self else { return }
-            let index = self.dataSource.snapshot().sectionIdentifiers[$2.section]
-            $0.configure(at: index)
-//            $0.delegate = self // TODO: Delegate for Button?
+            supplementView.delegate = self.delegate
         }
         
         dataSource.supplementaryViewProvider = {

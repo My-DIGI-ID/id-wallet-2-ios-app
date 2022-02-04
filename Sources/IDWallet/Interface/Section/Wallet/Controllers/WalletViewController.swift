@@ -55,18 +55,16 @@ final class WalletViewController: BareBaseViewController {
     lazy var noContentWalletView: NoContentWalletView = {
         let view = NoContentWalletView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.delegate = self
         return view
     }()
     
     lazy var contentWalletView: ContentWalletView = {
         let view = ContentWalletView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.delegate = self
         return view
     }()
-    
-    @objc dynamic func addDoumentButtonPressed(_ sender: UIControl) {
-        // TODO: Handle Add Document
-    }
     
     // MARK: - Lifecycle
     required init?(coder: NSCoder) {
@@ -98,8 +96,6 @@ final class WalletViewController: BareBaseViewController {
         headerLabel.font = .plexSansBold(25)
         headerLabel.textColor = .black
         headerLabel.text = NSLocalizedString("Deine Dokumente", comment: "")
-        
-        noContentWalletView.addDocumentButton.addTarget(self, action: #selector(addDoumentButtonPressed(_:)), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -119,5 +115,11 @@ final class WalletViewController: BareBaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+    }
+}
+
+extension WalletViewController: AddDocumentDelegate {
+    func addDocument() {
+        print("Add Document")
     }
 }

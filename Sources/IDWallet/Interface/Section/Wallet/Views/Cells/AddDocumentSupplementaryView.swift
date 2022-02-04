@@ -13,14 +13,24 @@
 
 import UIKit
 
+protocol AddDocumentDelegate: AnyObject {
+    func addDocument()
+}
+
 final class AddDocumentSupplementaryView: UICollectionReusableView {
     
-    private var index: Int?
+    weak var delegate: AddDocumentDelegate?
     
-    lazy var dummyLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    lazy var addDocumentButton: WalletButton = {
+        let button = WalletButton(titleText: "\(NSLocalizedString("Dokument hinzufügen", comment: ""))",
+                                  image: .init(systemName: "plus"),
+                                  imageAlignRight: false,
+                                  style: .secondary,
+                                  primaryAction: .init { [weak self] _ in
+            self?.delegate?.addDocument()
+        })
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     override init(frame: CGRect) {
@@ -38,13 +48,6 @@ final class AddDocumentSupplementaryView: UICollectionReusableView {
     }
 
     private func setupLayout() {
-        embed(dummyLabel)
-    }
-
-    func configure(at index: Int) {
-        self.index = index
-        
-        // TODO: Dummy. Remove
-        dummyLabel.text = "Lorem Ipsum Dolor Sit Amet"
+        embed(addDocumentButton, insets: .init(top: 30, left: 20, bottom: 0, right: 20))
     }
 }

@@ -20,6 +20,9 @@ fileprivate extension ImageNameIdentifier {
 /// Simple container view that wraps the content displayed when no wallet entries are available
 class NoContentWalletView: UIView {
     
+    /// Delegate that forwards `addDocument(:_)` calls from the addDocumentButton
+    weak var delegate: AddDocumentDelegate?
+    
     lazy var contentStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -67,23 +70,17 @@ class NoContentWalletView: UIView {
         let button = WalletButton(titleText: "\(NSLocalizedString("Dokument hinzufügen", comment: ""))",
                                   image: .init(systemName: "plus"),
                                   imageAlignRight: false,
-                                  style: .primary)
+                                  style: .primary,
+                                  primaryAction: .init { [weak self] _ in
+            self?.delegate?.addDocument()
+        })
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     lazy var addDocumentButtonContainer: UIView = {
         let view = UIView()
-        view.addSubview(addDocumentButton)
-        
-        let constraints = [
-            "V:|[button]|",
-        ].constraints(with: ["button": addDocumentButton]) + [
-            view.centerXAnchor.constraint(equalTo: addDocumentButton.centerXAnchor),
-            addDocumentButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-        ]
-        constraints.activate()
-        
+        view.embed(addDocumentButton, insets: .init(top: 0, left: 20, bottom: 0, right: 20))
         return view
     }()
     
