@@ -19,42 +19,6 @@ fileprivate extension ImageNameIdentifier {
 
 final class WalletViewController: BareBaseViewController {
     
-    // MARK: CollectionView
-    private typealias Section = Int
-    private typealias DataSource = UICollectionViewDiffableDataSource<Section, Row>
-    private typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Row>
-     
-    private struct Row: Hashable, Equatable {
-        let indexPath: IndexPath
-        let content: WalletCardModel
-    }
-    
-    private lazy var dataSource: DataSource = {
-        
-        // TODO: Remove empty cell - placeholder only
-        let emptyCell = UICollectionView.CellRegistration<UICollectionViewCell, NSNull> { _, _, _ in }
-        
-        let dataSource = DataSource(collectionView: walletCollectionView) {
-            
-            // TODO: Remove - placeholder only
-            switch $2.indexPath.row {
-            default:
-                return $0.dequeueConfiguredReusableCell(using: emptyCell, for: $1, item: nil)
-            }
-        }
-        // TODO: Configure DataSource
-        return dataSource
-    }()
-    
-    lazy var walletCollectionView: UICollectionView = {
-        // TODO: Make collectionViewLayout
-    
-        let collection = UICollectionView(frame: .zero)
-        collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.backgroundColor = .clear
-        return collection
-    }()
-    
     lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -88,9 +52,14 @@ final class WalletViewController: BareBaseViewController {
         return view
     }()
     
-    lazy var noWalletContentView: NoContentWalletView = {
+    lazy var noContentWalletView: NoContentWalletView = {
         let view = NoContentWalletView()
-//        view.delegate = self
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var contentWalletView: ContentWalletView = {
+        let view = ContentWalletView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -130,25 +99,27 @@ final class WalletViewController: BareBaseViewController {
         headerLabel.textColor = .black
         headerLabel.text = NSLocalizedString("Deine Dokumente", comment: "")
         
-        noWalletContentView.addDocumentButton.addTarget(self, action: #selector(addDoumentButtonPressed(_:)), for: .touchUpInside)
+        noContentWalletView.addDocumentButton.addTarget(self, action: #selector(addDoumentButtonPressed(_:)), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // TODO: Check if wallet entries available
-        let hasWalletEntries = false
+        let hasWalletEntries = true
         
         if !hasWalletEntries {
-            contentContainer.addSubview(noWalletContentView)
+            contentWalletView.removeFromSuperview()
+            contentContainer.addSubview(noContentWalletView)
             let constraints = [
                 "H:|[content]|",
-            ].constraints(with: ["header": headerContainer, "content": noWalletContentView]) + [
-                contentContainer.centerYAnchor.constraint(equalTo: noWalletContentView.centerYAnchor)
+            ].constraints(with: ["header": headerContainer, "content": noContentWalletView]) + [
+                contentContainer.centerYAnchor.constraint(equalTo: noContentWalletView.centerYAnchor)
             ]
             constraints.activate()
         } else {
-            noWalletContentView.removeFromSuperview()
+            noContentWalletView.removeFromSuperview()
+            contentContainer.embed(contentWalletView)
         }
     }
     
