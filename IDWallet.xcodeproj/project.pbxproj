@@ -170,11 +170,15 @@
 		8EF119A527718A8B00BDC5CE /* PinEntrySuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF119A22771857E00BDC5CE /* PinEntrySuccessViewController.swift */; };
 		8EF5CD30275777B900F464B7 /* PinEntryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5CD2F275777B900F464B7 /* PinEntryVC.swift */; };
 		8EF5CD3427577BBB00F464B7 /* NumberPadKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5CD3327577BBB00F464B7 /* NumberPadKey.swift */; };
+		950B422827AD6A1E002C03B6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 950B422627AD6A1E002C03B6 /* InfoPlist.strings */; };
 		950C069427AC6145006D0CAB /* Strings+Localize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950C069327AC6145006D0CAB /* Strings+Localize.swift */; };
+		950C06A027AD3EF6006D0CAB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 950C069E27AD3EF6006D0CAB /* Localizable.strings */; };
+		950C06A327AD3F00006D0CAB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 950C06A127AD3F00006D0CAB /* Localizable.strings */; };
 		9519372A279187D200ED0AF2 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95193729279187D200ED0AF2 /* WebViewController.swift */; };
 		952FF66B2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
 		952FF66C2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
 		952FF66D2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
+		953F26C827AD6B92008704E1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 953F26C627AD6B92008704E1 /* InfoPlist.strings */; };
 		9542C7E327988FF400784147 /* String+AttributedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E227988FF400784147 /* String+AttributedStyle.swift */; };
 		9542C7E5279890E300784147 /* NSAttributedString+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */; };
 		9542C7E727997A8800784147 /* Sequence+NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */; };
@@ -297,9 +301,13 @@
 		8EF119A22771857E00BDC5CE /* PinEntrySuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinEntrySuccessViewController.swift; sourceTree = "<group>"; };
 		8EF5CD2F275777B900F464B7 /* PinEntryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinEntryVC.swift; sourceTree = "<group>"; };
 		8EF5CD3327577BBB00F464B7 /* NumberPadKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadKey.swift; sourceTree = "<group>"; };
+		950B422727AD6A1E002C03B6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
 		950C069327AC6145006D0CAB /* Strings+Localize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+Localize.swift"; sourceTree = "<group>"; };
+		950C069F27AD3EF6006D0CAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
+		950C06A227AD3F00006D0CAB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Localizable.strings; sourceTree = "<group>"; };
 		95193729279187D200ED0AF2 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		952FF66A2796E703003840F9 /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
+		953F26C727AD6B92008704E1 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = InfoPlist.strings; sourceTree = "<group>"; };
 		9542C7E227988FF400784147 /* String+AttributedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+AttributedStyle.swift"; sourceTree = "<group>"; };
 		9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Alignment.swift"; sourceTree = "<group>"; };
 		9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+NSLayoutConstraint.swift"; sourceTree = "<group>"; };
@@ -749,6 +757,33 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		950C069927AD3EB0006D0CAB /* Locale */ = {
+			isa = PBXGroup;
+			children = (
+				950C069D27AD3EE3006D0CAB /* en.lproj */,
+				950C069C27AD3ED9006D0CAB /* de.lproj */,
+			);
+			path = Locale;
+			sourceTree = "<group>";
+		};
+		950C069C27AD3ED9006D0CAB /* de.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				953F26C627AD6B92008704E1 /* InfoPlist.strings */,
+				950C06A127AD3F00006D0CAB /* Localizable.strings */,
+			);
+			path = de.lproj;
+			sourceTree = "<group>";
+		};
+		950C069D27AD3EE3006D0CAB /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				950C069E27AD3EF6006D0CAB /* Localizable.strings */,
+				950B422627AD6A1E002C03B6 /* InfoPlist.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
 		9586384027A98C510030DCF3 /* QRCodeScanner */ = {
 			isa = PBXGroup;
 			children = (
@@ -777,6 +812,7 @@
 		95873EBD2791F85100A924C8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				950C069927AD3EB0006D0CAB /* Locale */,
 				95873EBE2791F85B00A924C8 /* Html */,
 			);
 			path = Resources;
@@ -920,6 +956,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 8847D76B2756376000C2A25B;
 			packageReferences = (
@@ -947,9 +984,13 @@
 				8847D7D827563F6200C2A25B /* LaunchScreen.storyboard in Resources */,
 				8E4331BB2759152B00D50127 /* IBMPlexSans-Bold.ttf in Resources */,
 				95C107DA2795896300FB02AD /* learn-more-de.html in Resources */,
+				950C06A027AD3EF6006D0CAB /* Localizable.strings in Resources */,
 				8847D7812756376200C2A25B /* Assets.xcassets in Resources */,
+				950C06A327AD3F00006D0CAB /* Localizable.strings in Resources */,
 				8E4331BA2759152B00D50127 /* IBMPlexSans-Regular.ttf in Resources */,
+				950B422827AD6A1E002C03B6 /* InfoPlist.strings in Resources */,
 				8847D7D727563F6200C2A25B /* Main.storyboard in Resources */,
+				953F26C827AD6B92008704E1 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1220,6 +1261,38 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		950B422627AD6A1E002C03B6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				950B422727AD6A1E002C03B6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		950C069E27AD3EF6006D0CAB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				950C069F27AD3EF6006D0CAB /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		950C06A127AD3F00006D0CAB /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				950C06A227AD3F00006D0CAB /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		953F26C627AD6B92008704E1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				953F26C727AD6B92008704E1 /* de */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1347,7 +1420,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3392FS42B6;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/IDWallet/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Erlaube den Zugriff, um QR-Codes scannen zu können.";
@@ -1379,7 +1452,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3392FS42B6;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/IDWallet/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Erlaube den Zugriff, um QR-Codes scannen zu können.";

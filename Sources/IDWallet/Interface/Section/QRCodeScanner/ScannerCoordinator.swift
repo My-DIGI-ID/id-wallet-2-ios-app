@@ -16,6 +16,17 @@ import UIKit
 import AVFoundation
 import Combine
 
+private enum Constants {
+    enum Text {
+        enum Alert {
+            static let title = "error".localized
+            static let message = "qr_code_request_camera_access_disabled".localized
+            static let cancel = "cancel".localized
+            static let settings = "settings".localized
+        }
+    }
+}
+
 enum ScanError: Error {
     case acesss
     case failed
@@ -26,15 +37,15 @@ struct ScanViewModel {
 }
 
 class ScannerCoordinator: Coordinator {
-
+    
     let presenter: PresenterProtocol
     let scanViewModel: ScanViewModel = ScanViewModel()
-
+    
     var cancellable: AnyCancellable?
-
+    
     init(presenter: PresenterProtocol, completion: @escaping (Result<String, ScanError>) -> Void) {
         self.presenter = presenter
-
+        
         cancellable = self.scanViewModel.scannedQR.sink(receiveCompletion: { completed in
             switch completed {
             case .failure(let error):
@@ -61,18 +72,19 @@ class ScannerCoordinator: Coordinator {
                 }
             }
         case .denied:
-            let alert = UIAlertController(title: "Fehler",
-                                          message: "Erlaube den Zugriff, um QR-Codes scannen zu können.",
-                                          preferredStyle: UIAlertController.Style.alert)
-
-                alert.addAction(UIAlertAction(title: "Abbrechen", style: .default))
-                alert.addAction(UIAlertAction(title: "Einstellungen", style: .cancel) { _ in
-
-                    guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
-                    UIApplication.shared.open(settingsURL,
-                                              options: [:], completionHandler: nil)
-                })
-
+            let alert = UIAlertController(
+                title: Constants.Text.Alert.title,
+                message: Constants.Text.Alert.message,
+                preferredStyle: UIAlertController.Style.alert)
+            
+            alert.addAction(UIAlertAction(title: Constants.Text.Alert.cancel, style: .default))
+            alert.addAction(UIAlertAction(title: Constants.Text.Alert.settings, style: .cancel) { _ in
+                
+                guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
+                UIApplication.shared.open(settingsURL,
+                                          options: [:], completionHandler: nil)
+            })
+            
             presenter.present(alert)
         case .restricted:
             return
