@@ -110,13 +110,7 @@ final class WalletViewController: BareBaseViewController {
         
         if !hasWalletEntries {
             contentWalletView.removeFromSuperview()
-            contentContainer.addSubview(noContentWalletView)
-            let constraints = [
-                "H:|[content]|",
-            ].constraints(with: ["header": headerContainer, "content": noContentWalletView]) + [
-                contentContainer.centerYAnchor.constraint(equalTo: noContentWalletView.centerYAnchor)
-            ]
-            constraints.activate()
+            contentContainer.embed(noContentWalletView)
         } else {
             noContentWalletView.removeFromSuperview()
             contentContainer.embed(contentWalletView)

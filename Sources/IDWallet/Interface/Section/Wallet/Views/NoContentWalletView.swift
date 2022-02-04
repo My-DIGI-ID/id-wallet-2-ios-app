@@ -89,7 +89,13 @@ class NoContentWalletView: UIView {
     
     private func setupLayout() {
         
-        embed(contentStackView)
+        addSubview(contentStackView)
+        let constraints = [
+            "H:|[stackView]|",
+        ].constraints(with: ["stackView": contentStackView]) + [
+            contentStackView.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ]
+        constraints.activate()
         
         contentStackView.addArrangedSubview(emptyWalletContainer)
         contentStackView.addArrangedSubview(infoTextLabel)
