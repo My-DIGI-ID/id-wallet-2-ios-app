@@ -30,7 +30,7 @@ struct WalletCardModel: Hashable, Equatable {
     }
     
     /// Specifies the title-value pairs displayed on either the left (i.e. name) or the right (i.e. validity)
-    struct Values: Hashable, Equatable {
+    struct WalletValue: Hashable, Equatable {
         let title: String
         let value: String
     }
@@ -45,8 +45,8 @@ struct WalletCardModel: Hashable, Equatable {
     let title: String
     
     /// Values displayed on the left half of the card
-    let primaryValues: [Values]
+    let primaryValues: [WalletValue]
     
     /// Values displayed on the right half of the card
-    let secondaryValues: [Values]
+    let secondaryValues: [WalletValue]
 }

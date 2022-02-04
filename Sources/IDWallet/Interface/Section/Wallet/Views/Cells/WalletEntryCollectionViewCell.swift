@@ -15,24 +15,22 @@ import UIKit
 
 final class WalletEntryCollectionViewCell: UICollectionViewCell {
     
-    lazy var dummyLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        return label
+    lazy var walletCard: WalletCardView = {
+        let view = WalletCardView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     private func setupView() {
         backgroundColor = .clear
-        
         // FIXME [12/31/2022]: iOS 14 has a bug where Cells require UIView-Encapsulated-Layout-Height/Width, causing a Constraint Error
-        embed(dummyLabel,
-              insets: .init(top: 10, left: 8, bottom: 10, right: 8),
+        // Workaround is to lower the priority just one below `required`
+        embed(walletCard,
               priorities: .init(bottom: .init(rawValue: 999), right: .init(rawValue: 999)))
     }
 
     func configure(with walletData: WalletCardModel, at: IndexPath) {
-        dummyLabel.text = walletData.title
+        walletCard.configure(with: walletData)
     }
     
     override init(frame: CGRect) {

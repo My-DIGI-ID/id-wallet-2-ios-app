@@ -72,7 +72,7 @@ class ContentWalletView: UIView {
             
             let layoutSection = NSCollectionLayoutSection(group: .vertical(layoutSize: layoutSize, subitems: [layoutItem]))
             layoutSection.boundarySupplementaryItems = [supplementaryView]
-            layoutSection.contentInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0) // TODO: Adjust inset
+            layoutSection.contentInsets = .init(top: 30, leading: 0, bottom: 0, trailing: 0)
             
             return UICollectionViewCompositionalLayout(section: layoutSection)
         }()

@@ -12,4 +12,63 @@
 //
 
 
-import Foundation
+import UIKit
+
+class WalletCardView: UIView {
+    
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var validityView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var headerContainer: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, validityView])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .horizontal
+        stackView.backgroundColor = .clear
+        return stackView
+    }()
+    
+    private func setupLayout() {
+        addSubview(headerContainer)
+        
+        let constraints = [
+            "H:|-(16)-[header]-(16)-|",
+            "V:|[header]",
+        ].constraints(with: ["header": headerContainer]) + [
+            widthAnchor.constraint(equalTo: heightAnchor, multiplier: 366 / 230),
+            headerContainer.heightAnchor.constraint(equalToConstant: 60),
+        ]
+        constraints.activate()
+        
+        backgroundColor = .primaryBlue
+        clipsToBounds = true
+        layer.cornerRadius = 16
+    }
+    
+    func configure(with walletData: WalletCardModel) {
+        titleLabel.text = walletData.title
+    }
+    
+    // MARK: Lifecycle
+    init() {
+        super.init(frame: .zero)
+        setupLayout()
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupLayout()
+    }
+}
