@@ -13,6 +13,21 @@
 
 import UIKit
 
+public struct LayoutPriorities {
+    let top: UILayoutPriority
+    let bottom: UILayoutPriority
+    let right: UILayoutPriority
+    let left: UILayoutPriority
+    
+    public init (top: UILayoutPriority = .required, bottom: UILayoutPriority = .required,
+                 right: UILayoutPriority = .required, left: UILayoutPriority = .required) {
+        self.top = top
+        self.bottom = bottom
+        self.left = left
+        self.right = right
+    }
+}
+
 extension UIView {
 
     /// Add all views as autolayout subviews
@@ -38,11 +53,12 @@ extension UIView {
     /// - Parameters:
     ///   - view: The view to embed
     ///   - insets: View layout spacing
-    public final func embed(_ view: UIView, insets: UIEdgeInsets = .zero) {
+    ///   - priorities: Defines the UILayoutPriority for top, bottom, left and right. Defaults to required for all dimensions
+    public final func embed(_ view: UIView, insets: UIEdgeInsets = .zero, priorities: LayoutPriorities = .init()) {
         addSubview(view)
         [
-            "H:|-(leftInset)-[view]-(rightInset)-|",
-            "V:|-(topInset)-[view]-(bottomInset)-|"
+            "H:|-(leftInset@\(priorities.left.rawValue))-[view]-(rightInset@\(priorities.right.rawValue))-|",
+            "V:|-(topInset@\(priorities.top.rawValue))-[view]-(bottomInset@\(priorities.bottom.rawValue))-|"
         ]
             .constraints(
                 with: [
