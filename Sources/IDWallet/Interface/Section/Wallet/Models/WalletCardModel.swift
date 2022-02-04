@@ -19,7 +19,7 @@ struct WalletCardModel: Hashable, Equatable {
     
     /// Specifies the image-type for the wallet-background. Can either be named (from Assets) or stored (via file-url)
     enum ImageType: Hashable, Equatable {
-        case named(String)
+        case named(ImageNameIdentifier)
         case stored(URL)
     }
     
