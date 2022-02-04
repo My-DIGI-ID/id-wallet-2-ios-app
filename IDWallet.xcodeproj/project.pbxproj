@@ -178,10 +178,14 @@
 		952FF66B2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
 		952FF66C2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
 		952FF66D2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
+		953F26CE27AD71E3008704E1 /* ConnectionConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F26CD27AD71E3008704E1 /* ConnectionConfirmationViewController.swift */; };
+		953F26D027AD71F5008704E1 /* ConnectionConfirmationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F26CF27AD71F5008704E1 /* ConnectionConfirmationCoordinator.swift */; };
+		953F26D227AD9170008704E1 /* UILabel+ImageAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F26D127AD9170008704E1 /* UILabel+ImageAttachment.swift */; };
 		953F26C827AD6B92008704E1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 953F26C627AD6B92008704E1 /* InfoPlist.strings */; };
 		9542C7E327988FF400784147 /* String+AttributedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E227988FF400784147 /* String+AttributedStyle.swift */; };
 		9542C7E5279890E300784147 /* NSAttributedString+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */; };
 		9542C7E727997A8800784147 /* Sequence+NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */; };
+		955D3F2A27ADAB290004AD70 /* NSAttributedString+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955D3F2927ADAB290004AD70 /* NSAttributedString+Image.swift */; };
 		9586384227A9926C0030DCF3 /* ScannerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9586384127A9926C0030DCF3 /* ScannerCoordinator.swift */; };
 		9586384427A993AF0030DCF3 /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9586384327A993AF0030DCF3 /* QRScannerViewController.swift */; };
 		95873EB42791A98700A924C8 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95873EB32791A98700A924C8 /* WebView.swift */; };
@@ -307,10 +311,14 @@
 		950C06A227AD3F00006D0CAB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Localizable.strings; sourceTree = "<group>"; };
 		95193729279187D200ED0AF2 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		952FF66A2796E703003840F9 /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
+		953F26CD27AD71E3008704E1 /* ConnectionConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionConfirmationViewController.swift; sourceTree = "<group>"; };
+		953F26CF27AD71F5008704E1 /* ConnectionConfirmationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionConfirmationCoordinator.swift; sourceTree = "<group>"; };
+		953F26D127AD9170008704E1 /* UILabel+ImageAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+ImageAttachment.swift"; sourceTree = "<group>"; };
 		953F26C727AD6B92008704E1 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = InfoPlist.strings; sourceTree = "<group>"; };
 		9542C7E227988FF400784147 /* String+AttributedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+AttributedStyle.swift"; sourceTree = "<group>"; };
 		9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Alignment.swift"; sourceTree = "<group>"; };
 		9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+NSLayoutConstraint.swift"; sourceTree = "<group>"; };
+		955D3F2927ADAB290004AD70 /* NSAttributedString+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Image.swift"; sourceTree = "<group>"; };
 		9586384127A9926C0030DCF3 /* ScannerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerCoordinator.swift; sourceTree = "<group>"; };
 		9586384327A993AF0030DCF3 /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
 		95873EB32791A98700A924C8 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
@@ -429,6 +437,7 @@
 		8847D7A927563C5B00C2A25B /* Section */ = {
 			isa = PBXGroup;
 			children = (
+				953F26C927AD71A1008704E1 /* ConnectionConfirmation */,
 				9586384027A98C510030DCF3 /* QRCodeScanner */,
 				95C107DD2795B7CE00FB02AD /* Alert */,
 				8847D7AA27563C5B00C2A25B /* Main */,
@@ -695,6 +704,8 @@
 				9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */,
 				95F9A2AF27A05D98003F15B5 /* UIColor+Image.swift */,
 				95F9A2B127A05F2E003F15B5 /* CALayer+SketchShadow.swift */,
+				953F26D127AD9170008704E1 /* UILabel+ImageAttachment.swift */,
+				955D3F2927ADAB290004AD70 /* NSAttributedString+Image.swift */,
 				950C069327AC6145006D0CAB /* Strings+Localize.swift */,
 			);
 			path = "Convenience Extensions";
@@ -755,6 +766,39 @@
 				8EDC79D0279679A90032E348 /* CustomTabBar.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		953F26C927AD71A1008704E1 /* ConnectionConfirmation */ = {
+			isa = PBXGroup;
+			children = (
+				953F26CC27AD71CE008704E1 /* Controllers */,
+				953F26CB27AD71C3008704E1 /* Models */,
+				953F26CA27AD71B1008704E1 /* Coordinators */,
+			);
+			path = ConnectionConfirmation;
+			sourceTree = "<group>";
+		};
+		953F26CA27AD71B1008704E1 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				953F26CF27AD71F5008704E1 /* ConnectionConfirmationCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		953F26CB27AD71C3008704E1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		953F26CC27AD71CE008704E1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				953F26CD27AD71E3008704E1 /* ConnectionConfirmationViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		950C069927AD3EB0006D0CAB /* Locale */ = {
@@ -1065,7 +1109,9 @@
 				8E8C40712767373600DBC979 /* Rounded.swift in Sources */,
 				8E8C40592765FA6F00DBC979 /* BaseVC.swift in Sources */,
 				95F9A2B527A06CE4003F15B5 /* WalletButton.swift in Sources */,
+				953F26D027AD71F5008704E1 /* ConnectionConfirmationCoordinator.swift in Sources */,
 				8E8C408C2769C15400DBC979 /* Coordinator.swift in Sources */,
+				955D3F2A27ADAB290004AD70 /* NSAttributedString+Image.swift in Sources */,
 				8EAF8405275D90FC00283D0B /* PinCodeView.swift in Sources */,
 				8E8C408427680AE400DBC979 /* OnboardingPageVC.swift in Sources */,
 				9542C7E5279890E300784147 /* NSAttributedString+Alignment.swift in Sources */,
@@ -1104,8 +1150,10 @@
 				952FF66B2796E703003840F9 /* WebViewModel.swift in Sources */,
 				95873EBA2791B23300A924C8 /* HelpViewCoordinator.swift in Sources */,
 				8EAF8422275FE6D000283D0B /* Typography.swift in Sources */,
+				953F26D227AD9170008704E1 /* UILabel+ImageAttachment.swift in Sources */,
 				8E7554CE277305580016DEB0 /* ContractError.swift in Sources */,
 				95F9A2B027A05D98003F15B5 /* UIColor+Image.swift in Sources */,
+				953F26CE27AD71E3008704E1 /* ConnectionConfirmationViewController.swift in Sources */,
 				95F9A2AC27A05482003F15B5 /* UIColor+IDWallet.swift in Sources */,
 				8E988179276AB3CF002F629C /* AppState.swift in Sources */,
 				8E98818C276AB815002F629C /* Presenter.swift in Sources */,

@@ -27,7 +27,8 @@ class AppCoordinator: Coordinator {
         Task {
             switch await appState.authenticator.authenticationState() {
             case .uninitialized:
-                startSetup()
+//                startSetup()
+                startConfirmation()
             case .unauthenticated, .authenticationFailed, .authenticationExpired:
                 startAuthentication()
             case .authenticated:
@@ -107,5 +108,9 @@ extension AppCoordinator {
          }
 
         presenter.present(WalletTabBarController(scannerCoordinator: scannerCoordinator))
+    }
+
+    private func startConfirmation() {
+        ConnectionConfirmationCoordinator(presenter: presenter).start()
     }
 }

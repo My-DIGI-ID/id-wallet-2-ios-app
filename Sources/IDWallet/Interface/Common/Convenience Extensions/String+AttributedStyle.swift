@@ -16,7 +16,9 @@ import UIKit
 
 enum AttributedStyle {
     case header,
-         subHeading
+         subHeading,
+         body,
+         text(font: UIFont)
 
     var attributes: [NSAttributedString.Key: Any] {
         switch self {
@@ -26,6 +28,12 @@ enum AttributedStyle {
         case .subHeading:
             return [.foregroundColor: UIColor.walBlack,
                     .font: Typography.regular.subHeadingFont]
+        case .body:
+            return [.foregroundColor: UIColor.walBlack,
+                    .font: Typography.regular.bodyFont]
+        case .text(let font):
+            return [.foregroundColor: UIColor.walBlack,
+                    .font: font]
         }
     }
 }

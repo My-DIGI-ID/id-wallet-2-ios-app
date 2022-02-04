@@ -99,6 +99,7 @@ class WalletButton: UIButton {
         layer.borderColor = styleColor.borderColor.cgColor
 
         setImage(buttonImage, for: .normal)
+
         setAttributedTitle(NSAttributedString(string: titleText ?? "",
                                               attributes: [.foregroundColor: styleColor.textColor,
                                                            .font: Typography.regular.buttonFont]), for: .normal)
@@ -138,5 +139,13 @@ extension WalletButton.Style {
                       textColor: .primaryBlue),
         disabled: Color(backgroundColor: .clear,
                         borderColor: .grey2,
+                        textColor: .grey2))
+
+    static let link = WalletButton.Style(
+        normal: Color(backgroundColor: .clear,
+                      borderColor: .clear,
+                      textColor: .primaryBlue),
+        disabled: Color(backgroundColor: .clear,
+                        borderColor: .clear,
                         textColor: .grey2))
 }
