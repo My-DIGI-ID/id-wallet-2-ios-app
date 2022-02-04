@@ -19,6 +19,9 @@
 		8847D7D827563F6200C2A25B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8847D7D527563F6100C2A25B /* LaunchScreen.storyboard */; };
 		8862A88A27AC213A00C9780B /* EmptyWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A88927AC213A00C9780B /* EmptyWalletView.swift */; };
 		8862A88D27AC217B00C9780B /* WalletCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A88C27AC217B00C9780B /* WalletCardModel.swift */; };
+		8862A89027AD15EE00C9780B /* UIImage+Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A88F27AD15EE00C9780B /* UIImage+Named.swift */; };
+		8862A89227AD18E500C9780B /* UIImage+existingNamed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A89127AD18E500C9780B /* UIImage+existingNamed.swift */; };
+		8862A89427AD1AF900C9780B /* UIImageView+Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A89327AD1AF900C9780B /* UIImageView+Named.swift */; };
 		8E43319D27590FB700D50127 /* NumberPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E43319C27590FB700D50127 /* NumberPad.swift */; };
 		8E4331BA2759152B00D50127 /* IBMPlexSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E4331AA2759152B00D50127 /* IBMPlexSans-Regular.ttf */; };
 		8E4331BB2759152B00D50127 /* IBMPlexSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E4331AB2759152B00D50127 /* IBMPlexSans-Bold.ttf */; };
@@ -244,6 +247,9 @@
 		8847D7D627563F6100C2A25B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8862A88927AC213A00C9780B /* EmptyWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmptyWalletView.swift; path = Sources/IDWallet/EmptyWalletView.swift; sourceTree = SOURCE_ROOT; };
 		8862A88C27AC217B00C9780B /* WalletCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardModel.swift; sourceTree = "<group>"; };
+		8862A88F27AD15EE00C9780B /* UIImage+Named.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Named.swift"; sourceTree = "<group>"; };
+		8862A89127AD18E500C9780B /* UIImage+existingNamed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+existingNamed.swift"; sourceTree = "<group>"; };
+		8862A89327AD1AF900C9780B /* UIImageView+Named.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Named.swift"; sourceTree = "<group>"; };
 		8E43319C27590FB700D50127 /* NumberPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPad.swift; sourceTree = "<group>"; };
 		8E43319F2759152B00D50127 /* IBMPlexSans-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-MediumItalic.ttf"; sourceTree = "<group>"; };
 		8E4331A02759152B00D50127 /* IBMPlexSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-Medium.ttf"; sourceTree = "<group>"; };
@@ -493,6 +499,7 @@
 		8847D7B427563CAB00C2A25B /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				8862A88E27AD15DB00C9780B /* Image */,
 				95C107E32796CECA00FB02AD /* Alerts */,
 				8E8C408F2769C1E800DBC979 /* Coordinators */,
 				8E4331BF2759164900D50127 /* Theme */,
@@ -528,6 +535,16 @@
 				8862A88C27AC217B00C9780B /* WalletCardModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		8862A88E27AD15DB00C9780B /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				8862A88F27AD15EE00C9780B /* UIImage+Named.swift */,
+				8862A89127AD18E500C9780B /* UIImage+existingNamed.swift */,
+				8862A89327AD1AF900C9780B /* UIImageView+Named.swift */,
+			);
+			path = Image;
 			sourceTree = "<group>";
 		};
 		8E43319E275914CF00D50127 /* Fonts */ = {
@@ -1147,8 +1164,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8862A89427AD1AF900C9780B /* UIImageView+Named.swift in Sources */,
 				8E7554C2277291DA0016DEB0 /* BaseVCStyle.swift in Sources */,
 				95C107E52796CEE200FB02AD /* MessageType+Image.swift in Sources */,
+				95C107E52796CEE200FB02AD /* ErrorType+Image.swift in Sources */,
+				8862A89027AD15EE00C9780B /* UIImage+Named.swift in Sources */,
 				8E7554CA27729A410016DEB0 /* BareBaseVC.swift in Sources */,
 				8EAF8407275D927B00283D0B /* PinCodeDigitView.swift in Sources */,
 				8E98817D276AB3EB002F629C /* Authenticator.swift in Sources */,
@@ -1187,6 +1207,7 @@
 				8E8C405527650CBB00DBC979 /* UIImageExtensions.swift in Sources */,
 				8EAF8413275F443A00283D0B /* ValidationError.swift in Sources */,
 				8E8C40492764BF6B00DBC979 /* OnboardingVC.swift in Sources */,
+				8862A89227AD18E500C9780B /* UIImage+existingNamed.swift in Sources */,
 				8EDC79D1279679A90032E348 /* CustomTabBar.swift in Sources */,
 				8E988175276A37B0002F629C /* MainNavigationController.swift in Sources */,
 				8EAF841D275FE2F400283D0B /* UIFontExtensions.swift in Sources */,
