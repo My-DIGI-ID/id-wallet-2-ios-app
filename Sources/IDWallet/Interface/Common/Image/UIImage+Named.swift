@@ -13,7 +13,7 @@
 
 import UIKit
 
-struct ImageNameIdentifier: RawRepresentable {
+struct ImageNameIdentifier: RawRepresentable, Hashable, Equatable {
     typealias RawValue = String
     let rawValue: RawValue
     
