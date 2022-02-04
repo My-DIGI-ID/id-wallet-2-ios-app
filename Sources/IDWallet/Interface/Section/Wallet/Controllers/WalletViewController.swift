@@ -13,6 +13,10 @@
 
 import UIKit
 
+fileprivate extension ImageNameIdentifier {
+    static let userIcon = ImageNameIdentifier(rawValue: "ImageIconUser")
+}
+
 final class WalletViewController: BareBaseViewController {
     
     // MARK: CollectionView
@@ -60,7 +64,7 @@ final class WalletViewController: BareBaseViewController {
     lazy var userIcon: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = .requiredImage(name: "ImageIconUser") // TODO: Replace with named-image
+        image.setImage(identifiedBy: .userIcon)
         
         [
             image.widthAnchor.constraint(equalToConstant: 32),
@@ -78,13 +82,23 @@ final class WalletViewController: BareBaseViewController {
         return stackView
     }()
     
-    lazy var emptyContentView: EmptyWalletView = {
-        let view = EmptyWalletView()
+    lazy var contentContainer: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var noWalletContentView: NoContentWalletView = {
+        let view = NoContentWalletView()
 //        view.delegate = self
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-        
+    
+    @objc dynamic func addDoumentButtonPressed(_ sender: UIControl) {
+        // TODO: Handle Add Document
+    }
+    
     // MARK: - Lifecycle
     required init?(coder: NSCoder) {
         fatalError("init(coder:) is not supported. Use init() instead")
@@ -99,11 +113,13 @@ final class WalletViewController: BareBaseViewController {
         // TODO: Layout
         view.backgroundColor = .white
         view.addSubview(headerContainer)
+        view.addSubview(contentContainer)
         
         let constraints = [
             "H:|-(24)-[header]-(24)-|",
-            "V:|-(60)-[header]",
-        ].constraints(with: ["header": headerContainer]) + [
+            "H:|-(24)-[content]-(24)-|",
+            "V:|-(60)-[header]-(5)-[content]|",
+        ].constraints(with: ["header": headerContainer, "content": contentContainer]) + [
             userIcon.widthAnchor.constraint(equalToConstant: 32),
             userIcon.heightAnchor.constraint(equalToConstant: 32),
         ]
@@ -113,18 +129,27 @@ final class WalletViewController: BareBaseViewController {
         headerLabel.font = .plexSansBold(25)
         headerLabel.textColor = .black
         headerLabel.text = NSLocalizedString("Deine Dokumente", comment: "")
+        
+        noWalletContentView.addDocumentButton.addTarget(self, action: #selector(addDoumentButtonPressed(_:)), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // TODO: Check if wallet entries available
+        let hasWalletEntries = false
         
-        view.addSubview(emptyContentView)
-        [
-            "H:|-(24)-[content]-(24)-|",
-            "V:[header]-(5)-[content]-(>=0)-|"
-        ].constraints(with: ["header": headerContainer, "content": emptyContentView]).activate()
+        if !hasWalletEntries {
+            contentContainer.addSubview(noWalletContentView)
+            let constraints = [
+                "H:|[content]|",
+            ].constraints(with: ["header": headerContainer, "content": noWalletContentView]) + [
+                contentContainer.centerYAnchor.constraint(equalTo: noWalletContentView.centerYAnchor)
+            ]
+            constraints.activate()
+        } else {
+            noWalletContentView.removeFromSuperview()
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
