@@ -11,11 +11,14 @@
 // specific language governing permissions and limitations under the License.
 //
 
-
 import UIKit
 
+fileprivate extension ImageNameIdentifier {
+    static let emptyWalletIcon = ImageNameIdentifier(rawValue: "ImageEmptyWalletPage")
+}
+
 /// Simple container view that wraps the content displayed when no wallet entries are available
-class EmptyWalletView: UIView {
+class NoContentWalletView: UIView {
     
     lazy var contentStackView: UIStackView = {
         let stackView = UIStackView()
@@ -25,20 +28,19 @@ class EmptyWalletView: UIView {
         stackView.distribution = .fill
         stackView.contentMode = .scaleToFill
         stackView.backgroundColor = .clear
-        stackView.spacing = 50
+        stackView.spacing = 30
         return stackView
     }()
     
     lazy var emptyWalletImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = .requiredImage(name: "ImageEmptyWalletPage")  // TODO: Replace with named-image
+        imageView.setImage(identifiedBy: .emptyWalletIcon)
         return imageView
     }()
     
     lazy var emptyWalletContainer: UIView = {
         let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(emptyWalletImageView)
         
         let constraints = [
@@ -61,12 +63,37 @@ class EmptyWalletView: UIView {
         return label
     }()
     
+    lazy var addDocumentButton: WalletButton = {
+        let button = WalletButton(titleText: "\(NSLocalizedString("Dokument hinzufügen", comment: ""))",
+                                  image: .init(systemName: "plus"),
+                                  imageAlignRight: false,
+                                  style: .primary)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    lazy var addDocumentButtonContainer: UIView = {
+        let view = UIView()
+        view.addSubview(addDocumentButton)
+        
+        let constraints = [
+            "V:|[button]|",
+        ].constraints(with: ["button": addDocumentButton]) + [
+            view.centerXAnchor.constraint(equalTo: addDocumentButton.centerXAnchor),
+            addDocumentButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+        ]
+        constraints.activate()
+        
+        return view
+    }()
+    
     private func setupLayout() {
         
         embed(contentStackView)
         
         contentStackView.addArrangedSubview(emptyWalletContainer)
         contentStackView.addArrangedSubview(infoTextLabel)
+        contentStackView.addArrangedSubview(addDocumentButtonContainer)
         
         // TODO: Font-Format
         infoTextLabel.text = NSLocalizedString("Die Wallet ist leer.\nFüge dein erstes Dokument hinzu.", comment: "")
@@ -75,6 +102,7 @@ class EmptyWalletView: UIView {
 
         [
             emptyWalletContainer.widthAnchor.constraint(equalTo: contentStackView.widthAnchor),
+            addDocumentButtonContainer.widthAnchor.constraint(equalTo: contentStackView.widthAnchor),
         ].activate()
     }
     
