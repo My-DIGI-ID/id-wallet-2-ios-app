@@ -22,10 +22,11 @@ private enum Constants {
         static let jailbreak: UIImage = #imageLiteral(resourceName: "jailbreak")
         static let noInternet: UIImage = #imageLiteral(resourceName: "noInternet")
         static let timeout: UIImage = #imageLiteral(resourceName: "timeout")
+        static let success: UIImage = #imageLiteral(resourceName: "success")
     }
 }
 
-extension ErrorType {
+extension MessageType {
     var image: UIImage {
         switch self {
         case .fail:
@@ -40,6 +41,8 @@ extension ErrorType {
             return Constants.Image.noInternet
         case .timeout:
             return Constants.Image.timeout
+        case .success:
+            return Constants.Image.success
         }
     }
 }

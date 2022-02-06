@@ -193,10 +193,10 @@
 		95873EBA2791B23300A924C8 /* HelpViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95873EB92791B23300A924C8 /* HelpViewCoordinator.swift */; };
 		95873EBC2791C01400A924C8 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95873EBB2791C01400A924C8 /* UIView+Layout.swift */; };
 		95C107DA2795896300FB02AD /* learn-more-de.html in Resources */ = {isa = PBXBuildFile; fileRef = 95873EBF2791F8A000A924C8 /* learn-more-de.html */; };
-		95C107DC27958FCB00FB02AD /* WalletAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107DB27958FCB00FB02AD /* WalletAlertViewController.swift */; };
-		95C107E02795B7E300FB02AD /* ErrorAlertCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107DF2795B7E300FB02AD /* ErrorAlertCoordinator.swift */; };
-		95C107E52796CEE200FB02AD /* ErrorType+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107E42796CEE200FB02AD /* ErrorType+Image.swift */; };
-		95C107E72796CF0E00FB02AD /* ErrorAlertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107E62796CF0E00FB02AD /* ErrorAlertViewModel.swift */; };
+		95C107DC27958FCB00FB02AD /* WalletMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107DB27958FCB00FB02AD /* WalletMessageViewController.swift */; };
+		95C107E02795B7E300FB02AD /* MessageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107DF2795B7E300FB02AD /* MessageCoordinator.swift */; };
+		95C107E52796CEE200FB02AD /* MessageType+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107E42796CEE200FB02AD /* MessageType+Image.swift */; };
+		95C107E72796CF0E00FB02AD /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107E62796CF0E00FB02AD /* MessageViewModel.swift */; };
 		95F9A2AC27A05482003F15B5 /* UIColor+IDWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F9A2AB27A05482003F15B5 /* UIColor+IDWallet.swift */; };
 		95F9A2AD27A055DA003F15B5 /* UIColor+IDWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F9A2AB27A05482003F15B5 /* UIColor+IDWallet.swift */; };
 		95F9A2AE27A055DA003F15B5 /* UIColor+IDWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F9A2AB27A05482003F15B5 /* UIColor+IDWallet.swift */; };
@@ -327,10 +327,10 @@
 		95873EB92791B23300A924C8 /* HelpViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewCoordinator.swift; sourceTree = "<group>"; };
 		95873EBB2791C01400A924C8 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		95873EBF2791F8A000A924C8 /* learn-more-de.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "learn-more-de.html"; sourceTree = "<group>"; };
-		95C107DB27958FCB00FB02AD /* WalletAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAlertViewController.swift; sourceTree = "<group>"; };
-		95C107DF2795B7E300FB02AD /* ErrorAlertCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertCoordinator.swift; sourceTree = "<group>"; };
-		95C107E42796CEE200FB02AD /* ErrorType+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ErrorType+Image.swift"; sourceTree = "<group>"; };
-		95C107E62796CF0E00FB02AD /* ErrorAlertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertViewModel.swift; sourceTree = "<group>"; };
+		95C107DB27958FCB00FB02AD /* WalletMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMessageViewController.swift; sourceTree = "<group>"; };
+		95C107DF2795B7E300FB02AD /* MessageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCoordinator.swift; sourceTree = "<group>"; };
+		95C107E42796CEE200FB02AD /* MessageType+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageType+Image.swift"; sourceTree = "<group>"; };
+		95C107E62796CF0E00FB02AD /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		95F9A2AB27A05482003F15B5 /* UIColor+IDWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+IDWallet.swift"; sourceTree = "<group>"; };
 		95F9A2AF27A05D98003F15B5 /* UIColor+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Image.swift"; sourceTree = "<group>"; };
 		95F9A2B127A05F2E003F15B5 /* CALayer+SketchShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+SketchShadow.swift"; sourceTree = "<group>"; };
@@ -575,7 +575,7 @@
 				8E8C40742767DB0D00DBC979 /* BaseVC */,
 				8E7554C927729A410016DEB0 /* BareBaseVC.swift */,
 				95193729279187D200ED0AF2 /* WebViewController.swift */,
-				95C107DB27958FCB00FB02AD /* WalletAlertViewController.swift */,
+				95C107DB27958FCB00FB02AD /* WalletMessageViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -884,7 +884,7 @@
 		95C107DE2795B7D300FB02AD /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				95C107DF2795B7E300FB02AD /* ErrorAlertCoordinator.swift */,
+				95C107DF2795B7E300FB02AD /* MessageCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -892,8 +892,8 @@
 		95C107E32796CECA00FB02AD /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
-				95C107E62796CF0E00FB02AD /* ErrorAlertViewModel.swift */,
-				95C107E42796CEE200FB02AD /* ErrorType+Image.swift */,
+				95C107E62796CF0E00FB02AD /* MessageViewModel.swift */,
+				95C107E42796CEE200FB02AD /* MessageType+Image.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -1090,7 +1090,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8E7554C2277291DA0016DEB0 /* BaseVCStyle.swift in Sources */,
-				95C107E52796CEE200FB02AD /* ErrorType+Image.swift in Sources */,
+				95C107E52796CEE200FB02AD /* MessageType+Image.swift in Sources */,
 				8E7554CA27729A410016DEB0 /* BareBaseVC.swift in Sources */,
 				8EAF8407275D927B00283D0B /* PinCodeDigitView.swift in Sources */,
 				8E98817D276AB3EB002F629C /* Authenticator.swift in Sources */,
@@ -1121,7 +1121,7 @@
 				9542C7E5279890E300784147 /* NSAttributedString+Alignment.swift in Sources */,
 				8E43319D27590FB700D50127 /* NumberPad.swift in Sources */,
 				95F9A2B227A05F2E003F15B5 /* CALayer+SketchShadow.swift in Sources */,
-				95C107DC27958FCB00FB02AD /* WalletAlertViewController.swift in Sources */,
+				95C107DC27958FCB00FB02AD /* WalletMessageViewController.swift in Sources */,
 				8E988182276AB437002F629C /* AppCoordinator.swift in Sources */,
 				8E8C405527650CBB00DBC979 /* UIImageExtensions.swift in Sources */,
 				8EAF8413275F443A00283D0B /* ValidationError.swift in Sources */,
@@ -1134,8 +1134,8 @@
 				8EAF8418275F4CC700283D0B /* PinCharacterRepresentation.swift in Sources */,
 				8ECA2280276F3E4200CB8D81 /* ZeroOrMore.swift in Sources */,
 				8847D7782756376000C2A25B /* AppDelegate.swift in Sources */,
-				95C107E02795B7E300FB02AD /* ErrorAlertCoordinator.swift in Sources */,
-				95C107E72796CF0E00FB02AD /* ErrorAlertViewModel.swift in Sources */,
+				95C107E02795B7E300FB02AD /* MessageCoordinator.swift in Sources */,
+				95C107E72796CF0E00FB02AD /* MessageViewModel.swift in Sources */,
 				8847D77A2756376000C2A25B /* SceneDelegate.swift in Sources */,
 				8EDC79CA278F727F0032E348 /* WalletTabBarController.swift in Sources */,
 				8EF119A327718A8A00BDC5CE /* PinEntrySuccessViewController.swift in Sources */,

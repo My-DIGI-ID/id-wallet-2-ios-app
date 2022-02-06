@@ -13,17 +13,17 @@
 
 import Foundation
 
-class ErrorAlertCoordinator: Coordinator {
+class MessageCoordinator: Coordinator {
     private let presenter: PresenterProtocol
-    private let viewModel: ErrorAlertModelProtocol
+    private let viewModel: MessageModelProtocol
 
-    init(presenter: PresenterProtocol, model: ErrorAlertModelProtocol) {
+    init(presenter: PresenterProtocol, model: MessageModelProtocol) {
         self.presenter = presenter
         self.viewModel = model
     }
 
     func start() {
-        presenter.present(WalletAlertViewController(viewModel: viewModel),
+        presenter.present(WalletMessageViewController(viewModel: viewModel),
                           modalPresentationStyle: .fullScreen,
                           modalTransitionStyle: .coverVertical)
     }

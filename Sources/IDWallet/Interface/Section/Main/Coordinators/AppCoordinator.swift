@@ -45,10 +45,16 @@ extension AppCoordinator {
         let help = HelpViewCoordinator(presenter: presenter, model: viewModel)
         help.start()
     }
-    
-    private func showError(viewModel: ErrorAlertViewModel) {
-        let alert = ErrorAlertCoordinator(presenter: presenter, model: viewModel)
+
+    private func showMessage(viewModel: MessageViewModel) {
+        let alert = MessageCoordinator(presenter: presenter, model: viewModel)
         alert.start()
+
+        /* Example for a success message with close
+         showMessage(viewModel: MessageViewModel(messageType: .success,
+                                                 header: "Daten erfolgreich übermittelt",
+                                                 buttons: [("Fertig", UIAction(handler: { _ in self.presenter.dismiss(completion: nil)}))]))
+         */
     }
 
     private func startSetup() {

@@ -14,30 +14,30 @@
 import Foundation
 import UIKit
 
-enum ErrorType {
-    case error, fail, unknownError, jailbreak, noInternet, timeout
+enum MessageType {
+    case error, fail, unknownError, jailbreak, noInternet, timeout, success
 }
 
-protocol ErrorAlertModelProtocol {
+protocol MessageModelProtocol {
     typealias ButtonModel = (title: String, action: UIAction)
     var title: String { get }
-    var alertType: ErrorType { get }
+    var messageType: MessageType { get }
     var header: String { get }
     var text: String { get }
     var buttons: [ButtonModel] { get }
 }
 
-struct ErrorAlertViewModel: ErrorAlertModelProtocol {
+struct MessageViewModel: MessageModelProtocol {
 
     var title: String
-    var alertType: ErrorType
+    var messageType: MessageType
     var header: String
     var text: String
     var buttons: [ButtonModel]
 
-    internal init(title: String, alertType: ErrorType, header: String, text: String, buttons: [ButtonModel]) {
+    internal init(title: String = "", messageType: MessageType, header: String = "", text: String = "", buttons: [ButtonModel]) {
         self.title = title
-        self.alertType = alertType
+        self.messageType = messageType
         self.header = header
         self.text = text
         self.buttons = buttons

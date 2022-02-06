@@ -35,7 +35,7 @@ private enum Constants {
     }
 }
 
-class WalletAlertViewController: BareBaseViewController {
+class WalletMessageViewController: BareBaseViewController {
 
     private lazy var closeButton: UIBarButtonItem = {
         let button = UIBarButtonItem(image: Images.regular.close,
@@ -52,7 +52,9 @@ class WalletAlertViewController: BareBaseViewController {
 
     private lazy var navigationBar: UINavigationBar = {
         let navigationItem = UINavigationItem(title: viewModel.title)
-        navigationItem.rightBarButtonItem = closeButton
+        if viewModel.messageType != .success {
+            navigationItem.rightBarButtonItem = closeButton
+        }
 
         let navigationBar = UINavigationBar(frame: .zero)
         navigationBar.barTintColor = .white
@@ -92,13 +94,13 @@ class WalletAlertViewController: BareBaseViewController {
         return label
     }()
 
-    private lazy var alertTypeImageView: UIImageView = {
-        return UIImageView(image: viewModel.alertType.image)
+    private lazy var messageTypeImageView: UIImageView = {
+        return UIImageView(image: viewModel.messageType.image)
             .withEqualAutolayoutSize(constant: Constants.Layout.iconSize)
     }()
 
     private lazy var stackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [alertTypeImageView,
+        let view = UIStackView(arrangedSubviews: [messageTypeImageView,
                                                   headerLabel,
                                                   subHeaderLabel,
                                                   UIView(),
@@ -117,9 +119,9 @@ class WalletAlertViewController: BareBaseViewController {
         return view
     }()
 
-    private let viewModel: ErrorAlertModelProtocol
+    private let viewModel: MessageModelProtocol
 
-    init(viewModel: ErrorAlertModelProtocol) {
+    init(viewModel: MessageModelProtocol) {
         self.viewModel = viewModel
         super.init(style: nil)
     }
@@ -156,7 +158,7 @@ class WalletAlertViewController: BareBaseViewController {
 
 // MARK: Layout
 
-extension WalletAlertViewController {
+extension WalletMessageViewController {
     private func setupLayout() {
         view.backgroundColor = .white
 
