@@ -185,6 +185,7 @@
 		9542C7E327988FF400784147 /* String+AttributedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E227988FF400784147 /* String+AttributedStyle.swift */; };
 		9542C7E5279890E300784147 /* NSAttributedString+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */; };
 		9542C7E727997A8800784147 /* Sequence+NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */; };
+		9547454B27B00CC000B2C0D1 /* ConnectionInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9547454A27B00CC000B2C0D1 /* ConnectionInformationViewModel.swift */; };
 		955D3F2A27ADAB290004AD70 /* NSAttributedString+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955D3F2927ADAB290004AD70 /* NSAttributedString+Image.swift */; };
 		9586384227A9926C0030DCF3 /* ScannerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9586384127A9926C0030DCF3 /* ScannerCoordinator.swift */; };
 		9586384427A993AF0030DCF3 /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9586384327A993AF0030DCF3 /* QRScannerViewController.swift */; };
@@ -318,6 +319,7 @@
 		9542C7E227988FF400784147 /* String+AttributedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+AttributedStyle.swift"; sourceTree = "<group>"; };
 		9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Alignment.swift"; sourceTree = "<group>"; };
 		9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+NSLayoutConstraint.swift"; sourceTree = "<group>"; };
+		9547454A27B00CC000B2C0D1 /* ConnectionInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInformationViewModel.swift; sourceTree = "<group>"; };
 		955D3F2927ADAB290004AD70 /* NSAttributedString+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Image.swift"; sourceTree = "<group>"; };
 		9586384127A9926C0030DCF3 /* ScannerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerCoordinator.swift; sourceTree = "<group>"; };
 		9586384327A993AF0030DCF3 /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
@@ -789,6 +791,7 @@
 		953F26CB27AD71C3008704E1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				9547454A27B00CC000B2C0D1 /* ConnectionInformationViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1108,6 +1111,7 @@
 				8E88912427744F2E00D0E6A3 /* ViewFactory.swift in Sources */,
 				8E8C40712767373600DBC979 /* Rounded.swift in Sources */,
 				8E8C40592765FA6F00DBC979 /* BaseVC.swift in Sources */,
+				9547454B27B00CC000B2C0D1 /* ConnectionInformationViewModel.swift in Sources */,
 				95F9A2B527A06CE4003F15B5 /* WalletButton.swift in Sources */,
 				953F26D027AD71F5008704E1 /* ConnectionConfirmationCoordinator.swift in Sources */,
 				8E8C408C2769C15400DBC979 /* Coordinator.swift in Sources */,

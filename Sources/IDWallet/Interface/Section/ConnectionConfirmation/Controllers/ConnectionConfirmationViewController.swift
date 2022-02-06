@@ -27,11 +27,15 @@ private enum Constants {
         static let contenStackViewInsets = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
         static let buttonStackViewBottomDistance: CGFloat = -16
         static let buttonStackViewSpacing: CGFloat = 8
-        static let headerSpacing: CGFloat = 48
+        static let headerSpacing: CGFloat = -48
+        static let imageSpacing: CGFloat = -32
+
+        static let informationViewCornerRadius: CGFloat = 16
+        static let informationViewLeading: CGFloat = 24
+        static let informationViewHeight: CGFloat = 58
 
         enum Button {
-            static let contentInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-            static let cornerRadius: CGFloat = 30
+            static let linkHeight: CGFloat = 24
         }
     }
     static let image: UIImage = #imageLiteral(resourceName: "error.svg.pdf")
@@ -41,15 +45,18 @@ private enum Constants {
 class ConnectionConfirmationViewController: BareBaseViewController {
 
     private lazy var closeButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: Images.regular.close,
-                                     style: .plain,
-                                     target: self,
-                                     action: #selector(closeView))
+        let button = UIBarButtonItem(
+            image: Images.regular.close,
+            style: .plain,
+            target: self,
+            action: #selector(closeView))
         button.tintColor = .primaryBlue
-        button.setTitleTextAttributes([.foregroundColor: UIColor.primaryBlue,
-                                       .font: Typography.regular.bodyFont], for: .normal)
-        button.setTitleTextAttributes([.foregroundColor: UIColor.primaryBlue,
-                                       .font: Typography.regular.bodyFont], for: .highlighted)
+        button.setTitleTextAttributes([
+            .foregroundColor: UIColor.primaryBlue,
+            .font: Typography.regular.bodyFont], for: .normal)
+        button.setTitleTextAttributes([
+            .foregroundColor: UIColor.primaryBlue,
+            .font: Typography.regular.bodyFont], for: .highlighted)
         return button
     }()
 
@@ -99,7 +106,7 @@ class ConnectionConfirmationViewController: BareBaseViewController {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .secondaryBlue
-        view.layer.cornerRadius = 16
+        view.layer.cornerRadius = Constants.Layout.informationViewCornerRadius
         view.addAutolayoutSubviews(labelSecuredConnection)
         return view
     }()
@@ -117,7 +124,7 @@ class ConnectionConfirmationViewController: BareBaseViewController {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .secondaryBlue
-        view.layer.cornerRadius = 16
+        view.layer.cornerRadius = Constants.Layout.informationViewCornerRadius
         view.addAutolayoutSubviews(labelCertificateInformation)
         return view
     }()
@@ -133,32 +140,30 @@ class ConnectionConfirmationViewController: BareBaseViewController {
 
     private lazy var linkSecurity: WalletButton = {
         let button = WalletButton(titleText: "Welche Sicherheitsstufe gibt es?",
-                                  image: nil,
-                                  imageAlignRight: true,
                                   style: .link,
                                   primaryAction: nil)
         return button
     }()
 
     private lazy var linkDetails: WalletButton = {
-        let button = WalletButton(titleText: "Details zu dieser Verbindung anzeigen",
-                                  image: nil,
-                                  imageAlignRight: true,
-                                  style: .link,
-                                  primaryAction: nil)
+        let button = WalletButton(
+            titleText: "Details zu dieser Verbindung anzeigen",
+            style: .link,
+            primaryAction: nil)
         return button
     }()
 
     private lazy var stackView: UIStackView = {
-        let view = UIStackView(arrangedSubviews: [alertTypeImageView,
-                                                  headerLabel,
-                                                  subHeaderLabel,
-                                                  securedConnectionInformationView,
-                                                  certificateInformationView,
-                                                  linkSecurity,
-                                                  linkDetails,
-                                                  UIView(),
-                                                  buttonsStackView])
+        let view = UIStackView(arrangedSubviews: [
+            alertTypeImageView,
+            headerLabel,
+            subHeaderLabel,
+            securedConnectionInformationView,
+            certificateInformationView,
+            linkSecurity,
+            linkDetails,
+            UIView(),
+            buttonsStackView])
         view.axis = .vertical
         view.alignment = .center
         view.distribution = .fill
@@ -173,9 +178,9 @@ class ConnectionConfirmationViewController: BareBaseViewController {
         return view
     }()
 
-    private let viewModel: ConnectionConfirmation
+    private let viewModel: ConnectionConfirmationViewModel
 
-    init(viewModel: ConnectionConfirmation) {
+    init(viewModel: ConnectionConfirmationViewModel) {
         self.viewModel = viewModel
         super.init(style: nil)
     }
@@ -216,6 +221,8 @@ class ConnectionConfirmationViewController: BareBaseViewController {
 // MARK: Layout
 
 extension ConnectionConfirmationViewController {
+
+    // swiftlint:disable:next function_body_length
     private func setupLayout() {
         view.backgroundColor = .white
 
@@ -227,11 +234,13 @@ extension ConnectionConfirmationViewController {
         contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
 
         // Layout Complete View
-        ["V:|-[navBar]-(spacing)-[scrollView]-|",
-         "H:|[navBar]|",
-         "H:|[scrollView]|"]
-            .constraints(with: ["navBar": navigationBar, "scrollView": scrollView],
-                         metrics: ["spacing": Constants.Layout.scrollBarTopSpacing])
+        [
+            "V:|-[navBar]-(spacing)-[scrollView]-|",
+            "H:|[navBar]|",
+            "H:|[scrollView]|"]
+            .constraints(
+                with: ["navBar": navigationBar, "scrollView": scrollView],
+                metrics: ["spacing": Constants.Layout.scrollBarTopSpacing])
             .activate()
 
         // Pin the button stackView to the bottom of the view
@@ -244,19 +253,31 @@ extension ConnectionConfirmationViewController {
         buttonsStackView.spacing = Constants.Layout.buttonStackViewSpacing
 
         NSLayoutConstraint.activate([
-            alertTypeImageView.bottomAnchor.constraint(equalTo: headerLabel.topAnchor, constant: -32),
-            headerLabel.bottomAnchor.constraint(equalTo: subHeaderLabel.topAnchor, constant: -Constants.Layout.headerSpacing),
-            subHeaderLabel.bottomAnchor.constraint(equalTo: securedConnectionInformationView.topAnchor, constant: -Constants.Layout.headerSpacing),
+            alertTypeImageView.bottomAnchor.constraint(
+                equalTo: headerLabel.topAnchor,
+                constant: Constants.Layout.imageSpacing),
+            headerLabel.bottomAnchor.constraint(
+                equalTo: subHeaderLabel.topAnchor,
+                constant: Constants.Layout.headerSpacing),
+            subHeaderLabel.bottomAnchor.constraint(
+                equalTo: securedConnectionInformationView.topAnchor,
+                constant: Constants.Layout.headerSpacing),
             securedConnectionInformationView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            securedConnectionInformationView.heightAnchor.constraint(equalToConstant: 58),
+            securedConnectionInformationView.heightAnchor.constraint(equalToConstant: Constants.Layout.informationViewHeight),
             labelSecuredConnection.centerYAnchor.constraint(equalTo: securedConnectionInformationView.centerYAnchor),
-            labelSecuredConnection.leadingAnchor.constraint(equalTo: securedConnectionInformationView.leadingAnchor, constant: 24),
+            labelSecuredConnection.leadingAnchor.constraint(
+                equalTo: securedConnectionInformationView.leadingAnchor,
+                constant: Constants.Layout.informationViewLeading),
             certificateInformationView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            certificateInformationView.heightAnchor.constraint(equalToConstant: 58),
+            certificateInformationView.heightAnchor.constraint(equalToConstant: Constants.Layout.informationViewHeight),
             labelCertificateInformation.centerYAnchor.constraint(equalTo: certificateInformationView.centerYAnchor),
-            labelCertificateInformation.leadingAnchor.constraint(equalTo: certificateInformationView.leadingAnchor, constant: 24),
+            labelCertificateInformation.leadingAnchor.constraint(
+                equalTo: certificateInformationView.leadingAnchor,
+                constant: Constants.Layout.informationViewLeading),
             linkSecurity.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            linkDetails.widthAnchor.constraint(equalTo: stackView.widthAnchor)
+            linkSecurity.heightAnchor.constraint(equalToConstant: Constants.Layout.Button.linkHeight),
+            linkDetails.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            linkDetails.heightAnchor.constraint(equalToConstant: Constants.Layout.Button.linkHeight)
         ])
     }
 }

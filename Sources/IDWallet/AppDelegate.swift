@@ -1,7 +1,6 @@
 import CocoaLumberjack
 import CocoaLumberjackSwift
 import UIKit
-
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

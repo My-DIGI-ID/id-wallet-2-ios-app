@@ -14,13 +14,6 @@
 import Foundation
 import UIKit
 
-struct ConnectionConfirmation {
-    typealias ButtonModel = (title: String, action: UIAction)
-
-    let connection: String
-    var buttons: [ButtonModel]
-}
-
 class ConnectionConfirmationCoordinator: Coordinator {
     let presenter: PresenterProtocol
 
@@ -29,13 +22,17 @@ class ConnectionConfirmationCoordinator: Coordinator {
     }
 
     func start() {
-        let allowAction = UIAction { action in }
-        let cancelAction = UIAction { action in }
+        let allowAction = UIAction { _ in
+            self.presenter.dismiss(completion: nil)
+        }
+        let cancelAction = UIAction { _ in
+            self.presenter.dismiss(completion: nil)
+        }
 
-        let viewModel = ConnectionConfirmation(connection: "Mesa Deutschland GmbH ist authenifiziert",
-                                               buttons: [
-                                                ("Erlauben", allowAction),
-                                                ("Abbrechen", cancelAction)])
+        let viewModel = ConnectionConfirmationViewModel(connection: "Mesa Deutschland GmbH ist authenifiziert",
+                                                        buttons: [
+                                                            ("Erlauben", allowAction),
+                                                            ("Abbrechen", cancelAction)])
         presenter.present(ConnectionConfirmationViewController(viewModel: viewModel))
     }
 }

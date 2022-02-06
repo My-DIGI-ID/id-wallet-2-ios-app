@@ -98,11 +98,20 @@ class WalletButton: UIButton {
         backgroundColor = styleColor.backgroundColor
         layer.borderColor = styleColor.borderColor.cgColor
 
-        setImage(buttonImage, for: .normal)
 
-        setAttributedTitle(NSAttributedString(string: titleText ?? "",
-                                              attributes: [.foregroundColor: styleColor.textColor,
-                                                           .font: Typography.regular.buttonFont]), for: .normal)
+        setImage(buttonImage, for: .normal)
+        if style.asLink {
+            setAttributedTitle(NSAttributedString(string: titleText ?? "",
+                                                  attributes: [
+                                                    .foregroundColor: styleColor.textColor,
+                                                    .font: Typography.regular.buttonFont,
+                                                    .underlineStyle: NSUnderlineStyle.single.rawValue]), for: .normal)
+        } else {
+            setAttributedTitle(NSAttributedString(string: titleText ?? "",
+                                                  attributes: [
+                                                    .foregroundColor: styleColor.textColor,
+                                                    .font: Typography.regular.buttonFont]), for: .normal)
+        }
     }
 }
 
@@ -116,6 +125,7 @@ extension WalletButton {
 
         let normal: Color
         let disabled: Color
+        var asLink: Bool = false
 
         func colorFor(state: UIControl.State) -> Color {
             return state.contains(.disabled) ? disabled : normal
@@ -147,5 +157,6 @@ extension WalletButton.Style {
                       textColor: .primaryBlue),
         disabled: Color(backgroundColor: .clear,
                         borderColor: .clear,
-                        textColor: .grey2))
+                        textColor: .grey2),
+        asLink: true)
 }
