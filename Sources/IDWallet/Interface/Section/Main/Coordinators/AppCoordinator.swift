@@ -31,7 +31,7 @@ class AppCoordinator: Coordinator {
         Task {
             switch await appState.authenticator.authenticationState() {
             case .uninitialized:
-                startSetup()            
+                startSetup()                
             case .unauthenticated, .authenticationFailed, .authenticationExpired:
                 startAuthentication()
             case .authenticated:
@@ -79,7 +79,7 @@ extension AppCoordinator {
     // TODO: Should be in Wallet Tabs
     private func startScanner() {
 
-       scannerCoordinator = ScannerCoordinator.init(presenter: presenter) { result in
+       scannerCoordinator = ScannerCoordinator(presenter: presenter) { result in
             switch result {
             case .success(let scanned):
                 print(scanned)
@@ -94,7 +94,7 @@ extension AppCoordinator {
         // TODO: WalletTabBarController should probably create scannerCoordinator, might need
         // a presenter
 
-        scannerCoordinator = ScannerCoordinator.init(presenter: presenter) { result in
+        scannerCoordinator = ScannerCoordinator(presenter: presenter) { result in
              switch result {
              case .success(let scanned):
                  print(scanned)
@@ -118,5 +118,9 @@ extension AppCoordinator {
     private func showMessage(viewModel: MessageViewModel) {
         let alert = MessageCoordinator(presenter: presenter, model: viewModel)
 	alert.start()
+    }
+
+    private func startOverView() {
+        OverviewCoordinator(presenter: presenter).start()
     }
 }

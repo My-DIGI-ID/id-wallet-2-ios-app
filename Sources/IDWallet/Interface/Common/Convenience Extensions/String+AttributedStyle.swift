@@ -18,22 +18,26 @@ enum AttributedStyle {
     case header,
          subHeading,
          body,
-         text(font: UIFont)
-
+         text(color: UIColor = .walBlack, font: UIFont)
+    
     var attributes: [NSAttributedString.Key: Any] {
         switch self {
         case .header:
-            return [.foregroundColor: UIColor.walBlack,
-                    .font: Typography.regular.headingFont]
+            return [
+                .foregroundColor: UIColor.walBlack,
+                .font: Typography.regular.headingFont]
         case .subHeading:
-            return [.foregroundColor: UIColor.walBlack,
-                    .font: Typography.regular.subHeadingFont]
+            return [
+                .foregroundColor: UIColor.walBlack,
+                .font: Typography.regular.subHeadingFont]
         case .body:
-            return [.foregroundColor: UIColor.walBlack,
-                    .font: Typography.regular.bodyFont]
-        case .text(let font):
-            return [.foregroundColor: UIColor.walBlack,
-                    .font: font]
+            return [
+                .foregroundColor: UIColor.walBlack,
+                .font: Typography.regular.bodyFont]
+        case .text(let color, let font):
+            return [
+                .foregroundColor: color,
+                .font: font]
         }
     }
 }

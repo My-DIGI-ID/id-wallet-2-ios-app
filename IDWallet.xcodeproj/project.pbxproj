@@ -178,14 +178,18 @@
 		952FF66B2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
 		952FF66C2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
 		952FF66D2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
+		953F26C827AD6B92008704E1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 953F26C627AD6B92008704E1 /* InfoPlist.strings */; };
 		953F26CE27AD71E3008704E1 /* ConnectionConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F26CD27AD71E3008704E1 /* ConnectionConfirmationViewController.swift */; };
 		953F26D027AD71F5008704E1 /* ConnectionConfirmationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F26CF27AD71F5008704E1 /* ConnectionConfirmationCoordinator.swift */; };
 		953F26D227AD9170008704E1 /* UILabel+ImageAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F26D127AD9170008704E1 /* UILabel+ImageAttachment.swift */; };
-		953F26C827AD6B92008704E1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 953F26C627AD6B92008704E1 /* InfoPlist.strings */; };
 		9542C7E327988FF400784147 /* String+AttributedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E227988FF400784147 /* String+AttributedStyle.swift */; };
 		9542C7E5279890E300784147 /* NSAttributedString+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */; };
 		9542C7E727997A8800784147 /* Sequence+NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */; };
 		9547454B27B00CC000B2C0D1 /* ConnectionInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9547454A27B00CC000B2C0D1 /* ConnectionInformationViewModel.swift */; };
+		9555836B27B16A7900D3E47B /* OverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9555836A27B16A7900D3E47B /* OverviewViewModel.swift */; };
+		9555836D27B16A9F00D3E47B /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9555836C27B16A9F00D3E47B /* OverviewViewController.swift */; };
+		9555836F27B1827000D3E47B /* OverviewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9555836E27B1827000D3E47B /* OverviewCoordinator.swift */; };
+		9555837127B1AA5C00D3E47B /* UIImageView+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9555837027B1AA5C00D3E47B /* UIImageView+URL.swift */; };
 		955D3F2A27ADAB290004AD70 /* NSAttributedString+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955D3F2927ADAB290004AD70 /* NSAttributedString+Image.swift */; };
 		9586384227A9926C0030DCF3 /* ScannerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9586384127A9926C0030DCF3 /* ScannerCoordinator.swift */; };
 		9586384427A993AF0030DCF3 /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9586384327A993AF0030DCF3 /* QRScannerViewController.swift */; };
@@ -312,14 +316,18 @@
 		950C06A227AD3F00006D0CAB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Localizable.strings; sourceTree = "<group>"; };
 		95193729279187D200ED0AF2 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		952FF66A2796E703003840F9 /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
+		953F26C727AD6B92008704E1 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = InfoPlist.strings; sourceTree = "<group>"; };
 		953F26CD27AD71E3008704E1 /* ConnectionConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionConfirmationViewController.swift; sourceTree = "<group>"; };
 		953F26CF27AD71F5008704E1 /* ConnectionConfirmationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionConfirmationCoordinator.swift; sourceTree = "<group>"; };
 		953F26D127AD9170008704E1 /* UILabel+ImageAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+ImageAttachment.swift"; sourceTree = "<group>"; };
-		953F26C727AD6B92008704E1 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = InfoPlist.strings; sourceTree = "<group>"; };
 		9542C7E227988FF400784147 /* String+AttributedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+AttributedStyle.swift"; sourceTree = "<group>"; };
 		9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Alignment.swift"; sourceTree = "<group>"; };
 		9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+NSLayoutConstraint.swift"; sourceTree = "<group>"; };
 		9547454A27B00CC000B2C0D1 /* ConnectionInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInformationViewModel.swift; sourceTree = "<group>"; };
+		9555836A27B16A7900D3E47B /* OverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewModel.swift; sourceTree = "<group>"; };
+		9555836C27B16A9F00D3E47B /* OverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
+		9555836E27B1827000D3E47B /* OverviewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewCoordinator.swift; sourceTree = "<group>"; };
+		9555837027B1AA5C00D3E47B /* UIImageView+URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+URL.swift"; sourceTree = "<group>"; };
 		955D3F2927ADAB290004AD70 /* NSAttributedString+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Image.swift"; sourceTree = "<group>"; };
 		9586384127A9926C0030DCF3 /* ScannerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerCoordinator.swift; sourceTree = "<group>"; };
 		9586384327A993AF0030DCF3 /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
@@ -439,6 +447,7 @@
 		8847D7A927563C5B00C2A25B /* Section */ = {
 			isa = PBXGroup;
 			children = (
+				9555836627B1624200D3E47B /* Overview */,
 				953F26C927AD71A1008704E1 /* ConnectionConfirmation */,
 				9586384027A98C510030DCF3 /* QRCodeScanner */,
 				95C107DD2795B7CE00FB02AD /* Alert */,
@@ -709,6 +718,7 @@
 				953F26D127AD9170008704E1 /* UILabel+ImageAttachment.swift */,
 				955D3F2927ADAB290004AD70 /* NSAttributedString+Image.swift */,
 				950C069327AC6145006D0CAB /* Strings+Localize.swift */,
+				9555837027B1AA5C00D3E47B /* UIImageView+URL.swift */,
 			);
 			path = "Convenience Extensions";
 			sourceTree = "<group>";
@@ -770,6 +780,33 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
+		950C069927AD3EB0006D0CAB /* Locale */ = {
+			isa = PBXGroup;
+			children = (
+				950C069D27AD3EE3006D0CAB /* en.lproj */,
+				950C069C27AD3ED9006D0CAB /* de.lproj */,
+			);
+			path = Locale;
+			sourceTree = "<group>";
+		};
+		950C069C27AD3ED9006D0CAB /* de.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				953F26C627AD6B92008704E1 /* InfoPlist.strings */,
+				950C06A127AD3F00006D0CAB /* Localizable.strings */,
+			);
+			path = de.lproj;
+			sourceTree = "<group>";
+		};
+		950C069D27AD3EE3006D0CAB /* en.lproj */ = {
+			isa = PBXGroup;
+			children = (
+				950C069E27AD3EF6006D0CAB /* Localizable.strings */,
+				950B422627AD6A1E002C03B6 /* InfoPlist.strings */,
+			);
+			path = en.lproj;
+			sourceTree = "<group>";
+		};
 		953F26C927AD71A1008704E1 /* ConnectionConfirmation */ = {
 			isa = PBXGroup;
 			children = (
@@ -804,31 +841,38 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
-		950C069927AD3EB0006D0CAB /* Locale */ = {
+		9555836627B1624200D3E47B /* Overview */ = {
 			isa = PBXGroup;
 			children = (
-				950C069D27AD3EE3006D0CAB /* en.lproj */,
-				950C069C27AD3ED9006D0CAB /* de.lproj */,
+				9555836927B16A6F00D3E47B /* Models */,
+				9555836827B16A6600D3E47B /* Controllers */,
+				9555836727B16A5D00D3E47B /* Coordinators */,
 			);
-			path = Locale;
+			path = Overview;
 			sourceTree = "<group>";
 		};
-		950C069C27AD3ED9006D0CAB /* de.lproj */ = {
+		9555836727B16A5D00D3E47B /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				953F26C627AD6B92008704E1 /* InfoPlist.strings */,
-				950C06A127AD3F00006D0CAB /* Localizable.strings */,
+				9555836E27B1827000D3E47B /* OverviewCoordinator.swift */,
 			);
-			path = de.lproj;
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
-		950C069D27AD3EE3006D0CAB /* en.lproj */ = {
+		9555836827B16A6600D3E47B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				950C069E27AD3EF6006D0CAB /* Localizable.strings */,
-				950B422627AD6A1E002C03B6 /* InfoPlist.strings */,
+				9555836C27B16A9F00D3E47B /* OverviewViewController.swift */,
 			);
-			path = en.lproj;
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		9555836927B16A6F00D3E47B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9555836A27B16A7900D3E47B /* OverviewViewModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		9586384027A98C510030DCF3 /* QRCodeScanner */ = {
@@ -1112,6 +1156,7 @@
 				8E8C40712767373600DBC979 /* Rounded.swift in Sources */,
 				8E8C40592765FA6F00DBC979 /* BaseVC.swift in Sources */,
 				9547454B27B00CC000B2C0D1 /* ConnectionInformationViewModel.swift in Sources */,
+				9555837127B1AA5C00D3E47B /* UIImageView+URL.swift in Sources */,
 				95F9A2B527A06CE4003F15B5 /* WalletButton.swift in Sources */,
 				953F26D027AD71F5008704E1 /* ConnectionConfirmationCoordinator.swift in Sources */,
 				8E8C408C2769C15400DBC979 /* Coordinator.swift in Sources */,
@@ -1120,6 +1165,7 @@
 				8E8C408427680AE400DBC979 /* OnboardingPageVC.swift in Sources */,
 				9542C7E5279890E300784147 /* NSAttributedString+Alignment.swift in Sources */,
 				8E43319D27590FB700D50127 /* NumberPad.swift in Sources */,
+				9555836F27B1827000D3E47B /* OverviewCoordinator.swift in Sources */,
 				95F9A2B227A05F2E003F15B5 /* CALayer+SketchShadow.swift in Sources */,
 				95C107DC27958FCB00FB02AD /* WalletMessageViewController.swift in Sources */,
 				8E988182276AB437002F629C /* AppCoordinator.swift in Sources */,
@@ -1138,6 +1184,7 @@
 				95C107E72796CF0E00FB02AD /* MessageViewModel.swift in Sources */,
 				8847D77A2756376000C2A25B /* SceneDelegate.swift in Sources */,
 				8EDC79CA278F727F0032E348 /* WalletTabBarController.swift in Sources */,
+				9555836B27B16A7900D3E47B /* OverviewViewModel.swift in Sources */,
 				8EF119A327718A8A00BDC5CE /* PinEntrySuccessViewController.swift in Sources */,
 				8E83F4E9276B2EE300469187 /* UIViewExtensions.swift in Sources */,
 				9542C7E727997A8800784147 /* Sequence+NSLayoutConstraint.swift in Sources */,
@@ -1150,6 +1197,7 @@
 				8EAF8411275F421900283D0B /* AppError.swift in Sources */,
 				9586384427A993AF0030DCF3 /* QRScannerViewController.swift in Sources */,
 				8ECA228A277084CB00CB8D81 /* AlignmentWrapperView.swift in Sources */,
+				9555836D27B16A9F00D3E47B /* OverviewViewController.swift in Sources */,
 				8EAF8416275F4B5E00283D0B /* PinValidationError.swift in Sources */,
 				952FF66B2796E703003840F9 /* WebViewModel.swift in Sources */,
 				95873EBA2791B23300A924C8 /* HelpViewCoordinator.swift in Sources */,
