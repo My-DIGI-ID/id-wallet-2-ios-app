@@ -13,12 +13,27 @@
 
 import UIKit
 
+private enum Constants {
+    enum Styles {
+        static let validityStyle: AttributedStyle = .validityLabel
+        
+        static let bgColorExpired: UIColor = .white
+        static let bgColorNearlyExpired: UIColor = .highlightYellow
+    }
+    
+    enum Layouts {
+        static let validityLabelInset: UIEdgeInsets = .init(top: 3, left: 6, bottom: 3, right: 10)
+    }
+}
+
 /// This view displays an info-text informing the user about the expiration state of the wallet-card.
-/// 
+///
 /// If less than 15h remain, this View will hightlight in Yellow and show a corresponding text.
 /// If the card expired, this view will highlight in white and show a corresponding text.
 /// In any other case, the background stays clear and no text is displayed
 class WalletValidityView: UIView {
+    fileprivate typealias Style = Constants.Styles
+    fileprivate typealias Layout = Constants.Layouts
     
     lazy var validityLabel: UILabel = {
         let label = UILabel()
@@ -33,17 +48,17 @@ class WalletValidityView: UIView {
     private func setupLayout() {
         updateCornerRadius()
         backgroundColor = .white
-        embed(validityLabel, insets: .init(top: 3, left: 6, bottom: 3, right: 10))
+        embed(validityLabel, insets: Layout.validityLabelInset)
     }
     
-    func configure(expires milliSeconds: Double ) {
+    func configure(expires milliSeconds: Double) {
         
         if milliSeconds <= 0 { // Expired
-            validityLabel.text = NSLocalizedString("Ungültig", comment: "") // TODO: Font
-            backgroundColor = .white
+            validityLabel.attributedText = NSLocalizedString("Ungültig", comment: "").styledAs(Style.validityStyle)
+            backgroundColor = Style.bgColorExpired
         } else if milliSeconds <= 900000 { // 15 Minutes remaining
-            validityLabel.text = NSLocalizedString("Noch 15h gültig", comment: "") // TODO: Font
-            backgroundColor = .highlightYellow
+            validityLabel.attributedText = NSLocalizedString("Noch 15h gültig", comment: "").styledAs(Style.validityStyle)
+            backgroundColor = Style.bgColorNearlyExpired
         } else {
             validityLabel.text = ""
             backgroundColor = .clear

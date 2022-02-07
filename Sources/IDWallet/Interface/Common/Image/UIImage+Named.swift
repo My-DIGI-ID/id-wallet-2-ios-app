@@ -43,4 +43,24 @@ extension UIImage {
     convenience init?(identifiedBy id: ImageNameIdentifier) {
         self.init(named: id.rawValue)
     }
+    
+    /// re-implements UIImage.init(systemName:) with a version that accepts the ImageNameIdentifier
+    ///
+    /// - Parameters id: The identifier for the image that should be loaded
+    /// - Returns: UIImage instance or nil
+    /// - SeeAlso: `UIImage(named:)`
+    convenience init?(systemId id: ImageNameIdentifier) {
+        self.init(systemName: id.rawValue)
+    }
+    
+    /// re-implements UIImage.init(systemName:compatibleWith:) with a version that accepts the ImageNameIdentifier
+    ///
+    /// - Parameters id: The identifier for the image that should be loaded
+    /// - Parameters traits: optional UITraitCollection
+    ///
+    /// - Returns: UIImage instance or nil
+    /// - SeeAlso: `UIImage(named:in:compatibleWith:)`
+    convenience init?(systemId id: ImageNameIdentifier, compatibleWith traits: UITraitCollection? = nil) {
+        self.init(systemName: id.rawValue, compatibleWith: traits)
+    }
 }

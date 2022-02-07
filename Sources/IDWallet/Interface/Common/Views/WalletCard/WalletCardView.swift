@@ -11,10 +11,47 @@
 // specific language governing permissions and limitations under the License.
 //
 
-
 import UIKit
 
+private enum Constants {
+    enum Styles {
+        static let titleStyle: AttributedStyle = .walletCardTitle
+    }
+    
+    enum Layouts {
+        static let cardCornerRadius: CGFloat = 16
+        static let cardInsetLeftRight: CGFloat = 16
+        
+        static let validityViewHeightRatio: CGFloat = 24 / 60
+        static let walletCardWidthHeightRatio: CGFloat = 366 / 232
+        static let walletCardHeaderWidthHeightRatio: CGFloat = 60 / 232
+        
+        static let valuesSpacing: CGFloat = 10
+        
+        static let headerInset: UIEdgeInsets = .init(top: 0,
+                                                     left: cardInsetLeftRight,
+                                                     bottom: 0,
+                                                     right: cardInsetLeftRight)
+    }
+}
+
+extension WalletCardModel.TextStyle {
+    var color: UIColor {
+        switch self {
+        case .light: return .white
+        case .dark: return .walBlack
+        }
+    }
+}
+
+/// Common UIView implementation that represents the Credentials added to the Wallet as Card
+/// A Wallet-Card consists of a title, a validity-marker (invisible, 15h remaining, invalid) and Key-Value pairs
+/// displayed on the left (primary) and right (secondary) side of the card.
+///
+/// The card can be configured using a WalletCardModel.
 class WalletCardView: UIView {
+    fileprivate typealias Style = Constants.Styles
+    fileprivate typealias Layout = Constants.Layouts
     
     // MARK: - Header
     lazy var titleLabel: UILabel = {
@@ -38,7 +75,7 @@ class WalletCardView: UIView {
             "H:|[validityView]|",
         ].constraints(with: ["validityView": validityView]) + [
             view.centerYAnchor.constraint(equalTo: validityView.centerYAnchor),
-            validityView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 24 / 60)
+            validityView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Layout.validityViewHeightRatio)
         ]
         constraints.activate()
         
@@ -57,7 +94,7 @@ class WalletCardView: UIView {
     lazy var headerContainer: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.embed(headerStackView, insets: .init(top: 0, left: 16, bottom: 0, right: 16))
+        view.embed(headerStackView, insets: Layout.headerInset)
         return view
     }()
     
@@ -67,8 +104,8 @@ class WalletCardView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .bottom
-        stackView.distribution = .equalCentering
-        stackView.spacing = 10
+        stackView.distribution = .fill
+        stackView.spacing = Layout.valuesSpacing
         stackView.backgroundColor = .clear
         return stackView
     }()
@@ -80,8 +117,8 @@ class WalletCardView: UIView {
         
         [
             "V:|[stackView]|",
-            "H:|-(16)-[stackView]-(>=0)-|"
-        ].constraints(with: ["stackView": primaryValuesStackView])
+            "H:|-(insetLR)-[stackView]-(>=0)-|"
+        ].constraints(with: ["stackView": primaryValuesStackView], metrics: ["insetLR": Layout.cardInsetLeftRight])
             .activate()
         
         return view
@@ -92,8 +129,8 @@ class WalletCardView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .bottom
-        stackView.distribution = .equalCentering
-        stackView.spacing = 10
+        stackView.distribution = .fill
+        stackView.spacing = Layout.valuesSpacing
         stackView.backgroundColor = .clear
         return stackView
     }()
@@ -105,17 +142,27 @@ class WalletCardView: UIView {
         
         [
             "V:|[stackView]|",
-            "H:|-(>=0)-[stackView]-(16)-|"
-        ].constraints(with: ["stackView": secondaryValuesStackView])
+            "H:|-(>=0)-[stackView]-(insetLR)-|"
+        ].constraints(with: ["stackView": secondaryValuesStackView], metrics: ["insetLR": Layout.cardInsetLeftRight])
             .activate()
         
         return view
     }()
     
+    // MARK: - Background
+    lazy var backgroundImage: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
+    // MARK: - Layout
+    
     private func setupLayout() {
         clipsToBounds = true
         layer.cornerRadius = 16
         
+        addSubview(backgroundImage)
         addSubview(headerContainer)
         addSubview(primaryValuesContainer)
         addSubview(secondaryValuesContainer)
@@ -131,23 +178,30 @@ class WalletCardView: UIView {
                              "primaryContainer": primaryValuesContainer,
                              "secondaryContainer": secondaryValuesContainer]) + [
                                 
-            widthAnchor.constraint(equalTo: heightAnchor, multiplier: 366 / 232),
-            headerContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: 60 / 232),
+            widthAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardWidthHeightRatio),
+            headerContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardHeaderWidthHeightRatio),
             primaryValuesContainer.widthAnchor.constraint(equalTo: secondaryValuesContainer.widthAnchor)
         ]
         constraints.activate()
+        
+        embed(backgroundImage)
     }
     
     func configure(with walletData: WalletCardModel) {
-        titleLabel.text = walletData.title // TODO: Format
-        headerContainer.backgroundColor = walletData.headerBackgroundColor
-        
         validityView.configure(expires: walletData.expiryDate.timeIntervalSinceNow)
         
+        titleLabel.attributedText = walletData.title.styledAs(Style.titleStyle).color(walletData.textStyle.color)
+        headerContainer.backgroundColor = walletData.headerBackgroundColor
+        
+        backgroundImage.isHidden = true
         switch walletData.background {
         case .color(let color): backgroundColor = color
-        case .namedImage(let identifier): break // TODO
-        case .storedImage(let url): break // TODO
+        case .namedImage(let identifier):
+            backgroundImage.isHidden = false
+            backgroundImage.setImage(identifiedBy: identifier)
+        case .storedImage(let url):
+            backgroundImage.isHidden = false
+            backgroundImage.image = UIImage(contentsOfFile: url.path)
         }
         
         primaryValuesStackView.removeArrangedSubviews()
@@ -155,7 +209,9 @@ class WalletCardView: UIView {
         walletData.primaryValues.forEach {
             let valueView = WalletValueView()
             primaryValuesStackView.addArrangedSubview(valueView)
-            valueView.configure(value: $0)
+            
+            valueView.configure(value: $0, textStyle: walletData.textStyle)
+            valueView.widthAnchor.constraint(equalTo: primaryValuesStackView.widthAnchor).isActive = true
         }
         
         secondaryValuesStackView.removeArrangedSubviews()
@@ -163,7 +219,9 @@ class WalletCardView: UIView {
         walletData.secondaryValues.forEach {
             let valueView = WalletValueView()
             secondaryValuesStackView.addArrangedSubview(valueView)
-            valueView.configure(value: $0)
+            
+            valueView.configure(value: $0, textStyle: walletData.textStyle)
+            valueView.widthAnchor.constraint(equalTo: primaryValuesStackView.widthAnchor).isActive = true
         }
     }
     

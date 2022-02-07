@@ -11,18 +11,16 @@
 // specific language governing permissions and limitations under the License.
 //
 
+import Foundation
 import UIKit
 
-extension UIView {
-    /// Removes all Subviews from self
-    func removeSubviews() {
-        subviews.forEach { $0.removeFromSuperview() }
-    }
-}
-
-extension UIStackView {
-    /// Removes all ArragedSubviews from self
-    func removeArrangedSubviews() {
-        arrangedSubviews.forEach { $0.removeFromSuperview() }
+extension NSAttributedString {
+    /// Changes the color of self to the provided value
+    /// - Parameter color: UIColor
+    /// - Returns: NSAttriutedString
+    func color(_ color: UIColor) -> NSAttributedString {
+        let attrString = NSMutableAttributedString(attributedString: self)
+        attrString.addAttributes([.foregroundColor: color], range: NSRange(0..<self.length))
+        return attrString
     }
 }

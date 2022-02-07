@@ -13,9 +13,17 @@
 
 import UIKit
 
+private enum Constants {
+    enum Styles {
+        static let titleStyle: AttributedStyle = .walletCardValueTitle
+        static let valueStyle: AttributedStyle = .walletCardValue
+    }
+}
+
 /// Represents a key-value pair (primary or secondary) of a Wallet-Card
 /// Title and Value are arranged in vertival order and aligned to the left
 class WalletValueView: UIView {
+    fileprivate typealias Style = Constants.Styles
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -33,7 +41,6 @@ class WalletValueView: UIView {
         let stackView = UIStackView(arrangedSubviews: [titleLabel, valueLabel])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.backgroundColor = .clear
         return stackView
     }()
     
@@ -41,9 +48,9 @@ class WalletValueView: UIView {
         embed(stackView)
     }
     
-    func configure(value: WalletCardModel.WalletValue) {
-        titleLabel.text = value.title // TODO: Font
-        valueLabel.text = value.value // TODO: Font
+    func configure(value: WalletCardModel.WalletValue, textStyle: WalletCardModel.TextStyle) {
+        titleLabel.attributedText = value.title.styledAs(Style.titleStyle).color(textStyle.color)
+        valueLabel.attributedText = value.value.styledAs(Style.valueStyle).color(textStyle.color)
     }
     
     // MARK: Lifecycle

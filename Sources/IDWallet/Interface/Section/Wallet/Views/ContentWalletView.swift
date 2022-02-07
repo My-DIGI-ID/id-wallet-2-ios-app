@@ -13,12 +13,17 @@
 
 import UIKit
 
-fileprivate extension ImageNameIdentifier {
-    static let defaultBackground = ImageNameIdentifier(rawValue: "DefaultWalletCard")
+private enum Constants {
+    enum Layouts {
+        static let collectionViewContentInset: NSDirectionalEdgeInsets = .init(top: 30, leading: 0, bottom: 0, trailing: 0)
+        static let collectionViewEstimatedCellHeight: NSCollectionLayoutDimension = .estimated(150)
+        static let collectionViewEstimatedSupplementaryHeight: NSCollectionLayoutDimension = .estimated(50)
+    }
 }
 
 /// Simple container view that wraps the content displayed when wallet entries are available
 class ContentWalletView: UIView {
+    fileprivate typealias Layout = Constants.Layouts
     
     // MARK: CollectionView
     private typealias Section = Int
@@ -60,19 +65,19 @@ class ContentWalletView: UIView {
     lazy var walletCollectionView: UICollectionView = {
         let layout: UICollectionViewLayout = {
             let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                    heightDimension: .estimated(150)) // TODO: Enter actual estimate once card is ready
+                                                    heightDimension: Layout.collectionViewEstimatedCellHeight)
             let layoutItem = NSCollectionLayoutItem(layoutSize: layoutSize)
             
             let supplementaryView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                                                                                  heightDimension: .estimated(50)),
+                                                                                                  heightDimension: Layout.collectionViewEstimatedSupplementaryHeight),
                                                                                 elementKind: UICollectionView.elementKindSectionFooter,
                                                                                 alignment: .bottom)
             supplementaryView.zIndex = 2
-            supplementaryView.pinToVisibleBounds = true // TODO: Validate if this is usable on small devices
+            supplementaryView.pinToVisibleBounds = true
             
             let layoutSection = NSCollectionLayoutSection(group: .vertical(layoutSize: layoutSize, subitems: [layoutItem]))
             layoutSection.boundarySupplementaryItems = [supplementaryView]
-            layoutSection.contentInsets = .init(top: 30, leading: 0, bottom: 0, trailing: 0)
+            layoutSection.contentInsets = Layout.collectionViewContentInset
             
             return UICollectionViewCompositionalLayout(section: layoutSection)
         }()
@@ -92,15 +97,14 @@ class ContentWalletView: UIView {
         // TODO: Remove Dummy
         snapshot.appendItems([.init(
             indexPath: .init(row: 0, section: 0),
-            content: .init(id: "SOME",
+            content: .init(id: "MESAID",
                            background: .color(.primaryBlue),
-                           title: "Führerscheinnachweis",
+                           title: "MESA Employee",
                            primaryValues: [
-                            .init(title: "Name", value: "Erika Mustermann"),
-                            .init(title: "Fahrerlaubnisklassen", value: "AM, A1, B1, B, C1, BE, L"),
+                            .init(title: "Name", value: "E. Mustermann"),
                            ],
                            secondaryValues: [
-                            .init(title: "Gültig bis", value: "12. Feb 22, 23:59 Uhr")
+                            .init(title: "Gültig bis", value: "29. Nov 22")
                            ],
                            expiryDate: Date.init(timeIntervalSinceNow: 900000)))],
                              toSection: 0)

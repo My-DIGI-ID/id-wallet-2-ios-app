@@ -13,6 +13,10 @@
 
 import UIKit
 
+fileprivate extension ImageNameIdentifier {
+    static let systemPlus = ImageNameIdentifier(rawValue: "plus")
+}
+
 protocol AddDocumentDelegate: AnyObject {
     func addDocument()
 }
@@ -23,7 +27,7 @@ final class AddDocumentSupplementaryView: UICollectionReusableView {
     
     lazy var addDocumentButton: WalletButton = {
         let button = WalletButton(titleText: "\(NSLocalizedString("Dokument hinzufügen", comment: ""))",
-                                  image: .init(systemName: "plus"),
+                                  image: .init(systemId: .systemPlus),
                                   imageAlignRight: false,
                                   style: .secondary,
                                   primaryAction: .init { [weak self] _ in

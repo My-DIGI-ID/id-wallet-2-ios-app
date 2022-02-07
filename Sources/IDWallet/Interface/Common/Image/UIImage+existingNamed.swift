@@ -44,4 +44,34 @@ extension UIImage {
         self.init(identifiedBy: id)!
         // swiftlint:enable
     }
+    
+    /// re-implements UIImage.init(systemName:compatibleWith:) with a version that accepts the ImageNameIdentifier, but must return a non-nill result.
+    ///
+    /// - Parameters id: The identifier for the image that should be loaded
+    /// - Parameters traits: optional UITraitCollection
+    ///
+    /// - Returns: UIImage instance
+    /// - SeeAlso: `UIImage(named:in:compatibleWith:)`
+    convenience init(existingSystemId id: ImageNameIdentifier, compatibleWith traits: UITraitCollection? = nil) {
+        assert(UIImage(systemId: id, compatibleWith: traits) != nil, "Expected system-image with name \(id.rawValue) but found nil instead")
+        
+        // Note [@mHader]: assertion ensures that image exists when in debug mode. Hence the force-unwrap is safe here
+        // swiftlint:disable force_unwrapping
+        self.init(systemId: id, compatibleWith: traits)!
+        // swiftlint:enable
+    }
+    
+    /// re-implements UIImage.init(systemName:) with a version that accepts the ImageNameIdentifier, but must return a non-nill result
+    ///
+    /// - Parameters id: The identifier for the image that should be loaded
+    /// - Returns: UIImage instance
+    /// - SeeAlso: `UIImage(named:)`
+    convenience init(existingSystemId id: ImageNameIdentifier) {
+        assert(UIImage(systemId: id) != nil, "Expected system-image with name \(id.rawValue) but found nil instead")
+        
+        // Note [@mHader]: assertion ensures that image exists when in debug mode. Hence the force-unwrap is safe here
+        // swiftlint:disable force_unwrapping
+        self.init(systemId: id)!
+        // swiftlint:enable
+    }
 }

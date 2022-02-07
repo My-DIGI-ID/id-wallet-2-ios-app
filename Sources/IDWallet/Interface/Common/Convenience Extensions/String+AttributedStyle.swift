@@ -17,9 +17,14 @@ import UIKit
 enum AttributedStyle {
     case header,
          subHeading,
-         body,
-         text(color: UIColor = .walBlack, font: UIFont)
-    
+         walletCardValueTitle,
+         walletCardValue,
+         walletCardTitle,
+         walletInfoText,
+validityLabel,
+body,
+text(color: UIColor = .walBlack, font: UIFont)
+
     var attributes: [NSAttributedString.Key: Any] {
         switch self {
         case .header:
@@ -27,17 +32,32 @@ enum AttributedStyle {
                 .foregroundColor: UIColor.walBlack,
                 .font: Typography.regular.headingFont]
         case .subHeading:
-            return [
-                .foregroundColor: UIColor.walBlack,
-                .font: Typography.regular.subHeadingFont]
+            return [.foregroundColor: UIColor.walBlack,
+                    .font: Typography.regular.subHeadingFont]
+            
+        case .walletCardValueTitle:
+            return [.foregroundColor: UIColor.walBlack,
+                    .font: UIFont.plexSansBold(12)]
+        case .walletCardValue:
+            return [.foregroundColor: UIColor.walBlack,
+                    .font: UIFont.plexSans(12)]
+        case .walletCardTitle:
+            return [.foregroundColor: UIColor.walBlack,
+                    .font: UIFont.plexSans(20)]
+        case .walletInfoText:
+            return [.foregroundColor: UIColor.appGrey1,
+                    .font: UIFont.plexSans(17)]
+        case .validityLabel:
+            return [.foregroundColor: UIColor.walBlack,
+                    .font: UIFont.plexSans(10)]
         case .body:
             return [
                 .foregroundColor: UIColor.walBlack,
                 .font: Typography.regular.bodyFont]
-        case .text(let color, let font):
-            return [
-                .foregroundColor: color,
-                .font: font]
+case .text(let color, let font):
+return [
+.foregroundColor: color,
+.font: font]
         }
     }
 }

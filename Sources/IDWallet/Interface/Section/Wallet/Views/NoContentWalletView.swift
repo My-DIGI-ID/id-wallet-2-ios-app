@@ -13,12 +13,28 @@
 
 import UIKit
 
+private enum Constants {
+    enum Styles {
+        static let infoTextStyle: AttributedStyle = .walletInfoText
+    }
+    
+    enum Layouts {
+        static let emptyWalletImageAspectRatio: CGFloat = 257 / 279
+        static let emptyWalletImageRelativeWidth: CGFloat = 0.7
+        static let contentStackviewSpacing: CGFloat = 30
+        static let documentButtonInset: UIEdgeInsets = .init(top: 0, left: 20, bottom: 0, right: 20)
+    }
+}
+
 fileprivate extension ImageNameIdentifier {
     static let emptyWalletIcon = ImageNameIdentifier(rawValue: "ImageEmptyWalletPage")
+    static let systemPlus = ImageNameIdentifier(rawValue: "plus")
 }
 
 /// Simple container view that wraps the content displayed when no wallet entries are available
 class NoContentWalletView: UIView {
+    fileprivate typealias Style = Constants.Styles
+    fileprivate typealias Layout = Constants.Layouts
     
     /// Delegate that forwards `addDocument(:_)` calls from the addDocumentButton
     weak var delegate: AddDocumentDelegate?
@@ -31,7 +47,7 @@ class NoContentWalletView: UIView {
         stackView.distribution = .fill
         stackView.contentMode = .scaleToFill
         stackView.backgroundColor = .clear
-        stackView.spacing = 30
+        stackView.spacing = Layout.contentStackviewSpacing
         return stackView
     }()
     
@@ -50,8 +66,8 @@ class NoContentWalletView: UIView {
             "V:|[image]|"
         ].constraints(with: ["image": emptyWalletImageView]) + [
             view.centerXAnchor.constraint(equalTo: emptyWalletImageView.centerXAnchor),
-            emptyWalletImageView.widthAnchor.constraint(equalTo: emptyWalletImageView.heightAnchor, multiplier: 257 / 279),
-            emptyWalletImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            emptyWalletImageView.widthAnchor.constraint(equalTo: emptyWalletImageView.heightAnchor, multiplier: Layout.emptyWalletImageAspectRatio),
+            emptyWalletImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: Layout.emptyWalletImageRelativeWidth),
         ]
         constraints.activate()
         
@@ -67,8 +83,8 @@ class NoContentWalletView: UIView {
     }()
     
     lazy var addDocumentButton: WalletButton = {
-        let button = WalletButton(titleText: "\(NSLocalizedString("Dokument hinzufügen", comment: ""))",
-                                  image: .init(systemName: "plus"),
+        let button = WalletButton(titleText: NSLocalizedString("Dokument hinzufügen", comment: ""),
+                                  image: .init(systemId: .systemPlus),
                                   imageAlignRight: false,
                                   style: .primary,
                                   primaryAction: .init { [weak self] _ in
@@ -80,7 +96,7 @@ class NoContentWalletView: UIView {
     
     lazy var addDocumentButtonContainer: UIView = {
         let view = UIView()
-        view.embed(addDocumentButton, insets: .init(top: 0, left: 20, bottom: 0, right: 20))
+        view.embed(addDocumentButton, insets: Layout.documentButtonInset)
         return view
     }()
     
@@ -98,10 +114,7 @@ class NoContentWalletView: UIView {
         contentStackView.addArrangedSubview(infoTextLabel)
         contentStackView.addArrangedSubview(addDocumentButtonContainer)
         
-        // TODO: Font-Format
-        infoTextLabel.text = NSLocalizedString("Die Wallet ist leer.\nFüge dein erstes Dokument hinzu.", comment: "")
-        infoTextLabel.font = .plexSans(17)
-        infoTextLabel.textColor = .appGrey1
+        infoTextLabel.attributedText = NSLocalizedString("Die Wallet ist leer.\nFüge dein erstes Dokument hinzu.", comment: "").styledAs(Style.infoTextStyle)
 
         [
             emptyWalletContainer.widthAnchor.constraint(equalTo: contentStackView.widthAnchor),

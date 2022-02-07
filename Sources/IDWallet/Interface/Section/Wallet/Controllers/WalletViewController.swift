@@ -13,11 +13,27 @@
 
 import UIKit
 
+private enum Constants {
+    enum Styles {
+        static let headerStyle: AttributedStyle = .header
+        static let backgroundColor: UIColor = .white
+    }
+    
+    enum Layouts {
+        static let userIconSize: CGSize = .init(width: 32, height: 32)
+        static let viewInsetLeftRight: CGFloat = 24
+        static let topSpacing: CGFloat = 60
+        static let contentSpacing: CGFloat = 5
+    }
+}
+
 fileprivate extension ImageNameIdentifier {
     static let userIcon = ImageNameIdentifier(rawValue: "ImageIconUser")
 }
 
 final class WalletViewController: BareBaseViewController {
+    fileprivate typealias Style = Constants.Styles
+    fileprivate typealias Layout = Constants.Layouts
     
     lazy var headerLabel: UILabel = {
         let label = UILabel()
@@ -29,12 +45,6 @@ final class WalletViewController: BareBaseViewController {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.setImage(identifiedBy: .userIcon)
-        
-        [
-            image.widthAnchor.constraint(equalToConstant: 32),
-            image.heightAnchor.constraint(equalToConstant: 32),
-        ].activate()
-        
         return image
     }()
     
@@ -77,25 +87,24 @@ final class WalletViewController: BareBaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // TODO: Layout
-        view.backgroundColor = .white
+        
+        view.backgroundColor = Style.backgroundColor
         view.addSubview(headerContainer)
         view.addSubview(contentContainer)
         
         let constraints = [
-            "H:|-(24)-[header]-(24)-|",
-            "H:|-(24)-[content]-(24)-|",
-            "V:|-(60)-[header]-(5)-[content]|",
-        ].constraints(with: ["header": headerContainer, "content": contentContainer]) + [
-            userIcon.widthAnchor.constraint(equalToConstant: 32),
-            userIcon.heightAnchor.constraint(equalToConstant: 32),
+            "H:|-(inset)-[header]-(inset)-|",
+            "H:|-(inset)-[content]-(inset)-|",
+            "V:|-(topSpace)-[header]-(contentSpace)-[content]|",
+        ].constraints(with: ["header": headerContainer, "content": contentContainer],
+                      metrics: ["inset": Layout.viewInsetLeftRight, "topSpace": Layout.topSpacing, "contentSpace": Layout.contentSpacing]) + [
+            userIcon.widthAnchor.constraint(equalToConstant: Layout.userIconSize.width),
+            userIcon.heightAnchor.constraint(equalToConstant: Layout.userIconSize.height),
         ]
             
         constraints.activate()
         
-        headerLabel.font = .plexSansBold(25)
-        headerLabel.textColor = .black
-        headerLabel.text = NSLocalizedString("Deine Dokumente", comment: "")
+        headerLabel.attributedText = NSLocalizedString("Deine Dokumente", comment: "").styledAs(Style.headerStyle)
     }
     
     override func viewWillAppear(_ animated: Bool) {
