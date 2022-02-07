@@ -27,6 +27,6 @@ class MessageCoordinator: Coordinator {
 
     func start() {
         // TODO: Should probably call presentModal
-        presenter.present(WalletMessageViewController(viewModel: viewModel),
+        presenter.present(WalletMessageViewController(viewModel: viewModel))
     }
 }

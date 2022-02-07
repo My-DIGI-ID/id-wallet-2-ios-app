@@ -23,10 +23,10 @@ class OverviewCoordinator: Coordinator {
     
     func start() {
         let addAction = UIAction { _ in
-            self.presenter.dismiss(completion: nil)
+            self.presenter.dismissModal(completion: nil)
         }
         let cancelAction = UIAction { _ in
-            self.presenter.dismiss(completion: nil)
+            self.presenter.dismissModal(completion: nil)
         }
         
         let rows: [OverviewViewModel.DataRow] = [
@@ -45,6 +45,6 @@ class OverviewCoordinator: Coordinator {
             buttons: [
                 ("Zur Wallet hinzufügen", addAction),
                 ("Abbrechen", cancelAction)], data: rows)
-        presenter.present(OverviewViewController(viewModel: viewModel))
+        presenter.presentModal(OverviewViewController(viewModel: viewModel), options: .defaultOptions)
     }
 }
