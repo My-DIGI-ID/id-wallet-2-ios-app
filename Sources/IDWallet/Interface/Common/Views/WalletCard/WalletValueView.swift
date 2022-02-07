@@ -13,13 +13,37 @@
 
 import UIKit
 
+/// Represents a key-value pair (primary or secondary) of a Wallet-Card
+/// Title and Value are arranged in vertival order and aligned to the left
 class WalletValueView: UIView {
+    
+    lazy var titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var valueLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, valueLabel])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.backgroundColor = .clear
+        return stackView
+    }()
+    
     private func setupLayout() {
-        // TODO
+        embed(stackView)
     }
     
     func configure(value: WalletCardModel.WalletValue) {
-        // TODO
+        titleLabel.text = value.title // TODO: Font
+        valueLabel.text = value.value // TODO: Font
     }
     
     // MARK: Lifecycle
@@ -36,6 +60,5 @@ class WalletValueView: UIView {
         super.awakeFromNib()
         setupLayout()
     }
-
 }
 

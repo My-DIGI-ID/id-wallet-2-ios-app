@@ -11,16 +11,16 @@
 // specific language governing permissions and limitations under the License.
 //
 
-
-import Foundation
+import UIKit
 
 /// Model that represents an entry in the Wallet CollectionView
 struct WalletCardModel: Hashable, Equatable {
     
-    /// Specifies the image-type for the wallet-background. Can either be named (from Assets) or stored (via file-url)
-    enum ImageType: Hashable, Equatable {
-        case named(ImageNameIdentifier)
-        case stored(URL)
+    /// Specifies the background-type for the wallet-background. Can either be named (from Assets), stored (via url) or a color
+    enum BackgroundType: Hashable, Equatable {
+        case namedImage(ImageNameIdentifier)
+        case storedImage(URL)
+        case color(UIColor)
     }
     
     /// Depending on the background it might be necessary to either display the cards text in light or dark color
@@ -35,10 +35,16 @@ struct WalletCardModel: Hashable, Equatable {
         let value: String
     }
     
-    /// Defines the background-image used for the Wallet-Card
-    let backgroundImage: ImageType
+    /// Unique identifier for the credential this Wallet-Card represents
+    let id: String
     
-    /// Defines the text-color that is used for the Wallet-Card (sould be choosen according to the backgroundImages color)
+    /// Defines the background used for the Wallet-Card. Can either be a stored/named image or a color
+    let background: BackgroundType
+    
+    /// Defines the color of the header-area in the Wallet-Card. Defaults to clear
+    let headerBackgroundColor: UIColor = .clear
+    
+    /// Defines the text-color that is used for the Wallet-Card (sould be choosen according to the background color/image)
     let textStyle: TextStyle = .light
     
     /// Title displayed for the Wallet-Card
@@ -49,4 +55,7 @@ struct WalletCardModel: Hashable, Equatable {
     
     /// Values displayed on the right half of the card
     let secondaryValues: [WalletValue]
+    
+    /// Date when the Wallet-Card the expires
+    let expiryDate: Date
 }

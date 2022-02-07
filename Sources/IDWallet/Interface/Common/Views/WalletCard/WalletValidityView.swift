@@ -13,13 +13,46 @@
 
 import UIKit
 
+/// This view displays an info-text informing the user about the expiration state of the wallet-card.
+/// 
+/// If less than 15h remain, this View will hightlight in Yellow and show a corresponding text.
+/// If the card expired, this view will highlight in white and show a corresponding text.
+/// In any other case, the background stays clear and no text is displayed
 class WalletValidityView: UIView {
+    
+    lazy var validityLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private func updateCornerRadius() {
+        layer.cornerRadius = bounds.height / 2
+    }
+    
     private func setupLayout() {
-        // TODO
+        updateCornerRadius()
+        backgroundColor = .white
+        embed(validityLabel, insets: .init(top: 3, left: 6, bottom: 3, right: 10))
     }
     
     func configure(expires milliSeconds: Double ) {
-        // TODO
+        
+        if milliSeconds <= 0 { // Expired
+            validityLabel.text = NSLocalizedString("Ungültig", comment: "") // TODO: Font
+            backgroundColor = .white
+        } else if milliSeconds <= 900000 { // 15 Minutes remaining
+            validityLabel.text = NSLocalizedString("Noch 15h gültig", comment: "") // TODO: Font
+            backgroundColor = .highlightYellow
+        } else {
+            validityLabel.text = ""
+            backgroundColor = .clear
+        }
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateCornerRadius()
     }
     
     // MARK: Lifecycle
@@ -36,5 +69,4 @@ class WalletValidityView: UIView {
         super.awakeFromNib()
         setupLayout()
     }
-
 }

@@ -23,7 +23,7 @@ extension UIColor {
     static let grey2 = requiredColor(named: "grey2")
     static let grey3 = requiredColor(named: "grey3")
     static let grey4 = requiredColor(named: "grey4")
-    static let highlightYellow = requiredColor(named: "hightlightYellow")
+    static let highlightYellow = requiredColor(named: "highlightYellow")
     static let errorRed = requiredColor(named: "errorRed")
     static let shadow = requiredColor(named: "shadow")
     static let gradientStart = requiredColor(named: "gradientStart")

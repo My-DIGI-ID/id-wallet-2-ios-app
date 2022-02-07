@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		6F1A9B8827902711009B3359 /* Mediator in Frameworks */ = {isa = PBXBuildFile; productRef = 6F1A9B8727902711009B3359 /* Mediator */; };
 		6FA511362771B7A100D068BD /* AusweisApp2 in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA511352771B7A100D068BD /* AusweisApp2 */; };
+		8820CA3B27B13E8A00B5B485 /* UIView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8820CA3A27B13E8A00B5B485 /* UIView+Subviews.swift */; };
 		8847D7782756376000C2A25B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8847D7772756376000C2A25B /* AppDelegate.swift */; };
 		8847D77A2756376000C2A25B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8847D7792756376000C2A25B /* SceneDelegate.swift */; };
 		8847D7812756376200C2A25B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8847D7802756376200C2A25B /* Assets.xcassets */; };
@@ -239,6 +240,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8820CA3A27B13E8A00B5B485 /* UIView+Subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Subviews.swift"; sourceTree = "<group>"; };
 		8847D7742756376000C2A25B /* IDWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IDWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8847D7772756376000C2A25B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8847D7792756376000C2A25B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -399,6 +401,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8820CA3927B13E6800B5B485 /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				8820CA3A27B13E8A00B5B485 /* UIView+Subviews.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
 		8847D76B2756376000C2A25B = {
 			isa = PBXGroup;
 			children = (
@@ -511,6 +521,7 @@
 		8847D7B427563CAB00C2A25B /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				8820CA3927B13E6800B5B485 /* Layout */,
 				8862A88E27AD15DB00C9780B /* Image */,
 				95C107E32796CECA00FB02AD /* Alerts */,
 				8E8C408F2769C1E800DBC979 /* Coordinators */,
@@ -1250,6 +1261,7 @@
 				8E988188276AB53D002F629C /* SetupCoordinator.swift in Sources */,
 				9542C7E327988FF400784147 /* String+AttributedStyle.swift in Sources */,
 				8EAF8418275F4CC700283D0B /* PinCharacterRepresentation.swift in Sources */,
+				8820CA3B27B13E8A00B5B485 /* UIView+Subviews.swift in Sources */,
 				8ECA2280276F3E4200CB8D81 /* ZeroOrMore.swift in Sources */,
 				8847D7782756376000C2A25B /* AppDelegate.swift in Sources */,
 				95C107E02795B7E300FB02AD /* MessageCoordinator.swift in Sources */,

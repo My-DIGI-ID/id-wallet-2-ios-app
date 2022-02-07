@@ -92,15 +92,17 @@ class ContentWalletView: UIView {
         // TODO: Remove Dummy
         snapshot.appendItems([.init(
             indexPath: .init(row: 0, section: 0),
-            content: .init(backgroundImage: .named(.defaultBackground),
-                           title: "Lorem Ipsum",
+            content: .init(id: "SOME",
+                           background: .color(.primaryBlue),
+                           title: "Führerscheinnachweis",
                            primaryValues: [
-                            .init(title: "Title", value: "Value"),
-                            .init(title: "Title", value: "Value"),
+                            .init(title: "Name", value: "Erika Mustermann"),
+                            .init(title: "Fahrerlaubnisklassen", value: "AM, A1, B1, B, C1, BE, L"),
                            ],
                            secondaryValues: [
-                            .init(title: "Title", value: "Value")
-                           ]))],
+                            .init(title: "Gültig bis", value: "12. Feb 22, 23:59 Uhr")
+                           ],
+                           expiryDate: Date.init(timeIntervalSinceNow: 900000)))],
                              toSection: 0)
         
         dataSource.apply(snapshot)
