@@ -38,7 +38,7 @@ private enum Constants {
             static let linkHeight: CGFloat = 24
         }
     }
-    static let image: UIImage = #imageLiteral(resourceName: "error.svg.pdf")
+    static let image: UIImage = #imageLiteral(resourceName: "verfified")
     static let checkmark: UIImage = #imageLiteral(resourceName: "solve")
 }
 
