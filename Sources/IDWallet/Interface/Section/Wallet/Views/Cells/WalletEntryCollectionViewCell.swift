@@ -13,7 +13,21 @@
 
 import UIKit
 
+private enum Constants {
+    enum Styles {
+        static let cellBackground: UIColor = .white
+        static let alphaExpired: CGFloat = 0.8
+        static let alphaValid: CGFloat = 1.0
+    }
+    
+    enum Layouts {
+        static let cardCornerRadius: CGFloat = 16
+    }
+}
+
 final class WalletEntryCollectionViewCell: UICollectionViewCell {
+    fileprivate typealias Style = Constants.Styles
+    fileprivate typealias Layout = Constants.Layouts
     
     lazy var walletCard: WalletCardView = {
         let view = WalletCardView()
@@ -22,7 +36,10 @@ final class WalletEntryCollectionViewCell: UICollectionViewCell {
     }()
     
     private func setupView() {
-        backgroundColor = .clear
+        backgroundColor = Style.cellBackground
+        clipsToBounds = true
+        layer.cornerRadius = Layout.cardCornerRadius
+        
         // FIXME [12/31/2022]: iOS 14 has a bug where Cells require UIView-Encapsulated-Layout-Height/Width, causing a Constraint Error
         // Workaround is to lower the priority just one below `required`
         embed(walletCard,
@@ -31,6 +48,7 @@ final class WalletEntryCollectionViewCell: UICollectionViewCell {
 
     func configure(with walletData: WalletCardModel, at: IndexPath) {
         walletCard.configure(with: walletData)
+        walletCard.alpha = walletData.expiryDate.timeIntervalSinceNow <= 0 ? Style.alphaExpired : Style.alphaValid
     }
     
     override init(frame: CGRect) {

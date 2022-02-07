@@ -16,6 +16,9 @@ import UIKit
 private enum Constants {
     enum Styles {
         static let titleStyle: AttributedStyle = .walletCardTitle
+        
+        static let alphaExpired: CGFloat = 0.8
+        static let alphaValid: CGFloat = 1.0
     }
     
     enum Layouts {
@@ -32,6 +35,10 @@ private enum Constants {
                                                      left: cardInsetLeftRight,
                                                      bottom: 0,
                                                      right: cardInsetLeftRight)
+        
+        static let valuesContainerSpacing: CGFloat = 15
+        static let valuesTopSpacing: CGFloat = 8
+        static let valuesBottomSpacing: CGFloat = 13
     }
 }
 
@@ -160,7 +167,7 @@ class WalletCardView: UIView {
     
     private func setupLayout() {
         clipsToBounds = true
-        layer.cornerRadius = 16
+        layer.cornerRadius = Layout.cardCornerRadius
         
         addSubview(backgroundImage)
         addSubview(headerContainer)
@@ -169,14 +176,17 @@ class WalletCardView: UIView {
         
         let constraints = [
             "H:|[header]|",
-            "H:|[primaryContainer]-(15)-[secondaryContainer]|",
+            "H:|[primaryContainer]-(containerSpacing)-[secondaryContainer]|",
             
             "V:|[header]",
-            "V:[header]-(8)-[primaryContainer]-(13)-|",
-            "V:[header]-(8)-[secondaryContainer]-(13)-|",
+            "V:[header]-(containerTop)-[primaryContainer]-(containerBottom)-|",
+            "V:[header]-(containerTop)-[secondaryContainer]-(containerBottom)-|",
         ].constraints(with: ["header": headerContainer,
                              "primaryContainer": primaryValuesContainer,
-                             "secondaryContainer": secondaryValuesContainer]) + [
+                             "secondaryContainer": secondaryValuesContainer],
+                      metrics: ["containerSpacing": Layout.valuesContainerSpacing,
+                                "containerTop": Layout.valuesTopSpacing,
+                                "containerBottom": Layout.valuesBottomSpacing]) + [
                                 
             widthAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardWidthHeightRatio),
             headerContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardHeaderWidthHeightRatio),
@@ -188,7 +198,8 @@ class WalletCardView: UIView {
     }
     
     func configure(with walletData: WalletCardModel) {
-        validityView.configure(expires: walletData.expiryDate.timeIntervalSinceNow)
+        let expiryInterval = walletData.expiryDate.timeIntervalSinceNow
+        validityView.configure(expires: expiryInterval)
         
         titleLabel.attributedText = walletData.title.styledAs(Style.titleStyle).color(walletData.textStyle.color)
         headerContainer.backgroundColor = walletData.headerBackgroundColor

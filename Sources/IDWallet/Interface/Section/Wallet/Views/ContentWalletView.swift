@@ -106,7 +106,7 @@ class ContentWalletView: UIView {
                            secondaryValues: [
                             .init(title: "Gültig bis", value: "29. Nov 22")
                            ],
-                           expiryDate: Date.init(timeIntervalSinceNow: 900000)))],
+                           expiryDate: .init(timeIntervalSinceNow: 900000)))],
                              toSection: 0)
         
         dataSource.apply(snapshot)
