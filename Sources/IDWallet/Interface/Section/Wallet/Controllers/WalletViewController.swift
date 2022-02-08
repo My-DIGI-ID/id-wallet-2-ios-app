@@ -12,6 +12,7 @@
  */
 
 import UIKit
+import Aries
 
 private enum Constants {
     enum Styles {
@@ -114,37 +115,39 @@ final class WalletViewController: BareBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        Task {
+        Task(priority: .userInitiated) {
             let credentialService = CustomCredentialService()
             let credentials = try await credentialService.credentials()
 
-            DispatchQueue.main.async {
-                let hasWalletEntries = !credentials.isEmpty
-
-                if !hasWalletEntries {
-                    self.contentWalletView.removeFromSuperview()
-                    self.contentContainer.embed(self.noContentWalletView)
-                } else {
-                    self.noContentWalletView.removeFromSuperview()
-                    self.contentContainer.embed(self.contentWalletView)
-
-                    self.contentWalletView.update(
-                        walletData: credentials.map { credential in
-                        .init(
-                            id: "MESAID",
-                            background: .namedImage(.mesaBackground),
-                            title: "MESA Employee",
-                            primaryValues: [
-                                .init(title: "Name", value: "E. Mustermann")
-                            ],
-                            secondaryValues: [
-                                .init(title: "Gültig bis", value: "29. Nov 22")
-                            ],
-                            expiryDate: .init(timeIntervalSinceNow: 900000)
-                        )
-                        }
+            if credentials.isEmpty {
+                self.contentWalletView.removeFromSuperview()
+                self.contentContainer.embed(self.noContentWalletView)
+            } else {
+                self.noContentWalletView.removeFromSuperview()
+                self.contentContainer.embed(self.contentWalletView)
+                
+                let models = credentials.map { credential in
+                    WalletCardModel(
+                        id: "MESAID",
+                        background: .namedImage(.mesaBackground),
+                        title: "MESA Mitarbeiter",
+                        primaryValues: [
+                            .init(
+                                title: "Name",
+                                value: (credential.attributes.first { $0.name == "Vorname" }?.value.first.map { "\($0). " } ?? "")
+                                + (credential.attributes.first { $0.name == "Nachname" }?.value ?? "")
+                            )
+                        ],
+                        secondaryValues: [
+                            .init(title: "Gültig bis", value: "9. März 22")
+                        ],
+                        expiryDate: .init(timeIntervalSinceNow: 2_259_000) // 60 * 60 * 24 * 30 => 30 days in seconds
                     )
                 }
+                
+                self.contentWalletView.update(
+                    walletData: models
+                )
             }
         }
     }

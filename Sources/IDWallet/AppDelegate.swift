@@ -10,10 +10,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         initializeLogging()
 
-        Task {
-            do {
-                try await CustomAgentService().setup()
-            }
+        Task(priority: .userInitiated) {
+            try await CustomAgentService().setup()
+            print("AGENT READY")
         }
         
         return true
