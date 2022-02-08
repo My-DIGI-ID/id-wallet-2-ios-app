@@ -24,7 +24,16 @@
         "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-aries-sdk",
         "state": {
           "branch": "development",
-          "revision": "b4e8e7a260697a28682e5fb528236bba6f4b4ce8",
+          "revision": "ee56ecfbcabf42b795ebe58a8eef123d68d0dc2a",
+          "version": null
+        }
+      },
+      {
+        "package": "Indy",
+        "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-indy-sdk",
+        "state": {
+          "branch": "development",
+          "revision": "16b646a6942a206a9dd9e423cfcf4880942c3758",
           "version": null
         }
       },

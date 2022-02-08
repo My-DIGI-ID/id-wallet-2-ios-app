@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6306220327B29B7300BABE0B /* CustomConnectionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6306220027B29B7300BABE0B /* CustomConnectionService.swift */; };
+		6306220427B29B7300BABE0B /* CustomAgentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6306220127B29B7300BABE0B /* CustomAgentService.swift */; };
+		6306220527B29B7300BABE0B /* CustomCredentialService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6306220227B29B7300BABE0B /* CustomCredentialService.swift */; };
+		6306220827B29B7900BABE0B /* idw_eesditest in Resources */ = {isa = PBXBuildFile; fileRef = 6306220727B29B7800BABE0B /* idw_eesditest */; };
+		6306220A27B29BAF00BABE0B /* Aries in Frameworks */ = {isa = PBXBuildFile; productRef = 6306220927B29BAF00BABE0B /* Aries */; };
 		6F1A9B8827902711009B3359 /* Mediator in Frameworks */ = {isa = PBXBuildFile; productRef = 6F1A9B8727902711009B3359 /* Mediator */; };
 		6FA511362771B7A100D068BD /* AusweisApp2 in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA511352771B7A100D068BD /* AusweisApp2 */; };
 		8820CA3B27B13E8A00B5B485 /* UIView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8820CA3A27B13E8A00B5B485 /* UIView+Subviews.swift */; };
@@ -241,6 +246,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6306220027B29B7300BABE0B /* CustomConnectionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomConnectionService.swift; sourceTree = "<group>"; };
+		6306220127B29B7300BABE0B /* CustomAgentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAgentService.swift; sourceTree = "<group>"; };
+		6306220227B29B7300BABE0B /* CustomCredentialService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCredentialService.swift; sourceTree = "<group>"; };
+		6306220727B29B7800BABE0B /* idw_eesditest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = idw_eesditest; sourceTree = "<group>"; };
 		8820CA3A27B13E8A00B5B485 /* UIView+Subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Subviews.swift"; sourceTree = "<group>"; };
 		8820CA3C27B1468700B5B485 /* NSAttributedString+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Color.swift"; sourceTree = "<group>"; };
 		8847D7742756376000C2A25B /* IDWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IDWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -379,6 +388,7 @@
 			files = (
 				8EAF840E275EEEA000283D0B /* CocoaLumberjackSwift in Frameworks */,
 				6F1A9B8827902711009B3359 /* Mediator in Frameworks */,
+				6306220A27B29BAF00BABE0B /* Aries in Frameworks */,
 				8EAF840C275EEEA000283D0B /* CocoaLumberjack in Frameworks */,
 				6FA511362771B7A100D068BD /* AusweisApp2 in Frameworks */,
 			);
@@ -403,6 +413,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		630621FF27B29B6B00BABE0B /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6306220127B29B7300BABE0B /* CustomAgentService.swift */,
+				6306220027B29B7300BABE0B /* CustomConnectionService.swift */,
+				6306220227B29B7300BABE0B /* CustomCredentialService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		6306220627B29B7800BABE0B /* Genesis */ = {
+			isa = PBXGroup;
+			children = (
+				6306220727B29B7800BABE0B /* idw_eesditest */,
+			);
+			path = Genesis;
+			sourceTree = "<group>";
+		};
 		8820CA3927B13E6800B5B485 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
@@ -435,6 +463,7 @@
 		8847D7762756376000C2A25B /* IDWallet */ = {
 			isa = PBXGroup;
 			children = (
+				630621FF27B29B6B00BABE0B /* Service */,
 				95873EBD2791F85100A924C8 /* Resources */,
 				8E43319E275914CF00D50127 /* Fonts */,
 				8847D7A827563C5B00C2A25B /* Interface */,
@@ -982,6 +1011,7 @@
 		95873EBD2791F85100A924C8 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6306220627B29B7800BABE0B /* Genesis */,
 				950C069927AD3EB0006D0CAB /* Locale */,
 				95873EBE2791F85B00A924C8 /* Html */,
 			);
@@ -1051,6 +1081,7 @@
 				8EAF840D275EEEA000283D0B /* CocoaLumberjackSwift */,
 				6FA511352771B7A100D068BD /* AusweisApp2 */,
 				6F1A9B8727902711009B3359 /* Mediator */,
+				6306220927B29BAF00BABE0B /* Aries */,
 			);
 			productName = IDWallet;
 			productReference = 8847D7742756376000C2A25B /* IDWallet.app */;
@@ -1156,6 +1187,7 @@
 				95C107DA2795896300FB02AD /* learn-more-de.html in Resources */,
 				950C06A027AD3EF6006D0CAB /* Localizable.strings in Resources */,
 				8847D7812756376200C2A25B /* Assets.xcassets in Resources */,
+				6306220827B29B7900BABE0B /* idw_eesditest in Resources */,
 				950C06A327AD3F00006D0CAB /* Localizable.strings in Resources */,
 				8E4331BA2759152B00D50127 /* IBMPlexSans-Regular.ttf in Resources */,
 				950B422827AD6A1E002C03B6 /* InfoPlist.strings in Resources */,
@@ -1215,7 +1247,7 @@
 				8862A89427AD1AF900C9780B /* UIImageView+Named.swift in Sources */,
 				8E7554C2277291DA0016DEB0 /* BaseVCStyle.swift in Sources */,
 				95C107E52796CEE200FB02AD /* MessageType+Image.swift in Sources */,
-				95C107E52796CEE200FB02AD /* ErrorType+Image.swift in Sources */,
+				95C107E52796CEE200FB02AD /* MessageType+Image.swift in Sources */,
 				8862A89027AD15EE00C9780B /* UIImage+Named.swift in Sources */,
 				8E7554CA27729A410016DEB0 /* BareBaseVC.swift in Sources */,
 				8EAF8407275D927B00283D0B /* PinCodeDigitView.swift in Sources */,
@@ -1251,6 +1283,7 @@
 				9542C7E5279890E300784147 /* NSAttributedString+Alignment.swift in Sources */,
 				8E43319D27590FB700D50127 /* NumberPad.swift in Sources */,
 				9555836F27B1827000D3E47B /* OverviewCoordinator.swift in Sources */,
+				6306220427B29B7300BABE0B /* CustomAgentService.swift in Sources */,
 				8820CA3D27B1468700B5B485 /* NSAttributedString+Color.swift in Sources */,
 				95F9A2B227A05F2E003F15B5 /* CALayer+SketchShadow.swift in Sources */,
 				95C107DC27958FCB00FB02AD /* WalletMessageViewController.swift in Sources */,
@@ -1266,13 +1299,14 @@
 				9542C7E327988FF400784147 /* String+AttributedStyle.swift in Sources */,
 				8EAF8418275F4CC700283D0B /* PinCharacterRepresentation.swift in Sources */,
 				8820CA3B27B13E8A00B5B485 /* UIView+Subviews.swift in Sources */,
+				6306220327B29B7300BABE0B /* CustomConnectionService.swift in Sources */,
 				8ECA2280276F3E4200CB8D81 /* ZeroOrMore.swift in Sources */,
 				8847D7782756376000C2A25B /* AppDelegate.swift in Sources */,
 				95C107E02795B7E300FB02AD /* MessageCoordinator.swift in Sources */,
 				95C107E72796CF0E00FB02AD /* MessageViewModel.swift in Sources */,
-				95C107E02795B7E300FB02AD /* ErrorAlertCoordinator.swift in Sources */,
+				95C107E02795B7E300FB02AD /* MessageCoordinator.swift in Sources */,
 				8862A89E27AD368500C9780B /* AddDocumentSupplementaryView.swift in Sources */,
-				95C107E72796CF0E00FB02AD /* ErrorAlertViewModel.swift in Sources */,
+				95C107E72796CF0E00FB02AD /* MessageViewModel.swift in Sources */,
 				8847D77A2756376000C2A25B /* SceneDelegate.swift in Sources */,
 				8EDC79CA278F727F0032E348 /* WalletTabBarController.swift in Sources */,
 				9555836B27B16A7900D3E47B /* OverviewViewModel.swift in Sources */,
@@ -1281,6 +1315,7 @@
 				9542C7E727997A8800784147 /* Sequence+NSLayoutConstraint.swift in Sources */,
 				8E8C404D2764BFB500DBC979 /* OnboardingPageControl.swift in Sources */,
 				8EAF841B275FE25600283D0B /* UIColorExtensions.swift in Sources */,
+				6306220527B29B7300BABE0B /* CustomCredentialService.swift in Sources */,
 				95F9FCDC27AAF27000C0603C /* BracketView.swift in Sources */,
 				8862A89727AD26B900C9780B /* NoContentWalletView.swift in Sources */,
 				95873EBC2791C01400A924C8 /* UIView+Layout.swift in Sources */,
@@ -1840,6 +1875,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		6306220927B29BAF00BABE0B /* Aries */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F1A9B83279025EC009B3359 /* XCRemoteSwiftPackageReference "ios-aries-sdk" */;
+			productName = Aries;
+		};
 		6F1A9B8727902711009B3359 /* Mediator */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6F1A9B8627902711009B3359 /* XCRemoteSwiftPackageReference "ios-mediator-sdk" */;
