@@ -46,6 +46,8 @@ class OverviewCoordinator: Coordinator {
                 ("Zur Wallet hinzufügen", addAction),
                 ("Abbrechen", cancelAction)],
             data: rows)
-        presenter.presentModal(OverviewViewController(viewModel: viewModel), options: .defaultOptions)
+        presenter.presentModal(OverviewViewController(viewModel: viewModel, completion: {
+            self.presenter.dismissModal(completion: nil)
+        }), options: .defaultOptions)
     }
 }

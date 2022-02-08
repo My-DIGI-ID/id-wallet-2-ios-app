@@ -33,6 +33,6 @@ class ConnectionConfirmationCoordinator: Coordinator {
                                                         buttons: [
                                                             ("Erlauben", allowAction),
                                                             ("Abbrechen", cancelAction)])
-        presenter.present(ConnectionConfirmationViewController(viewModel: viewModel))
+        presenter.present(ConnectionConfirmationViewController(viewModel: viewModel, completion: {}))
     }
 }

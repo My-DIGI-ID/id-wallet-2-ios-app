@@ -46,6 +46,8 @@ private enum Constants {
 
 class ConnectionConfirmationViewController: BareBaseViewController {
 
+    var completion: () -> Void
+
     private lazy var closeButton: UIBarButtonItem = {
         let button = UIBarButtonItem(
             image: Images.regular.close,
@@ -187,8 +189,9 @@ class ConnectionConfirmationViewController: BareBaseViewController {
 
     private let viewModel: ConnectionConfirmationViewModel
 
-    init(viewModel: ConnectionConfirmationViewModel) {
+    init(viewModel: ConnectionConfirmationViewModel, completion: @escaping () -> Void) {
         self.viewModel = viewModel
+        self.completion = completion
         super.init(style: nil)
     }
 
@@ -221,7 +224,7 @@ class ConnectionConfirmationViewController: BareBaseViewController {
 
     @objc
     private func closeView() {
-        dismiss(animated: true, completion: nil)
+        completion()
     }
 }
 

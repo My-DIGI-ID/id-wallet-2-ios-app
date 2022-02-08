@@ -49,6 +49,7 @@ private enum Constants {
 class OverviewViewController: BareBaseViewController {
 
     let viewModel: OverviewViewModel
+    var completion: () -> Void
 
     private lazy var closeButton: UIBarButtonItem = {
         let button = UIBarButtonItem(
@@ -168,8 +169,9 @@ class OverviewViewController: BareBaseViewController {
         return view
     }()
 
-    init(viewModel: OverviewViewModel) {
+    init(viewModel: OverviewViewModel, completion: @escaping () -> Void) {
         self.viewModel = viewModel
+        self.completion = completion
         super.init(style: nil)
     }
 
@@ -218,7 +220,7 @@ class OverviewViewController: BareBaseViewController {
 
     @objc
     private func closeView() {
-        dismiss(animated: true, completion: nil)
+        completion()
     }
 }
 

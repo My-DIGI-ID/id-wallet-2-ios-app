@@ -83,7 +83,7 @@ class WalletTabBarController: BareBaseViewController {
     private var qrcodeScanController = UIViewController()
     private var qrcodeScanBarItem = UITabBarItem(
         title: "QR-Code Scan",
-        image: UIImage.requiredImage(name: "BarButtonQrcodeBig").withRenderingMode(.alwaysOriginal),
+        image: UIImage.requiredImage(name: "BarbuttonQrcodeBig").withRenderingMode(.alwaysOriginal),
         selectedImage: UIImage.requiredImage(name: "BarbuttonQrcodeBigSelected").withRenderingMode(.alwaysOriginal))
 
     private var activitiesController = UIViewController()
@@ -158,14 +158,16 @@ extension WalletTabBarController: CustomTabBarDelegate {
             scannerCoordinator = ScannerCoordinator(presenter: presenter) { result in
                 switch result {
                 case .success(let scanned):
-                    // self.presenter.dismiss(options: .defaultOptions, completion: nil)
                     print(scanned)
                     self.selectedIndex = 0
+                    self.presenter.dismiss(options: .defaultOptions, completion: nil)
                 case .failure(let error):
                     self.selectedIndex = previouslySelected
                     print(error)
+                    self.presenter.dismiss(options: .defaultOptions, completion: nil)
                 case .cancelled:
                     self.selectedIndex = previouslySelected
+                    self.presenter.dismiss(options: .defaultOptions, completion: nil)
                 }
                 self.scannerCoordinator = nil
             }
