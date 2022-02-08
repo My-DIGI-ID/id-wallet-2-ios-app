@@ -42,10 +42,10 @@ struct WalletCardModel: Hashable, Equatable {
     let background: BackgroundType
     
     /// Defines the color of the header-area in the Wallet-Card. Defaults to clear
-    let headerBackgroundColor: UIColor = .clear
+    let headerBackgroundColor: UIColor
     
     /// Defines the text-color that is used for the Wallet-Card (sould be choosen according to the background color/image)
-    let textStyle: TextStyle = .light
+    let textStyle: TextStyle
     
     /// Title displayed for the Wallet-Card
     let title: String
@@ -58,4 +58,16 @@ struct WalletCardModel: Hashable, Equatable {
     
     /// Date when the Wallet-Card the expires
     let expiryDate: Date
+    
+    init(id: String, background: BackgroundType, headerBackgroundColor: UIColor = .clear, textStyle: TextStyle = .light,
+         title: String, primaryValues: [WalletValue], secondaryValues: [WalletValue], expiryDate: Date) {
+        self.id = id
+        self.background = background
+        self.headerBackgroundColor = headerBackgroundColor
+        self.textStyle = textStyle
+        self.title = title
+        self.primaryValues = primaryValues
+        self.secondaryValues = secondaryValues
+        self.expiryDate = expiryDate
+    }
 }
