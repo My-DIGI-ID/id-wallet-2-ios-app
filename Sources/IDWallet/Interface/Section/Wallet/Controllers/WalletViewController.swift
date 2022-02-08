@@ -29,6 +29,9 @@ private enum Constants {
 
 fileprivate extension ImageNameIdentifier {
     static let userIcon = ImageNameIdentifier(rawValue: "ImageIconUser")
+    
+    static let baseIDBackground = ImageNameIdentifier(rawValue: "BaseIDBackground")
+    static let ddlBackground = ImageNameIdentifier(rawValue: "DDLBackground")
 }
 
 final class WalletViewController: BareBaseViewController {
@@ -121,7 +124,7 @@ final class WalletViewController: BareBaseViewController {
             contentContainer.embed(contentWalletView)
             contentWalletView.update(walletData: [
                 .init(id: "MESAID",
-                               background: .color(.primaryBlue),
+                      background: .namedImage(.baseIDBackground),
                                title: "MESA Employee",
                                primaryValues: [
                                 .init(title: "Name", value: "E. Mustermann"),

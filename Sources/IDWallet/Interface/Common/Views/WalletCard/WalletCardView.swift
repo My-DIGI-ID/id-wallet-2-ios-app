@@ -169,7 +169,7 @@ class WalletCardView: UIView {
         clipsToBounds = true
         layer.cornerRadius = Layout.cardCornerRadius
         
-        addSubview(backgroundImage)
+        embed(backgroundImage)
         addSubview(headerContainer)
         addSubview(primaryValuesContainer)
         addSubview(secondaryValuesContainer)
@@ -193,8 +193,6 @@ class WalletCardView: UIView {
             primaryValuesContainer.widthAnchor.constraint(equalTo: secondaryValuesContainer.widthAnchor)
         ]
         constraints.activate()
-        
-        embed(backgroundImage)
     }
     
     func configure(with walletData: WalletCardModel) {
