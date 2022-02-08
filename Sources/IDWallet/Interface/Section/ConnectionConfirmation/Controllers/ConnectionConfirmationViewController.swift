@@ -150,6 +150,9 @@ class ConnectionConfirmationViewController: BareBaseViewController {
             titleText: "Details zu dieser Verbindung anzeigen",
             style: .link,
             primaryAction: nil)
+        button.titleLabel?.lineBreakMode = .byWordWrapping
+        button.titleLabel?.numberOfLines = 2
+        button.titleLabel?.textAlignment = .center
         return button
     }()
 
@@ -277,7 +280,8 @@ extension ConnectionConfirmationViewController {
             linkSecurity.widthAnchor.constraint(equalTo: stackView.widthAnchor),
             linkSecurity.heightAnchor.constraint(equalToConstant: Constants.Layout.Button.linkHeight),
             linkDetails.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            linkDetails.heightAnchor.constraint(equalToConstant: Constants.Layout.Button.linkHeight)
+            linkDetails.heightAnchor.constraint(equalToConstant: Constants.Layout.Button.linkHeight),
+            linkDetails.bottomAnchor.constraint(lessThanOrEqualTo: buttonsStackView.topAnchor, constant: -Constants.Layout.scrollBarTopSpacing)
         ])
     }
 }
