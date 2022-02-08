@@ -169,6 +169,7 @@ extension WalletTabBarController: CustomTabBarDelegate {
                     self.selectedIndex = previouslySelected
                     self.presenter.dismiss(options: .defaultOptions, completion: nil)
                 }
+                self.presenter.dismiss(options: .defaultOptions, completion: nil)
                 self.scannerCoordinator = nil
             }
             scannerCoordinator?.start()

@@ -198,12 +198,10 @@
 		952FF66D2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
 		953F26C827AD6B92008704E1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 953F26C627AD6B92008704E1 /* InfoPlist.strings */; };
 		953F26CE27AD71E3008704E1 /* ConnectionConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F26CD27AD71E3008704E1 /* ConnectionConfirmationViewController.swift */; };
-		953F26D027AD71F5008704E1 /* ConnectionConfirmationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F26CF27AD71F5008704E1 /* ConnectionConfirmationCoordinator.swift */; };
 		953F26D227AD9170008704E1 /* UILabel+ImageAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F26D127AD9170008704E1 /* UILabel+ImageAttachment.swift */; };
 		9542C7E327988FF400784147 /* String+AttributedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E227988FF400784147 /* String+AttributedStyle.swift */; };
 		9542C7E5279890E300784147 /* NSAttributedString+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */; };
 		9542C7E727997A8800784147 /* Sequence+NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */; };
-		9547454B27B00CC000B2C0D1 /* ConnectionInformationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9547454A27B00CC000B2C0D1 /* ConnectionInformationViewModel.swift */; };
 		9555836B27B16A7900D3E47B /* OverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9555836A27B16A7900D3E47B /* OverviewViewModel.swift */; };
 		9555836D27B16A9F00D3E47B /* OverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9555836C27B16A9F00D3E47B /* OverviewViewController.swift */; };
 		9555836F27B1827000D3E47B /* OverviewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9555836E27B1827000D3E47B /* OverviewCoordinator.swift */; };
@@ -353,12 +351,10 @@
 		952FF66A2796E703003840F9 /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		953F26C727AD6B92008704E1 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = InfoPlist.strings; sourceTree = "<group>"; };
 		953F26CD27AD71E3008704E1 /* ConnectionConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionConfirmationViewController.swift; sourceTree = "<group>"; };
-		953F26CF27AD71F5008704E1 /* ConnectionConfirmationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionConfirmationCoordinator.swift; sourceTree = "<group>"; };
 		953F26D127AD9170008704E1 /* UILabel+ImageAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+ImageAttachment.swift"; sourceTree = "<group>"; };
 		9542C7E227988FF400784147 /* String+AttributedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+AttributedStyle.swift"; sourceTree = "<group>"; };
 		9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Alignment.swift"; sourceTree = "<group>"; };
 		9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+NSLayoutConstraint.swift"; sourceTree = "<group>"; };
-		9547454A27B00CC000B2C0D1 /* ConnectionInformationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionInformationViewModel.swift; sourceTree = "<group>"; };
 		9555836A27B16A7900D3E47B /* OverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewModel.swift; sourceTree = "<group>"; };
 		9555836C27B16A9F00D3E47B /* OverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewController.swift; sourceTree = "<group>"; };
 		9555836E27B1827000D3E47B /* OverviewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewCoordinator.swift; sourceTree = "<group>"; };
@@ -928,7 +924,6 @@
 		953F26CA27AD71B1008704E1 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				953F26CF27AD71F5008704E1 /* ConnectionConfirmationCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -936,7 +931,6 @@
 		953F26CB27AD71C3008704E1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				9547454A27B00CC000B2C0D1 /* ConnectionInformationViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1272,10 +1266,8 @@
 				8E88912427744F2E00D0E6A3 /* ViewFactory.swift in Sources */,
 				8E8C40712767373600DBC979 /* Rounded.swift in Sources */,
 				8E8C40592765FA6F00DBC979 /* BaseVC.swift in Sources */,
-				9547454B27B00CC000B2C0D1 /* ConnectionInformationViewModel.swift in Sources */,
 				9555837127B1AA5C00D3E47B /* UIImageView+URL.swift in Sources */,
 				95F9A2B527A06CE4003F15B5 /* WalletButton.swift in Sources */,
-				953F26D027AD71F5008704E1 /* ConnectionConfirmationCoordinator.swift in Sources */,
 				8E8C408C2769C15400DBC979 /* Coordinator.swift in Sources */,
 				955D3F2A27ADAB290004AD70 /* NSAttributedString+Image.swift in Sources */,
 				8EAF8405275D90FC00283D0B /* PinCodeView.swift in Sources */,

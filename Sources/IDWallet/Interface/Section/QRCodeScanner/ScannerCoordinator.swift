@@ -127,55 +127,37 @@ class ScannerCoordinator: Coordinator {
                 self.completion(Result.failure(error))
                 
             case .cancelled:
-                // TODO: mock scan, remove
-                do {
-                    // self.completion(Result.success(qrCode))
-                    
-                    let connectionService = CustomConnectionService()
-                    // swiftlint:disable line_length
-                    let qrCode = "http://158.177.245.253:11000?c_i=eyJyZWNpcGllbnRLZXlzIjpbIkNpNFBZUzNVTDlKV3BhbmNSVzhuRktDam40NnkxcENaU1JkbTFDR1AxRlRzIl0sIkB0eXBlIjoiZGlkOnNvdjpCekNic05ZaE1yakhpcVpEVFVBU0hnO3NwZWMvY29ubmVjdGlvbnMvMS4wL2ludml0YXRpb24iLCJpbWFnZVVybCI6Imh0dHBzOi8vYXNzZXRzLmRldi5lc3NpZC1kZW1vLmNvbS9tZXNhMngucG5nIiwiQGlkIjoiZGNkZjQwMTYtYTQ4MS00MzQ0LTgwOTItNGFjZWYwZjUwYWZlIiwibGFiZWwiOiJNRVNBLURldXRzY2hsYW5kLUdtYkgiLCJzZXJ2aWNlRW5kcG9pbnQiOiJodHRwOi8vMTU4LjE3Ny4yNDUuMjUzOjExMDAwIn0="
-                    if let result = try connectionService.invitee(for: qrCode) {
-                        let (name, imageUrl) = result
-                        self.startConnectionConfirmation(qrCode: qrCode, name: name, imageUrl: imageUrl, viewController: self.currentViewController!)
-                    }
-                } catch let error {
-                    self.completion(Result.failure(error))
-                }
+                self.completion(Result.cancelled)
+
             }
         }
         presenter.present(currentViewController!)
     }
     
-    func startConnectionConfirmation(qrCode: String, name: String?, imageUrl: String?, viewController previous: UIViewController) {
+    func startConnectionConfirmation(
+        qrCode: String,
+        name: String?,
+        imageUrl: String?,
+        viewController previous: UIViewController
+    ) {
         if let name = name {
-            let viewModel = ConnectionConfirmationViewModel(
-                connection: name,
-                buttons: [
-                    (
-                        "Erlauben",
-                        UIAction(handler: { _ in
-                            Task {
-                                do {
-                                    let connectionId = try await self.connectionService.connect(with: qrCode)
-                                    self.startOverview(connectionId: connectionId, name: name, imageUrl: imageUrl, viewController: self.currentViewController!)
-                                } catch let error {
-                                    print(error)
-                                    self.completion(.failure(error))
-                                }
+            currentViewController =
+            ConnectionConfirmationViewController(connection: name) { result in
+                    switch result {
+                    case .confirm:
+                        Task {
+                            do {
+                                let connectionId = try await self.connectionService.connect(with: qrCode)
+                                self.startOverview(connectionId: connectionId, name: name, imageUrl: imageUrl, viewController: self.currentViewController!)
+                            } catch let error {
+                                print(error)
+                                self.completion(.failure(error))
                             }
-                        })
-                    ),
-                    (
-                        "Abbrechen",
-                        UIAction(handler: { _ in
-                            self.completion(Result.cancelled)
-                        })
-                    )
-                ]
-            )
-            currentViewController = ConnectionConfirmationViewController(viewModel: viewModel, completion: {
-                self.completion(.cancelled)
-            })
+                        }
+                    case .cancel, .deny:
+                        self.completion(Result.cancelled)
+                    }
+                }
             presenter.present(currentViewController!, replacing: previous)
         }
     }

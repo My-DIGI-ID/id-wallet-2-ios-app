@@ -65,7 +65,7 @@ class QRScannerViewController: BareBaseViewController {
                                        .font: Typography.regular.bodyFont], for: .highlighted)
         return button
     }()
-    
+
     private lazy var brackeView: BracketView = {
         let view = BracketView(lineLength: Constants.Layout.Bracket.lineLength,
                                lineWidth: Constants.Layout.Bracket.lineWidth,

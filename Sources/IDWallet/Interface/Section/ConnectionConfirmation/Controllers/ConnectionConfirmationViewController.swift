@@ -44,9 +44,33 @@ private enum Constants {
     static let checkmark: UIImage = #imageLiteral(resourceName: "solve")
 }
 
-class ConnectionConfirmationViewController: BareBaseViewController {
+enum ConnectionConfirmationResult {
+    case confirm
+    case cancel
+    case deny
+}
 
-    var completion: () -> Void
+class ConnectionConfirmationViewController: BareBaseViewController {
+    private let connection: String
+    private let completion: (ConnectionConfirmationResult) -> Void
+
+    private lazy var allowButton: WalletButton = {
+        let result = WalletButton(
+            titleText: "Erlauben",
+            primaryAction: UIAction(handler: { _ in
+                self.completion(.confirm)
+            }))
+        result.style = .secondary
+        return result
+    }()
+
+    private lazy var denyButton: WalletButton = {
+        return WalletButton(
+            titleText: "Abbrechen",
+            primaryAction: UIAction(handler: { _ in
+                self.completion(.deny)
+            }))
+    }()
 
     private lazy var closeButton: UIBarButtonItem = {
         let button = UIBarButtonItem(
@@ -187,10 +211,8 @@ class ConnectionConfirmationViewController: BareBaseViewController {
         return view
     }()
 
-    private let viewModel: ConnectionConfirmationViewModel
-
-    init(viewModel: ConnectionConfirmationViewModel, completion: @escaping () -> Void) {
-        self.viewModel = viewModel
+    init(connection: String, completion: @escaping (ConnectionConfirmationResult) -> Void) {
+        self.connection = connection
         self.completion = completion
         super.init(style: nil)
     }
@@ -205,7 +227,7 @@ class ConnectionConfirmationViewController: BareBaseViewController {
 
         setupLayout()
 
-        headerLabel.attributedText = viewModel.connection
+        headerLabel.attributedText = connection
             .styledAs(.header)
             .centered()
 
@@ -213,18 +235,13 @@ class ConnectionConfirmationViewController: BareBaseViewController {
             .styledAs(.text(font: .plexSans(25)))
             .centered()
 
-        viewModel.buttons.forEach { (title: String, action: UIAction) in
-            let button = WalletButton(titleText: title, primaryAction: action)
-            if !buttonsStackView.arrangedSubviews.isEmpty {
-                button.style = .secondary
-            }
-            buttonsStackView.addArrangedSubview(button)
-        }
+        buttonsStackView.addArrangedSubview(allowButton)
+        buttonsStackView.addArrangedSubview(denyButton)
     }
 
     @objc
     private func closeView() {
-        completion()
+        completion(.cancel)
     }
 }
 
