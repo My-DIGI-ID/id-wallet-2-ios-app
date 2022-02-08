@@ -41,6 +41,8 @@ private enum Constants {
         static let imageSize = CGSize(width: 100, height: 25)
 
         static let rowColor = UIColor(hexString: "#E1E5F5")
+
+        static let spacerHeight: CGFloat = 40
     }
 }
 
@@ -89,12 +91,14 @@ class OverviewViewController: BareBaseViewController {
         return view
     }()
 
+    private lazy var spacer = UIView()
+
     private lazy var stackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [
             headerStackView,
             divider,
             headerView,
-            UIView(),
+            spacer,
             buttonsStackView])
         view.axis = .vertical
         view.alignment = .leading
@@ -143,7 +147,7 @@ class OverviewViewController: BareBaseViewController {
 
         let view = UIStackView(arrangedSubviews: [imageView, vertical])
         view.axis = .horizontal
-
+        view.spacing = 8
         return view
     }()
 
@@ -282,6 +286,7 @@ extension OverviewViewController {
             headerView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
             divider.heightAnchor.constraint(equalToConstant: Constants.Layout.dividerHeight),
             divider.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            divider.bottomAnchor.constraint(equalTo: headerView.topAnchor, constant: Constants.Layout.divderBottomSpace)])
+            divider.bottomAnchor.constraint(equalTo: headerView.topAnchor, constant: Constants.Layout.divderBottomSpace),
+            spacer.heightAnchor.constraint(equalToConstant: Constants.Layout.spacerHeight)])
     }
 }

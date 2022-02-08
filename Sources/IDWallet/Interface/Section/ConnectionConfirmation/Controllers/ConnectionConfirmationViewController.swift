@@ -37,6 +37,8 @@ private enum Constants {
         enum Button {
             static let linkHeight: CGFloat = 24
         }
+
+        static let spacherHeight: CGFloat = 40
     }
     static let image: UIImage = #imageLiteral(resourceName: "verfified")
     static let checkmark: UIImage = #imageLiteral(resourceName: "solve")
@@ -156,6 +158,8 @@ class ConnectionConfirmationViewController: BareBaseViewController {
         return button
     }()
 
+    let spacer = UIView()
+
     private lazy var stackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [
             alertTypeImageView,
@@ -165,7 +169,7 @@ class ConnectionConfirmationViewController: BareBaseViewController {
             certificateInformationView,
             linkSecurity,
             linkDetails,
-            UIView(),
+            spacer,
             buttonsStackView])
         view.axis = .vertical
         view.alignment = .center
@@ -281,7 +285,7 @@ extension ConnectionConfirmationViewController {
             linkSecurity.heightAnchor.constraint(equalToConstant: Constants.Layout.Button.linkHeight),
             linkDetails.widthAnchor.constraint(equalTo: stackView.widthAnchor),
             linkDetails.heightAnchor.constraint(equalToConstant: Constants.Layout.Button.linkHeight),
-            linkDetails.bottomAnchor.constraint(lessThanOrEqualTo: buttonsStackView.topAnchor, constant: -Constants.Layout.scrollBarTopSpacing)
+            spacer.heightAnchor.constraint(equalToConstant: Constants.Layout.spacherHeight)
         ])
     }
 }
