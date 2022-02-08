@@ -110,8 +110,8 @@ final class WalletViewController: BareBaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // TODO: Check if wallet entries available
-        let hasWalletEntries = true
+        // TODO: Check if wallet entries available here
+        let hasWalletEntries = false
         
         if !hasWalletEntries {
             contentWalletView.removeFromSuperview()
@@ -129,6 +129,7 @@ final class WalletViewController: BareBaseViewController {
 
 extension WalletViewController: AddDocumentDelegate {
     func addDocument() {
+        // TODO: Trigger add Document here
         print("Add Document")
     }
 }

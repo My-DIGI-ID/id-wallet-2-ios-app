@@ -19,7 +19,7 @@ private enum Constants {
     }
     
     enum Layouts {
-        static let emptyWalletImageAspectRatio: CGFloat = 257 / 279
+        static let emptyWalletImageAspectRatio: CGFloat = 1.0
         static let emptyWalletImageRelativeWidth: CGFloat = 0.7
         static let contentStackviewSpacing: CGFloat = 30
         static let documentButtonInset: UIEdgeInsets = .init(top: 0, left: 20, bottom: 0, right: 20)

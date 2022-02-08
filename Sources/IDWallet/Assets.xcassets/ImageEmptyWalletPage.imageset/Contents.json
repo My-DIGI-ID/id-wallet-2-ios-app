@@ -1,19 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "empty_wallet_dummy_small.png",
-      "idiom" : "universal",
-      "scale" : "1x"
-    },
-    {
-      "filename" : "empty_wallet_dummy_medium.png",
-      "idiom" : "universal",
-      "scale" : "2x"
-    },
-    {
-      "filename" : "empty_wallet_dummy_large.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "filename" : "0010_wallet_illu@2x.pdf",
+      "idiom" : "universal"
     }
   ],
   "info" : {

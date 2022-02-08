@@ -23,7 +23,7 @@ enum AttributedStyle {
          walletInfoText,
 validityLabel,
 body,
-text(color: UIColor = .walBlack, font: UIFont)
+text(color: UIColor = .walBlack, font: UIFont)  // FIXME: We should not use parameters for the attribute styles.
 
     var attributes: [NSAttributedString.Key: Any] {
         switch self {
