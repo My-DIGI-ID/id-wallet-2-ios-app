@@ -1561,6 +1561,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1622,6 +1623,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -1650,7 +1652,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PL4YWAM25J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/IDWallet/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Erlaube den Zugriff, um QR-Codes scannen zu können.";
@@ -1682,7 +1684,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PL4YWAM25J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/IDWallet/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Erlaube den Zugriff, um QR-Codes scannen zu können.";

@@ -10,6 +10,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ) -> Bool {
         initializeLogging()
 
+        Task {
+            do {
+                try await CustomAgentService().setup()
+            }
+        }
+        
         return true
     }
 

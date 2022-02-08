@@ -135,9 +135,7 @@ class ScannerCoordinator: Coordinator {
                         "Erlauben",
                         UIAction(handler: { _ in
                             Task {
-                                let connectionService = CustomConnectionService()
-                                let connectionId = try await connectionService.connect(with: qrCode)
-
+                                let connectionId = try await CustomConnectionService().connect(with: qrCode)
                                 self.startOverview(connectionId: connectionId, name: name, imageUrl: imageUrl, viewController: self.currentViewController!)
                             }
                         })

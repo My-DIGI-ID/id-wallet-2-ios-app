@@ -20,7 +20,7 @@ class CustomAgentService {
     private static let genesis = "idw_eesditest"
     
     func setup() async throws {
-        guard let url = Bundle.main.url(forResource: Self.genesis, withExtension: nil)?.absoluteString else {
+        guard let url = Bundle.main.url(forResource: Self.genesis, withExtension: nil)?.path else {
             return
         }
         
@@ -29,7 +29,7 @@ class CustomAgentService {
         
         // Set the first master secret to enable credential handling
         try await Aries.agent.run {
-            try await Aries.provisioning.update(Self.id, with: $0)
+            try? await Aries.provisioning.update(Self.id, with: $0)
         }
     }
 }
