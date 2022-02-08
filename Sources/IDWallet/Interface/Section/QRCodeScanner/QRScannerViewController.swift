@@ -140,7 +140,7 @@ class QRScannerViewController: BareBaseViewController {
 #if targetEnvironment(simulator)
 #else
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
-            viewModel.scannedQR.send(completion: .failure(.acesss))
+            completion(.failure(error: .acesss))
             return
         }
         
@@ -149,14 +149,14 @@ class QRScannerViewController: BareBaseViewController {
         do {
             videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
         } catch {
-            viewModel.scannedQR.send(completion: .failure(.failed))
+            completion(.failure(error: .failure))
             return
         }
         
         if captureSession.canAddInput(videoInput) {
             captureSession.addInput(videoInput)
         } else {
-            viewModel.scannedQR.send(completion: .failure(.acesss))
+            completion(.failure(error: .acesss))
             return
         }
         
@@ -168,7 +168,7 @@ class QRScannerViewController: BareBaseViewController {
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = [.qr]
         } else {
-            viewModel.scannedQR.send(completion: .failure(.failed))
+            completion(.failure(error: .failure))
             return
         }
         
