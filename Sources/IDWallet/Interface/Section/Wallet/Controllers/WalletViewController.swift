@@ -32,6 +32,7 @@ fileprivate extension ImageNameIdentifier {
     
     static let baseIDBackground = ImageNameIdentifier(rawValue: "BaseIDBackground")
     static let ddlBackground = ImageNameIdentifier(rawValue: "DDLBackground")
+    static let mesaBackground = ImageNameIdentifier(rawValue: "MesaBackground")
 }
 
 final class WalletViewController: BareBaseViewController {
@@ -125,7 +126,7 @@ final class WalletViewController: BareBaseViewController {
             contentWalletView.update(walletData: [
                 .init(
                     id: "MESAID",
-                    background: .namedImage(.baseIDBackground),
+                    background: .namedImage(.mesaBackground),
                     title: "MESA Employee",
                     primaryValues: [
                         .init(title: "Name", value: "E. Mustermann")
