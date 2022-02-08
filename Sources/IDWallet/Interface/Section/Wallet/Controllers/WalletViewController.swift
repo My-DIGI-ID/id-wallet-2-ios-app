@@ -111,7 +111,7 @@ final class WalletViewController: BareBaseViewController {
         super.viewWillAppear(animated)
         
         // TODO: Check if wallet entries available here
-        let hasWalletEntries = false
+        let hasWalletEntries = true
         
         if !hasWalletEntries {
             contentWalletView.removeFromSuperview()
@@ -119,6 +119,18 @@ final class WalletViewController: BareBaseViewController {
         } else {
             noContentWalletView.removeFromSuperview()
             contentContainer.embed(contentWalletView)
+            contentWalletView.update(walletData: [
+                .init(id: "MESAID",
+                               background: .color(.primaryBlue),
+                               title: "MESA Employee",
+                               primaryValues: [
+                                .init(title: "Name", value: "E. Mustermann"),
+                               ],
+                               secondaryValues: [
+                                .init(title: "Gültig bis", value: "29. Nov 22")
+                               ],
+                               expiryDate: .init(timeIntervalSinceNow: 900000))
+            ])
         }
     }
     

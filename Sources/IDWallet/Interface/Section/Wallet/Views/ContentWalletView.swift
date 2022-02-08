@@ -90,26 +90,18 @@ class ContentWalletView: UIView {
     
     private func setupLayout() {
         embed(walletCollectionView)
-        
-        var snapshot = dataSource.snapshot()
-        snapshot.appendSections([0]) // Currently only one big section
-        
-        // TODO: Remove Dummy
-        snapshot.appendItems([.init(
-            indexPath: .init(row: 0, section: 0),
-            content: .init(id: "MESAID",
-                           background: .color(.primaryBlue),
-                           title: "MESA Employee",
-                           primaryValues: [
-                            .init(title: "Name", value: "E. Mustermann"),
-                           ],
-                           secondaryValues: [
-                            .init(title: "Gültig bis", value: "29. Nov 22")
-                           ],
-                           expiryDate: .init(timeIntervalSinceNow: 900000)))],
+        dataSource.apply(.init())
+    }
+    
+    func update(walletData: [WalletCardModel]) {
+        var snapshot = DataSourceSnapshot()
+        snapshot.appendSections([0])
+        snapshot.appendItems(walletData.enumerated().map {
+            .init(indexPath: .init(row: $0.offset, section: 0), content: $0.element)
+        },
                              toSection: 0)
         
-        dataSource.apply(snapshot)
+        dataSource.apply(snapshot, animatingDifferences: true)
     }
     
     // MARK: Lifecycle
