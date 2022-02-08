@@ -21,9 +21,9 @@ enum AttributedStyle {
          walletCardValue,
          walletCardTitle,
          walletInfoText,
-validityLabel,
-body,
-text(color: UIColor = .walBlack, font: UIFont)  // FIXME: We should not use parameters for the attribute styles.
+         validityLabel,
+         body,
+         text(color: UIColor = .walBlack, font: UIFont)  // FIXME: We should not use parameters for the attribute styles.
 
     var attributes: [NSAttributedString.Key: Any] {
         switch self {
@@ -54,10 +54,10 @@ text(color: UIColor = .walBlack, font: UIFont)  // FIXME: We should not use para
             return [
                 .foregroundColor: UIColor.walBlack,
                 .font: Typography.regular.bodyFont]
-case .text(let color, let font):
-return [
-.foregroundColor: color,
-.font: font]
+        case .text(let color, let font):
+            return [
+                .foregroundColor: color,
+                .font: font]
         }
     }
 }
