@@ -43,6 +43,11 @@ protocol PresenterProtocol: AnyObject {
         completion: (() -> Void)?
     )
 
+    func dismiss(
+        options: PresentationOptions,
+        completion: (() -> Void)?
+    )
+
     /// Presents a modal view controller. There can always only be one modal view controller
     /// presented at any time.
     func presentModal(
@@ -146,6 +151,18 @@ class RootPresenter: NSObject, PresenterProtocol, CAAnimationDelegate {
         animateTransition(options, completion: completion) {
             viewControllers[last] = viewController
             navigationController.setViewControllers(viewControllers, animated: false)
+        }
+    }
+
+
+    func dismiss(
+        options: PresentationOptions,
+        completion: (() -> Void)?
+    ) {
+        let navigationController = navigationController
+
+        animateTransition(options, completion: completion) {
+            navigationController.popViewController(animated: false)
         }
     }
 

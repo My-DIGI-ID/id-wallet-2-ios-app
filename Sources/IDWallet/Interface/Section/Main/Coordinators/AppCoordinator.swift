@@ -76,51 +76,7 @@ extension AppCoordinator {
         presenter.present(alert)
     }
 
-    // TODO: Should be in Wallet Tabs
-    private func startScanner() {
-
-       scannerCoordinator = ScannerCoordinator(presenter: presenter) { result in
-            switch result {
-            case .success(let scanned):
-                print(scanned)
-            case .failure(let error):
-                print(error)
-            }
-        }
-        scannerCoordinator?.start()
-    }
-
     private func startWallet() {
-        // TODO: WalletTabBarController should probably create scannerCoordinator, might need
-        // a presenter
-
-        scannerCoordinator = ScannerCoordinator(presenter: presenter) { result in
-             switch result {
-             case .success(let scanned):
-                 print(scanned)
-             case .failure(let error):
-                 print(error)
-             }
-         }
-
-        presenter.present(WalletTabBarController(scannerCoordinator: scannerCoordinator))
-    }
-
-    //       is not part of the workflow, will simply come back to old screen on completion)
-    // TODO: Should support completion callback (maybe in view model)
-    private func showHelp(viewModel: WebViewViewModelProtocol) {
-        let help = HelpViewCoordinator(presenter: presenter, model: viewModel)
-        help.start()
-    }
-
-    // TODO: same as showHelp, this is not a specific WF error but a reusable method.
-    // TODO: should support completion callback (maybe in view model)
-    private func showMessage(viewModel: MessageViewModel) {
-        let alert = MessageCoordinator(presenter: presenter, model: viewModel)
-	alert.start()
-    }
-
-    private func startOverView() {
-        OverviewCoordinator(presenter: presenter).start()
+        presenter.present(WalletTabBarController(presenter: presenter))
     }
 }

@@ -10,8 +10,6 @@ import UIKit
 @MainActor
 class WalletTabBarController: BareBaseViewController {
 
-    private(set) var scannerCoordinator: ScannerCoordinator?
-
     var viewControllers: [UIViewController] = [] {
         didSet {
             // See tabBar.items for how selection is updated:
@@ -25,6 +23,9 @@ class WalletTabBarController: BareBaseViewController {
                 selectedViewController = viewControllers[selectedIndex]
             } else {
                 selectedViewController = nil
+            }
+            if tabBar.selectedIndex != selectedIndex {
+                tabBar.selectedIndex = selectedIndex
             }
         }
     }
@@ -70,6 +71,9 @@ class WalletTabBarController: BareBaseViewController {
 
     private var controlledConstraints: [NSLayoutConstraint] = []
 
+    private var presenter: PresenterProtocol
+    private var scannerCoordinator: ScannerCoordinator?
+
     private var walletController = WalletViewController()
     private var walletBarItem = UITabBarItem(
         title: "Wallet",
@@ -80,7 +84,7 @@ class WalletTabBarController: BareBaseViewController {
     private var qrcodeScanBarItem = UITabBarItem(
         title: "QR-Code Scan",
         image: UIImage.requiredImage(name: "BarButtonQrcodeBig").withRenderingMode(.alwaysOriginal),
-        selectedImage: UIImage.requiredImage(name: "BarButtonQrcodeBigSelected").withRenderingMode(.alwaysOriginal))
+        selectedImage: UIImage.requiredImage(name: "BarbuttonQrcodeBigSelected").withRenderingMode(.alwaysOriginal))
 
     private var activitiesController = UIViewController()
     private var activitiesBarItem = UITabBarItem(
@@ -90,12 +94,11 @@ class WalletTabBarController: BareBaseViewController {
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupOnce()
+        fatalError()
     }
 
-    init(scannerCoordinator: ScannerCoordinator?) {
-        self.scannerCoordinator = scannerCoordinator
+    init(presenter: PresenterProtocol) {
+        self.presenter = presenter
         super.init(style: nil)
         setupOnce()
     }
@@ -144,8 +147,38 @@ class WalletTabBarController: BareBaseViewController {
 extension WalletTabBarController: CustomTabBarDelegate {
     func customTabBar(_ tabBar: CustomTabBar, didSelect item: UITabBarItem) {
         if item == qrcodeScanBarItem {
-            self.scannerCoordinator?.start()
+            guard
+                item != selectedViewController?.tabBarItem,
+                scannerCoordinator == nil
+            else {
+                return
+            }
+
+            let previouslySelected = selectedIndex
+            scannerCoordinator = ScannerCoordinator(presenter: presenter) { result in
+                if let result = result as? Result<String, ScanError> {
+                    switch result {
+                    case .success(let scanned):
+                        self.presenter.dismiss(options: .defaultOptions, completion: nil)
+                        print(scanned)
+                        self.selectedIndex = 0
+                    case .failure(let error):
+                        switch error {
+                        case .cancelled:
+                            self.presenter.dismiss(options: .defaultOptions, completion: nil)
+                        default:
+                            // TODO: handle errors
+                            self.presenter.dismiss(options: .defaultOptions, completion: nil)
+                        }
+                        self.selectedIndex = previouslySelected
+                        print(error)
+                    }
+                }
+                self.scannerCoordinator = nil
+            }
+            scannerCoordinator?.start()
         }
+
         if let index = viewControllers.firstIndex(where: { viewController in viewController.tabBarItem == item }) {
             selectedIndex = index
         }

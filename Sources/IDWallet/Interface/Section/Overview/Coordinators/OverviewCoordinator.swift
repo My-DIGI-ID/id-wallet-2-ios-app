@@ -44,7 +44,8 @@ class OverviewCoordinator: Coordinator {
             imageURL: "https://digital-enabling.eu/assets/images/logo.png",
             buttons: [
                 ("Zur Wallet hinzufügen", addAction),
-                ("Abbrechen", cancelAction)], data: rows)
+                ("Abbrechen", cancelAction)],
+            data: rows)
         presenter.presentModal(OverviewViewController(viewModel: viewModel), options: .defaultOptions)
     }
 }

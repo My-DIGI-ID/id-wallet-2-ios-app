@@ -175,7 +175,7 @@ class QRScannerViewController: BareBaseViewController {
     
     @objc
     private func closeView() {
-        dismiss(animated: true, completion: nil)
+        viewModel.scannedQR.send(completion: .failure(.cancelled))
     }
 }
 

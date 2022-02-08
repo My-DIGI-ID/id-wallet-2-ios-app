@@ -98,11 +98,11 @@ final class WalletViewController: BareBaseViewController {
         let constraints = [
             "H:|-(inset)-[header]-(inset)-|",
             "H:|-(inset)-[content]-(inset)-|",
-            "V:|-(topSpace)-[header]-(contentSpace)-[content]|",
+            "V:|-(topSpace)-[header]-(contentSpace)-[content]|"
         ].constraints(with: ["header": headerContainer, "content": contentContainer],
                       metrics: ["inset": Layout.viewInsetLeftRight, "topSpace": Layout.topSpacing, "contentSpace": Layout.contentSpacing]) + [
             userIcon.widthAnchor.constraint(equalToConstant: Layout.userIconSize.width),
-            userIcon.heightAnchor.constraint(equalToConstant: Layout.userIconSize.height),
+            userIcon.heightAnchor.constraint(equalToConstant: Layout.userIconSize.height)
         ]
             
         constraints.activate()
@@ -123,16 +123,17 @@ final class WalletViewController: BareBaseViewController {
             noContentWalletView.removeFromSuperview()
             contentContainer.embed(contentWalletView)
             contentWalletView.update(walletData: [
-                .init(id: "MESAID",
-                      background: .namedImage(.baseIDBackground),
-                               title: "MESA Employee",
-                               primaryValues: [
-                                .init(title: "Name", value: "E. Mustermann"),
-                               ],
-                               secondaryValues: [
-                                .init(title: "Gültig bis", value: "29. Nov 22")
-                               ],
-                               expiryDate: .init(timeIntervalSinceNow: 900000))
+                .init(
+                    id: "MESAID",
+                    background: .namedImage(.baseIDBackground),
+                    title: "MESA Employee",
+                    primaryValues: [
+                        .init(title: "Name", value: "E. Mustermann")
+                    ],
+                    secondaryValues: [
+                        .init(title: "Gültig bis", value: "29. Nov 22")
+                    ],
+                    expiryDate: .init(timeIntervalSinceNow: 900000))
             ])
         }
     }
