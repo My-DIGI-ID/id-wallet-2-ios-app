@@ -26,11 +26,12 @@ class MainNavigationController: UINavigationController {
     setNavigationBarHidden(true, animated: false)
     setToolbarHidden(true, animated: false)
   }
+
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
 
     if appCoordinator == nil {
-      appCoordinator = AppCoordinator(presenter: Presenter(self), appState: AppState())
+      appCoordinator = AppCoordinator(presenter: RootPresenter(self), appState: AppState())
       appCoordinator?.start()
     }
   }

@@ -99,9 +99,12 @@ extension UIColor {
 struct ColorScheme: Equatable {
     struct Gradient: Equatable {
         static func == (lhs: ColorScheme.Gradient, rhs: ColorScheme.Gradient) -> Bool {
-            return
-            (lhs.gradientType == rhs.gradientType && lhs.colors == rhs.colors
-             && lhs.startPoint == rhs.startPoint && lhs.endPoint == rhs.endPoint)
+            return (
+                lhs.gradientType == rhs.gradientType &&
+                lhs.colors == rhs.colors &&
+                lhs.startPoint == rhs.startPoint &&
+                lhs.endPoint == rhs.endPoint
+            )
         }
         let gradientType: CAGradientLayerType
         let colors: [UIColor]

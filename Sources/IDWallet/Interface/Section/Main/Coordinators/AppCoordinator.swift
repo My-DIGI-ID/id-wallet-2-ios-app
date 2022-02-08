@@ -15,14 +15,18 @@ import Combine
 class AppCoordinator: Coordinator {
     private let appState: AppState
     private let presenter: PresenterProtocol
+
+    // TODO: Remove?
     var cancelable: AnyCancellable?
 
+    // TODO: Move to where startScanner goes (Wallet Tabs)
     private var scannerCoordinator: ScannerCoordinator?
 
     init(presenter: PresenterProtocol, appState: AppState) {
         self.presenter = presenter
         self.appState = appState
     }
+
     func start() {
         Task {
             switch await appState.authenticator.authenticationState() {
@@ -40,16 +44,6 @@ class AppCoordinator: Coordinator {
 // MARK: - Coordinator Workflow Implementation
 
 extension AppCoordinator {
-
-    private func showHelp(viewModel: WebViewViewModelProtocol) {
-        let help = HelpViewCoordinator(presenter: presenter, model: viewModel)
-        help.start()
-    }
-
-    private func showMessage(viewModel: MessageViewModel) {
-        let alert = MessageCoordinator(presenter: presenter, model: viewModel)
-        alert.start()
-    }
 
     private func startSetup() {
         let setupCoordinator = SetupCoordinator(
@@ -82,6 +76,7 @@ extension AppCoordinator {
         presenter.present(alert)
     }
 
+    // TODO: Should be in Wallet Tabs
     private func startScanner() {
 
        scannerCoordinator = ScannerCoordinator.init(presenter: presenter) { result in
@@ -96,6 +91,8 @@ extension AppCoordinator {
     }
 
     private func startWallet() {
+        // TODO: WalletTabBarController should probably create scannerCoordinator, might need
+        // a presenter
 
         scannerCoordinator = ScannerCoordinator.init(presenter: presenter) { result in
              switch result {
@@ -109,7 +106,17 @@ extension AppCoordinator {
         presenter.present(WalletTabBarController(scannerCoordinator: scannerCoordinator))
     }
 
-    private func startConfirmation() {
-        ConnectionConfirmationCoordinator(presenter: presenter).start()
+    //       is not part of the workflow, will simply come back to old screen on completion)
+    // TODO: Should support completion callback (maybe in view model)
+    private func showHelp(viewModel: WebViewViewModelProtocol) {
+        let help = HelpViewCoordinator(presenter: presenter, model: viewModel)
+        help.start()
+    }
+
+    // TODO: same as showHelp, this is not a specific WF error but a reusable method.
+    // TODO: should support completion callback (maybe in view model)
+    private func showMessage(viewModel: MessageViewModel) {
+        let alert = MessageCoordinator(presenter: presenter, model: viewModel)
+	alert.start()
     }
 }

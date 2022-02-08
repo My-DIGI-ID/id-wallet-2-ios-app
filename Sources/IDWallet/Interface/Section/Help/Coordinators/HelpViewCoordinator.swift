@@ -23,8 +23,13 @@ class HelpViewCoordinator: Coordinator {
     }
 
     func start() {
-        presenter.present(WebViewController(viewModel: viewModel),
-                          modalPresentationStyle: .formSheet,
-                          modalTransitionStyle: .coverVertical)
+        presenter.presentModal(
+            WebViewController(viewModel: viewModel),
+            options: .init(
+                animated: true,
+                modalPresentationStyle: .formSheet,
+                modalTransitionStyle: .coverVertical
+            )
+        )
     }
 }
