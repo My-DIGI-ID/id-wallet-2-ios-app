@@ -51,10 +51,18 @@ class ScannerCoordinator: Coordinator {
 
     private var cancellable: AnyCancellable?
     private var currentViewController: UIViewController?
+    private lazy var connectionService = {
+        return CustomConnectionService()
+    }()
 
     init(presenter: PresenterProtocol, completion: @escaping (Any) -> Void) {
         self.presenter = presenter
         self.completion = completion
+        Task {
+            do {
+                try await CustomAgentService().setup()
+            }
+        }
     }
 
     func start() {
@@ -152,9 +160,8 @@ class ScannerCoordinator: Coordinator {
                         "Erlauben",
                         UIAction(handler: { _ in
                             Task {
-                                let connectionService = CustomConnectionService()
                                 do {
-                                    let connectionId = try await connectionService.connect(with: qrCode)
+                                    let connectionId = try await self.connectionService.connect(with: qrCode)
                                     self.startOverview(connectionId: connectionId, name: name, imageUrl: imageUrl, viewController: self.currentViewController!)
                                 } catch let error {
                                     print(error)
