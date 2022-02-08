@@ -33,9 +33,15 @@ final class AddDocumentSupplementaryView: UICollectionReusableView {
                                   primaryAction: .init { [weak self] _ in
             self?.delegate?.addDocument()
         })
+        button.backgroundColor = .white
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
+
+    private func setupLayout() {
+        embed(addDocumentButton, insets: .init(top: 30, left: 20, bottom: 0, right: 20))
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,9 +55,5 @@ final class AddDocumentSupplementaryView: UICollectionReusableView {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupLayout()
-    }
-
-    private func setupLayout() {
-        embed(addDocumentButton, insets: .init(top: 30, left: 20, bottom: 0, right: 20))
     }
 }

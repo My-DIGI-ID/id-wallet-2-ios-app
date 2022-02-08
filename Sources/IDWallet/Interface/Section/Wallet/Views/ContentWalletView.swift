@@ -15,7 +15,7 @@ import UIKit
 
 private enum Constants {
     enum Layouts {
-        static let collectionViewContentInset: NSDirectionalEdgeInsets = .init(top: 30, leading: 0, bottom: 0, trailing: 0)
+        static let itemEdgeSpacing: CGFloat = 30
         static let collectionViewEstimatedCellHeight: NSCollectionLayoutDimension = .estimated(150)
         static let collectionViewEstimatedSupplementaryHeight: NSCollectionLayoutDimension = .estimated(50)
     }
@@ -67,6 +67,7 @@ class ContentWalletView: UIView {
             let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                     heightDimension: Layout.collectionViewEstimatedCellHeight)
             let layoutItem = NSCollectionLayoutItem(layoutSize: layoutSize)
+            layoutItem.edgeSpacing = .init(leading: nil, top: .fixed(Layout.itemEdgeSpacing), trailing: nil, bottom: nil)
             
             let supplementaryView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
                                                                                                   heightDimension: Layout.collectionViewEstimatedSupplementaryHeight),
@@ -75,9 +76,9 @@ class ContentWalletView: UIView {
             supplementaryView.zIndex = 2
             supplementaryView.pinToVisibleBounds = true
             
-            let layoutSection = NSCollectionLayoutSection(group: .vertical(layoutSize: layoutSize, subitems: [layoutItem]))
+            let group = NSCollectionLayoutGroup.vertical(layoutSize: layoutSize, subitems: [layoutItem])
+            let layoutSection = NSCollectionLayoutSection(group: group)
             layoutSection.boundarySupplementaryItems = [supplementaryView]
-            layoutSection.contentInsets = Layout.collectionViewContentInset
             
             return UICollectionViewCompositionalLayout(section: layoutSection)
         }()
