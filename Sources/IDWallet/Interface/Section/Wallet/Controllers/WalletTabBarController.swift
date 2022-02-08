@@ -156,23 +156,16 @@ extension WalletTabBarController: CustomTabBarDelegate {
 
             let previouslySelected = selectedIndex
             scannerCoordinator = ScannerCoordinator(presenter: presenter) { result in
-                if let result = result as? Result<String, ScanError> {
-                    switch result {
-                    case .success(let scanned):
-                        self.presenter.dismiss(options: .defaultOptions, completion: nil)
-                        print(scanned)
-                        self.selectedIndex = 0
-                    case .failure(let error):
-                        switch error {
-                        case .cancelled:
-                            self.presenter.dismiss(options: .defaultOptions, completion: nil)
-                        default:
-                            // TODO: handle errors
-                            self.presenter.dismiss(options: .defaultOptions, completion: nil)
-                        }
-                        self.selectedIndex = previouslySelected
-                        print(error)
-                    }
+                switch result {
+                case .success(let scanned):
+                    // self.presenter.dismiss(options: .defaultOptions, completion: nil)
+                    print(scanned)
+                    self.selectedIndex = 0
+                case .failure(let error):
+                    self.selectedIndex = previouslySelected
+                    print(error)
+                case .cancelled:
+                    self.selectedIndex = previouslySelected
                 }
                 self.scannerCoordinator = nil
             }

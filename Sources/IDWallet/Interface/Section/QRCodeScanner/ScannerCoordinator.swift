@@ -50,7 +50,7 @@ class ScannerCoordinator: Coordinator {
         return CustomConnectionService()
     }()
 
-    init(presenter: PresenterProtocol, completion: @escaping (Any) -> Void) {
+    init(presenter: PresenterProtocol, completion: @escaping (ScannerCoordinator.Result) -> Void) {
         self.presenter = presenter
         self.completion = completion
     }
@@ -67,17 +67,23 @@ class ScannerCoordinator: Coordinator {
                 message: Constants.Text.Alert.message,
                 preferredStyle: UIAlertController.Style.alert)
 
-            alert.addAction(UIAlertAction(title: Constants.Text.Alert.cancel, style: .default))
+            alert.addAction(UIAlertAction(title: Constants.Text.Alert.cancel, style: .default) {_ in
+                DispatchQueue.main.async {
+                    self.completion(.cancelled)
+                }
+            })
             alert.addAction(UIAlertAction(title: Constants.Text.Alert.settings, style: .cancel) { _ in
-
                 guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
                     return
                 }
                 UIApplication.shared.open(settingsURL,
-                                          options: [:], completionHandler: nil)
+                                          options: [:], completionHandler: { _ in
+                    // TODO: is this what we want? Can we tell when settings are changed?
+                    self.startRequestAccess()
+                })
             })
 
-            presenter.present(alert)
+            presenter.presentModal(alert, options: .init(animated: true, modalPresentationStyle: .automatic, modalTransitionStyle: .crossDissolve))
         case .restricted:
             return
         @unknown default:
@@ -95,6 +101,8 @@ class ScannerCoordinator: Coordinator {
                 DispatchQueue.main.async {
                     self.startScan()
                 }
+            } else {
+                self.completion(.cancelled)
             }
         }
     }
