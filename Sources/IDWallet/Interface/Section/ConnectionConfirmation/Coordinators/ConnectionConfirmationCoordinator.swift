@@ -23,10 +23,10 @@ class ConnectionConfirmationCoordinator: Coordinator {
 
     func start() {
         let allowAction = UIAction { _ in
-            self.presenter.dismiss(completion: nil)
+            self.presenter.dismissModal(completion: nil)
         }
         let cancelAction = UIAction { _ in
-            self.presenter.dismiss(completion: nil)
+            self.presenter.dismissModal(completion: nil)
         }
 
         let viewModel = ConnectionConfirmationViewModel(connection: "Mesa Deutschland GmbH ist authenifiziert",
