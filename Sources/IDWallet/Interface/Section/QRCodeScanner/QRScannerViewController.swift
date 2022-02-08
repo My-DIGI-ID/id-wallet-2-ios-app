@@ -45,9 +45,16 @@ private enum Constants {
     }
 }
 
+
+enum QRScannerResult {
+    case success(value: String)
+    case failure(error: ScanError)
+    case cancelled
+}
+
 class QRScannerViewController: BareBaseViewController {
     
-    var viewModel: ScanViewModel
+    var completion: (QRScannerResult) -> Void
     
     private lazy var closeButton: UIBarButtonItem = {
         let button = UIBarButtonItem(image: Images.regular.close, style: .plain, target: self, action: #selector(closeView))
@@ -116,8 +123,8 @@ class QRScannerViewController: BareBaseViewController {
         return .portrait
     }
     
-    init(viewModel: ScanViewModel) {
-        self.viewModel = viewModel
+    init(completion: @escaping (QRScannerResult) -> Void) {
+        self.completion = completion
         super.init(style: nil)
     }
     
@@ -175,7 +182,7 @@ class QRScannerViewController: BareBaseViewController {
     
     @objc
     private func closeView() {
-        viewModel.scannedQR.send(completion: .failure(.cancelled))
+        completion(.cancelled)
     }
 }
 
@@ -224,7 +231,7 @@ extension QRScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let value = readableObject.stringValue else { return }
             dismiss(animated: true) {
-                self.viewModel.scannedQR.send(value)
+                self.completion(.success(value: value))
             }
         } else {
             captureSession.startRunning()

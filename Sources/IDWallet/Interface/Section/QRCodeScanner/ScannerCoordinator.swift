@@ -33,9 +33,6 @@ enum ScanError: Error {
     case cancelled
 }
 
-struct ScanViewModel {
-    let scannedQR = PassthroughSubject<String, ScanError>()
-}
 
 @MainActor
 class ScannerCoordinator: Coordinator {
@@ -46,10 +43,8 @@ class ScannerCoordinator: Coordinator {
     }
 
     let presenter: PresenterProtocol
-    let scanViewModel: ScanViewModel = ScanViewModel()
     private let completion: (Result) -> Void
 
-    private var cancellable: AnyCancellable?
     private var currentViewController: UIViewController?
     private lazy var connectionService = {
         return CustomConnectionService()
@@ -58,11 +53,6 @@ class ScannerCoordinator: Coordinator {
     init(presenter: PresenterProtocol, completion: @escaping (Any) -> Void) {
         self.presenter = presenter
         self.completion = completion
-        Task {
-            do {
-                try await CustomAgentService().setup()
-            }
-        }
     }
 
     func start() {
@@ -80,7 +70,9 @@ class ScannerCoordinator: Coordinator {
             alert.addAction(UIAlertAction(title: Constants.Text.Alert.cancel, style: .default))
             alert.addAction(UIAlertAction(title: Constants.Text.Alert.settings, style: .cancel) { _ in
 
-                guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
+                guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
+                    return
+                }
                 UIApplication.shared.open(settingsURL,
                                           options: [:], completionHandler: nil)
             })
@@ -108,51 +100,46 @@ class ScannerCoordinator: Coordinator {
     }
 
     func startScan() {
-        cancellable = self.scanViewModel.scannedQR.sink(receiveCompletion: { completed in
-            switch completed {
-            case .failure(let error):
-                switch error {
-                case ScanError.cancelled:
-                    do {
-                        // self.completion(Result.success(qrCode))
+        currentViewController = QRScannerViewController { result in
+            switch result {
+            case .success(let qrCode):
+                do {
+                    // self.completion(Result.success(qrCode))
 
-                        let connectionService = CustomConnectionService()
-                        // swiftlint:disable line_length
-                        let qrCode = "http://158.177.245.253:11000?c_i=eyJyZWNpcGllbnRLZXlzIjpbIkNpNFBZUzNVTDlKV3BhbmNSVzhuRktDam40NnkxcENaU1JkbTFDR1AxRlRzIl0sIkB0eXBlIjoiZGlkOnNvdjpCekNic05ZaE1yakhpcVpEVFVBU0hnO3NwZWMvY29ubmVjdGlvbnMvMS4wL2ludml0YXRpb24iLCJpbWFnZVVybCI6Imh0dHBzOi8vYXNzZXRzLmRldi5lc3NpZC1kZW1vLmNvbS9tZXNhMngucG5nIiwiQGlkIjoiZGNkZjQwMTYtYTQ4MS00MzQ0LTgwOTItNGFjZWYwZjUwYWZlIiwibGFiZWwiOiJNRVNBLURldXRzY2hsYW5kLUdtYkgiLCJzZXJ2aWNlRW5kcG9pbnQiOiJodHRwOi8vMTU4LjE3Ny4yNDUuMjUzOjExMDAwIn0="
-                        if let result = try connectionService.invitee(for: qrCode) {
-                            let (name, imageUrl) = result
-                            self.startConnectionConfirmation(qrCode: qrCode, name: name, imageUrl: imageUrl, viewController: self.currentViewController!)
-                        }
-                    } catch let error {
-                        self.completion(Result.failure(error))
+                    let connectionService = CustomConnectionService()
+                    if let result = try connectionService.invitee(for: qrCode) {
+                        let (name, imageUrl) = result
+                        self.startConnectionConfirmation(qrCode: qrCode, name: name, imageUrl: imageUrl, viewController: self.currentViewController!)
                     }
-                default:
+                } catch let error {
                     self.completion(Result.failure(error))
                 }
-            case .finished:
-                break
-            }
-        }, receiveValue: { [self] qrCode in
-            do {
-                // self.completion(Result.success(qrCode))
 
-                let connectionService = CustomConnectionService()
-                if let result = try connectionService.invitee(for: qrCode) {
-                    let (name, imageUrl) = result
-                    self.startConnectionConfirmation(qrCode: qrCode, name: name, imageUrl: imageUrl, viewController: self.currentViewController!)
-                }
-            } catch let error {
+            case .failure(let error):
                 self.completion(Result.failure(error))
-            }
-        })
 
-        currentViewController = QRScannerViewController(viewModel: scanViewModel)
+            case .cancelled:
+                // TODO: mock scan, remove
+                do {
+                    // self.completion(Result.success(qrCode))
+
+                    let connectionService = CustomConnectionService()
+                    // swiftlint:disable line_length
+                    let qrCode = "http://158.177.245.253:11000?c_i=eyJyZWNpcGllbnRLZXlzIjpbIkNpNFBZUzNVTDlKV3BhbmNSVzhuRktDam40NnkxcENaU1JkbTFDR1AxRlRzIl0sIkB0eXBlIjoiZGlkOnNvdjpCekNic05ZaE1yakhpcVpEVFVBU0hnO3NwZWMvY29ubmVjdGlvbnMvMS4wL2ludml0YXRpb24iLCJpbWFnZVVybCI6Imh0dHBzOi8vYXNzZXRzLmRldi5lc3NpZC1kZW1vLmNvbS9tZXNhMngucG5nIiwiQGlkIjoiZGNkZjQwMTYtYTQ4MS00MzQ0LTgwOTItNGFjZWYwZjUwYWZlIiwibGFiZWwiOiJNRVNBLURldXRzY2hsYW5kLUdtYkgiLCJzZXJ2aWNlRW5kcG9pbnQiOiJodHRwOi8vMTU4LjE3Ny4yNDUuMjUzOjExMDAwIn0="
+                    if let result = try connectionService.invitee(for: qrCode) {
+                        let (name, imageUrl) = result
+                        self.startConnectionConfirmation(qrCode: qrCode, name: name, imageUrl: imageUrl, viewController: self.currentViewController!)
+                    }
+                } catch let error {
+                    self.completion(Result.failure(error))
+                }
+            }
+        }
         presenter.present(currentViewController!)
     }
 
     func startConnectionConfirmation(qrCode: String, name: String?, imageUrl: String?, viewController previous: UIViewController) {
         if let name = name {
-            var viewController: ConnectionConfirmationViewController?
             let viewModel = ConnectionConfirmationViewModel(
                 connection: name,
                 buttons: [
