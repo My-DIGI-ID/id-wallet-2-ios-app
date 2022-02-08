@@ -30,6 +30,11 @@ class CustomAgentService {
         // Set the first master secret to enable credential handling
         try await Aries.agent.run {
             try? await Aries.provisioning.update(Self.id, with: $0)
+            
+            let json = "{\"name\":\"ID Wallet\"}".data(using: .utf8)!
+            let owner = try JSONDecoder().decode(Owner.self, from: json)
+            
+            try? await Aries.provisioning.update(owner, with: $0)
         }
     }
 }
