@@ -80,7 +80,7 @@ class WalletTabBarController: BareBaseViewController {
     private var qrcodeScanBarItem = UITabBarItem(
         title: "QR-Code Scan",
         image: UIImage.requiredImage(name: "BarButtonQrcodeBig").withRenderingMode(.alwaysOriginal),
-        selectedImage: UIImage.requiredImage(name: "BarbuttonQrcodeBigSelected").withRenderingMode(.alwaysOriginal))
+        selectedImage: UIImage.requiredImage(name: "BarButtonQrcodeBigSelected").withRenderingMode(.alwaysOriginal))
 
     private var activitiesController = UIViewController()
     private var activitiesBarItem = UITabBarItem(
