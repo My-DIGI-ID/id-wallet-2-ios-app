@@ -170,17 +170,10 @@ class ScannerCoordinator: Coordinator {
         }
     }
 
-    func startOverview(connectionId: String, name: String?, imageUrl: String?, viewController previous: UIViewController) {
-
-        let rows: [OverviewViewModel.DataRow] = [
-            ("Stadt", "Musterhausen"),
-            ("Firmenname", "MESA Deutschland"),
-            ("Straße", "Musterstraße 5"),
-            ("Abteilung", "-"),
-            ("Vorname", "Max"),
-            ("Nachname", "Mustermann")]
-
-        let credentialService = CustomCredentialService()
+    func startOverview(connectionId: String, name: String?, imageUrl: String?, viewController previous: UIViewController) {        
+        let rows: [OverviewViewModel.DataRow] = CustomCredentialService().requested().attributes.map {
+            ($0.name, $0.value)
+        }
 
         let viewModel = OverviewViewModel(
             header: name ?? "Mesa Deutschland GmbH",
@@ -191,7 +184,7 @@ class ScannerCoordinator: Coordinator {
                 ("Zur Wallet hinzufügen", UIAction { _ in
                     Task {
                         do {
-                            let credentialId = try await credentialService.request(with: connectionId)
+                            let credentialId = try await CustomCredentialService().request(with: connectionId)
                             self.completion(.success(credentialId))
                         } catch let error {
                             self.completion(.failure(error))

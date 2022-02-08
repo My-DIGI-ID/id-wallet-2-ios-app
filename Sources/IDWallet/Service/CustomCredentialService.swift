@@ -15,9 +15,48 @@ import Foundation
 import Aries
 
 class CustomCredentialService {
-    func credentials() async throws -> [CredentialRecord] {
+    
+    private let mapping = [
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "firmName": "Firmenname",
+        "firmSubject": "Abteilung",
+        "firmStreet": "Straße",
+        "firmPostalcode": "PLZ",
+        "firmCity": "Stadt"
+    ]
+    
+    private func preview() -> CredentialPreview {
+        var credentialPreview = CredentialPreview()
+        credentialPreview.attributes.append(contentsOf: [
+            CredentialAttribute(name: "firstName", value: "Erika"),
+            CredentialAttribute(name: "lastName", value: "Mustermann"),
+            CredentialAttribute(name: "firmName", value: "MESA Deutschland GmbH"),
+            CredentialAttribute(name: "firmSubject", value: "Identitäten"),
+            CredentialAttribute(name: "firmCity", value: "Berlin"),
+            CredentialAttribute(name: "firmPostalcode", value: "51145"),
+            CredentialAttribute(name: "firmStreet", value: "Musterstrasse 2")
+        ])
+        return credentialPreview
+    }
+    
+    func requested() -> CredentialPreview {
+        var preview = CredentialPreview()
+        preview.attributes = self.preview().attributes.map { attr in
+            CredentialAttribute(name: mapping[attr.name] ?? "", value: attr.value)
+        }
+        return preview
+    }
+    
+    func credentials() async throws -> [CredentialPreview] {
         try await Aries.agent.run {
             try await Aries.record.search(CredentialRecord.self, in: $0.wallet, with: .none, count: nil, skip: nil)
+        }.map { record in
+            var preview = CredentialPreview()
+            preview.attributes = record.attributes.map { attr in
+                CredentialAttribute(name: mapping[attr.name]!, value: attr.value)
+            }
+            return preview
         }
     }
     
@@ -29,20 +68,9 @@ class CustomCredentialService {
                 return ""
             }
             
-            var credentialPreview = CredentialPreview()
-            credentialPreview.attributes.append(contentsOf: [
-                CredentialAttribute(name: "firstName", value: "Erika"),
-                CredentialAttribute(name: "lastName", value: "Mustermann"),
-                CredentialAttribute(name: "firmName", value: "MESA Deutschland GmbH"),
-                CredentialAttribute(name: "firmSubject", value: "Identitäten"),
-                CredentialAttribute(name: "firmCity", value: "Berlin"),
-                CredentialAttribute(name: "firmPostalcode", value: "51145"),
-                CredentialAttribute(name: "firmStreet", value: "Musterstrasse 2")
-            ])
-            
             var credentialProposal: CredentialProposalMessage = try await Aries.credential.proposal()
             credentialProposal.credentialId = "akaikNikeYARE9DnS9Jox:3:CL:23:Arbeitgeberbescheinigung_Test3"
-            credentialProposal.proposal = credentialPreview
+            credentialProposal.proposal = preview()
             
             let credentialProposalRequest = MessageRequest(
                 message: credentialProposal,
