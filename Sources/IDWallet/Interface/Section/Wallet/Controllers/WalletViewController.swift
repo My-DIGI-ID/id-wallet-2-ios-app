@@ -113,29 +113,39 @@ final class WalletViewController: BareBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // TODO: Check if wallet entries available here
-        let hasWalletEntries = true
-        
-        if !hasWalletEntries {
-            contentWalletView.removeFromSuperview()
-            contentContainer.embed(noContentWalletView)
-        } else {
-            noContentWalletView.removeFromSuperview()
-            contentContainer.embed(contentWalletView)
-            contentWalletView.update(walletData: [
-                .init(
-                    id: "MESAID",
-                    background: .namedImage(.mesaBackground),
-                    title: "MESA Employee",
-                    primaryValues: [
-                        .init(title: "Name", value: "E. Mustermann")
-                    ],
-                    secondaryValues: [
-                        .init(title: "Gültig bis", value: "29. Nov 22")
-                    ],
-                    expiryDate: .init(timeIntervalSinceNow: 900000))
-            ])
+
+        Task {
+            let credentialService = CustomCredentialService()
+            let credentials = try await credentialService.credentials()
+
+            DispatchQueue.main.async {
+                let hasWalletEntries = !credentials.isEmpty
+
+                if !hasWalletEntries {
+                    self.contentWalletView.removeFromSuperview()
+                    self.contentContainer.embed(self.noContentWalletView)
+                } else {
+                    self.noContentWalletView.removeFromSuperview()
+                    self.contentContainer.embed(self.contentWalletView)
+
+                    self.contentWalletView.update(
+                        walletData: credentials.map { credential in
+                        .init(
+                            id: "MESAID",
+                            background: .namedImage(.mesaBackground),
+                            title: "MESA Employee",
+                            primaryValues: [
+                                .init(title: "Name", value: "E. Mustermann")
+                            ],
+                            secondaryValues: [
+                                .init(title: "Gültig bis", value: "29. Nov 22")
+                            ],
+                            expiryDate: .init(timeIntervalSinceNow: 900000)
+                        )
+                        }
+                    )
+                }
+            }
         }
     }
     
