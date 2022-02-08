@@ -103,7 +103,24 @@ class ScannerCoordinator: Coordinator {
         cancellable = self.scanViewModel.scannedQR.sink(receiveCompletion: { completed in
             switch completed {
             case .failure(let error):
-                self.completion(Result.failure(error))
+                switch error {
+                case ScanError.cancelled:
+                    do {
+                        // self.completion(Result.success(qrCode))
+
+                        let connectionService = CustomConnectionService()
+                        // swiftlint:disable line_length
+                        let qrCode = "http://158.177.245.253:11000?c_i=eyJyZWNpcGllbnRLZXlzIjpbIkNpNFBZUzNVTDlKV3BhbmNSVzhuRktDam40NnkxcENaU1JkbTFDR1AxRlRzIl0sIkB0eXBlIjoiZGlkOnNvdjpCekNic05ZaE1yakhpcVpEVFVBU0hnO3NwZWMvY29ubmVjdGlvbnMvMS4wL2ludml0YXRpb24iLCJpbWFnZVVybCI6Imh0dHBzOi8vYXNzZXRzLmRldi5lc3NpZC1kZW1vLmNvbS9tZXNhMngucG5nIiwiQGlkIjoiZGNkZjQwMTYtYTQ4MS00MzQ0LTgwOTItNGFjZWYwZjUwYWZlIiwibGFiZWwiOiJNRVNBLURldXRzY2hsYW5kLUdtYkgiLCJzZXJ2aWNlRW5kcG9pbnQiOiJodHRwOi8vMTU4LjE3Ny4yNDUuMjUzOjExMDAwIn0="
+                        if let result = try connectionService.invitee(for: qrCode) {
+                            let (name, imageUrl) = result
+                            self.startConnectionConfirmation(qrCode: qrCode, name: name, imageUrl: imageUrl, viewController: self.currentViewController!)
+                        }
+                    } catch let error {
+                        self.completion(Result.failure(error))
+                    }
+                default:
+                    self.completion(Result.failure(error))
+                }
             case .finished:
                 break
             }
@@ -135,8 +152,14 @@ class ScannerCoordinator: Coordinator {
                         "Erlauben",
                         UIAction(handler: { _ in
                             Task {
-                                let connectionId = try await CustomConnectionService().connect(with: qrCode)
-                                self.startOverview(connectionId: connectionId, name: name, imageUrl: imageUrl, viewController: self.currentViewController!)
+                                let connectionService = CustomConnectionService()
+                                do {
+                                    let connectionId = try await connectionService.connect(with: qrCode)
+                                    self.startOverview(connectionId: connectionId, name: name, imageUrl: imageUrl, viewController: self.currentViewController!)
+                                } catch let error {
+                                    print(error)
+                                    self.completion(.failure(error))
+                                }
                             }
                         })
                     ),
