@@ -193,10 +193,10 @@ class ConnectionConfirmationViewController: BareBaseViewController {
             alertTypeImageView,
             headerLabel,
             subHeaderLabel,
-            securedConnectionInformationView,
-            certificateInformationView,
-            linkSecurity,
-            linkDetails,
+//            securedConnectionInformationView,
+//            certificateInformationView,
+//            linkSecurity,
+//            linkDetails,
             spacer,
             buttonsStackView])
         view.axis = .vertical
@@ -288,26 +288,26 @@ extension ConnectionConfirmationViewController {
             headerLabel.bottomAnchor.constraint(
                 equalTo: subHeaderLabel.topAnchor,
                 constant: Constants.Layout.headerSpacing),
-            subHeaderLabel.bottomAnchor.constraint(
-                equalTo: securedConnectionInformationView.topAnchor,
-                constant: Constants.Layout.headerSpacing),
-            securedConnectionInformationView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            securedConnectionInformationView.heightAnchor.constraint(equalToConstant: Constants.Layout.informationViewHeight),
-            labelSecuredConnection.centerYAnchor.constraint(equalTo: securedConnectionInformationView.centerYAnchor),
-            labelSecuredConnection.leadingAnchor.constraint(
-                equalTo: securedConnectionInformationView.leadingAnchor,
-                constant: Constants.Layout.informationViewLeading),
-            certificateInformationView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            certificateInformationView.heightAnchor.constraint(equalToConstant: Constants.Layout.informationViewHeight),
-            labelCertificateInformation.centerYAnchor.constraint(equalTo: certificateInformationView.centerYAnchor),
-            labelCertificateInformation.leadingAnchor.constraint(
-                equalTo: certificateInformationView.leadingAnchor,
-                constant: Constants.Layout.informationViewLeading),
-            linkSecurity.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            linkSecurity.heightAnchor.constraint(equalToConstant: Constants.Layout.Button.linkHeight),
-            linkDetails.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            linkDetails.heightAnchor.constraint(equalToConstant: Constants.Layout.Button.linkHeight),
-            spacer.heightAnchor.constraint(equalToConstant: Constants.Layout.spacherHeight)
+//            subHeaderLabel.bottomAnchor.constraint(
+//                equalTo: securedConnectionInformationView.topAnchor,
+//                constant: Constants.Layout.headerSpacing),
+//            securedConnectionInformationView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+//            securedConnectionInformationView.heightAnchor.constraint(equalToConstant: Constants.Layout.informationViewHeight),
+//            labelSecuredConnection.centerYAnchor.constraint(equalTo: securedConnectionInformationView.centerYAnchor),
+//            labelSecuredConnection.leadingAnchor.constraint(
+//                equalTo: securedConnectionInformationView.leadingAnchor,
+//                constant: Constants.Layout.informationViewLeading),
+//            certificateInformationView.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+//            certificateInformationView.heightAnchor.constraint(equalToConstant: Constants.Layout.informationViewHeight),
+//            labelCertificateInformation.centerYAnchor.constraint(equalTo: certificateInformationView.centerYAnchor),
+//            labelCertificateInformation.leadingAnchor.constraint(
+//                equalTo: certificateInformationView.leadingAnchor,
+//                constant: Constants.Layout.informationViewLeading),
+//            linkSecurity.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+//            linkSecurity.heightAnchor.constraint(equalToConstant: Constants.Layout.Button.linkHeight),
+//            linkDetails.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+//            linkDetails.heightAnchor.constraint(equalToConstant: Constants.Layout.Button.linkHeight),
+//            spacer.heightAnchor.constraint(equalToConstant: Constants.Layout.spacherHeight)
         ])
     }
 }
