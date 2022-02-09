@@ -5,5 +5,5 @@
 // QR Code Scanner
 "qr_code_title" = "QR-Code Scan";
 "qr_code_hint" = "Richte die Kamera auf einen QR-Code";
-"qr_code_request_camera_access" = "„ID Wallet“ möchte auf deine Kamera zugreifen";
+"qr_code_request_camera_access" = "„ID Wallet“ möchte auf Deine Kamera zugreifen";
 "qr_code_request_camera_access_disabled" = "Erlaube den Zugriff, um QR-Codes scannen zu können.";

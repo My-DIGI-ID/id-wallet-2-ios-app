@@ -104,7 +104,7 @@ class NoContentWalletView: UIView {
         
         addSubview(contentStackView)
         let constraints = [
-            "H:|[stackView]|",
+            "H:|[stackView]|"
         ].constraints(with: ["stackView": contentStackView]) + [
             contentStackView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ]
@@ -114,11 +114,11 @@ class NoContentWalletView: UIView {
         contentStackView.addArrangedSubview(infoTextLabel)
         contentStackView.addArrangedSubview(addDocumentButtonContainer)
         
-        infoTextLabel.attributedText = NSLocalizedString("Die Wallet ist leer.\nFüge dein erstes Dokument hinzu.", comment: "").styledAs(Style.infoTextStyle)
-
+        infoTextLabel.attributedText = NSLocalizedString("Die Wallet ist leer.\nFüge Dein erstes Dokument hinzu.", comment: "").styledAs(Style.infoTextStyle)
+        
         [
             emptyWalletContainer.widthAnchor.constraint(equalTo: contentStackView.widthAnchor),
-            addDocumentButtonContainer.widthAnchor.constraint(equalTo: contentStackView.widthAnchor),
+            addDocumentButtonContainer.widthAnchor.constraint(equalTo: contentStackView.widthAnchor)
         ].activate()
     }
     
@@ -126,11 +126,11 @@ class NoContentWalletView: UIView {
         super.init(frame: .zero)
         setupLayout()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupLayout()
