@@ -82,8 +82,8 @@ extension PinEntrySuccessViewController {
         let title: String = NSLocalizedString("Richte Deine Wallet ein", comment: "Page Title")
         let heading: String = NSLocalizedString("ID Wallet eingerichtet", comment: "Heading")
         let subHeading: String = NSLocalizedString(
-            "Du hast Deinen Zugangscode erfolgreich festgelegt. Bitte merke ihn dir gut - " +
-            "du benötigst ihn bei jedem Öffnen der App.\n\nDu kannst jetzt weiter zum Wallet " +
+            "Du hast Deinen Zugangscode erfolgreich festgelegt. Bitte merke ihn Dir gut - " +
+            "Du benötigst ihn bei jedem Öffnen der App.\n\nDu kannst jetzt weiter zum Wallet " +
             "und dort Deine ersten Nachweise erstellen",
             comment: "Sub Heading")
         let commitTitle: String = NSLocalizedString(

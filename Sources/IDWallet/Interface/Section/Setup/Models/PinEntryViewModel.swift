@@ -290,7 +290,7 @@ extension PinEntryViewModel {
                 heading: NSLocalizedString(
                     "Zugangscode festlegen", comment: "Action title"),
                 subHeading: NSLocalizedString(
-                    "Den Zugangscode brauchst du bei jeder Nutzung der ID Wallet App",
+                    "Den Zugangscode brauchst Du bei jeder Nutzung der ID Wallet App",
                     comment: "Action instructions"),
                 commitActionTitle: NSLocalizedString(
                     "Weiter", comment: "Commit button title, next step"),

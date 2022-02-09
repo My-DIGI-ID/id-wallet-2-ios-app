@@ -84,7 +84,7 @@ extension PinEntryIntroViewController {
         let heading: String = NSLocalizedString("ID Wallet aktivieren", comment: "Heading")
         let subHeading: String = NSLocalizedString(
             "Lege einen Zugangscode fest, um Deine ID Wallet zu aktivieren. " +
-            "Den Zugangscode brauchst du bei jeder Benutzung der ID Wallet App.",
+            "Den Zugangscode brauchst Du bei jeder Benutzung der ID Wallet App.",
             comment: "Sub Heading")
         let tipTitle: String = NSLocalizedString("Hinweis:", comment: "Tip Title")
         let tipText: String = NSLocalizedString(

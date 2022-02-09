@@ -98,7 +98,7 @@ extension OnboardingViewController {
                         "Daten sicher aufbewahren",
                         comment: "Onboarding Page 2 Heading"),
                     subHeading: NSLocalizedString(
-                        "Alle Daten werden verschlüsselt gesichert und können jederzeit von dir gelöscht werden." +
+                        "Alle Daten werden verschlüsselt gesichert und können jederzeit von Dir gelöscht werden. " +
                         "Du entscheidest mit wem welche Daten geteilt werden sollen.",
                         comment: "Onboarding Page 2 Sub Heading")
                 ),
