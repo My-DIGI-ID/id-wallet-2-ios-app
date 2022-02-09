@@ -162,8 +162,12 @@ extension WalletTabBarController: CustomTabBarDelegate {
                     self.selectedIndex = 0
                     self.presenter.dismiss(options: .defaultOptions, completion: nil)
                 case .failure(let error):
+                    let alert = UIAlertController(title: "Fehler", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
                     self.selectedIndex = previouslySelected
                     print(error)
+                    self.presenter.presentModal(alert, options: .defaultOptions)
                     self.presenter.dismiss(options: .defaultOptions, completion: nil)
                 case .cancelled:
                     self.selectedIndex = previouslySelected
