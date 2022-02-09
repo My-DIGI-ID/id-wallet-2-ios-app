@@ -31,7 +31,7 @@ class AppCoordinator: Coordinator {
         Task {
             switch await appState.authenticator.authenticationState() {
             case .uninitialized:
-                startWallet()
+                startSetup()
             case .unauthenticated, .authenticationFailed, .authenticationExpired:
                 startAuthentication()
             case .authenticated:
