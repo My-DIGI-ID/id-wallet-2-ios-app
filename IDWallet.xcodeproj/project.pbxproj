@@ -814,7 +814,6 @@
 		8EAF8419275FE23A00283D0B /* Convenience Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				8E9CF75B27B3C73D005BB929 /* ConnectionConfirmationViewModel.swift */,
 				8EAF8420275FE42C00283D0B /* README.md */,
 				8EAF841A275FE25600283D0B /* UIColorExtensions.swift */,
 				8EAF841C275FE2F400283D0B /* UIFontExtensions.swift */,
@@ -934,6 +933,7 @@
 		953F26CB27AD71C3008704E1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8E9CF75B27B3C73D005BB929 /* ConnectionConfirmationViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

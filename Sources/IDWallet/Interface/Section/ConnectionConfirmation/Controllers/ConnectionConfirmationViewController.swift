@@ -22,7 +22,7 @@ private enum Constants {
     enum Layout {
         static let iconSize: CGFloat = 96
         static let stackViewSpacing: CGFloat = 8
-        static let scrollBarTopSpacing: CGFloat = 40
+        static let scrollBarTopSpacing: CGFloat = 106
 
         static let contenStackViewInsets = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
         static let buttonStackViewBottomDistance: CGFloat = -16
@@ -76,24 +76,24 @@ class ConnectionConfirmationViewController: BareBaseViewController {
         return result
     }()
 
-    private lazy var closeButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(
-            image: Images.regular.close,
-            style: .plain,
-            target: self,
-            action: #selector(closeView))
-        button.tintColor = .primaryBlue
-        button.setTitleTextAttributes([
-            .foregroundColor: UIColor.primaryBlue,
-            .font: Typography.regular.bodyFont], for: .normal)
-        button.setTitleTextAttributes([
-            .foregroundColor: UIColor.primaryBlue,
-            .font: Typography.regular.bodyFont], for: .highlighted)
-        return button
-    }()
-
+//    private lazy var closeButton: UIBarButtonItem = {
+//        let button = UIBarButtonItem(
+//            image: Images.regular.close,
+//            style: .plain,
+//            target: self,
+//            action: #selector(closeView))
+//        button.tintColor = .primaryBlue
+//        button.setTitleTextAttributes([
+//            .foregroundColor: UIColor.primaryBlue,
+//            .font: Typography.regular.bodyFont], for: .normal)
+//        button.setTitleTextAttributes([
+//            .foregroundColor: UIColor.primaryBlue,
+//            .font: Typography.regular.bodyFont], for: .highlighted)
+//        return button
+//    }()
+//
     private lazy var navigationBar: UINavigationBar = {
-        navigationItem.rightBarButtonItem = closeButton
+//        navigationItem.rightBarButtonItem = closeButton
 
         let navigationBar = UINavigationBar(frame: .zero)
         navigationBar.barTintColor = .white
@@ -134,48 +134,48 @@ class ConnectionConfirmationViewController: BareBaseViewController {
             .withEqualAutolayoutSize(constant: Constants.Layout.iconSize)
     }()
 
-    private lazy var securedConnectionInformationView: UIView = {
-        let view = UIView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .secondaryBlue
-        view.layer.cornerRadius = Constants.Layout.informationViewCornerRadius
-        view.addAutolayoutSubviews(labelSecuredConnection)
-        return view
-    }()
+//    private lazy var securedConnectionInformationView: UIView = {
+//        let view = UIView(frame: .zero)
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.backgroundColor = .secondaryBlue
+//        view.layer.cornerRadius = Constants.Layout.informationViewCornerRadius
+//        view.addAutolayoutSubviews(labelSecuredConnection)
+//        return view
+//    }()
+//
+//    private lazy var labelSecuredConnection: UILabel = {
+//        let label = UILabel(frame: .zero)
+//        label.numberOfLines = 1
+//        label.attributedText = "Verbindung ist verschlüsselt"
+//            .styledAs(.body)
+//            .prepend(image: Constants.checkmark)
+//        return label
+//    }()
 
-    private lazy var labelSecuredConnection: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.numberOfLines = 1
-        label.attributedText = "Verbindung ist verschlüsselt"
-            .styledAs(.body)
-            .prepend(image: Constants.checkmark)
-        return label
-    }()
+//    private lazy var certificateInformationView: UIView = {
+//        let view = UIView(frame: .zero)
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.backgroundColor = .secondaryBlue
+//        view.layer.cornerRadius = Constants.Layout.informationViewCornerRadius
+//        view.addAutolayoutSubviews(labelCertificateInformation)
+//        return view
+//    }()
+//
+//    private lazy var labelCertificateInformation: UILabel = {
+//        let label = UILabel(frame: .zero)
+//        label.numberOfLines = 1
+//        label.attributedText = "Zertifikat ist gültig"
+//            .styledAs(.body)
+//            .prepend(image: Constants.checkmark)
+//        return label
+//    }()
 
-    private lazy var certificateInformationView: UIView = {
-        let view = UIView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .secondaryBlue
-        view.layer.cornerRadius = Constants.Layout.informationViewCornerRadius
-        view.addAutolayoutSubviews(labelCertificateInformation)
-        return view
-    }()
-
-    private lazy var labelCertificateInformation: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.numberOfLines = 1
-        label.attributedText = "Zertifikat ist gültig"
-            .styledAs(.body)
-            .prepend(image: Constants.checkmark)
-        return label
-    }()
-
-    private lazy var linkSecurity: WalletButton = {
-        let button = WalletButton(titleText: "Welche Sicherheitsstufe gibt es?",
-                                  style: .link,
-                                  primaryAction: nil)
-        return button
-    }()
+//    private lazy var linkSecurity: WalletButton = {
+//        let button = WalletButton(titleText: "Welche Sicherheitsstufe gibt es?",
+//                                  style: .link,
+//                                  primaryAction: nil)
+//        return button
+//    }()
 
     private lazy var linkDetails: WalletButton = {
         let button = WalletButton(
@@ -257,7 +257,9 @@ extension ConnectionConfirmationViewController {
     private func setupLayout() {
         view.backgroundColor = .white
 
-        view.addAutolayoutSubviews(navigationBar, scrollView)
+        view.addAutolayoutSubviews(
+//            navigationBar,
+            scrollView)
 
         // Layout ScrollView
         scrollView.embed(contentView)
@@ -266,11 +268,10 @@ extension ConnectionConfirmationViewController {
 
         // Layout Complete View
         [
-            "V:|-[navBar]-(spacing)-[scrollView]-|",
-            "H:|[navBar]|",
+            "V:|-(spacing)-[scrollView]-|",
             "H:|[scrollView]|"]
             .constraints(
-                with: ["navBar": navigationBar, "scrollView": scrollView],
+                with: ["scrollView": scrollView],
                 metrics: ["spacing": Constants.Layout.scrollBarTopSpacing])
             .activate()
 
