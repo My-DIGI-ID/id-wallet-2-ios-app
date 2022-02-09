@@ -143,10 +143,14 @@ class ScannerCoordinator: Coordinator {
         name: String?,
         imageUrl: String?
     ) {
-        if let name = name {
+        if var name = name {
+            name = "Mesa Deutschland GmbH"
+
             let previous = currentViewController
+            let viewModel = ConnectionConfirmationViewModel(connection: name)
+
             currentViewController =
-            ConnectionConfirmationViewController(connection: name) { result in
+            ConnectionConfirmationViewController(viewModel: viewModel) { result in
                 switch result {
                 case .confirm:
                     Task {
@@ -154,7 +158,7 @@ class ScannerCoordinator: Coordinator {
                             let connectionId = try await self.connectionService.connect(with: qrCode)
                             self.startOverview(
                                 connectionId: connectionId,
-                                name: name,
+                                name: viewModel.connection,
                                 imageUrl: imageUrl)
                         } catch let error {
                             print(error)
@@ -177,7 +181,7 @@ class ScannerCoordinator: Coordinator {
         }
         
         let viewModel = OverviewViewModel(
-            header: name ?? "Mesa Deutschland GmbH",
+            header: "Mesa Deutschland GmbH",
             subHeader: "16.02.2021 - 15:20 Uhr",
             title: "Arbeitgeberbescheinigung",
             imageURL: imageUrl ?? "https://digital-enabling.eu/assets/images/logo.png",

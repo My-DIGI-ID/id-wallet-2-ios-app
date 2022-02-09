@@ -51,7 +51,9 @@ enum ConnectionConfirmationResult {
 }
 
 class ConnectionConfirmationViewController: BareBaseViewController {
-    private let connection: String
+
+    private let viewModel: ConnectionConfirmationViewModel
+
     private let completion: (ConnectionConfirmationResult) -> Void
 
     private lazy var allowButton: WalletButton = {
@@ -213,8 +215,8 @@ class ConnectionConfirmationViewController: BareBaseViewController {
         return view
     }()
 
-    init(connection: String, completion: @escaping (ConnectionConfirmationResult) -> Void) {
-        self.connection = connection
+    init(viewModel: ConnectionConfirmationViewModel, completion: @escaping (ConnectionConfirmationResult) -> Void) {
+        self.viewModel = viewModel
         self.completion = completion
         super.init(style: nil)
     }
@@ -229,7 +231,7 @@ class ConnectionConfirmationViewController: BareBaseViewController {
 
         setupLayout()
 
-        headerLabel.attributedText = connection
+        headerLabel.attributedText = viewModel.connection
             .styledAs(.header)
             .centered()
 
