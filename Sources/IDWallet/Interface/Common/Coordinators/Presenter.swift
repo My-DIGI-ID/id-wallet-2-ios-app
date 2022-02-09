@@ -201,8 +201,8 @@ class RootPresenter: NSObject, PresenterProtocol, CAAnimationDelegate {
     }
 
     func animationDidStart(_ anim: CAAnimation) {
-        guard completionByAnimation.count <= 1 else {
-            ContractError.guardAssertionFailed("Found more than one concurrent transition").fatal()
+        if completionByAnimation.count > 1 {
+            print("Found more than one concurrent transition with completion blocks (\(completionByAnimation.count), this may or may not be a problem, verify")
         }
         print("Animation did start: \(anim)")
     }

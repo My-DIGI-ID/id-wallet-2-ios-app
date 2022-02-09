@@ -83,8 +83,8 @@ class WalletTabBarController: BareBaseViewController {
     private var qrcodeScanController = UIViewController()
     private var qrcodeScanBarItem = UITabBarItem(
         title: "QR-Code Scan",
-        image: UIImage.requiredImage(name: "BarbuttonQrcodeBig").withRenderingMode(.alwaysOriginal),
-        selectedImage: UIImage.requiredImage(name: "BarbuttonQrcodeBigSelected").withRenderingMode(.alwaysOriginal))
+        image: UIImage.requiredImage(name: "BarButtonQrcodeBig").withRenderingMode(.alwaysOriginal),
+        selectedImage: UIImage.requiredImage(name: "BarButtonQrcodeBigSelected").withRenderingMode(.alwaysOriginal))
 
     private var activitiesController = UIViewController()
     private var activitiesBarItem = UITabBarItem(
@@ -94,7 +94,7 @@ class WalletTabBarController: BareBaseViewController {
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) not implemented, use init(presenter:)")
     }
 
     init(presenter: PresenterProtocol) {
@@ -135,7 +135,7 @@ class WalletTabBarController: BareBaseViewController {
         // T-O-D-O: [03/01/2022] placeholder for not yet implemented tabs (timed to do comments not yet configured)
         qrcodeScanController.tabBarItem = qrcodeScanBarItem
         activitiesController.tabBarItem = activitiesBarItem
-        qrcodeScanController.view.backgroundColor = .systemRed
+        qrcodeScanController.view.backgroundColor = .systemBackground
         activitiesController.view.backgroundColor = .systemYellow
 
         viewControllers = [
@@ -168,8 +168,12 @@ extension WalletTabBarController: CustomTabBarDelegate {
                 case .cancelled:
                     self.selectedIndex = previouslySelected
                     self.presenter.dismiss(options: .defaultOptions, completion: nil)
+                case .cameraPermissionDenied:
+                    self.selectedIndex = previouslySelected
+                    // No dismiss here, because camera permission dialog is not
+                    // presented using the presenter
                 }
-                self.presenter.dismiss(options: .defaultOptions, completion: nil)
+
                 self.scannerCoordinator = nil
             }
             scannerCoordinator?.start()

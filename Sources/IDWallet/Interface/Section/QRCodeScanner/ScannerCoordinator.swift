@@ -40,6 +40,7 @@ class ScannerCoordinator: Coordinator {
         case success(_ credentialId: String)
         case failure(_ error: Error)
         case cancelled
+        case cameraPermissionDenied
     }
     
     let presenter: PresenterProtocol
@@ -69,7 +70,7 @@ class ScannerCoordinator: Coordinator {
             
             alert.addAction(UIAlertAction(title: Constants.Text.Alert.cancel, style: .default) {_ in
                 DispatchQueue.main.async {
-                    self.completion(.cancelled)
+                    self.completion(.cameraPermissionDenied)
                 }
             })
             alert.addAction(UIAlertAction(title: Constants.Text.Alert.settings, style: .cancel) { _ in
@@ -97,72 +98,80 @@ class ScannerCoordinator: Coordinator {
                 return
             }
             
-            if granted {
-                DispatchQueue.main.async {
+            DispatchQueue.main.async {
+                if granted {
                     self.startScan()
+                } else {
+                    self.completion(.cameraPermissionDenied)
                 }
-            } else {
-                self.completion(.cancelled)
             }
         }
     }
     
     func startScan() {
         currentViewController = QRScannerViewController { result in
-            switch result {
-            case .success(let qrCode):
-                do {
-                    // self.completion(Result.success(qrCode))
-                    
-                    let connectionService = CustomConnectionService()
-                    if let result = try connectionService.invitee(for: qrCode) {
-                        let (name, imageUrl) = result
-                        self.startConnectionConfirmation(qrCode: qrCode, name: name, imageUrl: imageUrl, viewController: self.currentViewController!)
-                    }
-                } catch let error {
-                    self.completion(Result.failure(error))
-                }
-                
-            case .failure(let error):
-                self.completion(Result.failure(error))
-                
-            case .cancelled:
-                self.completion(Result.cancelled)
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let qrCode):
+                    do {
+                        // self.completion(Result.success(qrCode))
 
+                        let connectionService = CustomConnectionService()
+                        if let result = try connectionService.invitee(for: qrCode) {
+                            let (name, imageUrl) = result
+                            self.startConnectionConfirmation(qrCode: qrCode, name: name, imageUrl: imageUrl)
+                        }
+                    } catch let error {
+                        self.completion(Result.failure(error))
+                    }
+
+                case .failure(let error):
+                    self.completion(Result.failure(error))
+
+                case .cancelled:
+                    self.completion(Result.cancelled)
+                }
             }
         }
-        presenter.present(currentViewController!)
+        if let currentViewController = currentViewController {
+            presenter.present(currentViewController)
+        }
     }
     
     func startConnectionConfirmation(
         qrCode: String,
         name: String?,
-        imageUrl: String?,
-        viewController previous: UIViewController
+        imageUrl: String?
     ) {
         if let name = name {
+            let previous = currentViewController
             currentViewController =
             ConnectionConfirmationViewController(connection: name) { result in
-                    switch result {
-                    case .confirm:
-                        Task {
-                            do {
-                                let connectionId = try await self.connectionService.connect(with: qrCode)
-                                self.startOverview(connectionId: connectionId, name: name, imageUrl: imageUrl, viewController: self.currentViewController!)
-                            } catch let error {
-                                print(error)
-                                self.completion(.failure(error))
-                            }
+                switch result {
+                case .confirm:
+                    Task {
+                        do {
+                            let connectionId = try await self.connectionService.connect(with: qrCode)
+                            self.startOverview(
+                                connectionId: connectionId,
+                                name: name,
+                                imageUrl: imageUrl)
+                        } catch let error {
+                            print(error)
+                            self.completion(.failure(error))
                         }
-                    case .cancel, .deny:
-                        self.completion(Result.cancelled)
                     }
+                case .cancel, .deny:
+                    self.completion(Result.cancelled)
                 }
-            presenter.present(currentViewController!, replacing: previous)
+            }
+            if let currentViewController = currentViewController {
+                presenter.present(currentViewController, replacing: previous)
+            }
         }
     }
     
-    func startOverview(connectionId: String, name: String?, imageUrl: String?, viewController previous: UIViewController) {        
+    func startOverview(connectionId: String, name: String?, imageUrl: String?) {
         let rows: [OverviewViewModel.DataRow] = CustomCredentialService().requested().attributes.map {
             ($0.name, $0.value)
         }
@@ -174,7 +183,9 @@ class ScannerCoordinator: Coordinator {
             imageURL: imageUrl ?? "https://digital-enabling.eu/assets/images/logo.png",
             buttons: [
                 ("Zur Wallet hinzufügen", UIAction { [weak self] _ in
-                    guard let self = self else { return }
+                    guard let self = self else {
+                        return
+                    }
                     Task {
                         do {
                             let credentialId = try await CustomCredentialService().request(with: connectionId)
@@ -188,10 +199,14 @@ class ScannerCoordinator: Coordinator {
                     self.completion(.cancelled)
                 })],
             data: rows)
-        
-        presenter.present(OverviewViewController(viewModel: viewModel, completion: {
+
+        let previous = currentViewController
+        currentViewController = OverviewViewController(viewModel: viewModel, completion: {
             self.completion(.cancelled)
-        }), replacing: previous)
+        })
+        if let currentViewController = currentViewController {
+            presenter.present(currentViewController, replacing: previous)
+        }
     }
     
     func startSuccessViewController(credentialId: String) {
