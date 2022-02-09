@@ -15,7 +15,6 @@ extension PinEntrySuccessViewController {
     case headerContainer
     case titleLabel
     case titleSpacer
-    case cancelButton
 
     case mainContentContainer
     case imageView
@@ -158,14 +157,6 @@ class PinEntrySuccessViewController: BaseViewController<
         ) { spacer in
           spacer.translatesAutoresizingMaskIntoConstraints = false
         }
-
-        makeOrUpdateSymbolButton(
-          id: .cancelButton,
-          systemName: "xmark",
-          in: headerContainer, didMake: &didCreate
-        ) { cancelButton in
-          cancelButton.translatesAutoresizingMaskIntoConstraints = false
-        }
       }
 
       makeOrUpdateImageView(
@@ -260,7 +251,6 @@ class PinEntrySuccessViewController: BaseViewController<
       !areBindingsActive,
       let viewModel = viewModel,
       let commitButton = controlledView(.commitButton) as? UIButton,
-      let cancelButton = controlledView(.cancelButton) as? UIButton,
       let titleLabel = controlledView(.titleLabel) as? UILabel,
       let headingLabel = controlledView(.headingLabel) as? UILabel,
       let subHeadingLabel = controlledView(.subHeadingLabel) as? UILabel
@@ -271,10 +261,6 @@ class PinEntrySuccessViewController: BaseViewController<
     bind(
       control: commitButton, target: self, action: #selector(commitButtonTapped(sender:)),
       for: .touchUpInside)
-    bind(
-      control: cancelButton, target: self, action: #selector(cancelButtonTapped(sender:)),
-      for: .touchUpInside)
-
     let animationDuration = 0.25
     bind(subscriptions: [
       viewModel.$presentation.sink { presentation in
@@ -298,9 +284,5 @@ class PinEntrySuccessViewController: BaseViewController<
       viewModel.canCommit {
       viewModel.commit(self)
     }
-  }
-
-  @objc func cancelButtonTapped(sender: UIButton) {
-    viewModel?.cancel(self)
   }
 }
