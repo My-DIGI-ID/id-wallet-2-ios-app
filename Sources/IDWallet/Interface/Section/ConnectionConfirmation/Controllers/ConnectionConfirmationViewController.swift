@@ -60,16 +60,18 @@ class ConnectionConfirmationViewController: BareBaseViewController {
             primaryAction: UIAction(handler: { _ in
                 self.completion(.confirm)
             }))
-        result.style = .secondary
+        result.style = .primary
         return result
     }()
 
     private lazy var denyButton: WalletButton = {
-        return WalletButton(
+        let result = WalletButton(
             titleText: "Abbrechen",
             primaryAction: UIAction(handler: { _ in
                 self.completion(.deny)
             }))
+        result.style = .secondary
+        return result
     }()
 
     private lazy var closeButton: UIBarButtonItem = {
