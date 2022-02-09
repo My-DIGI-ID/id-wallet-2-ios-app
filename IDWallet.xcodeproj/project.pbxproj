@@ -116,6 +116,7 @@
 		8E98818C276AB815002F629C /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98818B276AB815002F629C /* Presenter.swift */; };
 		8E98818D276AB815002F629C /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98818B276AB815002F629C /* Presenter.swift */; };
 		8E98818E276AB815002F629C /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E98818B276AB815002F629C /* Presenter.swift */; };
+		8E9CF75C27B3C73E005BB929 /* ConnectionConfirmationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E9CF75B27B3C73D005BB929 /* ConnectionConfirmationViewModel.swift */; };
 		8EAF8405275D90FC00283D0B /* PinCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF8404275D90FC00283D0B /* PinCodeView.swift */; };
 		8EAF8407275D927B00283D0B /* PinCodeDigitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF8406275D927B00283D0B /* PinCodeDigitView.swift */; };
 		8EAF8409275EE35A00283D0B /* PinEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF8408275EE35A00283D0B /* PinEntryViewModel.swift */; };
@@ -318,6 +319,7 @@
 		8E988181276AB437002F629C /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		8E988187276AB53D002F629C /* SetupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupCoordinator.swift; sourceTree = "<group>"; };
 		8E98818B276AB815002F629C /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
+		8E9CF75B27B3C73D005BB929 /* ConnectionConfirmationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionConfirmationViewModel.swift; sourceTree = "<group>"; };
 		8EAF8404275D90FC00283D0B /* PinCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeView.swift; sourceTree = "<group>"; };
 		8EAF8406275D927B00283D0B /* PinCodeDigitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeDigitView.swift; sourceTree = "<group>"; };
 		8EAF8408275EE35A00283D0B /* PinEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinEntryViewModel.swift; sourceTree = "<group>"; };
@@ -812,6 +814,7 @@
 		8EAF8419275FE23A00283D0B /* Convenience Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8E9CF75B27B3C73D005BB929 /* ConnectionConfirmationViewModel.swift */,
 				8EAF8420275FE42C00283D0B /* README.md */,
 				8EAF841A275FE25600283D0B /* UIColorExtensions.swift */,
 				8EAF841C275FE2F400283D0B /* UIFontExtensions.swift */,
@@ -1248,6 +1251,7 @@
 				8E98817D276AB3EB002F629C /* Authenticator.swift in Sources */,
 				8EDC79CD27916B620032E348 /* CustomBarButton.swift in Sources */,
 				8EAF8409275EE35A00283D0B /* PinEntryViewModel.swift in Sources */,
+				8E9CF75C27B3C73E005BB929 /* ConnectionConfirmationViewModel.swift in Sources */,
 				8E7554B927727AE90016DEB0 /* Documentation.docc in Sources */,
 				8EB4018D275CEFA100484161 /* ThemeContext.swift in Sources */,
 				950C069427AC6145006D0CAB /* Strings+Localize.swift in Sources */,
