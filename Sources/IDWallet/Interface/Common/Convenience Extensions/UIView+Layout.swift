@@ -19,13 +19,16 @@ public struct LayoutPriorities {
     let right: UILayoutPriority
     let left: UILayoutPriority
     
-    public init (top: UILayoutPriority = .required, bottom: UILayoutPriority = .required,
-                 right: UILayoutPriority = .required, left: UILayoutPriority = .required) {
-        self.top = top
-        self.bottom = bottom
-        self.left = left
-        self.right = right
-    }
+    public init (
+        top: UILayoutPriority = .required,
+        bottom: UILayoutPriority = .required,
+        right: UILayoutPriority = .required,
+        left: UILayoutPriority = .required) {
+            self.top = top
+            self.bottom = bottom
+            self.left = left
+            self.right = right
+        }
 }
 
 extension UIView {
@@ -44,8 +47,9 @@ extension UIView {
     /// - Returns: An autolayout view with equal height and width
     func withEqualAutolayoutSize(constant: CGFloat) -> Self {
         self.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([self.heightAnchor.constraint(equalToConstant: constant),
-                                     self.widthAnchor.constraint(equalToConstant: constant)])
+        NSLayoutConstraint.activate([
+            self.heightAnchor.constraint(equalToConstant: constant),
+            self.widthAnchor.constraint(equalToConstant: constant)])
         return self
     }
     

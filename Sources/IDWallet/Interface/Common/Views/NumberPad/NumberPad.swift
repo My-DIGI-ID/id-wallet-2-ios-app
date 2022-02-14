@@ -165,7 +165,6 @@ class NumberPad: UIView {
         }
     }
     
-    // swiftlint:disable function_body_length
     private func setup(_ style: NumberPad.Style) {
         reset()
         self.style = style
@@ -280,7 +279,6 @@ class NumberPad: UIView {
                 size: CGSize(width: 0, height: size.height), priority: .required)
         }
     }
-    // swiftlint:enable function_body_length
     
     private func reset() {
         for view in keyViewsByName.values {
@@ -318,6 +316,7 @@ extension NumberPad {
 extension NumberPad {
     /// Sets up constraints if controlledConstraints is empty
     override func updateConstraints() {
+        super.updateConstraints()
         if controlledConstraints.count >= 4 {
             // Constraints already set up
             return

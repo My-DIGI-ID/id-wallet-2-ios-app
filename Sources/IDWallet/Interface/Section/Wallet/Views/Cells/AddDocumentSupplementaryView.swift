@@ -26,18 +26,18 @@ final class AddDocumentSupplementaryView: UICollectionReusableView {
     weak var delegate: AddDocumentDelegate?
     
     lazy var addDocumentButton: WalletButton = {
-        let button = WalletButton(titleText: "\(NSLocalizedString("Dokument hinzufügen", comment: ""))",
-                                  image: .init(systemId: .systemPlus),
-                                  imageAlignRight: false,
-                                  style: .secondary,
-                                  primaryAction: .init { [weak self] _ in
+        let button = WalletButton(
+            titleText: "\(NSLocalizedString("Dokument hinzufügen", comment: ""))",
+            image: .init(systemId: .systemPlus),
+            imageAlignRight: false,
+            style: .secondary,
+            primaryAction: .init { [weak self] _ in
             self?.delegate?.addDocument()
         })
         button.backgroundColor = .white
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
     
     private func setupLayout() {
         embed(addDocumentButton, insets: .init(top: 30, left: 20, bottom: 0, right: 20))

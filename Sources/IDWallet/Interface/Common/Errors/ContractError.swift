@@ -84,11 +84,13 @@ enum ContractError: Error, CustomStringConvertible {
     
     func fatal() -> Never {
         switch self {
-        case .unspecified(let file, let line), .guardAssertionFailed(_, let file, let line),
-                .preconditionUnsatisfied(_, _, let file, let line),
-                .unsupportedApiChange(_, let file, let line), .failedToCallSuper(_, _, let file, let line),
-                .missingFont(_, _, let file, let line), .missingImage(_, let file, let line),
-                .missingColor(_, let file, let line):
+        case
+            .unspecified(let file, let line),
+            .guardAssertionFailed(_, let file, let line),
+            .preconditionUnsatisfied(_, _, let file, let line),
+            .unsupportedApiChange(_, let file, let line), .failedToCallSuper(_, _, let file, let line),
+            .missingFont(_, _, let file, let line), .missingImage(_, let file, let line),
+            .missingColor(_, let file, let line):
             fatalError(self.description, file: file, line: line)
         }
     }

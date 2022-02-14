@@ -30,12 +30,13 @@ class Authenticator {
     
     private var state: AuthenticationState
     
+    private let maxAge: TimeInterval = 60.0 * 30.0
+    
     init() {
         pin = nil
         state = .uninitialized
     }
     
-    private let maxAge: TimeInterval = 60.0 * 30.0
     // Queries the state and expires the authentication if necessary
     func authenticationState() async -> AuthenticationState {
         switch state {
@@ -62,10 +63,12 @@ class Authenticator {
     }
     
     func authenticate(pin: String) async -> AuthenticationState {
-        state =
-        (pin == self.pin
-         ? .authenticated(authenticationTime: Date())
-         : .authenticationFailed(authenticationTime: Date()))
+        state = (
+            pin == self.pin ?
+                .authenticated(
+                    authenticationTime: Date()) :
+                    .authenticationFailed(
+                        authenticationTime: Date()))
         return state
     }
     

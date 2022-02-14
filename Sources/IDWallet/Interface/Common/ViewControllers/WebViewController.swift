@@ -34,10 +34,12 @@ class WebViewController: BareBaseViewController {
     private lazy var doneButton: UIBarButtonItem = {
         let button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(closeView))
         button.tintColor = .primaryBlue
-        button.setTitleTextAttributes([.foregroundColor: UIColor.primaryBlue,
-                                       .font: Typography.regular.bodyFont], for: .normal)
-        button.setTitleTextAttributes([.foregroundColor: UIColor.primaryBlue,
-                                       .font: Typography.regular.bodyFont], for: .highlighted)
+        button.setTitleTextAttributes([
+            .foregroundColor: UIColor.primaryBlue,
+            .font: Typography.regular.bodyFont], for: .normal)
+        button.setTitleTextAttributes([
+            .foregroundColor: UIColor.primaryBlue,
+            .font: Typography.regular.bodyFont], for: .highlighted)
         return button
     }()
     
@@ -48,8 +50,9 @@ class WebViewController: BareBaseViewController {
         let navigationBar = UINavigationBar(frame: .zero)
         navigationBar.barTintColor = .white
         navigationBar.isTranslucent = false
-        navigationBar.titleTextAttributes = [.foregroundColor: UIColor.walBlack,
-                                             .font: Constants.NavigationBar.titleFont]
+        navigationBar.titleTextAttributes = [
+            .foregroundColor: UIColor.walBlack,
+            .font: Constants.NavigationBar.titleFont]
         
         navigationBar.shadowImage = Constants.Color.divder?.image()
         
@@ -97,13 +100,13 @@ extension WebViewController {
     
     private func setupLayout() {
         view.addAutolayoutSubviews(navigationBar, webview)
-        
-        ["V:|-[navBar]-(spacing)-[webView]-|",
-         "H:|[navBar]|",
-         "H:|[webView]|"]
-            .constraints(with: ["navBar": navigationBar,
-                                "webView": webview],
-                         metrics: ["spacing": Constants.Layout.dividerHeight])
+        [
+            "V:|-[navBar]-(spacing)-[webView]-|",
+            "H:|[navBar]|",
+            "H:|[webView]|"]
+            .constraints(with: [
+                "navBar": navigationBar,
+                "webView": webview], metrics: ["spacing": Constants.Layout.dividerHeight])
             .activate()
     }
 }

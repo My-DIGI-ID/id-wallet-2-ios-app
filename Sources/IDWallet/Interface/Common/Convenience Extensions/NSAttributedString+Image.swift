@@ -18,7 +18,7 @@ extension NSAttributedString {
     func add(image: UIImage, leading: Bool = true, imageSize: CGSize = CGSize(width: 24, height: 24), spacing: Int = 16) -> NSAttributedString {
         var capHeight = imageSize.width
         self.enumerateAttributes(in: NSRange(0..<self.length), options: .longestEffectiveRangeNotRequired) { attribs, _, _ in
-            guard let value = attribs.first(where: {$0.key == NSAttributedString.Key.font})?.value as? UIFont else { return }
+            guard let value = attribs.first(where: { $0.key == NSAttributedString.Key.font })?.value as? UIFont else { return }
             capHeight = value.capHeight
         }
         

@@ -26,9 +26,7 @@ extension UIImage {
         assert(UIImage(identifiedBy: id, in: bundle, compatibleWith: traits) != nil, "Expected image with name \(id.rawValue) but found nil instead")
         
         // Note [@mHader]: assertion ensures that image exists when in debug mode. Hence the force-unwrap is safe here
-        // swiftlint:disable force_unwrapping
         self.init(identifiedBy: id, in: bundle, compatibleWith: traits)!
-        // swiftlint:enable
     }
     
     /// re-implements UIImage.init(named:) with a version that accepts the ImageNameIdentifier, but must return a non-nill result
@@ -40,9 +38,7 @@ extension UIImage {
         assert(UIImage(identifiedBy: id) != nil, "Expected image with name \(id.rawValue) but found nil instead")
         
         // Note [@mHader]: assertion ensures that image exists when in debug mode. Hence the force-unwrap is safe here
-        // swiftlint:disable force_unwrapping
         self.init(identifiedBy: id)!
-        // swiftlint:enable
     }
     
     /// re-implements UIImage.init(systemName:compatibleWith:) with a version that accepts the ImageNameIdentifier, but must return a non-nill result.
@@ -56,9 +52,7 @@ extension UIImage {
         assert(UIImage(systemId: id, compatibleWith: traits) != nil, "Expected system-image with name \(id.rawValue) but found nil instead")
         
         // Note [@mHader]: assertion ensures that image exists when in debug mode. Hence the force-unwrap is safe here
-        // swiftlint:disable force_unwrapping
         self.init(systemId: id, compatibleWith: traits)!
-        // swiftlint:enable
     }
     
     /// re-implements UIImage.init(systemName:) with a version that accepts the ImageNameIdentifier, but must return a non-nill result
@@ -70,8 +64,6 @@ extension UIImage {
         assert(UIImage(systemId: id) != nil, "Expected system-image with name \(id.rawValue) but found nil instead")
         
         // Note [@mHader]: assertion ensures that image exists when in debug mode. Hence the force-unwrap is safe here
-        // swiftlint:disable force_unwrapping
         self.init(systemId: id)!
-        // swiftlint:enable
     }
 }

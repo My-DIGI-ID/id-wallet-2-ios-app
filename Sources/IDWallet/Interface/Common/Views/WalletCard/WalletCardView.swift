@@ -31,10 +31,11 @@ private enum Constants {
         
         static let valuesSpacing: CGFloat = 10
         
-        static let headerInset: UIEdgeInsets = .init(top: 0,
-                                                     left: cardInsetLeftRight,
-                                                     bottom: 0,
-                                                     right: cardInsetLeftRight)
+        static let headerInset: UIEdgeInsets = .init(
+            top: 0,
+            left: cardInsetLeftRight,
+            bottom: 0,
+            right: cardInsetLeftRight)
         
         static let valuesContainerSpacing: CGFloat = 15
         static let valuesTopSpacing: CGFloat = 8
@@ -79,7 +80,7 @@ class WalletCardView: UIView {
         view.addSubview(validityView)
         
         let constraints = [
-            "H:|[validityView]|",
+            "H:|[validityView]|"
         ].constraints(with: ["validityView": validityView]) + [
             view.centerYAnchor.constraint(equalTo: validityView.centerYAnchor),
             validityView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Layout.validityViewHeightRatio)
@@ -177,21 +178,22 @@ class WalletCardView: UIView {
         let constraints = [
             "H:|[header]|",
             "H:|[primaryContainer]-(containerSpacing)-[secondaryContainer]|",
-            
             "V:|[header]",
             "V:[header]-(containerTop)-[primaryContainer]-(containerBottom)-|",
-            "V:[header]-(containerTop)-[secondaryContainer]-(containerBottom)-|",
-        ].constraints(with: ["header": headerContainer,
-                             "primaryContainer": primaryValuesContainer,
-                             "secondaryContainer": secondaryValuesContainer],
-                      metrics: ["containerSpacing": Layout.valuesContainerSpacing,
-                                "containerTop": Layout.valuesTopSpacing,
-                                "containerBottom": Layout.valuesBottomSpacing]) + [
-                                    
-                                    widthAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardWidthHeightRatio),
-                                    headerContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardHeaderWidthHeightRatio),
-                                    primaryValuesContainer.widthAnchor.constraint(equalTo: secondaryValuesContainer.widthAnchor)
-                                ]
+            "V:[header]-(containerTop)-[secondaryContainer]-(containerBottom)-|"
+        ].constraints(with: [
+            "header": headerContainer,
+            "primaryContainer": primaryValuesContainer,
+            "secondaryContainer": secondaryValuesContainer], metrics: [
+                "containerSpacing": Layout.valuesContainerSpacing,
+                "containerTop": Layout.valuesTopSpacing,
+                "containerBottom": Layout.valuesBottomSpacing]) + [
+                    widthAnchor.constraint(
+                        equalTo: heightAnchor,
+                        multiplier: Layout.walletCardWidthHeightRatio),
+                    headerContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardHeaderWidthHeightRatio),
+                    primaryValuesContainer.widthAnchor.constraint(equalTo: secondaryValuesContainer.widthAnchor)
+                ]
         constraints.activate()
     }
     

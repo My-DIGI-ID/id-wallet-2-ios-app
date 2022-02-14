@@ -29,8 +29,8 @@ extension NSAttributedString {
         paragraph.alignment = .left
         
         let mutableAttrString = NSMutableAttributedString(attributedString: self)
-        mutableAttrString.addAttributes([.paragraphStyle: paragraph],
-                                        range: NSRange(0..<self.length))
+        mutableAttrString.addAttributes([
+            .paragraphStyle: paragraph], range: NSRange(0..<self.length))
         return mutableAttrString
     }
     
@@ -39,8 +39,8 @@ extension NSAttributedString {
         paragraph.alignment = .right
         
         let mutableAttrString = NSMutableAttributedString(attributedString: self)
-        mutableAttrString.addAttributes([.paragraphStyle: paragraph],
-                                        range: NSRange(0..<self.length))
+        mutableAttrString.addAttributes([
+            .paragraphStyle: paragraph], range: NSRange(0..<self.length))
         return mutableAttrString
     }
 }

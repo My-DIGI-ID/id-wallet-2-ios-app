@@ -290,9 +290,7 @@ extension CustomBarButton {
     enum TouchState {
         case idle
         case down
-        // swiftlint:disable identifier_name
         case up
-        // swiftlint:enable identifier_name
         case cancelled
     }
     

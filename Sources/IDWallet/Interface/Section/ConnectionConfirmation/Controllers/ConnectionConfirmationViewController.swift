@@ -253,7 +253,6 @@ class ConnectionConfirmationViewController: BareBaseViewController {
 
 extension ConnectionConfirmationViewController {
     
-    // swiftlint:disable:next function_body_length
     private func setupLayout() {
         view.backgroundColor = .white
         
@@ -290,7 +289,7 @@ extension ConnectionConfirmationViewController {
                 constant: Constants.Layout.imageSpacing),
             headerLabel.bottomAnchor.constraint(
                 equalTo: subHeaderLabel.topAnchor,
-                constant: Constants.Layout.headerSpacing),
+                constant: Constants.Layout.headerSpacing)
             //            subHeaderLabel.bottomAnchor.constraint(
             //                equalTo: securedConnectionInformationView.topAnchor,
             //                constant: Constants.Layout.headerSpacing),

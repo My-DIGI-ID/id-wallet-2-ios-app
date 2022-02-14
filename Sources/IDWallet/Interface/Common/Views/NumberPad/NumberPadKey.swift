@@ -116,9 +116,7 @@ extension NumberPadKey {
     enum TouchState {
         case idle
         case down
-        // swiftlint:disable identifier_name
         case up
-        // swiftlint:enable identifier_name
         case cancelled
     }
 }
@@ -320,15 +318,26 @@ class NumberPadKey: UIControl {
     
     override var intrinsicContentSize: CGSize {
         return CGSize(
-            width: (CGFloat(style.layout.hPadding * 2)
-                    + max(
-                        primaryKeyLabel.intrinsicContentSize.width, secondaryKeysLabel.intrinsicContentSize.width)),
-            height: (CGFloat(style.layout.vPadding * 2) + primaryKeyLabel.intrinsicContentSize.height
-                     + secondaryKeysLabel.intrinsicContentSize.height + CGFloat(style.layout.auxiliarySpacing))
+            width: (
+                CGFloat(style.layout.hPadding * 2) + max(
+                    primaryKeyLabel.intrinsicContentSize.width,
+                    secondaryKeysLabel.intrinsicContentSize.width)),
+            height: (
+                CGFloat(style.layout.vPadding * 2) +
+                primaryKeyLabel.intrinsicContentSize.height +
+                secondaryKeysLabel.intrinsicContentSize.height +
+                CGFloat(style.layout.auxiliarySpacing))
         )
     }
     /// This view will not work using autoresizing
     override final class var requiresConstraintBasedLayout: Bool { return true }
+    
+    /// Uses the (primary) key label for baseline alignment
+    override var forFirstBaselineLayout: UIView { primaryKeyLabel }
+    
+    /// Uses the (primary) key label for baseline alignment
+    override var forLastBaselineLayout: UIView { primaryKeyLabel }
+    
     /// Uses the (primary) key label for alignment
     override func alignmentRect(forFrame frame: CGRect) -> CGRect {
         primaryKeyLabel.alignmentRect(forFrame: frame)
@@ -337,12 +346,6 @@ class NumberPadKey: UIControl {
     override func frame(forAlignmentRect alignmentRect: CGRect) -> CGRect {
         primaryKeyLabel.frame(forAlignmentRect: alignmentRect)
     }
-    
-    /// Uses the (primary) key label for baseline alignment
-    override var forFirstBaselineLayout: UIView { primaryKeyLabel }
-    
-    /// Uses the (primary) key label for baseline alignment
-    override var forLastBaselineLayout: UIView { primaryKeyLabel }
 }
 
 // MARK: Gesture Tracking

@@ -42,8 +42,10 @@ final class WalletEntryCollectionViewCell: UICollectionViewCell {
         
         // FIXME [12/31/2022]: iOS 14 has a bug where Cells require UIView-Encapsulated-Layout-Height/Width, causing a Constraint Error
         // Workaround is to lower the priority just one below `required`
-        embed(walletCard,
-              priorities: .init(bottom: .init(rawValue: 999), right: .init(rawValue: 999)))
+        embed(
+            walletCard, priorities: .init(
+                bottom: .init(rawValue: 999),
+                right: .init(rawValue: 999)))
     }
     
     func configure(with walletData: WalletCardModel, at: IndexPath) {

@@ -5,7 +5,6 @@
 //  Created by Michael Utech on 23.12.21.
 //
 
-// swiftlint:disable file_length
 import Foundation
 import UIKit
 

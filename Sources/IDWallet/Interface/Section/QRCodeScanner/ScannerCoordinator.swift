@@ -76,8 +76,10 @@ class ScannerCoordinator: Coordinator {
                 guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
                     return
                 }
-                UIApplication.shared.open(settingsURL,
-                                          options: [:], completionHandler: { _ in
+                UIApplication.shared.open(
+                    settingsURL,
+                    options: [:],
+                    completionHandler: { _ in
                     // TODO: is this what we want? Can we tell when settings are changed?
                     self.startRequestAccess()
                 })

@@ -280,7 +280,8 @@ extension LayoutFactory {
     }
     
     func alignTopAndBottom(
-        _ first: UIView, _ others: UIView...,
+        _ first: UIView,
+        _ others: UIView...,
         identifier: String,
         activate: Bool = true
     ) {
@@ -288,7 +289,8 @@ extension LayoutFactory {
     }
     
     func alignTopAndBottom(
-        _ first: UIView, views: [UIView],
+        _ first: UIView,
+        views: [UIView],
         identifier: String,
         activate: Bool = true
     ) {

@@ -105,9 +105,11 @@ class ContentWalletView: UIView {
         var snapshot = DataSourceSnapshot()
         snapshot.appendSections([0])
         snapshot.appendItems(walletData.enumerated().map {
-            .init(indexPath: .init(row: $0.offset, section: 0), content: $0.element)
-        },
-                             toSection: 0)
+            .init(
+                indexPath: .init(
+                    row: $0.offset,
+                    section: 0),
+                content: $0.element)}, toSection: 0)
         
         dataSource.apply(snapshot, animatingDifferences: true)
     }

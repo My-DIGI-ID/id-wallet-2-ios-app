@@ -72,11 +72,12 @@ class WalletButton: UIButton {
         updateUI()
     }
     
-    convenience init(titleText: String? = nil,
-                     image: UIImage? = nil,
-                     imageAlignRight: Bool = true,
-                     style: Style = .primary,
-                     primaryAction: UIAction? = nil) {
+    convenience init(
+        titleText: String? = nil,
+        image: UIImage? = nil,
+        imageAlignRight: Bool = true,
+        style: Style = .primary,
+        primaryAction: UIAction? = nil) {
         
         self.init(primaryAction: primaryAction)
         

@@ -66,8 +66,12 @@ class NoContentWalletView: UIView {
             "V:|[image]|"
         ].constraints(with: ["image": emptyWalletImageView]) + [
             view.centerXAnchor.constraint(equalTo: emptyWalletImageView.centerXAnchor),
-            emptyWalletImageView.widthAnchor.constraint(equalTo: emptyWalletImageView.heightAnchor, multiplier: Layout.emptyWalletImageAspectRatio),
-            emptyWalletImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: Layout.emptyWalletImageRelativeWidth),
+            emptyWalletImageView.widthAnchor.constraint(
+                equalTo: emptyWalletImageView.heightAnchor,
+                multiplier: Layout.emptyWalletImageAspectRatio),
+            emptyWalletImageView.widthAnchor.constraint(
+                equalTo: view.widthAnchor,
+                multiplier: Layout.emptyWalletImageRelativeWidth)
         ]
         constraints.activate()
         
@@ -83,11 +87,12 @@ class NoContentWalletView: UIView {
     }()
     
     lazy var addDocumentButton: WalletButton = {
-        let button = WalletButton(titleText: NSLocalizedString("Dokument hinzufügen", comment: ""),
-                                  image: .init(systemId: .systemPlus),
-                                  imageAlignRight: false,
-                                  style: .primary,
-                                  primaryAction: .init { [weak self] _ in
+        let button = WalletButton(
+            titleText: NSLocalizedString("Dokument hinzufügen", comment: ""),
+            image: .init(systemId: .systemPlus),
+            imageAlignRight: false,
+            style: .primary,
+            primaryAction: .init { [weak self] _ in
             self?.delegate?.addDocument()
         })
         button.translatesAutoresizingMaskIntoConstraints = false

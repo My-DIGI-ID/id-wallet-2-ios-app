@@ -29,10 +29,11 @@ class ConnectionConfirmationCoordinator: Coordinator {
             self.presenter.dismissModal(completion: nil)
         }
 
-        let viewModel = ConnectionConfirmationViewModel(connection: "Mesa Deutschland GmbH ist authenifiziert",
-                                                        buttons: [
-                                                            ("Erlauben", allowAction),
-                                                            ("Abbrechen", cancelAction)])
+        let viewModel = ConnectionConfirmationViewModel(
+            connection: "Mesa Deutschland GmbH ist authenifiziert",
+            buttons: [
+                ("Erlauben", allowAction),
+                ("Abbrechen", cancelAction)])
         presenter.present(ConnectionConfirmationViewController(viewModel: viewModel, completion: {}))
     }
 }
