@@ -16,8 +16,8 @@ import UIKit
 private enum Constants {
     enum Layouts {
         static let itemEdgeSpacing: CGFloat = 30
-        static let itemWidthToHeightRatio: CGFloat = 207.5 / 327
-        static let collectionViewEstimatedCellHeight: NSCollectionLayoutDimension = .fractionalWidth(itemWidthToHeightRatio)
+        static let itemHeightWidthRatio: CGFloat = 207.5 / 327
+        static let collectionViewEstimatedCellHeight: NSCollectionLayoutDimension = .fractionalWidth(itemHeightWidthRatio)
         static let collectionViewEstimatedSupplementaryHeight: NSCollectionLayoutDimension = .estimated(50)
     }
 }
@@ -65,9 +65,8 @@ class ContentWalletView: UIView {
     
     lazy var walletCollectionView: UICollectionView = {
         let layout: UICollectionViewLayout = {
-            let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                    heightDimension: Layout.collectionViewEstimatedCellHeight)
-            let layoutItem = NSCollectionLayoutItem(layoutSize: layoutSize)
+            let layoutItem = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
+                                                                      heightDimension: Layout.collectionViewEstimatedCellHeight))
             layoutItem.edgeSpacing = .init(leading: nil, top: .fixed(Layout.itemEdgeSpacing), trailing: nil, bottom: nil)
             
             let supplementaryView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
@@ -77,7 +76,9 @@ class ContentWalletView: UIView {
             supplementaryView.zIndex = 2
             supplementaryView.pinToVisibleBounds = true
             
-            let group = NSCollectionLayoutGroup.vertical(layoutSize: layoutSize, subitems: [layoutItem])
+            let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1),
+                                                                           heightDimension: .estimated(150)),
+                                                         subitems: [layoutItem])
             let layoutSection = NSCollectionLayoutSection(group: group)
             layoutSection.boundarySupplementaryItems = [supplementaryView]
             
