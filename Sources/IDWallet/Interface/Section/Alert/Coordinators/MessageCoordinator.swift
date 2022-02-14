@@ -17,14 +17,14 @@ class MessageCoordinator: Coordinator {
     private let presenter: PresenterProtocol
     private let viewModel: MessageModelProtocol
     private let completion: (() -> Void)?
-
+    
     // TODO: Should support completion callback, maybe in ErrorAlertModelProtocol
     init(presenter: PresenterProtocol, model: MessageModelProtocol, completion: (() -> Void)? = nil) {
         self.presenter = presenter
         self.viewModel = model
         self.completion = completion
     }
-
+    
     func start() {
         // TODO: Should probably call presentModal
         presenter.present(WalletMessageViewController(viewModel: viewModel))

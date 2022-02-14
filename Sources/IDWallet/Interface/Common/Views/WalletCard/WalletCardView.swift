@@ -187,11 +187,11 @@ class WalletCardView: UIView {
                       metrics: ["containerSpacing": Layout.valuesContainerSpacing,
                                 "containerTop": Layout.valuesTopSpacing,
                                 "containerBottom": Layout.valuesBottomSpacing]) + [
-                                
-            widthAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardWidthHeightRatio),
-            headerContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardHeaderWidthHeightRatio),
-            primaryValuesContainer.widthAnchor.constraint(equalTo: secondaryValuesContainer.widthAnchor)
-        ]
+                                    
+                                    widthAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardWidthHeightRatio),
+                                    headerContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardHeaderWidthHeightRatio),
+                                    primaryValuesContainer.widthAnchor.constraint(equalTo: secondaryValuesContainer.widthAnchor)
+                                ]
         constraints.activate()
     }
     
@@ -239,11 +239,11 @@ class WalletCardView: UIView {
         super.init(frame: .zero)
         setupLayout()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupLayout()

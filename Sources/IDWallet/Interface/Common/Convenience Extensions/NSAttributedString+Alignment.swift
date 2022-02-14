@@ -18,26 +18,26 @@ extension NSAttributedString {
     func centered() -> NSAttributedString {
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .center
-
+        
         let mutableAttrString = NSMutableAttributedString(attributedString: self)
         mutableAttrString.addAttributes([.paragraphStyle: paragraph], range: NSRange(0..<self.length))
         return mutableAttrString
     }
-
+    
     func leftAligned() -> NSAttributedString {
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .left
-
+        
         let mutableAttrString = NSMutableAttributedString(attributedString: self)
         mutableAttrString.addAttributes([.paragraphStyle: paragraph],
                                         range: NSRange(0..<self.length))
         return mutableAttrString
     }
-
+    
     func rightAligned() -> NSAttributedString {
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .right
-
+        
         let mutableAttrString = NSMutableAttributedString(attributedString: self)
         mutableAttrString.addAttributes([.paragraphStyle: paragraph],
                                         range: NSRange(0..<self.length))

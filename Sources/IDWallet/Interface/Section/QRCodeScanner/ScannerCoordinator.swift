@@ -33,7 +33,6 @@ enum ScanError: Error {
     case cancelled
 }
 
-
 @MainActor
 class ScannerCoordinator: Coordinator {
     enum Result {
@@ -115,7 +114,7 @@ class ScannerCoordinator: Coordinator {
                 case .success(let qrCode):
                     do {
                         // self.completion(Result.success(qrCode))
-
+                        
                         let connectionService = CustomConnectionService()
                         if let result = try connectionService.invitee(for: qrCode) {
                             let (name, imageUrl) = result
@@ -124,10 +123,10 @@ class ScannerCoordinator: Coordinator {
                     } catch let error {
                         self.completion(Result.failure(error))
                     }
-
+                    
                 case .failure(let error):
                     self.completion(Result.failure(error))
-
+                    
                 case .cancelled:
                     self.completion(Result.cancelled)
                 }
@@ -145,10 +144,10 @@ class ScannerCoordinator: Coordinator {
     ) {
         if var name = name {
             name = "Mesa Deutschland GmbH"
-
+            
             let previous = currentViewController
             let viewModel = ConnectionConfirmationViewModel(connection: name)
-
+            
             currentViewController =
             ConnectionConfirmationViewController(viewModel: viewModel) { result in
                 switch result {
@@ -203,7 +202,7 @@ class ScannerCoordinator: Coordinator {
                     self.completion(.cancelled)
                 })],
             data: rows)
-
+        
         let previous = currentViewController
         currentViewController = OverviewViewController(viewModel: viewModel, completion: {
             self.completion(.cancelled)

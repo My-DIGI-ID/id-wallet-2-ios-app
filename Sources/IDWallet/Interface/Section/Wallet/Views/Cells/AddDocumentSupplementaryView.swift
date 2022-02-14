@@ -38,7 +38,7 @@ final class AddDocumentSupplementaryView: UICollectionReusableView {
         return button
     }()
     
-
+    
     private func setupLayout() {
         embed(addDocumentButton, insets: .init(top: 30, left: 20, bottom: 0, right: 20))
     }
@@ -47,11 +47,11 @@ final class AddDocumentSupplementaryView: UICollectionReusableView {
         super.init(frame: frame)
         setupLayout()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupLayout()

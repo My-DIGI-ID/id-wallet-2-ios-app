@@ -15,16 +15,17 @@ import Foundation
 import UIKit
 
 enum AttributedStyle {
-    case header,
-         subHeading,
-         walletCardValueTitle,
-         walletCardValue,
-         walletCardTitle,
-         walletInfoText,
-         validityLabel,
-         body,
-         text(color: UIColor = .walBlack, font: UIFont)  // FIXME: We should not use parameters for the attribute styles.
-
+    case
+    header,
+    subHeading,
+    walletCardValueTitle,
+    walletCardValue,
+    walletCardTitle,
+    walletInfoText,
+    validityLabel,
+    body,
+    text(color: UIColor = .walBlack, font: UIFont)  // FIXME: We should not use parameters for the attribute styles.
+    
     var attributes: [NSAttributedString.Key: Any] {
         switch self {
         case .header:
@@ -32,24 +33,30 @@ enum AttributedStyle {
                 .foregroundColor: UIColor.walBlack,
                 .font: Typography.regular.headingFont]
         case .subHeading:
-            return [.foregroundColor: UIColor.walBlack,
-                    .font: Typography.regular.subHeadingFont]
+            return [
+                .foregroundColor: UIColor.walBlack,
+                .font: Typography.regular.subHeadingFont]
             
         case .walletCardValueTitle:
-            return [.foregroundColor: UIColor.walBlack,
-                    .font: UIFont.plexSansBold(12)]
+            return [
+                .foregroundColor: UIColor.walBlack,
+                .font: UIFont.plexSansBold(12)]
         case .walletCardValue:
-            return [.foregroundColor: UIColor.walBlack,
-                    .font: UIFont.plexSans(12)]
+            return [
+                .foregroundColor: UIColor.walBlack,
+                .font: UIFont.plexSans(12)]
         case .walletCardTitle:
-            return [.foregroundColor: UIColor.walBlack,
-                    .font: UIFont.plexSans(20)]
+            return [
+                .foregroundColor: UIColor.walBlack,
+                .font: UIFont.plexSans(20)]
         case .walletInfoText:
-            return [.foregroundColor: UIColor.appGrey1,
-                    .font: UIFont.plexSans(17)]
+            return [
+                .foregroundColor: UIColor.appGrey1,
+                .font: UIFont.plexSans(17)]
         case .validityLabel:
-            return [.foregroundColor: UIColor.walBlack,
-                    .font: UIFont.plexSans(10)]
+            return [
+                .foregroundColor: UIColor.walBlack,
+                .font: UIFont.plexSans(10)]
         case .body:
             return [
                 .foregroundColor: UIColor.walBlack,
@@ -65,8 +72,9 @@ enum AttributedStyle {
 extension String {
     func styledAs(_ style: AttributedStyle) -> NSAttributedString {
         let attrString = NSMutableAttributedString(string: self)
-        attrString.addAttributes(style.attributes,
-                                 range: NSRange(0..<self.count))
+        attrString.addAttributes(
+            style.attributes,
+            range: NSRange(0..<self.count))
         return attrString
     }
 }

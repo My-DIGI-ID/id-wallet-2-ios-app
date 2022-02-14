@@ -23,25 +23,25 @@ private enum Constants {
 }
 
 class WalletButton: UIButton {
-
+    
     var style: Style = .primary {
         didSet {
             updateUI()
         }
     }
-
+    
     var titleText: String? {
         didSet {
             updateUI()
         }
     }
-
+    
     var buttonImage: UIImage? {
         didSet {
             updateUI()
         }
     }
-
+    
     override var isEnabled: Bool {
         get {
             super.isEnabled
@@ -51,35 +51,35 @@ class WalletButton: UIButton {
             updateUI()
         }
     }
-
+    
     private var styleColor: Style.Color {
         style.colorFor(state: state)
     }
-
+    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
-
+        
         layer.cornerRadius = Constants.Layout.cornderRadius
         layer.cornerCurve = .continuous
         contentEdgeInsets = Constants.Layout.insets
         layer.borderWidth = Constants.Layout.borderWidth
-
+        
         updateUI()
     }
-
+    
     convenience init(titleText: String? = nil,
                      image: UIImage? = nil,
                      imageAlignRight: Bool = true,
                      style: Style = .primary,
                      primaryAction: UIAction? = nil) {
-
+        
         self.init(primaryAction: primaryAction)
-
+        
         self.style = style
         self.titleText = titleText
         self.buttonImage = image
@@ -88,29 +88,30 @@ class WalletButton: UIButton {
             semanticContentAttribute = .forceRightToLeft
             imageEdgeInsets = UIEdgeInsets(top: 0, left: Constants.Layout.imageSpacing, bottom: 0, right: 0)
         }
-
+        
         updateUI()
     }
-
+    
     private func updateUI() {
-
+        
         tintColor = styleColor.textColor
         backgroundColor = styleColor.backgroundColor
         layer.borderColor = styleColor.borderColor.cgColor
-
-
+        
         setImage(buttonImage, for: .normal)
         if style.asLink {
-            setAttributedTitle(NSAttributedString(string: titleText ?? "",
-                                                  attributes: [
-                                                    .foregroundColor: styleColor.textColor,
-                                                    .font: Typography.regular.buttonFont,
-                                                    .underlineStyle: NSUnderlineStyle.single.rawValue]), for: .normal)
+            setAttributedTitle(NSAttributedString(
+                string: titleText ?? "",
+                attributes: [
+                    .foregroundColor: styleColor.textColor,
+                    .font: Typography.regular.buttonFont,
+                    .underlineStyle: NSUnderlineStyle.single.rawValue]), for: .normal)
         } else {
-            setAttributedTitle(NSAttributedString(string: titleText ?? "",
-                                                  attributes: [
-                                                    .foregroundColor: styleColor.textColor,
-                                                    .font: Typography.regular.buttonFont]), for: .normal)
+            setAttributedTitle(NSAttributedString(
+                string: titleText ?? "",
+                attributes: [
+                    .foregroundColor: styleColor.textColor,
+                    .font: Typography.regular.buttonFont]), for: .normal)
         }
     }
 }
@@ -122,11 +123,11 @@ extension WalletButton {
             let borderColor: UIColor
             let textColor: UIColor
         }
-
+        
         let normal: Color
         let disabled: Color
         var asLink: Bool = false
-
+        
         func colorFor(state: UIControl.State) -> Color {
             return state.contains(.disabled) ? disabled : normal
         }
@@ -134,29 +135,35 @@ extension WalletButton {
 }
 
 extension WalletButton.Style {
-
+    
     static let primary = WalletButton.Style(
-        normal: Color(backgroundColor: .primaryBlue,
-                      borderColor: .primaryBlue,
-                      textColor: .white),
-        disabled: Color(backgroundColor: .grey3,
-                        borderColor: .grey3,
-                        textColor: .grey2))
-
+        normal: Color(
+            backgroundColor: .primaryBlue,
+            borderColor: .primaryBlue,
+            textColor: .white),
+        disabled: Color(
+            backgroundColor: .grey3,
+            borderColor: .grey3,
+            textColor: .grey2))
+    
     static let secondary = WalletButton.Style(
-        normal: Color(backgroundColor: .clear,
-                      borderColor: .primaryBlue,
-                      textColor: .primaryBlue),
-        disabled: Color(backgroundColor: .clear,
-                        borderColor: .grey2,
-                        textColor: .grey2))
-
+        normal: Color(
+            backgroundColor: .clear,
+            borderColor: .primaryBlue,
+            textColor: .primaryBlue),
+        disabled: Color(
+            backgroundColor: .clear,
+            borderColor: .grey2,
+            textColor: .grey2))
+    
     static let link = WalletButton.Style(
-        normal: Color(backgroundColor: .clear,
-                      borderColor: .clear,
-                      textColor: .primaryBlue),
-        disabled: Color(backgroundColor: .clear,
-                        borderColor: .clear,
-                        textColor: .grey2),
+        normal: Color(
+            backgroundColor: .clear,
+            borderColor: .clear,
+            textColor: .primaryBlue),
+        disabled: Color(
+            backgroundColor: .clear,
+            borderColor: .clear,
+            textColor: .grey2),
         asLink: true)
 }

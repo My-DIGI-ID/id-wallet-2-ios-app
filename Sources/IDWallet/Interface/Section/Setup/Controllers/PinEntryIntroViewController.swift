@@ -1,8 +1,14 @@
 //
-//  PinEntryIntroVC.swift
-//  IDWallet
+// Copyright 2022 Bundesrepublik Deutschland
 //
-//  Created by Michael Utech on 21.12.21.
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+// the License. You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+// an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+// specific language governing permissions and limitations under the License.
 //
 
 import Foundation
@@ -119,10 +125,7 @@ class PinEntryIntroViewController: BaseViewController<
 PinEntryIntroViewController.ViewID, PinEntryIntroViewController.Style,
 PinEntryIntroViewController.ViewModel
 > {
-    
     // MARK: - Views
-    
-    // swiftlint:disable function_body_length
     override func createOrUpdateViews() {
         super.createOrUpdateViews()
         
@@ -326,8 +329,8 @@ PinEntryIntroViewController.ViewModel
     }
     
     @objc func commitButtonTapped(sender: UIButton) {
-        if let viewModel = viewModel,
-           viewModel.canCommit {
+        if
+            let viewModel = viewModel, viewModel.canCommit {
             viewModel.commit(self)
         }
     }

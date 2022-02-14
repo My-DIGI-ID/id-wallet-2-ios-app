@@ -58,11 +58,11 @@ class WalletValueView: UIView {
         super.init(frame: .zero)
         setupLayout()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupLayout()

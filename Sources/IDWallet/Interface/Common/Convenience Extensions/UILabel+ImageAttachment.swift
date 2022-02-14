@@ -19,7 +19,7 @@ extension UILabel {
         guard let attrString = self.attributedText else { return }
         self.attributedText = attrString.add(image: image, leading: true, imageSize: imageSize, spacing: spacing)
     }
-
+    
     func append(image: UIImage, imageSize: CGSize = CGSize(width: 24, height: 24), spacing: Int = 16) {
         guard let attrString = self.attributedText else { return }
         self.attributedText = attrString.add(image: image, leading: false, imageSize: imageSize, spacing: spacing)

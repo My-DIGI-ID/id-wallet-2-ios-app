@@ -1,8 +1,14 @@
 //
-//  PinEntryIntroVC.swift
-//  IDWallet
+// Copyright 2022 Bundesrepublik Deutschland
 //
-//  Created by Michael Utech on 21.12.21.
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+// the License. You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+// an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+// specific language governing permissions and limitations under the License.
 //
 
 import Foundation
@@ -15,26 +21,26 @@ extension PinEntrySuccessViewController {
         case headerContainer
         case titleLabel
         case titleSpacer
-
+        
         case mainContentContainer
         case imageView
         case headingLabel
         case subHeadingLabel
-
+        
         case footerContainer
         case commitButton
-
+        
         var key: String { return rawValue }
     }
-
+    
     struct Style: BaseViewControllerStyle {
         // swiftlint:disable nesting
         typealias LayoutType = Layout
         // swiftlint:enable nesting
-
+        
         var themeContext: ThemeContext
         var layout: PinEntrySuccessViewController.Layout
-
+        
         init(
             themeContext: ThemeContext = .main,
             layout: Layout = .regular
@@ -42,21 +48,21 @@ extension PinEntrySuccessViewController {
             self.themeContext = themeContext
             self.layout = layout
         }
-
+        
         init() { self.init(themeContext: .main, layout: .regular) }
     }
-
+    
     struct Layout: BaseViewControllerLayout {
         // swiftlint:disable nesting
         typealias ViewIDType = ViewID
         // swiftlint:enable nesting
-
+        
         static var regular: PinEntrySuccessViewController.Layout = .init()
-
+        
         let headerMainSpacing: [LayoutPredicate] = .equal(360)
         let mainContentSpacing: CGFloat = 24
         let mainFooterSpacing: [LayoutPredicate] = .greaterThanOrEqual(20)
-
+        
         let views: ViewsLayout<PinEntrySuccessViewController.ViewID> = [
             .containerView: .init(
                 padding: .init(horizontal: 20, top: 60, bottom: 40)
@@ -74,10 +80,10 @@ extension PinEntrySuccessViewController {
                 padding: .init(horizontal: 0, bottom: 0)
             )
         ]
-
+        
         init() {}
     }
-
+    
     struct Presentation {
         let title: String = NSLocalizedString("Richte Deine Wallet ein", comment: "Page Title")
         let heading: String = NSLocalizedString("ID Wallet eingerichtet", comment: "Heading")
@@ -89,17 +95,17 @@ extension PinEntrySuccessViewController {
         let commitTitle: String = NSLocalizedString(
             "Weiter zum Wallet", comment: "Commit Action Title")
     }
-
+    
     class ViewModel {
-
+        
         @Published var presentation: Presentation
-
+        
         @Published var canCommit: Bool = true
         fileprivate let commit: (PinEntrySuccessViewController) -> Void
-
+        
         @Published var canCancel: Bool = true
         fileprivate let cancel: (PinEntrySuccessViewController) -> Void
-
+        
         init(
             commit: @escaping (PinEntrySuccessViewController) -> Void,
             cancel: @escaping (PinEntrySuccessViewController) -> Void,
@@ -116,23 +122,21 @@ class PinEntrySuccessViewController: BaseViewController<
 PinEntrySuccessViewController.ViewID, PinEntrySuccessViewController.Style,
 PinEntrySuccessViewController.ViewModel
 > {
-
     // MARK: - Views
 
-    // swiftlint:disable function_body_length
     override func createOrUpdateViews() {
         super.createOrUpdateViews()
-
+        
         var didCreate: Bool = false
-
+        
         style.themeContext.applyPageBackgroundStyles(view: view)
-
+        
         makeOrUpdateContainer(
             id: .containerView,
             in: view, didMake: &didCreate
         ) { [self] containerView, didCreate in
             containerView.translatesAutoresizingMaskIntoConstraints = false
-
+            
             makeOrUpdateHStack(
                 id: .headerContainer,
                 alignment: .firstBaseline,
@@ -141,7 +145,7 @@ PinEntrySuccessViewController.ViewModel
                 in: containerView, didMake: &didCreate
             ) { [self] headerContainer, didCreate in
                 headerContainer.translatesAutoresizingMaskIntoConstraints = false
-
+                
                 makeOrUpdateTitle(
                     id: .titleLabel,
                     text: viewModel.presentation.title,
@@ -150,7 +154,7 @@ PinEntrySuccessViewController.ViewModel
                     label.translatesAutoresizingMaskIntoConstraints = false
                     label.textAlignment = .left
                 }
-
+                
                 makeOrUpdateView(
                     id: .titleSpacer,
                     in: headerContainer, didMake: &didCreate
@@ -158,7 +162,7 @@ PinEntrySuccessViewController.ViewModel
                     spacer.translatesAutoresizingMaskIntoConstraints = false
                 }
             }
-
+            
             makeOrUpdateImageView(
                 id: .imageView,
                 imageName: "ImagePinEntrySuccess",
@@ -166,16 +170,16 @@ PinEntrySuccessViewController.ViewModel
             ) { imageView in
                 imageView.translatesAutoresizingMaskIntoConstraints = false
             }
-
+            
             makeOrUpdateVStack(
                 id: .mainContentContainer,
                 spacing: style.layout.mainContentSpacing,
                 in: containerView, didMake: &didCreate
             ) { mainContentContainer, didCreate in
                 mainContentContainer.translatesAutoresizingMaskIntoConstraints = false
-
+                
                 mainContentContainer.alignment = .center
-
+                
                 makeOrUpdateHeading(
                     id: .headingLabel,
                     text: viewModel.presentation.heading,
@@ -186,7 +190,7 @@ PinEntrySuccessViewController.ViewModel
                     label.lineBreakMode = .byWordWrapping
                     label.textAlignment = .center
                 }
-
+                
                 makeOrUpdateSubHeading(
                     id: .subHeadingLabel,
                     text: viewModel.presentation.subHeading,
@@ -198,14 +202,14 @@ PinEntrySuccessViewController.ViewModel
                     label.textAlignment = .center
                 }
             }
-
+            
             makeOrUpdateAlignmentWrapper(
                 id: .footerContainer,
                 horizontalAlignment: .center, verticalAlignment: .bottom,
                 in: containerView, didMake: &didCreate
             ) { [self] footerContainer, didCreate in
                 footerContainer.translatesAutoresizingMaskIntoConstraints = false
-
+                
                 makeOrUpdatePrimaryActionButton(
                     id: .commitButton, title: viewModel.presentation.commitTitle,
                     isEnabled: viewModel.canCommit,
@@ -217,16 +221,15 @@ PinEntrySuccessViewController.ViewModel
             }
         }
     }
-    // swiftlint:enable function_body_length
-
+    
     override func createOrUpdateConstraints() {
         super.createOrUpdateConstraints()
-
+        
         guard !hasControlledConstraints else { return }
-
+        
         addConstraintsForViewsLayout(
             identifier: "style.layout.views")
-
+        
         let spc1 = style.layout.headerMainSpacing.vfl ?? "-"
         let spc2 = style.layout.mainFooterSpacing.vfl ?? "-"
         addConstraints(
@@ -234,19 +237,20 @@ PinEntrySuccessViewController.ViewModel
                 "V:[\(ViewID.headerContainer)]\(spc1)[\(ViewID.mainContentContainer)]\(spc2)[\(ViewID.footerContainer)]",
             views: viewsForLayout,
             identifier: "vertical")
-
-        if let imageView = controlledView(.imageView) as? UIImageView,
-           let containerView = controlledView(.containerView) {
+        
+        if
+            let imageView = controlledView(.imageView) as? UIImageView,
+            let containerView = controlledView(.containerView) {
             addConstraint(
                 imageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor, constant: -35),
                 identifier: "image-centerX"
             )
         }
     }
-
+    
     override func activateBindings() {
         super.activateBindings()
-
+        
         guard
             !areBindingsActive,
             let viewModel = viewModel,
@@ -257,7 +261,7 @@ PinEntrySuccessViewController.ViewModel
         else {
             return
         }
-
+        
         bind(
             control: commitButton, target: self, action: #selector(commitButtonTapped(sender:)),
             for: .touchUpInside)
@@ -278,10 +282,9 @@ PinEntrySuccessViewController.ViewModel
             }
         ])
     }
-
+    
     @objc func commitButtonTapped(sender: UIButton) {
-        if let viewModel = viewModel,
-           viewModel.canCommit {
+        if let viewModel = viewModel, viewModel.canCommit {
             viewModel.commit(self)
         }
     }

@@ -1,15 +1,15 @@
-/*
- * Copyright 2021 Bundesrepublik Deutschland
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
- * the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
- * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
- * specific language governing permissions and limitations under the License.
- */
+//
+// Copyright 2022 Bundesrepublik Deutschland
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+// the License. You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+// an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+// specific language governing permissions and limitations under the License.
+//
 
 import UIKit
 import Aries
@@ -85,7 +85,7 @@ final class WalletViewController: BareBaseViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) is not supported. Use init() instead")
     }
-
+    
     init() {
         super.init()
     }
@@ -103,10 +103,10 @@ final class WalletViewController: BareBaseViewController {
             "V:|-(topSpace)-[header]-(contentSpace)-[content]|"
         ].constraints(with: ["header": headerContainer, "content": contentContainer],
                       metrics: ["inset": Layout.viewInsetLeftRight, "topSpace": Layout.topSpacing, "contentSpace": Layout.contentSpacing]) + [
-            userIcon.widthAnchor.constraint(equalToConstant: Layout.userIconSize.width),
-            userIcon.heightAnchor.constraint(equalToConstant: Layout.userIconSize.height)
-        ]
-            
+                        userIcon.widthAnchor.constraint(equalToConstant: Layout.userIconSize.width),
+                        userIcon.heightAnchor.constraint(equalToConstant: Layout.userIconSize.height)
+                      ]
+        
         constraints.activate()
         
         headerLabel.attributedText = NSLocalizedString("Deine Dokumente", comment: "").styledAs(Style.headerStyle)
@@ -114,11 +114,11 @@ final class WalletViewController: BareBaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         Task(priority: .userInitiated) {
             let credentialService = CustomCredentialService()
             let credentials = try await credentialService.credentials()
-
+            
             if credentials.isEmpty {
                 self.contentWalletView.removeFromSuperview()
                 self.contentContainer.embed(self.noContentWalletView)

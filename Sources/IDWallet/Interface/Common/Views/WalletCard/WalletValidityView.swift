@@ -64,7 +64,7 @@ class WalletValidityView: UIView {
             backgroundColor = .clear
         }
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         updateCornerRadius()
@@ -75,11 +75,11 @@ class WalletValidityView: UIView {
         super.init(frame: .zero)
         setupLayout()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupLayout()

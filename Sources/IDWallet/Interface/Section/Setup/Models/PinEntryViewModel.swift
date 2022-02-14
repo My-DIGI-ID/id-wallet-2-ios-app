@@ -1,8 +1,14 @@
 //
-//  PinEntryViewModel.swift
-//  IDWallet
+// Copyright 2022 Bundesrepublik Deutschland
 //
-//  Created by Michael Utech on 07.12.21.
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+// the License. You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+// an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+// specific language governing permissions and limitations under the License.
 //
 
 import CocoaLumberjackSwift
@@ -38,6 +44,23 @@ class PinEntryViewModel {
     private let originalPin: String? = nil
     
     private let handleResult: (PinEntryViewModel.Result, PinEntryViewController) -> Void
+    
+    // MARK: - Exposed State
+    
+    // Presentation related parameters
+    @Published var presentation: PinEntryViewModel.Presentation
+    
+    /// Indicates whether a `commit` action can currently be performed
+    @Published var canCommit: Bool = false
+    
+    /// Indicates whether an `add` action can currently be performed
+    @Published var canAdd: Bool
+    
+    /// Indicates whether a `remove` action can currently be performed
+    @Published var canRemove: Bool
+    
+    /// Representation of the PIN that does not reveal its contents (except the last character if so configured)
+    @Published var pin: [PinCharacterRepresentation]
     
     // MARK: - Initialization
     
@@ -83,23 +106,6 @@ class PinEntryViewModel {
         updateStateForPinChange()
     }
     
-    // MARK: - Exposed State
-    
-    // Presentation related parameters
-    @Published var presentation: PinEntryViewModel.Presentation
-    
-    /// Indicates whether a `commit` action can currently be performed
-    @Published var canCommit: Bool = false
-    
-    /// Indicates whether an `add` action can currently be performed
-    @Published var canAdd: Bool
-    
-    /// Indicates whether a `remove` action can currently be performed
-    @Published var canRemove: Bool
-    
-    /// Representation of the PIN that does not reveal its contents (except the last character if so configured)
-    @Published var pin: [PinCharacterRepresentation]
-    
     // MARK: - Exposed Actions
     
     /// Adds a character to the end of the current PIN code. Requires `canAdd`
@@ -141,9 +147,10 @@ class PinEntryViewModel {
     // MARK: - Support
     
     private func updateStateForPinChange() {
-        canCommit =
-        ((minimumLength == nil || pin.count >= minimumLength!)
-         && (maximumLength == nil || pin.count <= maximumLength!) && isValidPin(self.clearTextPin))
+        canCommit = (
+            (minimumLength == nil || pin.count >= minimumLength!) &&
+            (maximumLength == nil || pin.count <= maximumLength!) &&
+            isValidPin(self.clearTextPin))
         canAdd = maximumLength == nil || clearTextPin.count < maximumLength!
         canRemove = !clearTextPin.isEmpty
         var newPin: [PinCharacterRepresentation] = []

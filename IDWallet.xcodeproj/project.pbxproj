@@ -1063,10 +1063,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8847D79E2756376300C2A25B /* Build configuration list for PBXNativeTarget "IDWallet" */;
 			buildPhases = (
+				8E88911E2773DD7800D0E6A3 /* swiftlint */,
 				8847D7702756376000C2A25B /* Sources */,
 				8847D7712756376000C2A25B /* Frameworks */,
 				8847D7722756376000C2A25B /* Resources */,
-				8E88911E2773DD7800D0E6A3 /* swiftlint */,
 			);
 			buildRules = (
 			);

@@ -45,7 +45,6 @@ private enum Constants {
     }
 }
 
-
 enum QRScannerResult {
     case success(value: String)
     case failure(error: ScanError)
@@ -59,17 +58,20 @@ class QRScannerViewController: BareBaseViewController {
     private lazy var closeButton: UIBarButtonItem = {
         let button = UIBarButtonItem(image: Images.regular.close, style: .plain, target: self, action: #selector(closeView))
         button.tintColor = .primaryBlue
-        button.setTitleTextAttributes([.foregroundColor: UIColor.primaryBlue,
-                                       .font: Typography.regular.bodyFont], for: .normal)
-        button.setTitleTextAttributes([.foregroundColor: UIColor.primaryBlue,
-                                       .font: Typography.regular.bodyFont], for: .highlighted)
+        button.setTitleTextAttributes([
+            .foregroundColor: UIColor.primaryBlue,
+            .font: Typography.regular.bodyFont], for: .normal)
+        button.setTitleTextAttributes([
+            .foregroundColor: UIColor.primaryBlue,
+            .font: Typography.regular.bodyFont], for: .highlighted)
         return button
     }()
-
+    
     private lazy var brackeView: BracketView = {
-        let view = BracketView(lineLength: Constants.Layout.Bracket.lineLength,
-                               lineWidth: Constants.Layout.Bracket.lineWidth,
-                               cornerRadius: Constants.Layout.Bracket.cornerRadius)
+        let view = BracketView(
+            lineLength: Constants.Layout.Bracket.lineLength,
+            lineWidth: Constants.Layout.Bracket.lineWidth,
+            cornerRadius: Constants.Layout.Bracket.cornerRadius)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -81,8 +83,9 @@ class QRScannerViewController: BareBaseViewController {
         let navigationBar = UINavigationBar(frame: .zero)
         navigationBar.barTintColor = .white
         navigationBar.isTranslucent = false
-        navigationBar.titleTextAttributes = [.foregroundColor: UIColor.walBlack,
-                                             .font: Constants.NavigationBar.titleFont]
+        navigationBar.titleTextAttributes = [
+            .foregroundColor: UIColor.walBlack,
+            .font: Constants.NavigationBar.titleFont]
         
         navigationBar.shadowImage = UIImage()
         navigationBar.pushItem(navigationItem, animated: false)
@@ -93,9 +96,11 @@ class QRScannerViewController: BareBaseViewController {
     private lazy var hintLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.textAlignment = .center
-        label.attributedText = NSAttributedString(string: Constants.Text.hint,
-                                                  attributes: [.foregroundColor: UIColor.grey1,
-                                                               .font: Typography.regular.subHeadingFont])
+        label.attributedText = NSAttributedString(
+            string: Constants.Text.hint,
+            attributes: [
+                .foregroundColor: UIColor.grey1,
+                .font: Typography.regular.subHeadingFont])
         return label
     }()
     
@@ -139,44 +144,44 @@ class QRScannerViewController: BareBaseViewController {
         
 #if targetEnvironment(simulator)
 #else
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
-            completion(.failure(error: .acesss))
-            return
+    guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
+        completion(.failure(error: .acesss))
+        return
+    }
+    
+    let videoInput: AVCaptureDeviceInput
+    
+    do {
+        videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+    } catch {
+        completion(.failure(error: .failure))
+        return
+    }
+    
+    if captureSession.canAddInput(videoInput) {
+        captureSession.addInput(videoInput)
+    } else {
+        completion(.failure(error: .acesss))
+        return
+    }
+    
+    let metadataOutput = AVCaptureMetadataOutput()
+    
+    if captureSession.canAddOutput(metadataOutput) {
+        captureSession.addOutput(metadataOutput)
+        
+        metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        metadataOutput.metadataObjectTypes = [.qr]
+    } else {
+        completion(.failure(error: .failure))
+        return
+    }
+    
+    if !captureSession.isRunning {
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.captureSession.startRunning()
         }
-        
-        let videoInput: AVCaptureDeviceInput
-        
-        do {
-            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-        } catch {
-            completion(.failure(error: .failure))
-            return
-        }
-        
-        if captureSession.canAddInput(videoInput) {
-            captureSession.addInput(videoInput)
-        } else {
-            completion(.failure(error: .acesss))
-            return
-        }
-        
-        let metadataOutput = AVCaptureMetadataOutput()
-        
-        if captureSession.canAddOutput(metadataOutput) {
-            captureSession.addOutput(metadataOutput)
-            
-            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.qr]
-        } else {
-            completion(.failure(error: .failure))
-            return
-        }
-        
-        if !captureSession.isRunning {
-            DispatchQueue.global(qos: .userInitiated).async {
-                self.captureSession.startRunning()
-            }
-        }
+    }
 #endif
     }
     

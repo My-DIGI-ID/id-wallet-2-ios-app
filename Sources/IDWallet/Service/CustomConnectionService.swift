@@ -28,7 +28,7 @@ class CustomConnectionService {
         
         return (message.label, message.imageUrl)
     }
-
+    
     /// Establishes a persistent connection to the inviting party
     func connect(with url: String) async throws -> String {
         try await Aries.agent.run {

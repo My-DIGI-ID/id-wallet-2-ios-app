@@ -1,15 +1,21 @@
 //
-//  CustomBarButton.swift
-//  IDWallet
+// Copyright 2022 Bundesrepublik Deutschland
 //
-//  Created by Michael Utech on 14.01.22.
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+// the License. You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+// an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+// specific language governing permissions and limitations under the License.
 //
 
 import UIKit
 
 @MainActor
 class CustomBarButton: UIControl {
-
+    
     enum Constants {
         static let defaultHorizontalPadding = 0.0
         static let defaultVerticalPadding = 0.0
@@ -17,14 +23,14 @@ class CustomBarButton: UIControl {
         static let defaultAnimationDuration = 0.15
         static let defaultInactiveAlpha = 0.6
     }
-
+    
     // MARK: - Configuration
-
+    
     var title: String? {
         get { titleLabel.text }
         set(value) { titleLabel.text = value }
     }
-
+    
     var image: UIImage? {
         didSet {
             if !isSelected, image != oldValue {
@@ -32,7 +38,7 @@ class CustomBarButton: UIControl {
             }
         }
     }
-
+    
     var selectedImage: UIImage? {
         didSet {
             if isSelected, selectedImage != oldValue {
@@ -40,18 +46,18 @@ class CustomBarButton: UIControl {
             }
         }
     }
-
+    
     var horizontalPadding: CGFloat = Constants.defaultHorizontalPadding
     var verticalPadding: CGFloat = Constants.defaultVerticalPadding
     var verticalSpacing: CGFloat = Constants.defaultVerticalSpacing
-
+    
     var animationDuration: CGFloat = Constants.defaultAnimationDuration
     var animateTouches: Bool = false
-
+    
     var selectedColor: UIColor = .primaryBlue
     var deselectedColor: UIColor = .walBlack
     var inactiveAlpha = Constants.defaultInactiveAlpha
-
+    
     var inactiveColor: UIColor {
         isSelected
         ? selectedColor.withAlphaComponent(inactiveAlpha)
@@ -60,9 +66,9 @@ class CustomBarButton: UIControl {
     var activeColor: UIColor {
         isSelected ? selectedColor : deselectedColor
     }
-
+    
     // MARK: - State
-
+    
     override var isSelected: Bool {
         get { super.isSelected }
         set(value) {
@@ -70,7 +76,7 @@ class CustomBarButton: UIControl {
             updateForStateChange()
         }
     }
-
+    
     override var isEnabled: Bool {
         get { super.isEnabled }
         set(value) {
@@ -78,18 +84,18 @@ class CustomBarButton: UIControl {
             updateForStateChange()
         }
     }
-
+    
     private(set) lazy var titleLabel: UILabel = { UILabel() }()
     private(set) lazy var imageView: UIImageView = { UIImageView() }()
-
+    
     private var controlledConstraints: [NSLayoutConstraint] = []
-
+    
     private var touchState: CustomBarButton.TouchState = .idle {
         didSet {
             guard touchState != oldValue else {
                 return
             }
-
+            
             switch touchState {
             case .idle:
                 break
@@ -106,9 +112,9 @@ class CustomBarButton: UIControl {
             }
         }
     }
-
+    
     // MARK: - Initialization
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -117,43 +123,43 @@ class CustomBarButton: UIControl {
         super.init(coder: coder)
         setup()
     }
-
+    
     convenience init(
         title: String?, image: UIImage?, selectedImage: UIImage?
     ) {
         self.init(frame: CGRect.zero)
-
+        
         self.title = title
         self.image = image
         self.selectedImage = selectedImage
         self.isSelected = false
         self.isEnabled = true
     }
-
+    
     convenience init(barItem: UITabBarItem) {
         self.init(
             title: barItem.title,
             image: barItem.image,
             selectedImage: barItem.selectedImage)
     }
-
+    
     // MARK: - Views
-
+    
     func setup() {
         translatesAutoresizingMaskIntoConstraints = false
-
+        
         imageView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(imageView)
-
+        
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = .plexSans(12)
         addSubview(titleLabel)
-
+        
         setNeedsLayout()
     }
-
+    
     // MARK: - Layout
-
+    
     private func removeControlledConstraints() {
         for constraint in controlledConstraints {
             constraint.isActive = false
@@ -166,11 +172,11 @@ class CustomBarButton: UIControl {
         }
         controlledConstraints.removeAll()
     }
-
+    
     override func updateConstraints() {
         removeControlledConstraints()
         updateForStateChange()
-
+        
         let views = [
             "titleLabel": titleLabel,
             "imageView": imageView
@@ -180,7 +186,7 @@ class CustomBarButton: UIControl {
             "vPadding": verticalPadding,
             "vSpacing": verticalSpacing
         ]
-
+        
         controlledConstraints.append(contentsOf: [
             titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             imageView.centerXAnchor.constraint(equalTo: centerXAnchor)
@@ -201,12 +207,12 @@ class CustomBarButton: UIControl {
                 withVisualFormat: "V:|-(vPadding)-[imageView]-(vSpacing)-[titleLabel]-(vPadding)-|", metrics: metrics,
                 views: views as [String: Any])
         )
-
+        
         NSLayoutConstraint.activate(controlledConstraints)
-
+        
         super.updateConstraints()
     }
-
+    
     func updateForStateChange(
         animated: Bool = false,
         completion: ((Bool) -> Void)? = nil
@@ -267,13 +273,13 @@ extension CustomBarButton {
             )
         )
     }
-
+    
     /// This view will not work using autoresizing
     override final class var requiresConstraintBasedLayout: Bool { return true }
-
+    
     /// Uses the title label for baseline alignment
     override var forFirstBaselineLayout: UIView { titleLabel }
-
+    
     /// Uses the title label for baseline alignment
     override var forLastBaselineLayout: UIView { titleLabel }
 }
@@ -289,17 +295,17 @@ extension CustomBarButton {
         // swiftlint:enable identifier_name
         case cancelled
     }
-
+    
     private var extendedBounds: CGRect {
         // extend bounds if touch sensitivity is too narrow
         bounds
     }
-
+    
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         guard touchState == .idle else {
             return false
         }
-
+        
         let point = touch.location(in: self)
         if extendedBounds.contains(point) {
             touchState = .down
@@ -309,7 +315,7 @@ extension CustomBarButton {
             return false
         }
     }
-
+    
     override func continueTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let point = touch.location(in: self)
         if extendedBounds.contains(point) {
@@ -320,7 +326,7 @@ extension CustomBarButton {
             return false
         }
     }
-
+    
     override func endTracking(_ touch: UITouch?, with event: UIEvent?) {
         super.endTracking(touch, with: event)
         if let point = touch?.location(in: self), extendedBounds.contains(point) {
@@ -329,7 +335,7 @@ extension CustomBarButton {
             touchState = .cancelled
         }
     }
-
+    
     override func cancelTracking(with event: UIEvent?) {
         touchState = .cancelled
     }
@@ -367,17 +373,17 @@ extension CustomBarButton {
             completion(true)
         }
     }
-
+    
     private func performTouchDownAnimations(_ completion: @escaping (Bool) -> Void = { _ in }) {
         animateTouchState(
             color: inactiveColor, alpha: self.inactiveAlpha, completion: completion)
     }
-
+    
     private func performTouchUpAnimations(_ completion: @escaping (Bool) -> Void = { _ in }) {
         animateTouchState(
             color: activeColor, alpha: 1.0, completion: completion)
     }
-
+    
     private func performTouchCancelledAnimations(
         _ completion: @escaping (Bool) -> Void = { _ in }
     ) {

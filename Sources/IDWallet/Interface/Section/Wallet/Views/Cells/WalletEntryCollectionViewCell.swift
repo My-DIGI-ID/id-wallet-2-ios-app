@@ -45,7 +45,7 @@ final class WalletEntryCollectionViewCell: UICollectionViewCell {
         embed(walletCard,
               priorities: .init(bottom: .init(rawValue: 999), right: .init(rawValue: 999)))
     }
-
+    
     func configure(with walletData: WalletCardModel, at: IndexPath) {
         walletCard.configure(with: walletData)
         walletCard.alpha = walletData.expiryDate.timeIntervalSinceNow <= 0 ? Style.alphaExpired : Style.alphaValid
@@ -55,11 +55,11 @@ final class WalletEntryCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         setupView()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()

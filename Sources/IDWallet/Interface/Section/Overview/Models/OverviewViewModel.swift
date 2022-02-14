@@ -15,18 +15,18 @@ import Foundation
 import UIKit
 
 struct OverviewViewModel {
-
+    
     typealias ButtonModel = (title: String, action: UIAction)
     typealias DataRow = (title: String, value: String)
-
+    
     let header: String
     let subHeader: String
     let title: String
     let imageURL: String
-
+    
     var buttons: [ButtonModel]
     var rows: [DataRow]
-
+    
     internal init(header: String, subHeader: String, title: String, imageURL: String, buttons: [OverviewViewModel.ButtonModel], data: [DataRow]) {
         self.header = header
         self.subHeader = subHeader

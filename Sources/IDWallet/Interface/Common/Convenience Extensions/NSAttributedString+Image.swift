@@ -11,7 +11,6 @@
 // specific language governing permissions and limitations under the License.
 //
 
-
 import Foundation
 import UIKit
 
@@ -22,17 +21,17 @@ extension NSAttributedString {
             guard let value = attribs.first(where: {$0.key == NSAttributedString.Key.font})?.value as? UIFont else { return }
             capHeight = value.capHeight
         }
-
+        
         let attachment = NSTextAttachment()
         attachment.image = image
         attachment.bounds = CGRect(x: 0, y: (capHeight - imageSize.width) * 0.5, width: imageSize.width, height: imageSize.height)
-
+        
         let padding = NSTextAttachment()
         padding.bounds = CGRect(origin: .zero, size: .init(width: spacing, height: 0))
-
+        
         let attachmentString = NSAttributedString(attachment: attachment)
         let paddingString = NSAttributedString(attachment: padding)
-
+        
         if leading {
             let mutableAttributedString = NSMutableAttributedString()
             mutableAttributedString.append(attachmentString)
@@ -46,11 +45,11 @@ extension NSAttributedString {
             return mutableAttributedString
         }
     }
-
+    
     func prepend(image: UIImage, size: CGSize = CGSize(width: 24, height: 24), spacing: Int = 16) -> NSAttributedString {
         self.add(image: image, leading: true, imageSize: size, spacing: spacing)
     }
-
+    
     func append(image: UIImage, size: CGSize = CGSize(width: 24, height: 24), spacing: Int = 16) -> NSAttributedString {
         self.add(image: image, leading: false, imageSize: size, spacing: spacing)
     }

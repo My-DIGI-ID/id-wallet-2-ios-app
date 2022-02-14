@@ -16,12 +16,12 @@ import Foundation
 class HelpViewCoordinator: Coordinator {
     private let presenter: PresenterProtocol
     private let viewModel: WebViewViewModelProtocol
-
+    
     init(presenter: PresenterProtocol, model: WebViewViewModelProtocol) {
         self.presenter = presenter
         self.viewModel = model
     }
-
+    
     func start() {
         presenter.presentModal(
             WebViewController(viewModel: viewModel),

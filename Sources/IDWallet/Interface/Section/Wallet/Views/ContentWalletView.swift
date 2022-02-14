@@ -29,7 +29,7 @@ class ContentWalletView: UIView {
     private typealias Section = Int
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, Row>
     private typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Row>
-     
+    
     private struct Row: Hashable, Equatable {
         let indexPath: IndexPath
         let content: WalletCardModel
@@ -40,7 +40,7 @@ class ContentWalletView: UIView {
     
     private lazy var dataSource: DataSource = {
         let walletCardCell = UICollectionView.CellRegistration<WalletEntryCollectionViewCell, WalletCardModel> {
-//            $0.delegate = self // TODO: Interaction Delegate for Card Details
+            //            $0.delegate = self // TODO: Interaction Delegate for Card Details
             $0.configure(with: $2, at: $1)
         }
         
@@ -50,9 +50,9 @@ class ContentWalletView: UIView {
         
         let footerRegistration = UICollectionView
             .SupplementaryRegistration<AddDocumentSupplementaryView>(elementKind: UICollectionView.elementKindSectionFooter) { [weak self] (supplementView, _, _) in
-            guard let self = self else { return }
-            supplementView.delegate = self.delegate
-        }
+                guard let self = self else { return }
+                supplementView.delegate = self.delegate
+            }
         
         dataSource.supplementaryViewProvider = {
             guard $1 == UICollectionView.elementKindSectionFooter else { return nil }
@@ -64,15 +64,22 @@ class ContentWalletView: UIView {
     
     lazy var walletCollectionView: UICollectionView = {
         let layout: UICollectionViewLayout = {
-            let layoutSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                    heightDimension: Layout.collectionViewEstimatedCellHeight)
+            let layoutSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: Layout.collectionViewEstimatedCellHeight)
             let layoutItem = NSCollectionLayoutItem(layoutSize: layoutSize)
-            layoutItem.edgeSpacing = .init(leading: nil, top: .fixed(Layout.itemEdgeSpacing), trailing: nil, bottom: nil)
+            layoutItem.edgeSpacing = .init(
+                leading: nil,
+                top: .fixed(Layout.itemEdgeSpacing),
+                trailing: nil,
+                bottom: nil)
             
-            let supplementaryView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                                                                                  heightDimension: Layout.collectionViewEstimatedSupplementaryHeight),
-                                                                                elementKind: UICollectionView.elementKindSectionFooter,
-                                                                                alignment: .bottom)
+            let supplementaryView = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: .init(
+                    widthDimension: .fractionalWidth(1),
+                    heightDimension: Layout.collectionViewEstimatedSupplementaryHeight),
+                elementKind: UICollectionView.elementKindSectionFooter,
+                alignment: .bottom)
             supplementaryView.zIndex = 2
             supplementaryView.pinToVisibleBounds = true
             
@@ -110,11 +117,11 @@ class ContentWalletView: UIView {
         super.init(frame: .zero)
         setupLayout()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupLayout()

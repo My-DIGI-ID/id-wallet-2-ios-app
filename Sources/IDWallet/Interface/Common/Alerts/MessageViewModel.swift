@@ -28,13 +28,13 @@ protocol MessageModelProtocol {
 }
 
 struct MessageViewModel: MessageModelProtocol {
-
+    
     var title: String
     var messageType: MessageType
     var header: String
     var text: String
     var buttons: [ButtonModel]
-
+    
     internal init(title: String = "", messageType: MessageType, header: String = "", text: String = "", buttons: [ButtonModel]) {
         self.title = title
         self.messageType = messageType

@@ -29,7 +29,7 @@ public struct LayoutPriorities {
 }
 
 extension UIView {
-
+    
     /// Add all views as autolayout subviews
     /// - Parameter views: subviews to add
     func addAutolayoutSubviews(_ views: UIView...) {
@@ -38,7 +38,7 @@ extension UIView {
             addSubview($0)
         }
     }
-
+    
     /// Returns `Self` as an autolayout squared view
     /// - Parameter constant: Value of width and height of the view
     /// - Returns: An autolayout view with equal height and width
@@ -48,7 +48,7 @@ extension UIView {
                                      self.widthAnchor.constraint(equalToConstant: constant)])
         return self
     }
-
+    
     /// Embeds (add + autolayout) a view in the superview and pins the layout anchors
     /// - Parameters:
     ///   - view: The view to embed

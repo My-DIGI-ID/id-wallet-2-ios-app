@@ -21,12 +21,12 @@ extension CALayer {
         offsetY: CGFloat = 0,
         blur: CGFloat = 80,
         spread: CGFloat = 0) {
-
+            
             masksToBounds = false
             shadowColor = color.cgColor
             shadowOffset = CGSize(width: offsetX, height: offsetY)
             shadowRadius = blur * 0.5
-
+            
             if spread == 0 {
                 shadowPath = nil
             } else {

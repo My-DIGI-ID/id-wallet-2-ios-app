@@ -1,8 +1,14 @@
 //
-//  NumberPad.swift
-//  IDWallet
+// Copyright 2022 Bundesrepublik Deutschland
 //
-//  Created by Michael Utech on 02.12.21.
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+// the License. You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+// an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+// specific language governing permissions and limitations under the License.
 //
 
 import UIKit
@@ -12,12 +18,12 @@ import UIKit
 extension NumberPad {
     struct Style {
         static let regular = NumberPad.Style(.main)
-
+        
         let themeContext: ThemeContext
         let letters: [String: String]
         let layout: Layout
         let keyViewStyle: NumberPadKey.Style
-
+        
         init(
             _ themeContext: ThemeContext,
             letters: [String: String] = [
@@ -43,7 +49,7 @@ extension NumberPad {
             }
         }
     }
-
+    
     struct Layout {
         static let regular = Layout(
             hPadding: 0,
@@ -57,12 +63,12 @@ extension NumberPad {
             hSpacing: 20,
             vSpacing: 0
         )
-
+        
         let hPadding: Int?
         let vPadding: Int?
         let hSpacing: Int?
         let vSpacing: Int?
-
+        
         var metrics: [String: Any] {
             return [
                 "hPadding": hPadding as Any,
@@ -77,7 +83,7 @@ extension NumberPad {
 @objc protocol NumberPadDelegate {
     @objc
     optional func numberPad(_ numberPad: NumberPad, didAddDigit: String)
-
+    
     @objc
     optional func numberPadDidRemoveLastDigit(_ numberPad: NumberPad)
 }
@@ -92,14 +98,14 @@ class NumberPad: UIView {
             }
         }
     }
-
+    
     weak var delegate: NumberPadDelegate?
-
+    
     // controlled subviews and constraints (weakly held)
     private var controlledConstraints = NSHashTable<NSLayoutConstraint>.weakObjects()
     private var keyViewsByName: [String: UIControl] = [:]
     private var contentView: UIStackView!
-
+    
     // State
     var canAddDigit: Bool = false {
         didSet {
@@ -110,7 +116,7 @@ class NumberPad: UIView {
             }
         }
     }
-
+    
     var canRemoveLastDigit: Bool = false {
         didSet {
             keyViewsByName["deleteKey"]?.isEnabled = canRemoveLastDigit
@@ -118,31 +124,31 @@ class NumberPad: UIView {
             updateStylesIfNeeded()
         }
     }
-
+    
     // MARK: - Initialization
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
+    
     required init(style: NumberPad.Style = .regular) {
         super.init(frame: CGRect.zero)
-
+        
         setup(style)
     }
-
+    
     // MARK: - Setup
-
+    
     private var _needsUpdateStyles = false
-
+    
     private func setNeedsUpdateStyles() {
         _needsUpdateStyles = true
     }
-
+    
     private func updateStylesIfNeeded() {
         if _needsUpdateStyles {
             if keyViewsByName.count >= 10 {
@@ -158,22 +164,22 @@ class NumberPad: UIView {
             }
         }
     }
-
+    
     // swiftlint:disable function_body_length
     private func setup(_ style: NumberPad.Style) {
         reset()
         self.style = style
-
+        
         tintColor = self.style.keyViewStyle.themeContext.colors.tintColor
-
+        
         var size = CGSize.zero
         var sizedViews: [UIView] = []
         var spacerViews: [UIView] = []
-
+        
         func maxSz(_ lhs: CGSize, _ rhs: CGSize) -> CGSize {
             return CGSize(width: max(lhs.width, rhs.width), height: max(lhs.height, rhs.height))
         }
-
+        
         func makeNumberPadKey(number: Int) -> NumberPadKey {
             let viewName = "k\(number)"
             let key = "\(number)"
@@ -186,7 +192,7 @@ class NumberPad: UIView {
             result.translatesAutoresizingMaskIntoConstraints = false
             return result
         }
-
+        
         func deleteKey() -> UIView {
             let result = UIButton.systemButton(
                 with: UIImage.requiredImage(name: "delete.backward.pdf").withSize(targetSize: CGSize(width: 30, height: 30)),
@@ -195,7 +201,7 @@ class NumberPad: UIView {
             )
             result.accessibilityIdentifier = "Key_Delete"
             keyViewsByName["deleteKey"] = result
-
+            
             size = maxSz(size, maxSz(result.frame.size, result.intrinsicContentSize))
             result.frame.size = size
             result.translatesAutoresizingMaskIntoConstraints = false
@@ -206,7 +212,7 @@ class NumberPad: UIView {
             result.makeFillSuperviewConstraints()
             return view
         }
-
+        
         func placeholer() -> UIView {
             let result = UIView()
             sizedViews.append(result)
@@ -238,16 +244,16 @@ class NumberPad: UIView {
             result.spacing = CGFloat(style.layout.vSpacing ?? 0)
             return result
         }
-
+        
         contentView = vstack()
         addSubview(contentView)
-
+        
         var rows = [UIStackView]()
-
+        
         for rowIndex in 0...2 {
             let rowStack = hstack()
             rows.append(rowStack)
-
+            
             rowStack.addArrangedSubview(spacer())
             for number in 1...3 {
                 let keyView = makeNumberPadKey(number: number + rowIndex * 3)
@@ -264,7 +270,7 @@ class NumberPad: UIView {
         lastRow.addArrangedSubview(deleteKey())
         lastRow.addArrangedSubview(spacer())
         contentView.addArrangedSubview(lastRow)
-
+        
         sizedViews.forEach {
             $0.makeOrUpdateSizeConstraints(
                 size: size, priority: .required)
@@ -275,13 +281,13 @@ class NumberPad: UIView {
         }
     }
     // swiftlint:enable function_body_length
-
+    
     private func reset() {
         for view in keyViewsByName.values {
             view.removeFromSuperview()
         }
         keyViewsByName.removeAll()
-
+        
         for constraint in controlledConstraints.allObjects {
             constraint.isActive = false
             if let first = constraint.firstItem {
@@ -301,7 +307,7 @@ extension NumberPad {
     @objc func didTapDeleteKey(sender: UIButton) {
         delegate?.numberPadDidRemoveLastDigit?(self)
     }
-
+    
     @objc func didTapNumberKey(sender: NumberPadKey) {
         delegate?.numberPad?(self, didAddDigit: sender.primaryKey)
     }
@@ -316,7 +322,7 @@ extension NumberPad {
             // Constraints already set up
             return
         }
-
+        
         guard keyViewsByName.count >= 10 else {
             // Sub views not present, need setup
             // (we're not supporting storyboard setup or init(frame) yet)
@@ -324,7 +330,7 @@ extension NumberPad {
             // Logging
             return
         }
-
+        
         var constraints: [NSLayoutConstraint] = []
         contentView.translatesAutoresizingMaskIntoConstraints = false
         let views: [String: UIView] = ["contentView": contentView]
@@ -344,16 +350,16 @@ extension NumberPad {
             constraint.isActive = true
             controlledConstraints.add(constraint)
         }
-
+        
         super.updateConstraints()
     }
-
+    
     /// This view will not work using autoresizing
     override final class var requiresConstraintBasedLayout: Bool { return true }
-
+    
     /// Uses the (primary) key label for baseline alignment
     override var forFirstBaselineLayout: UIView { return keyViewsByName["4"] ?? self }
-
+    
     /// Uses the (primary) key label for baseline alignment
     override var forLastBaselineLayout: UIView { return keyViewsByName["6"] ?? self }
 }

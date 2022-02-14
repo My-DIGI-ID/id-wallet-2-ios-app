@@ -11,14 +11,13 @@
 // specific language governing permissions and limitations under the License.
 //
 
-
 import Foundation
 
 extension String {
     var localized: String {
         NSLocalizedString(self, comment: "")
     }
-
+    
     func localized(for bundle: Bundle) -> String {
         NSLocalizedString(self, tableName: nil, bundle: bundle, value: "", comment: "")
     }

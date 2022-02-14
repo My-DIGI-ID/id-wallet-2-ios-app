@@ -1,8 +1,14 @@
 //
-//  BaseVCLayout.swift
-//  IDWallet
+// Copyright 2022 Bundesrepublik Deutschland
 //
-//  Created by Michael Utech on 21.12.21.
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
+// the License. You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
+// an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
+// specific language governing permissions and limitations under the License.
 //
 
 import Foundation
@@ -72,21 +78,21 @@ import Foundation
 /// ``BaseViewController.addConstraintsForViewsLayout()`` in
 /// their implementation of ``createOrUpdateConstraints()`` in oder to apply these settings.
 protocol BaseViewControllerLayout: Equatable {
-  /// The ViewID type that identifies all views created or adopted by the concrete view controller
-  /// class. This is used by all parties accessing specific views, such as
-  /// ``BaseViewController.createOrUpdateViews()``,
-  /// ``BaseViewController.createOrUpdateConstraints()`` as well
-  /// as UI test code in need of identifying or accessing specific well known views.
-  associatedtype ViewIDType: BaseViewID
-
-  /// This defines the view controllers default layout.
-  static var regular: Self { get }
-
-  /// This provides the possibility to specify the size and padding of each well known view.
-  ///
-  /// The implementation can choose to either indiscriminately implement constraints for these
-  /// settings (by calling ``BaseViewController.addConstraintsForViewsLayout(:)``)
-  /// or support only specific settings (which it should document in its implementation of this
-  /// protocol).
-  var views: ViewsLayout<ViewIDType> { get }
+    /// The ViewID type that identifies all views created or adopted by the concrete view controller
+    /// class. This is used by all parties accessing specific views, such as
+    /// ``BaseViewController.createOrUpdateViews()``,
+    /// ``BaseViewController.createOrUpdateConstraints()`` as well
+    /// as UI test code in need of identifying or accessing specific well known views.
+    associatedtype ViewIDType: BaseViewID
+    
+    /// This defines the view controllers default layout.
+    static var regular: Self { get }
+    
+    /// This provides the possibility to specify the size and padding of each well known view.
+    ///
+    /// The implementation can choose to either indiscriminately implement constraints for these
+    /// settings (by calling ``BaseViewController.addConstraintsForViewsLayout(:)``)
+    /// or support only specific settings (which it should document in its implementation of this
+    /// protocol).
+    var views: ViewsLayout<ViewIDType> { get }
 }
