@@ -59,8 +59,14 @@ struct WalletCardModel: Hashable, Equatable {
     /// Date when the Wallet-Card the expires
     let expiryDate: Date
     
-    init(id: String, background: BackgroundType, headerBackgroundColor: UIColor = .clear, textStyle: TextStyle = .light,
-         title: String, primaryValues: [WalletValue], secondaryValues: [WalletValue], expiryDate: Date) {
+    init(id: String,
+         background: BackgroundType,
+         headerBackgroundColor: UIColor = .clear,
+         textStyle: TextStyle = .light,
+         title: String,
+         primaryValues: [WalletValue],
+         secondaryValues: [WalletValue],
+         expiryDate: Date) {
         self.id = id
         self.background = background
         self.headerBackgroundColor = headerBackgroundColor
