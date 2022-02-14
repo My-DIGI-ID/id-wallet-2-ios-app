@@ -26,8 +26,8 @@ private enum Constants {
         static let cardInsetLeftRight: CGFloat = 16
         
         static let validityViewHeightRatio: CGFloat = 24 / 60
-        static let walletCardWidthHeightRatio: CGFloat = 366 / 232
-        static let walletCardHeaderWidthHeightRatio: CGFloat = 60 / 232
+        static let walletCardWidthHeightRatio: CGFloat = 327 / 207.5
+        static let walletCardHeaderWidthHeightRatio: CGFloat = 60 / 207.5
         
         static let valuesSpacing: CGFloat = 10
         
