@@ -16,7 +16,8 @@ import UIKit
 private enum Constants {
     enum Layouts {
         static let itemEdgeSpacing: CGFloat = 30
-        static let collectionViewEstimatedCellHeight: NSCollectionLayoutDimension = .estimated(150)
+        static let itemWidthToHeightRatio: CGFloat = 207.5 / 327
+        static let collectionViewEstimatedCellHeight: NSCollectionLayoutDimension = .fractionalWidth(itemWidthToHeightRatio)
         static let collectionViewEstimatedSupplementaryHeight: NSCollectionLayoutDimension = .estimated(50)
     }
 }
