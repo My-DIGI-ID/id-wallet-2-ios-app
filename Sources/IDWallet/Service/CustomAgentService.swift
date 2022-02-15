@@ -42,10 +42,13 @@ class CustomAgentService {
         let m = MediatorService(urlString: "https://mediator.dev.essid-demo.com/.well-known/agent-configuration")
         
         try await m.connect()
-        
-        let validation = try await IDWalletSecurity(mobileSecret: "vU70ZrK1b5dyYNPq2T4jYngb6d4IkPYJ")
-            .getAttestionObject(challenge: Data())
+
+        let security = IDWalletSecurity(mobileSecret: "vU70ZrK1b5dyYNPq2T4jYngb6d4IkPYJ")
+        // Reset Keychain on First Install
+        try security.reset()
+        let validation = try await security.getAttestionObject(challenge: Data())
         
         _ = try await m.createInbox(deviceValidation: validation)
+
     }
 }
