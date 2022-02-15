@@ -69,6 +69,7 @@ extension WalletCardModel.TextStyle {
 ///
 /// The card can be configured using a WalletCardModel.
 class WalletCardView: UIView {
+    typealias Callback = (WalletCardView) -> Void
     fileprivate typealias Style = Constants.Styles
     fileprivate typealias Layout = Constants.Layouts
     
@@ -175,8 +176,11 @@ class WalletCardView: UIView {
         return image
     }()
     
-    // MARK: - Layout
+    // MARK: - User Interactopm
+    private lazy var tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(cardTapped(_:)))
+    private var callback: Callback?
     
+    // MARK: - Layout
     private func setupLayout() {
         clipsToBounds = false
         
@@ -217,6 +221,8 @@ class WalletCardView: UIView {
             primaryValuesContainer.widthAnchor.constraint(equalTo: secondaryValuesContainer.widthAnchor)
         ]
         constraints.activate()
+        
+        addGestureRecognizer(tapRecognizer)
     }
     
     func configure(with walletData: WalletCardModel) {
@@ -258,14 +264,20 @@ class WalletCardView: UIView {
         }
     }
     
+    @objc
+    dynamic private func cardTapped(_ sender: UITapGestureRecognizer) {
+        callback?(self)
+    }
+    
     // MARK: Lifecycle
-    init() {
+    init(callback: Callback? = nil) {
         super.init(frame: .zero)
+        self.callback = callback
         setupLayout()
     }
     
-    convenience init(with walletData: WalletCardModel) {
-        self.init()
+    convenience init(with walletData: WalletCardModel, callback: Callback? = nil) {
+        self.init(callback: callback)
         self.configure(with: walletData)
     }
 
@@ -273,8 +285,9 @@ class WalletCardView: UIView {
         super.init(coder: coder)
     }
     
-    convenience init?(with walletData: WalletCardModel, coder: NSCoder) {
+    convenience init?(with walletData: WalletCardModel, callback: Callback? = nil, coder: NSCoder) {
         self.init(coder: coder)
+        self.callback = callback
         self.configure(with: walletData)
     }
 
