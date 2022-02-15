@@ -28,30 +28,24 @@ class SetupCoordinator: Coordinator {
 // MARK: - Workflow Implementations
 
 extension SetupCoordinator {
-    
+
+    /// Displays the first onboarding screen providing general information about the App
+    ///
+    /// Can be called as initial activity or from any other activity (f.e. cancelled operations)
     private func startOnboarding(from previous: UIViewController? = nil) {
-        let viewModel = OnboardingViewController.ViewModel(
-            commit: { viewController in
+        presenter.present(
+            OnboardingViewController(
+                viewModel: .init(modalPresenter: self.presenter)
+            ) { viewController in
                 self.startPinEntryInstructions(from: viewController)
             },
-            showInfo: { viewController in
-                self.startOnboardingShowAdditionalInformation(from: viewController)
-            }
+            replacing: previous
         )
-        presenter.present(
-            OnboardingViewController(style: .regular, viewModel: viewModel), replacing: previous)
     }
-    
-    private func startOnboardingShowAdditionalInformation(
-        from viewController: OnboardingViewController
-    ) {
-        guard let url = Bundle.main.url(forResource: "learn-more-de", withExtension: "html") else { return }
-        let viewModel = WebViewModel(title: "Mehr erfahren", url: url)
-        let webViewController = WebViewController(viewModel: viewModel)
-        
-        viewController.present(webViewController, animated: true)
-    }
-    
+
+    /// Displays instructions for defining a PIN.
+    ///
+    /// Called from onboarding and after a failed confirmation PIN entry
     private func startPinEntryInstructions(from previous: UIViewController) {
         let viewModel = PinEntryIntroViewController.ViewModel(
             commit: { viewController in
@@ -65,7 +59,10 @@ extension SetupCoordinator {
         presenter.present(
             PinEntryIntroViewController(style: style, viewModel: viewModel), replacing: previous)
     }
-    
+
+    /// Displays a form letting the user enter the PIN
+    ///
+    /// Called from PIN Entry Instructions or after a failed PIN entry
     private func startInitialPinEntry(from previous: UIViewController) {
         let viewController = PinEntryViewController(
             style: .regular,
@@ -82,7 +79,8 @@ extension SetupCoordinator {
             ))
         presenter.present(viewController, replacing: previous)
     }
-    
+
+    /// Display a form letting the user enter the confirmation PIN
     private func startConfirmationPinEntry(
         from previous: PinEntryViewController, pin previousPin: String
     ) {

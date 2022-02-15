@@ -23,9 +23,23 @@ struct ModalPresentationOptions {
     var modalTransitionStyle: UIModalTransitionStyle = .crossDissolve
 }
 
+protocol ModalPresenterProtocol: AnyObject {
+
+    /// Presents a modal view controller. There can always only be one modal view controller
+    /// presented at any time.
+    func presentModal(
+        _ viewController: UIViewController,
+        options: ModalPresentationOptions,
+        completion: (() -> Void)?
+    )
+
+    /// Dismisses a modal view controller previously presented by `presentModal(_:options:)`.
+    func dismissModal(completion: (() -> Void)?)
+}
+
 /// The presenter protocol is designed to provide a minimalistic and safe interface to ``Coordinator``s
 /// enabeling them to present view controllers as activities.
-protocol PresenterProtocol: AnyObject {
+protocol PresenterProtocol: ModalPresenterProtocol {
     /// Presents the first activity of a coordinator workflow. After calling this method, the coordinator
     /// has to use `present(_:replacing:options:)` in order to present successive activities.
     func present(
@@ -47,17 +61,6 @@ protocol PresenterProtocol: AnyObject {
         options: PresentationOptions,
         completion: (() -> Void)?
     )
-
-    /// Presents a modal view controller. There can always only be one modal view controller
-    /// presented at any time.
-    func presentModal(
-        _ viewController: UIViewController,
-        options: ModalPresentationOptions,
-        completion: (() -> Void)?
-    )
-
-    /// Dismisses a modal view controller previously presented by `presentModal(_:options:)`.
-    func dismissModal(completion: (() -> Void)?)
 }
 
 extension PresenterProtocol {
@@ -93,7 +96,9 @@ extension PresenterProtocol {
     ) {
         present(viewController, replacing: replacing, options: options, completion: nil)
     }
+}
 
+extension ModalPresenterProtocol {
     /// Presents a modal view controller. There can always only be one modal view controller
     /// presented at any time.
     func presentModal(
