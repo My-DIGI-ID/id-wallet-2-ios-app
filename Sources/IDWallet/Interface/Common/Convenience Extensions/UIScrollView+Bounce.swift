@@ -46,4 +46,10 @@ extension UIScrollView {
     var isBeyondBottom: Bool {
         contentOffset.y > bottomOffset
     }
+    
+    
+    /// Returns true if the scrollView is currently bouncing (isBeyondTop or isBeyondBottom)
+    var isBouncing: Bool {
+        isBeyondTop || isBeyondBottom
+    }
 }
