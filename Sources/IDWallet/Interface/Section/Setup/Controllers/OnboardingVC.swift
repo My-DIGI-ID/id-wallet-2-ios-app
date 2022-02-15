@@ -337,43 +337,45 @@ final class OnboardingViewController: BareBaseViewController {
 
     private func createLayoutConstraints() {
         let views: [String: Any] = [
-            ViewID.containerView.key: containerView,
-            ViewID.pageContainerView.key: pageContainerView,
-            ViewID.pageControl.key: pageControl,
-            ViewID.showInfoButton.key: showInfoButton,
-            ViewID.startButton.key: startButton
+            "container": containerView,
+            "pageContainer": pageContainerView,
+            "pageControl": pageControl,
+            "showInfo": showInfoButton,
+            "start": startButton
         ]
 
         containerView.layoutMargins = .zero
         pageContainerView.layoutMargins = .zero
 
-        NSLayoutConstraint.activate([
-            "H:|-[\(ViewID.containerView)]-|",
-            "V:|-(80@50,>=40@500)-[\(ViewID.containerView)]-(50@50,>=34@500)-|",
+        [
+            "H:|-[container]-|",
+            "V:|-(80@50,>=40@500)-[container]-(50@50,>=34@500)-|",
 
-            "H:|-[\(ViewID.pageContainerView)]-|"
+            "H:|-[pageContainer]-|"
         ].constraints(
             with: views,
-            metrics: nil)
-        )
+            metrics: nil
+        ).activate()
 
-        // Align horizontally center-X:
-        NSLayoutConstraint.activate([
-            "V:|-[\(ViewID.pageContainerView)]-(5)-"
-            + "[\(ViewID.pageControl)]-(64@50,>=40@50,>=16)-"
-            + "[\(ViewID.startButton)]-(24@50,>=16)-"
-            + "[\(ViewID.showInfoButton)]-0-|"
+        [
+            "V:|-[pageContainer]-(5)-"
+            + "[pageControl]-(64@50,>=40@50,>=16)-"
+            + "[start]-(24@50,>=16)-"
+            + "[showInfo]-0-|"
         ].constraints(
             with: views,
             metrics: nil,
-            options: .alignAllCenterX)
-        )
+            options: .alignAllCenterX
+        ).activate()
 
-        pageContainerView.heightAnchor.constraint(greaterThanOrEqualToConstant: 450.0).isActive = true
+        [
+            pageContainerView.heightAnchor.constraint(greaterThanOrEqualToConstant: 450.0),
+            startButton.widthAnchor.constraint(greaterThanOrEqualToConstant: Layout.actionButtonMinWidth)
+        ].activate()
+        
+        showInfoButton.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         pageControl.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
         startButton.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
-        startButton.widthAnchor.constraint(greaterThanOrEqualToConstant: Layout.actionButtonMinWidth).isActive = true
-        showInfoButton.setContentCompressionResistancePriority(.defaultHigh, for: .vertical)
     }
     
     // MARK: - Actions

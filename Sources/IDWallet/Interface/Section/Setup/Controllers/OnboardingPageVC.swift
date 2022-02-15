@@ -153,10 +153,10 @@ final class OnboardingPageViewController: BareBaseViewController {
 
     private func createLayoutConstraints() {
         let views: [String: Any] = [
-            ViewID.containerView.key: containerView,
-            ViewID.imageView.key: imageView,
-            ViewID.headingLabel.key: headingLabel,
-            ViewID.subHeadingLabel.key: subHeadingLabel
+            "container": containerView,
+            "image": imageView,
+            "heading": headingLabel,
+            "subHeading": subHeadingLabel
         ]
 
         let metrics: [String: Any] = [
@@ -165,24 +165,29 @@ final class OnboardingPageViewController: BareBaseViewController {
             "hpadtxt": Layout.horizontalTextPadding
         ]
 
-        NSLayoutConstraint.activate([
-            "H:|-[\(ViewID.containerView)]-|",
-            "V:|-[\(ViewID.containerView)]-|",
-            "H:|-(hpadtxt)-[\(ViewID.headingLabel)]-(hpadtxt)-|",
-            "H:|-(hpadtxt)-[\(ViewID.subHeadingLabel)]-(hpadtxt)-|"
-        ].constraints(with: views, metrics: metrics, options: []))
+        [
+            "H:|-[container]-|",
+            "V:|-[container]-|",
+            "H:|-(hpadtxt)-[heading]-(hpadtxt)-|",
+            "H:|-(hpadtxt)-[subHeading]-(hpadtxt)-|"
+        ].constraints(
+            with: views, metrics: metrics, options: []
+        ).activate()
 
-        NSLayoutConstraint.activate([
-            "V:|-[\(ViewID.imageView)]-(vspc)-[\(ViewID.headingLabel)]-(vspctxt)-[\(ViewID.subHeadingLabel)]-|"
-        ].constraints(with: views, metrics: metrics, options: .alignAllCenterX))
+        [
+            "V:|-[image]-(vspc)-[heading]-(vspctxt)-[subHeading]-|"
+        ].constraints(
+            with: views, metrics: metrics, options: .alignAllCenterX
+        ).activate()
 
         headingLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
             .isActive = true
 
         if let image = imageView.image {
-            imageView.heightAnchor.constraint(equalToConstant: image.size.height)
-                .isActive = true
-            imageView.widthAnchor.constraint(equalToConstant: image.size.width).isActive = true
+            [
+                imageView.heightAnchor.constraint(equalToConstant: image.size.height),
+                imageView.widthAnchor.constraint(equalToConstant: image.size.width)
+            ].activate()
         }
     }
 }
