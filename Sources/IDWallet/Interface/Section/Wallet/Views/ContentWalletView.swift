@@ -128,8 +128,8 @@ class ContentWalletView: UIView {
 }
 
 fileprivate extension WalletCardView {
-    convenience init(with walletData: WalletCardModel, offset: Int) {
-        self.init(with: walletData)
+    convenience init(with walletData: WalletCardModel, offset: Int, callback: @escaping WalletCardView.Callback) {
+        self.init(with: walletData, callback: callback)
         layer.zPosition = CGFloat(offset)
     }
 }

@@ -19,6 +19,18 @@ private enum Constants {
         
         static let alphaExpired: CGFloat = 0.8
         static let alphaValid: CGFloat = 1.0
+        
+        enum Shadow {
+            static let color: UIColor = .walBlack
+            static let offset: CGSize = .init(width: 0, height: 0)
+            static let radius: CGFloat = 3.0
+            static let opacity: Float = 0.3
+        }
+        
+        enum Border {
+            static let color: UIColor = .white
+            static let width: CGFloat = 0.5
+        }
     }
     
     enum Layouts {
@@ -27,15 +39,14 @@ private enum Constants {
         
         static let validityViewHeightRatio: CGFloat = 24 / 60
         static let walletCardWidthHeightRatio: CGFloat = 327 / 207.5
-        static let walletCardHeaderWidthHeightRatio: CGFloat = 60 / 207.5
+        static let walletCardHeaderHeightRatio: CGFloat = 60 / 207.5
         
         static let valuesSpacing: CGFloat = 10
         
-        static let headerInset: UIEdgeInsets = .init(
-            top: 0,
-            left: cardInsetLeftRight,
-            bottom: 0,
-            right: cardInsetLeftRight)
+        static let headerInset: UIEdgeInsets = .init(top: 0,
+                                                     left: cardInsetLeftRight,
+                                                     bottom: 0,
+                                                     right: cardInsetLeftRight)
         
         static let valuesContainerSpacing: CGFloat = 15
         static let valuesTopSpacing: CGFloat = 8
@@ -58,6 +69,7 @@ extension WalletCardModel.TextStyle {
 ///
 /// The card can be configured using a WalletCardModel.
 class WalletCardView: UIView {
+    typealias Callback = (WalletCardView) -> Void
     fileprivate typealias Style = Constants.Styles
     fileprivate typealias Layout = Constants.Layouts
     
@@ -80,7 +92,7 @@ class WalletCardView: UIView {
         view.addSubview(validityView)
         
         let constraints = [
-            "H:|[validityView]|"
+            "H:|[validityView]|",
         ].constraints(with: ["validityView": validityView]) + [
             view.centerYAnchor.constraint(equalTo: validityView.centerYAnchor),
             validityView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Layout.validityViewHeightRatio)
@@ -164,10 +176,25 @@ class WalletCardView: UIView {
         return image
     }()
     
-    // MARK: - Layout
+    // MARK: - User Interactopm
+    private lazy var tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(cardTapped(_:)))
+    private var callback: Callback?
     
+    // MARK: - Layout
     private func setupLayout() {
-        clipsToBounds = true
+        clipsToBounds = false
+        
+        layer.borderColor = Style.Border.color.cgColor
+        layer.borderWidth = Style.Border.width
+        
+        layer.shadowOffset = Style.Shadow.offset
+        layer.shadowRadius = Style.Shadow.radius
+        layer.shadowColor = Style.Shadow.color.cgColor
+        layer.shadowOpacity = Style.Shadow.opacity
+        
+        // Must define cornerRadius on both the background and the views layer
+        backgroundImage.layer.masksToBounds = true
+        backgroundImage.layer.cornerRadius = Layout.cardCornerRadius
         layer.cornerRadius = Layout.cardCornerRadius
         
         embed(backgroundImage)
@@ -178,23 +205,24 @@ class WalletCardView: UIView {
         let constraints = [
             "H:|[header]|",
             "H:|[primaryContainer]-(containerSpacing)-[secondaryContainer]|",
+            
             "V:|[header]",
             "V:[header]-(containerTop)-[primaryContainer]-(containerBottom)-|",
-            "V:[header]-(containerTop)-[secondaryContainer]-(containerBottom)-|"
-        ].constraints(with: [
-            "header": headerContainer,
-            "primaryContainer": primaryValuesContainer,
-            "secondaryContainer": secondaryValuesContainer], metrics: [
-                "containerSpacing": Layout.valuesContainerSpacing,
-                "containerTop": Layout.valuesTopSpacing,
-                "containerBottom": Layout.valuesBottomSpacing]) + [
-                    widthAnchor.constraint(
-                        equalTo: heightAnchor,
-                        multiplier: Layout.walletCardWidthHeightRatio),
-                    headerContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardHeaderWidthHeightRatio),
-                    primaryValuesContainer.widthAnchor.constraint(equalTo: secondaryValuesContainer.widthAnchor)
-                ]
+            "V:[header]-(containerTop)-[secondaryContainer]-(containerBottom)-|",
+        ].constraints(with: ["header": headerContainer,
+                             "primaryContainer": primaryValuesContainer,
+                             "secondaryContainer": secondaryValuesContainer],
+                      metrics: ["containerSpacing": Layout.valuesContainerSpacing,
+                                "containerTop": Layout.valuesTopSpacing,
+                                "containerBottom": Layout.valuesBottomSpacing]) + [
+                                
+            widthAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardWidthHeightRatio),
+            headerContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardHeaderHeightRatio),
+            primaryValuesContainer.widthAnchor.constraint(equalTo: secondaryValuesContainer.widthAnchor)
+        ]
         constraints.activate()
+        
+        addGestureRecognizer(tapRecognizer)
     }
     
     func configure(with walletData: WalletCardModel) {
@@ -236,16 +264,33 @@ class WalletCardView: UIView {
         }
     }
     
+    @objc
+    dynamic private func cardTapped(_ sender: UITapGestureRecognizer) {
+        callback?(self)
+    }
+    
     // MARK: Lifecycle
-    init() {
+    init(callback: Callback? = nil) {
         super.init(frame: .zero)
+        self.callback = callback
         setupLayout()
     }
     
+    convenience init(with walletData: WalletCardModel, callback: Callback? = nil) {
+        self.init(callback: callback)
+        self.configure(with: walletData)
+    }
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
     
+    convenience init?(with walletData: WalletCardModel, callback: Callback? = nil, coder: NSCoder) {
+        self.init(coder: coder)
+        self.callback = callback
+        self.configure(with: walletData)
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         setupLayout()
