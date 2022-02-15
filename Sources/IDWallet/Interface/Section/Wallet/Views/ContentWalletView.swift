@@ -71,6 +71,7 @@ class ContentWalletView: UIView {
     }()
     
     lazy var addDocumentView = AddDocumentButtonView()
+    private var openWalletCard: WalletCardView?
     
     private func setupLayout() {
         embed(contentScrollView, insets: .init(top: 0, left: Layout.scrollViewVerticalInset, bottom: 0, right: Layout.scrollViewVerticalInset))
@@ -82,15 +83,33 @@ class ContentWalletView: UIView {
     }
     
     private func updateLayout() {
-        print("Updating Layout")
         stackSpacing = contentScrollView.frame.width * Layout.itemVOffsetRatio
         contentStackView.spacing = stackSpacing
     }
     
+    private func toggleWalletCard(_ card: WalletCardView) {
+        defer {
+            contentScrollView.scrollRectToVisible(card.frame, animated: true)
+        }
+        // Note: Find better way to validate if "button View" is the cards successor, hence we dont want to unfold here
+        guard contentStackView.arrangedSubviews.firstIndex(of: card) != contentStackView.arrangedSubviews.count - 2 else {
+            return
+        }
+        
+        openWalletCard.map { contentStackView.setCustomSpacing(stackSpacing, after: $0) }
+        guard card != openWalletCard else {
+            openWalletCard = nil
+            return
+        }
+        
+        openWalletCard = card
+        contentStackView.setCustomSpacing(Layout.itemEdgeSpacing, after: card)
+    }
+    
     func update(walletData: [WalletCardModel]) {
         contentStackView.removeArrangedSubviews()
-        walletData.enumerated().forEach {
-            let walletView = WalletCardView(with: $0.element, offset: $0.offset)
+        walletData.enumerated().forEach { [toggleWalletCard] in
+            let walletView = WalletCardView(with: $0.element, offset: $0.offset, callback: toggleWalletCard)
             contentStackView.addArrangedSubview(walletView)
             
             [
