@@ -15,21 +15,41 @@ import CryptoKit
 import DeviceCheck
 import Foundation
 import Valet
+import Aries
 import Mediator
 
 private enum Constants {
+    // swiftlint:disable:next force_unwrapping
+    static let valetIdentifier = Identifier(nonEmpty: "IDWalletApp")!
     static let appAttestKeyId = "appAttestKeyId"
-    // swiftlint:disable:next force_unwrapping 
-    static let valetIdentifier = Identifier(nonEmpty: "IDWalletAppAuthenticity")!
+
+    static let mobileSecret = "vU70ZrK1b5dyYNPq2T4jYngb6d4IkPYJ"
+    static let pinSalt = "pinSalt"
+    static let walletPinDerivat = "walletPinDerivat"
+    static let preKey = "PreKey"
+    static let walletSalt = "WalletSalt"
 }
 
 protocol IDWalletSecure {
     func getAttestionObject(challenge: Data) async throws -> String
 }
 
-public struct IDWalletSecurity: IDWalletSecure {
+public class IDWalletSecurity: IDWalletSecure {
     private let valet = Valet.valet(with: Constants.valetIdentifier,
                                     accessibility: .whenUnlockedThisDeviceOnly)
+
+    private static var sharedAppSecurity: IDWalletSecurity = {
+        let security = IDWalletSecurity()
+        return security
+    }()
+
+    private init() {
+        MediatorService.mobileSecret = Constants.mobileSecret
+    }
+
+    class func shared() -> IDWalletSecurity {
+        return sharedAppSecurity
+    }
 
     /// Retrieves the key identifier for the App Attest service stored in the keychain
     /// If none is found the key identifier is created and stored in the keychain
@@ -62,11 +82,25 @@ public struct IDWalletSecurity: IDWalletSecure {
         return data.base64EncodedString()
     }
 
-    public func reset() throws {
+    func reset() throws {
         try valet.removeObject(forKey: Constants.appAttestKeyId)
     }
 
-    public init(mobileSecret: String) {
-        MediatorService.mobileSecret = mobileSecret
+    func save(pin: String) async throws {
+        // 2 - 5
+        let preKey = try await DefaultWalletService.generateKey(with: pin)
+        let walletSalt = try Data.generateSalt()
+        try valet.setObject(walletSalt, forKey: Constants.walletSalt)
+        try valet.setString(preKey, forKey: Constants.preKey)
+
+        let walletKeyDerivat = try pin.pbkdf2(saltData: walletSalt)
+
+        // 10 - 12
+        guard let pinSalt = try? Data.generateSalt() else {
+            throw CryptoError.general
+        }
+        let derivat = try pin.pbkdf2(saltData: pinSalt)
+        try valet.setObject(pinSalt, forKey: Constants.pinSalt)
+        try valet.setObject(derivat, forKey: Constants.walletPinDerivat)
     }
 }

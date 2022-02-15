@@ -219,6 +219,9 @@
 		95873EBC2791C01400A924C8 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95873EBB2791C01400A924C8 /* UIView+Layout.swift */; };
 		95C107DA2795896300FB02AD /* learn-more-de.html in Resources */ = {isa = PBXBuildFile; fileRef = 95873EBF2791F8A000A924C8 /* learn-more-de.html */; };
 		95C107DC27958FCB00FB02AD /* WalletMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107DB27958FCB00FB02AD /* WalletMessageViewController.swift */; };
+		95C1083F27BC102C001248F0 /* String+Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C1083E27BC102C001248F0 /* String+Crypto.swift */; };
+		95C1084127BC1036001248F0 /* Data+Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C1084027BC1036001248F0 /* Data+Crypto.swift */; };
+		95C1084327BC1068001248F0 /* CryptoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C1084227BC1068001248F0 /* CryptoError.swift */; };
 		95F9A2AC27A05482003F15B5 /* UIColor+IDWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F9A2AB27A05482003F15B5 /* UIColor+IDWallet.swift */; };
 		95F9A2AD27A055DA003F15B5 /* UIColor+IDWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F9A2AB27A05482003F15B5 /* UIColor+IDWallet.swift */; };
 		95F9A2AE27A055DA003F15B5 /* UIColor+IDWallet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F9A2AB27A05482003F15B5 /* UIColor+IDWallet.swift */; };
@@ -374,6 +377,9 @@
 		95C107DF2795B7E300FB02AD /* MessageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCoordinator.swift; sourceTree = "<group>"; };
 		95C107E42796CEE200FB02AD /* MessageType+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageType+Image.swift"; sourceTree = "<group>"; };
 		95C107E62796CF0E00FB02AD /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
+		95C1083E27BC102C001248F0 /* String+Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Crypto.swift"; sourceTree = "<group>"; };
+		95C1084027BC1036001248F0 /* Data+Crypto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Crypto.swift"; sourceTree = "<group>"; };
+		95C1084227BC1068001248F0 /* CryptoError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoError.swift; sourceTree = "<group>"; };
 		95F9A2AB27A05482003F15B5 /* UIColor+IDWallet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+IDWallet.swift"; sourceTree = "<group>"; };
 		95F9A2AF27A05D98003F15B5 /* UIColor+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Image.swift"; sourceTree = "<group>"; };
 		95F9A2B127A05F2E003F15B5 /* CALayer+SketchShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+SketchShadow.swift"; sourceTree = "<group>"; };
@@ -464,6 +470,7 @@
 		8847D7762756376000C2A25B /* IDWallet */ = {
 			isa = PBXGroup;
 			children = (
+				95C1083D27BC1016001248F0 /* Extensions */,
 				630621FF27B29B6B00BABE0B /* Service */,
 				95873EBD2791F85100A924C8 /* Resources */,
 				8E43319E275914CF00D50127 /* Fonts */,
@@ -787,9 +794,10 @@
 			isa = PBXGroup;
 			children = (
 				8EAF8410275F421900283D0B /* AppError.swift */,
-				8EAF8412275F443A00283D0B /* ValidationError.swift */,
-				8E8C40412763264800DBC979 /* MultipleErrors.swift */,
+				95C1084227BC1068001248F0 /* CryptoError.swift */,
 				8E7554CD277305580016DEB0 /* ContractError.swift */,
+				8E8C40412763264800DBC979 /* MultipleErrors.swift */,
+				8EAF8412275F443A00283D0B /* ValidationError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -1043,6 +1051,15 @@
 			path = Alerts;
 			sourceTree = "<group>";
 		};
+		95C1083D27BC1016001248F0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				95C1083E27BC102C001248F0 /* String+Crypto.swift */,
+				95C1084027BC1036001248F0 /* Data+Crypto.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		95F9A2B327A06CC1003F15B5 /* Button */ = {
 			isa = PBXGroup;
 			children = (
@@ -1245,12 +1262,14 @@
 				8E98817D276AB3EB002F629C /* Authenticator.swift in Sources */,
 				8EDC79CD27916B620032E348 /* CustomBarButton.swift in Sources */,
 				8EAF8409275EE35A00283D0B /* PinEntryViewModel.swift in Sources */,
+				95C1083F27BC102C001248F0 /* String+Crypto.swift in Sources */,
 				8E9CF75C27B3C73E005BB929 /* ConnectionConfirmationViewModel.swift in Sources */,
 				8E7554B927727AE90016DEB0 /* Documentation.docc in Sources */,
 				8EB4018D275CEFA100484161 /* ThemeContext.swift in Sources */,
 				950C069427AC6145006D0CAB /* Strings+Localize.swift in Sources */,
 				8E8C405127650C7700DBC979 /* Images.swift in Sources */,
 				8862A8A127AD518300C9780B /* WalletCardView.swift in Sources */,
+				95C1084327BC1068001248F0 /* CryptoError.swift in Sources */,
 				8EDC79D42797EFC10032E348 /* WalletViewController.swift in Sources */,
 				8ECA2284276F596F00CB8D81 /* Layout.swift in Sources */,
 				8EAF841F275FE36F00283D0B /* ColorScheme.swift in Sources */,
@@ -1321,6 +1340,7 @@
 				8EAF8422275FE6D000283D0B /* Typography.swift in Sources */,
 				953F26D227AD9170008704E1 /* UILabel+ImageAttachment.swift in Sources */,
 				8862A88D27AC217B00C9780B /* WalletCardModel.swift in Sources */,
+				95C1084127BC1036001248F0 /* Data+Crypto.swift in Sources */,
 				8E7554CE277305580016DEB0 /* ContractError.swift in Sources */,
 				95F9A2B027A05D98003F15B5 /* UIColor+Image.swift in Sources */,
 				953F26CE27AD71E3008704E1 /* ConnectionConfirmationViewController.swift in Sources */,
@@ -1835,7 +1855,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-aries-sdk";
 			requirement = {
-				branch = development;
+				branch = "feature/BKAWALIOS-215";
 				kind = branch;
 			};
 		};
@@ -1843,7 +1863,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-mediator-sdk";
 			requirement = {
-				branch = development;
+				branch = "feature/BKAWALIOS-215";
 				kind = branch;
 			};
 		};

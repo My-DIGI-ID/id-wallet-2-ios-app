@@ -23,8 +23,8 @@
         "package": "Aries",
         "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-aries-sdk",
         "state": {
-          "branch": "development",
-          "revision": "ee56ecfbcabf42b795ebe58a8eef123d68d0dc2a",
+          "branch": "feature/BKAWALIOS-215",
+          "revision": "17e5f76a8b92aee809837ed4547ac300dd74f4a9",
           "version": null
         }
       },
@@ -41,8 +41,8 @@
         "package": "Mediator",
         "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-mediator-sdk",
         "state": {
-          "branch": "development",
-          "revision": "c559f0af8c8e3d560301945a836db2e21842b596",
+          "branch": "feature/BKAWALIOS-215",
+          "revision": "e5764c0d603d6250021e4bfb0efa00a8b0c6582c",
           "version": null
         }
       },

@@ -76,4 +76,26 @@ class Authenticator {
         state = .uninitialized
         pin = nil
     }
+
+      do {
+          try await IDWalletSecurity.shared().save(pin: pin)
+      } catch {
+
+      }
+    self.pin = pin
+    self.state = .authenticated(authenticationTime: Date())
+  }
+
+  func authenticate(pin: String) async -> AuthenticationState {
+    state =
+      (pin == self.pin
+        ? .authenticated(authenticationTime: Date())
+        : .authenticationFailed(authenticationTime: Date()))
+    return state
+  }
+
+  func reset() {
+    state = .uninitialized
+    pin = nil
+  }
 }
