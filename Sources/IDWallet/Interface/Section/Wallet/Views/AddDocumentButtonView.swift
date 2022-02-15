@@ -21,7 +21,7 @@ protocol AddDocumentDelegate: AnyObject {
     func addDocument()
 }
 
-final class AddDocumentSupplementaryView: UICollectionReusableView {
+final class AddDocumentButtonView: UIView {
     
     weak var delegate: AddDocumentDelegate?
     
@@ -43,8 +43,8 @@ final class AddDocumentSupplementaryView: UICollectionReusableView {
         embed(addDocumentButton, insets: .init(top: 30, left: 20, bottom: 0, right: 20))
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: .zero)
         setupLayout()
     }
     

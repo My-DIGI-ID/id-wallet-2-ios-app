@@ -14,6 +14,7 @@
 		6306220A27B29BAF00BABE0B /* Aries in Frameworks */ = {isa = PBXBuildFile; productRef = 6306220927B29BAF00BABE0B /* Aries */; };
 		6F1A9B8827902711009B3359 /* Mediator in Frameworks */ = {isa = PBXBuildFile; productRef = 6F1A9B8727902711009B3359 /* Mediator */; };
 		6FA511362771B7A100D068BD /* AusweisApp2 in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA511352771B7A100D068BD /* AusweisApp2 */; };
+		88136CF127BB95B100799E94 /* UIScrollView+Bounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88136CF027BB95B100799E94 /* UIScrollView+Bounce.swift */; };
 		8820CA3B27B13E8A00B5B485 /* UIView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8820CA3A27B13E8A00B5B485 /* UIView+Subviews.swift */; };
 		8820CA3D27B1468700B5B485 /* NSAttributedString+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8820CA3C27B1468700B5B485 /* NSAttributedString+Color.swift */; };
 		8847D7782756376000C2A25B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8847D7772756376000C2A25B /* AppDelegate.swift */; };
@@ -33,8 +34,7 @@
 		8862A89427AD1AF900C9780B /* UIImageView+Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A89327AD1AF900C9780B /* UIImageView+Named.swift */; };
 		8862A89727AD26B900C9780B /* NoContentWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A89627AD26B900C9780B /* NoContentWalletView.swift */; };
 		8862A89927AD26D600C9780B /* ContentWalletView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A89827AD26D600C9780B /* ContentWalletView.swift */; };
-		8862A89C27AD34B900C9780B /* WalletEntryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A89B27AD34B900C9780B /* WalletEntryCollectionViewCell.swift */; };
-		8862A89E27AD368500C9780B /* AddDocumentSupplementaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A89D27AD368500C9780B /* AddDocumentSupplementaryView.swift */; };
+		8862A89E27AD368500C9780B /* AddDocumentButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A89D27AD368500C9780B /* AddDocumentButtonView.swift */; };
 		8862A8A127AD518300C9780B /* WalletCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A8A027AD518300C9780B /* WalletCardView.swift */; };
 		8862A8A327AD697B00C9780B /* WalletValidityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A8A227AD697B00C9780B /* WalletValidityView.swift */; };
 		8862A8A527AD6A1F00C9780B /* WalletValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A8A427AD6A1F00C9780B /* WalletValueView.swift */; };
@@ -249,6 +249,7 @@
 		6306220127B29B7300BABE0B /* CustomAgentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAgentService.swift; sourceTree = "<group>"; };
 		6306220227B29B7300BABE0B /* CustomCredentialService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCredentialService.swift; sourceTree = "<group>"; };
 		6306220727B29B7800BABE0B /* idw_eesditest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = idw_eesditest; sourceTree = "<group>"; };
+		88136CF027BB95B100799E94 /* UIScrollView+Bounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Bounce.swift"; sourceTree = "<group>"; };
 		8820CA3A27B13E8A00B5B485 /* UIView+Subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Subviews.swift"; sourceTree = "<group>"; };
 		8820CA3C27B1468700B5B485 /* NSAttributedString+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Color.swift"; sourceTree = "<group>"; };
 		8847D7742756376000C2A25B /* IDWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IDWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -269,8 +270,7 @@
 		8862A89327AD1AF900C9780B /* UIImageView+Named.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Named.swift"; sourceTree = "<group>"; };
 		8862A89627AD26B900C9780B /* NoContentWalletView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoContentWalletView.swift; sourceTree = "<group>"; };
 		8862A89827AD26D600C9780B /* ContentWalletView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentWalletView.swift; sourceTree = "<group>"; };
-		8862A89B27AD34B900C9780B /* WalletEntryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletEntryCollectionViewCell.swift; sourceTree = "<group>"; };
-		8862A89D27AD368500C9780B /* AddDocumentSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDocumentSupplementaryView.swift; sourceTree = "<group>"; };
+		8862A89D27AD368500C9780B /* AddDocumentButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDocumentButtonView.swift; sourceTree = "<group>"; };
 		8862A8A027AD518300C9780B /* WalletCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardView.swift; sourceTree = "<group>"; };
 		8862A8A227AD697B00C9780B /* WalletValidityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletValidityView.swift; sourceTree = "<group>"; };
 		8862A8A427AD6A1F00C9780B /* WalletValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletValueView.swift; sourceTree = "<group>"; };
@@ -602,20 +602,11 @@
 		8862A89527AD269A00C9780B /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8862A89A27AD2A0C00C9780B /* Cells */,
+				8862A89D27AD368500C9780B /* AddDocumentButtonView.swift */,
 				8862A89627AD26B900C9780B /* NoContentWalletView.swift */,
 				8862A89827AD26D600C9780B /* ContentWalletView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		8862A89A27AD2A0C00C9780B /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				8862A89B27AD34B900C9780B /* WalletEntryCollectionViewCell.swift */,
-				8862A89D27AD368500C9780B /* AddDocumentSupplementaryView.swift */,
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		8862A89F27AD517100C9780B /* WalletCard */ = {
@@ -831,6 +822,7 @@
 				955D3F2927ADAB290004AD70 /* NSAttributedString+Image.swift */,
 				950C069327AC6145006D0CAB /* Strings+Localize.swift */,
 				9555837027B1AA5C00D3E47B /* UIImageView+URL.swift */,
+				88136CF027BB95B100799E94 /* UIScrollView+Bounce.swift */,
 			);
 			path = "Convenience Extensions";
 			sourceTree = "<group>";
@@ -1276,6 +1268,7 @@
 				955D3F2A27ADAB290004AD70 /* NSAttributedString+Image.swift in Sources */,
 				8EAF8405275D90FC00283D0B /* PinCodeView.swift in Sources */,
 				8E8C408427680AE400DBC979 /* OnboardingPageVC.swift in Sources */,
+				88136CF127BB95B100799E94 /* UIScrollView+Bounce.swift in Sources */,
 				9542C7E5279890E300784147 /* NSAttributedString+Alignment.swift in Sources */,
 				8E43319D27590FB700D50127 /* NumberPad.swift in Sources */,
 				9555836F27B1827000D3E47B /* OverviewCoordinator.swift in Sources */,
@@ -1298,7 +1291,7 @@
 				6306220327B29B7300BABE0B /* CustomConnectionService.swift in Sources */,
 				8ECA2280276F3E4200CB8D81 /* ZeroOrMore.swift in Sources */,
 				8847D7782756376000C2A25B /* AppDelegate.swift in Sources */,
-				8862A89E27AD368500C9780B /* AddDocumentSupplementaryView.swift in Sources */,
+				8862A89E27AD368500C9780B /* AddDocumentButtonView.swift in Sources */,
 				8847D77A2756376000C2A25B /* SceneDelegate.swift in Sources */,
 				8EDC79CA278F727F0032E348 /* WalletTabBarController.swift in Sources */,
 				9555836B27B16A7900D3E47B /* OverviewViewModel.swift in Sources */,
@@ -1319,7 +1312,6 @@
 				9555836D27B16A9F00D3E47B /* OverviewViewController.swift in Sources */,
 				8EAF8416275F4B5E00283D0B /* PinValidationError.swift in Sources */,
 				952FF66B2796E703003840F9 /* WebViewModel.swift in Sources */,
-				8862A89C27AD34B900C9780B /* WalletEntryCollectionViewCell.swift in Sources */,
 				8862A8A527AD6A1F00C9780B /* WalletValueView.swift in Sources */,
 				95873EBA2791B23300A924C8 /* HelpViewCoordinator.swift in Sources */,
 				8EAF8422275FE6D000283D0B /* Typography.swift in Sources */,
