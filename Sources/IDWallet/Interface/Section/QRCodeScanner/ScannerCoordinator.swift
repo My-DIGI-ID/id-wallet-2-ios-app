@@ -177,40 +177,43 @@ class ScannerCoordinator: Coordinator {
     }
     
     func startOverview(connectionId: String, name: String?, imageUrl: String?) {
-        let rows: [OverviewViewModel.DataRow] = CustomCredentialService().requested().attributes.map {
-            ($0.name, $0.value)
-        }
-        
-        let viewModel = OverviewViewModel(
-            header: "Mesa Deutschland GmbH",
-            subHeader: "16.02.2021 - 15:20 Uhr",
-            title: "Arbeitgeberbescheinigung",
-            imageURL: imageUrl ?? "https://digital-enabling.eu/assets/images/logo.png",
-            buttons: [
-                ("Zur Wallet hinzufügen", UIAction { [weak self] _ in
-                    guard let self = self else {
-                        return
-                    }
-                    Task {
-                        do {
-                            let credentialId = try await CustomCredentialService().request(with: connectionId)
-                            self.startSuccessViewController(credentialId: credentialId)
-                        } catch let error {
-                            self.completion(.failure(error))
+        Task(priority: .userInitiated) {
+            let (id, preview) = try await CustomCredentialService().preview(for: connectionId)
+            let rows: [OverviewViewModel.DataRow] = preview.attributes.map {
+                ($0.name, $0.value)
+            }
+            
+            let viewModel = OverviewViewModel(
+                header: "Mesa Deutschland GmbH",
+                subHeader: "16.02.2021 - 15:20 Uhr",
+                title: "Arbeitgeberbescheinigung",
+                imageURL: imageUrl ?? "https://digital-enabling.eu/assets/images/logo.png",
+                buttons: [
+                    ("Zur Wallet hinzufügen", UIAction { [weak self] _ in
+                        guard let self = self else {
+                            return
                         }
-                    }
-                }),
-                ("Abbrechen", UIAction { _ in
-                    self.completion(.cancelled)
-                })],
-            data: rows)
-        
-        let previous = currentViewController
-        currentViewController = OverviewViewController(viewModel: viewModel, completion: {
-            self.completion(.cancelled)
-        })
-        if let currentViewController = currentViewController {
-            presenter.present(currentViewController, replacing: previous)
+                        Task {
+                            do {
+                                let credentialId = try await CustomCredentialService().request(with: connectionId)
+                                self.startSuccessViewController(credentialId: credentialId)
+                            } catch let error {
+                                self.completion(.failure(error))
+                            }
+                        }
+                    }),
+                    ("Abbrechen", UIAction { _ in
+                        self.completion(.cancelled)
+                    })],
+                data: rows)
+            
+            let previous = currentViewController
+            currentViewController = OverviewViewController(viewModel: viewModel, completion: {
+                self.completion(.cancelled)
+            })
+            if let currentViewController = currentViewController {
+                presenter.present(currentViewController, replacing: previous)
+            }
         }
     }
     

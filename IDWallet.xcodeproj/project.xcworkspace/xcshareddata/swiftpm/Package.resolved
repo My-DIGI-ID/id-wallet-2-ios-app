@@ -11,24 +11,6 @@
         }
       },
       {
-        "package": "Base58String",
-        "repositoryURL": "https://github.com/cloutiertyler/Base58String.git",
-        "state": {
-          "branch": null,
-          "revision": "496ad09a11f2212643a7413570effc16b7c76506",
-          "version": "0.1.0"
-        }
-      },
-      {
-        "package": "BigInt",
-        "repositoryURL": "https://github.com/attaswift/BigInt.git",
-        "state": {
-          "branch": null,
-          "revision": "018a5925f60f9e0523edd261de394a0898fe95b7",
-          "version": "3.1.0"
-        }
-      },
-      {
         "package": "CocoaLumberjack",
         "repositoryURL": "https://github.com/CocoaLumberjack/CocoaLumberjack.git",
         "state": {
@@ -42,7 +24,7 @@
         "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-aries-sdk",
         "state": {
           "branch": "feature/BKAWALIOS-215",
-          "revision": "17e5f76a8b92aee809837ed4547ac300dd74f4a9",
+          "revision": "717ff8baaa21303cd532ff02efd04fe54c5625ff",
           "version": null
         }
       },
@@ -60,17 +42,8 @@
         "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-mediator-sdk",
         "state": {
           "branch": "feature/BKAWALIOS-215",
-          "revision": "e5764c0d603d6250021e4bfb0efa00a8b0c6582c",
+          "revision": "4d0e711e26b69dbdd3bbc7cca58846d79d275cd6",
           "version": null
-        }
-      },
-      {
-        "package": "SipHash",
-        "repositoryURL": "https://github.com/attaswift/SipHash",
-        "state": {
-          "branch": null,
-          "revision": "e325083424688055363bbfcb7f1a440d7d7a1bae",
-          "version": "1.2.2"
         }
       },
       {

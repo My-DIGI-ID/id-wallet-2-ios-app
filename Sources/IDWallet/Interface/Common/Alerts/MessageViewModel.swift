@@ -14,14 +14,14 @@
 import Foundation
 import UIKit
 
-enum MessageType {
+enum AlertType {
     case error, fail, unknownError, jailbreak, noInternet, timeout, success
 }
 
 protocol MessageModelProtocol {
     typealias ButtonModel = (title: String, action: UIAction)
     var title: String { get }
-    var messageType: MessageType { get }
+    var messageType: AlertType { get }
     var header: String { get }
     var text: String { get }
     var buttons: [ButtonModel] { get }
@@ -30,7 +30,7 @@ protocol MessageModelProtocol {
 struct MessageViewModel: MessageModelProtocol {
     
     var title: String
-    var messageType: MessageType
+    var messageType: AlertType
     var header: String
     var text: String
     var buttons: [ButtonModel]

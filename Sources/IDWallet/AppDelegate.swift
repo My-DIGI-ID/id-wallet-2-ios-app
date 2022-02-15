@@ -24,8 +24,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         initializeLogging()
         
         Task(priority: .userInitiated) {
-            try await CustomAgentService().setup()
-            print("AGENT READY")
+            do {
+                try await CustomAgentService().setup()
+                print("AGENT SETUP SUCCESSFUL")
+            } catch {
+                print("AGENT SETUP FAILED: \(error)")
+            }
         }
         
         return true

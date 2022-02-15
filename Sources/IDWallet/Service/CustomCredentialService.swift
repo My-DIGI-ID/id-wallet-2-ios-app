@@ -13,6 +13,7 @@
 
 import Foundation
 import Aries
+import Mediator
 
 class CustomCredentialService {
     
@@ -26,28 +27,6 @@ class CustomCredentialService {
         "firmCity": "Stadt"
     ]
     
-    private func preview() -> CredentialPreview {
-        var credentialPreview = CredentialPreview()
-        credentialPreview.attributes.append(contentsOf: [
-            CredentialAttribute(name: "firstName", value: "Erika"),
-            CredentialAttribute(name: "lastName", value: "Mustermann"),
-            CredentialAttribute(name: "firmName", value: "MESA Deutschland GmbH"),
-            CredentialAttribute(name: "firmSubject", value: "Identitäten"),
-            CredentialAttribute(name: "firmCity", value: "Berlin"),
-            CredentialAttribute(name: "firmPostalcode", value: "51145"),
-            CredentialAttribute(name: "firmStreet", value: "Musterstrasse 2")
-        ])
-        return credentialPreview
-    }
-    
-    func requested() -> CredentialPreview {
-        var preview = CredentialPreview()
-        preview.attributes = self.preview().attributes.map { attr in
-            CredentialAttribute(name: mapping[attr.name] ?? "", value: attr.value)
-        }
-        return preview
-    }
-    
     func credentials() async throws -> [CredentialPreview] {
         try await Aries.agent.run {
             try await Aries.record.search(CredentialRecord.self, in: $0.wallet, with: .none, count: nil, skip: nil)
@@ -60,31 +39,37 @@ class CustomCredentialService {
         }
     }
     
-    func request(with connectionId: String) async throws -> String {
+    func preview(for connectionId: String) async throws -> (String, CredentialPreview) {
         try await Aries.agent.run {
-            let connection = try await Aries.record.get(ConnectionRecord.self, for: connectionId, from: $0.wallet)
+            // Loop query for offer message
+            var offer: CredentialOfferMessage!
             
-            guard let service = connection.theirDocument().services?.first else {
-                return ""
+            let decoder = JSONDecoder()
+            while true {
+                guard let data = try await MediatorService(urlString: nil)
+                        .getInboxItems()
+                        .items
+                        .compactMap({ $0.data.data(using: .utf8) })
+                        .first(where: { try decoder.decode(HeaderMessage.self, from: $0).type == MessageType.credentialOffer.rawValue })
+                else { continue }
+                
+                offer = try decoder.decode(CredentialOfferMessage.self, from: data)
+                break
             }
             
-            var credentialProposal: CredentialProposalMessage = try await Aries.credential.proposal()
-            credentialProposal.credentialId = "akaikNikeYARE9DnS9Jox:3:CL:23:Arbeitgeberbescheinigung_Test3"
-            credentialProposal.proposal = preview()
-            
-            let credentialProposalRequest = MessageRequest(
-                message: credentialProposal,
-                recipientKeys: service.recipientKeys ?? [],
-                senderKey: connection.myVerkey,
-                endpoint: service.endpoint
-            )
-            
-            let credentialProposalResponse: MessageResponse<CredentialOfferMessage> = try await Aries.message
-                .sendReceive(credentialProposalRequest, with: $0.wallet)
-            
-            let credentialOffer = credentialProposalResponse.message
-            
-            let id = try await Aries.credential.process(credentialOffer, for: connectionId, with: $0)
+            let id = try await Aries.credential.process(offer, for: connectionId, with: $0)
+            return (id, offer.preview!)
+        }
+    }
+    
+    func request(with id: String) async throws -> String {
+        try await Aries.agent.run {
+            let record = try await Aries.record.get(CredentialRecord.self, for: id, from: $0.wallet)
+            let connection = try await Aries.record
+                .get(ConnectionRecord.self, for: record.tags["connectionKey"]!, from: $0.wallet)
+            guard let service = connection.theirDocument().services?.first else {
+                throw AriesError.notFound("No service found to send the credential request to")
+            }
             
             let credentialRequest = try await Aries.credential.request(for: id, with: $0)
             
@@ -103,4 +88,14 @@ class CustomCredentialService {
             return try await Aries.credential.process(credentialIssue, with: $0)
         }
     }
+}
+
+public struct HeaderMessage: Message {
+    private enum CodingKeys: String, CodingKey {
+        case id = "@id"
+        case type = "@type"
+    }
+    
+    public let id: String
+    public let type: String
 }

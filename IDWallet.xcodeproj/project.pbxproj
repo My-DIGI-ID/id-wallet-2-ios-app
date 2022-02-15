@@ -1665,7 +1665,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PL4YWAM25J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/IDWallet/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Erlaube den Zugriff, um QR-Codes scannen zu können.";
@@ -1697,7 +1697,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PL4YWAM25J;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/IDWallet/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Erlaube den Zugriff, um QR-Codes scannen zu können.";
