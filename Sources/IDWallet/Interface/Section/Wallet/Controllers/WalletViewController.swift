@@ -77,6 +77,7 @@ final class WalletViewController: BareBaseViewController {
     lazy var contentWalletView: ContentWalletView = {
         let view = ContentWalletView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view .clipsToBounds = true
         view.delegate = self
         return view
     }()

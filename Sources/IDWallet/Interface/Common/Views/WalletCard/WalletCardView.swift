@@ -19,6 +19,18 @@ private enum Constants {
         
         static let alphaExpired: CGFloat = 0.8
         static let alphaValid: CGFloat = 1.0
+        
+        enum Shadow {
+            static let color: UIColor = .walBlack
+            static let offset: CGSize = .init(width: 0, height: 0)
+            static let radius: CGFloat = 3.0
+            static let opacity: Float = 0.3
+        }
+        
+        enum Border {
+            static let color: UIColor = .white
+            static let width: CGFloat = 0.5
+        }
     }
     
     enum Layouts {
@@ -27,7 +39,7 @@ private enum Constants {
         
         static let validityViewHeightRatio: CGFloat = 24 / 60
         static let walletCardWidthHeightRatio: CGFloat = 327 / 207.5
-        static let walletCardHeaderWidthHeightRatio: CGFloat = 60 / 207.5
+        static let walletCardHeaderHeightRatio: CGFloat = 60 / 207.5
         
         static let valuesSpacing: CGFloat = 10
         
@@ -166,7 +178,19 @@ class WalletCardView: UIView {
     // MARK: - Layout
     
     private func setupLayout() {
-        clipsToBounds = true
+        clipsToBounds = false
+        
+        layer.borderColor = Style.Border.color.cgColor
+        layer.borderWidth = Style.Border.width
+        
+        layer.shadowOffset = Style.Shadow.offset
+        layer.shadowRadius = Style.Shadow.radius
+        layer.shadowColor = Style.Shadow.color.cgColor
+        layer.shadowOpacity = Style.Shadow.opacity
+        
+        // Must define cornerRadius on both the background and the views layer
+        backgroundImage.layer.masksToBounds = true
+        backgroundImage.layer.cornerRadius = Layout.cardCornerRadius
         layer.cornerRadius = Layout.cardCornerRadius
         
         embed(backgroundImage)
@@ -189,7 +213,7 @@ class WalletCardView: UIView {
                                 "containerBottom": Layout.valuesBottomSpacing]) + [
                                 
             widthAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardWidthHeightRatio),
-            headerContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardHeaderWidthHeightRatio),
+            headerContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardHeaderHeightRatio),
             primaryValuesContainer.widthAnchor.constraint(equalTo: secondaryValuesContainer.widthAnchor)
         ]
         constraints.activate()
@@ -239,9 +263,19 @@ class WalletCardView: UIView {
         super.init(frame: .zero)
         setupLayout()
     }
+    
+    convenience init(with walletData: WalletCardModel) {
+        self.init()
+        self.configure(with: walletData)
+    }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    convenience init?(with walletData: WalletCardModel, coder: NSCoder) {
+        self.init(coder: coder)
+        self.configure(with: walletData)
     }
 
     override func awakeFromNib() {

@@ -16,9 +16,18 @@ import UIKit
 private enum Constants {
     enum Layouts {
         static let itemEdgeSpacing: CGFloat = 30
-        static let itemHeightWidthRatio: CGFloat = 207.5 / 327
+        static let itemHeaderHeight: CGFloat = 60
+        static let itemRelativeWidth: CGFloat = 327
+        static let itemRelativeHeight: CGFloat = 207.5
+        
+        static let itemHeightWidthRatio: CGFloat = itemRelativeHeight / itemRelativeWidth
+        static let itemBodyHeightRatio: CGFloat = (itemRelativeHeight - itemHeaderHeight) / itemRelativeHeight
+        static let itemVOffsetRatio: CGFloat = itemHeightWidthRatio * itemBodyHeightRatio * -1
+        
         static let collectionViewEstimatedCellHeight: NSCollectionLayoutDimension = .fractionalWidth(itemHeightWidthRatio)
         static let collectionViewEstimatedSupplementaryHeight: NSCollectionLayoutDimension = .estimated(50)
+        
+        static let scrollViewVerticalInset: CGFloat = 4
     }
 }
 
@@ -26,85 +35,75 @@ private enum Constants {
 class ContentWalletView: UIView {
     fileprivate typealias Layout = Constants.Layouts
     
-    // MARK: CollectionView
-    private typealias Section = Int
-    private typealias DataSource = UICollectionViewDiffableDataSource<Section, Row>
-    private typealias DataSourceSnapshot = NSDiffableDataSourceSnapshot<Section, Row>
-     
-    private struct Row: Hashable, Equatable {
-        let indexPath: IndexPath
-        let content: WalletCardModel
-    }
+    /// Used to store the calculated UIStackView spacing when layouting the `contentStackViews` elements
+    /// This avoids having to re-calculate the offset whenever the scrollview triggers a bounce or similar events that need this value
+    private var stackSpacing: CGFloat = 0.0
     
     /// Delegate that forwards `addDocument(:_)` calls from the `AddDocumentSupplementaryView`
-    weak var delegate: AddDocumentDelegate?
+    weak var delegate: AddDocumentDelegate? {
+        get { addDocumentView.delegate }
+        set { addDocumentView.delegate = newValue }
+    }
     
-    private lazy var dataSource: DataSource = {
-        let walletCardCell = UICollectionView.CellRegistration<WalletEntryCollectionViewCell, WalletCardModel> {
-//            $0.delegate = self // TODO: Interaction Delegate for Card Details
-            $0.configure(with: $2, at: $1)
-        }
-        
-        let dataSource = DataSource(collectionView: walletCollectionView) {
-            return $0.dequeueConfiguredReusableCell(using: walletCardCell, for: $1, item: $2.content)
-        }
-        
-        let footerRegistration = UICollectionView
-            .SupplementaryRegistration<AddDocumentSupplementaryView>(elementKind: UICollectionView.elementKindSectionFooter) { [weak self] (supplementView, _, _) in
-            guard let self = self else { return }
-            supplementView.delegate = self.delegate
-        }
-        
-        dataSource.supplementaryViewProvider = {
-            guard $1 == UICollectionView.elementKindSectionFooter else { return nil }
-            return $0.dequeueConfiguredReusableSupplementary(using: footerRegistration, for: $2)
-        }
-        
-        return dataSource
+    lazy var contentStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.alignment = .fill
+        stackView.axis = .vertical
+        stackView.distribution = .fill
+        stackView.contentMode = .scaleToFill
+        stackView.backgroundColor = .clear
+        return stackView
     }()
     
-    lazy var walletCollectionView: UICollectionView = {
-        let layout: UICollectionViewLayout = {
-            let layoutItem = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                                                      heightDimension: Layout.collectionViewEstimatedCellHeight))
-            layoutItem.edgeSpacing = .init(leading: nil, top: .fixed(Layout.itemEdgeSpacing), trailing: nil, bottom: nil)
-            
-            let supplementaryView = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                                                                                  heightDimension: Layout.collectionViewEstimatedSupplementaryHeight),
-                                                                                elementKind: UICollectionView.elementKindSectionFooter,
-                                                                                alignment: .bottom)
-            supplementaryView.zIndex = 2
-            supplementaryView.pinToVisibleBounds = true
-            
-            let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                                                           heightDimension: .estimated(150)),
-                                                         subitems: [layoutItem])
-            let layoutSection = NSCollectionLayoutSection(group: group)
-            layoutSection.boundarySupplementaryItems = [supplementaryView]
-            
-            return UICollectionViewCompositionalLayout(section: layoutSection)
-        }()
-        
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .clear
-        return collectionView
+    lazy var contentScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.clipsToBounds = false
+        scrollView.isExclusiveTouch = true
+        scrollView.alwaysBounceVertical = true
+        scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.alwaysBounceHorizontal = false
+        scrollView.contentInset = .init(top: Layout.itemEdgeSpacing, left: 0, bottom: Layout.itemEdgeSpacing, right: 0)
+        return scrollView
     }()
+    
+    lazy var addDocumentView = AddDocumentButtonView()
     
     private func setupLayout() {
-        embed(walletCollectionView)
-        dataSource.apply(.init())
+        embed(contentScrollView, insets: .init(top: 0, left: Layout.scrollViewVerticalInset, bottom: 0, right: Layout.scrollViewVerticalInset))
+        contentScrollView.embed(contentStackView)
+        
+        [
+            contentStackView.widthAnchor.constraint(equalTo: contentScrollView.widthAnchor)
+        ].activate()
+    }
+    
+    private func updateLayout() {
+        print("Updating Layout")
+        stackSpacing = contentScrollView.frame.width * Layout.itemVOffsetRatio
+        contentStackView.spacing = stackSpacing
     }
     
     func update(walletData: [WalletCardModel]) {
-        var snapshot = DataSourceSnapshot()
-        snapshot.appendSections([0])
-        snapshot.appendItems(walletData.enumerated().map {
-            .init(indexPath: .init(row: $0.offset, section: 0), content: $0.element)
-        },
-                             toSection: 0)
+        contentStackView.removeArrangedSubviews()
+        walletData.enumerated().forEach {
+            let walletView = WalletCardView(with: $0.element, offset: $0.offset)
+            contentStackView.addArrangedSubview(walletView)
+            
+            [
+                walletView.widthAnchor.constraint(equalTo: contentStackView.widthAnchor),
+                walletView.heightAnchor.constraint(equalTo: walletView.widthAnchor, multiplier: Layout.itemHeightWidthRatio)
+            ].activate()
+        }
         
-        dataSource.apply(snapshot, animatingDifferences: true)
+        if let lastView = contentStackView.arrangedSubviews.last {
+            contentStackView.setCustomSpacing(0, after: lastView)
+        }
+        addDocumentView.layer.zPosition = CGFloat(walletData.endIndex)
+        contentStackView.addArrangedSubview(addDocumentView)
     }
     
     // MARK: Lifecycle
@@ -120,5 +119,17 @@ class ContentWalletView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         setupLayout()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        updateLayout()
+    }
+}
+
+fileprivate extension WalletCardView {
+    convenience init(with walletData: WalletCardModel, offset: Int) {
+        self.init(with: walletData)
+        layer.zPosition = CGFloat(offset)
     }
 }
