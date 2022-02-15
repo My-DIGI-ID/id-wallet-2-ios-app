@@ -27,6 +27,7 @@ class CustomAgentService {
         
         // First time setup of the agent
         try await Aries.agent.initialize(with: Self.id, Self.key, url)
+        try await Aries.agent.open(with: Self.id, Self.key)
         
         // Set the first master secret to enable credential handling
         try await Aries.agent.run {
