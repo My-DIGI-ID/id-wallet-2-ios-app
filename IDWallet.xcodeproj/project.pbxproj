@@ -197,6 +197,7 @@
 		950C06A027AD3EF6006D0CAB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 950C069E27AD3EF6006D0CAB /* Localizable.strings */; };
 		950C06A327AD3F00006D0CAB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 950C06A127AD3F00006D0CAB /* Localizable.strings */; };
 		9519372A279187D200ED0AF2 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95193729279187D200ED0AF2 /* WebViewController.swift */; };
+		9521F56527BBF41D003E2CCF /* IDWalletSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9521F56427BBF41D003E2CCF /* IDWalletSecurity.swift */; };
 		952FF66B2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
 		952FF66C2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
 		952FF66D2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
@@ -350,6 +351,7 @@
 		950C069F27AD3EF6006D0CAB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Localizable.strings; sourceTree = "<group>"; };
 		950C06A227AD3F00006D0CAB /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = Localizable.strings; sourceTree = "<group>"; };
 		95193729279187D200ED0AF2 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		9521F56427BBF41D003E2CCF /* IDWalletSecurity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IDWalletSecurity.swift; sourceTree = "<group>"; };
 		952FF66A2796E703003840F9 /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		953F26C727AD6B92008704E1 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = InfoPlist.strings; sourceTree = "<group>"; };
 		953F26CD27AD71E3008704E1 /* ConnectionConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionConfirmationViewController.swift; sourceTree = "<group>"; };
@@ -414,6 +416,7 @@
 		630621FF27B29B6B00BABE0B /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				9521F56427BBF41D003E2CCF /* IDWalletSecurity.swift */,
 				6306220127B29B7300BABE0B /* CustomAgentService.swift */,
 				6306220027B29B7300BABE0B /* CustomConnectionService.swift */,
 				6306220227B29B7300BABE0B /* CustomCredentialService.swift */,
@@ -1294,6 +1297,7 @@
 				8862A89E27AD368500C9780B /* AddDocumentButtonView.swift in Sources */,
 				8847D77A2756376000C2A25B /* SceneDelegate.swift in Sources */,
 				8EDC79CA278F727F0032E348 /* WalletTabBarController.swift in Sources */,
+				9521F56527BBF41D003E2CCF /* IDWalletSecurity.swift in Sources */,
 				9555836B27B16A7900D3E47B /* OverviewViewModel.swift in Sources */,
 				8EF119A327718A8A00BDC5CE /* PinEntrySuccessViewController.swift in Sources */,
 				8E83F4E9276B2EE300469187 /* UIViewExtensions.swift in Sources */,
