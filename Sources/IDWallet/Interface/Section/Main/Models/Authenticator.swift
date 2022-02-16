@@ -57,9 +57,14 @@ class Authenticator {
             ContractError.guardAssertionFailed("Attempt to define PIN even though it is already defined.")
                 .fatal()
         }
-        
-        self.pin = pin
-        self.state = .authenticated(authenticationTime: Date())
+        do {
+            let walletKey = try await IDWalletSecurity.shared().save(pin: pin)
+            state = .authenticated(authenticationTime: Date())
+            self.pin = pin
+        } catch {
+            state = .uninitialized
+        }
+
     }
     
     func authenticate(pin: String) async -> AuthenticationState {
@@ -76,22 +81,4 @@ class Authenticator {
         state = .uninitialized
         pin = nil
     }
-
-      do {
-          try await IDWalletSecurity.shared().save(pin: pin)
-      } catch {
-      }
-    self.pin = pin
-    self.state = .authenticated(authenticationTime: Date())
-  }
-
-  func authenticate(pin: String) async -> AuthenticationState {
-    state = (pin == self.pin ? .authenticated(authenticationTime: Date()) : .authenticationFailed(authenticationTime: Date()))
-    return state
-  }
-
-  func reset() {
-    state = .uninitialized
-    pin = nil
-  }
 }
