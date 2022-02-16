@@ -449,8 +449,7 @@ extension ViewFactory {
     @discardableResult
     func makeOrUpdateImageView(
         id: ViewIDType,
-        image: UIImage? = nil,
-        imageName: String? = nil,
+        image: ImageNameIdentifier? = nil,
         in parent: UIView? = nil,
         didMake: inout Bool,
         _ then: ((UIImageView) -> Void)? = nil
@@ -458,9 +457,7 @@ extension ViewFactory {
         var result = controlledView(id, ofType: UIImageView.self, parent: parent)
         if result == nil {
             if let image = image {
-                result = UIImageView(image: image)
-            } else if let imageName = imageName {
-                result = UIImageView(image: UIImage.requiredImage(name: imageName))
+                result = UIImageView(identifiedBy: image)
             } else {
                 result = UIImageView()
             }

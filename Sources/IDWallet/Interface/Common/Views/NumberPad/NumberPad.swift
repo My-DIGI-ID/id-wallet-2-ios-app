@@ -13,7 +13,9 @@
 
 import UIKit
 
-// MARK: - Configuration
+fileprivate extension ImageNameIdentifier {
+    static let deleteBack = ImageNameIdentifier(rawValue: "DeleteLeft")
+}
 
 extension NumberPad {
     struct Style {
@@ -194,7 +196,7 @@ class NumberPad: UIView {
         
         func deleteKey() -> UIView {
             let result = UIButton.systemButton(
-                with: UIImage.requiredImage(name: "delete.backward.pdf").withSize(targetSize: CGSize(width: 30, height: 30)),
+                with: UIImage(existing: .deleteBack).withSize(targetSize: CGSize(width: 30, height: 30)),
                 target: self,
                 action: #selector(didTapDeleteKey(sender:))
             )

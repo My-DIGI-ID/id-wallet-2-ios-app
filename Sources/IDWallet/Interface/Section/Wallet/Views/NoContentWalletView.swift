@@ -27,7 +27,7 @@ private enum Constants {
 }
 
 fileprivate extension ImageNameIdentifier {
-    static let emptyWalletIcon = ImageNameIdentifier(rawValue: "ImageEmptyWalletPage")
+    static let emptyWalletIcon = ImageNameIdentifier(rawValue: "EmptyWallet")
     static let systemPlus = ImageNameIdentifier(rawValue: "plus")
 }
 

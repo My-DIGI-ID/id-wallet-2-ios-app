@@ -15,6 +15,10 @@ import Foundation
 import SwiftUI
 import UIKit
 
+fileprivate extension ImageNameIdentifier {
+    static let pinSuccess = ImageNameIdentifier(rawValue: "PinEntrySuccess")
+}
+
 extension PinEntrySuccessViewController {
     enum ViewID: String, BaseViewID {
         case containerView
@@ -167,7 +171,7 @@ PinEntrySuccessViewController.ViewModel
 
             makeOrUpdateImageView(
                 id: .imageView,
-                imageName: "ImagePinEntrySuccess",
+                image: .pinSuccess,
                 in: containerView, didMake: &didCreate
             ) { imageView in
                 imageView.translatesAutoresizingMaskIntoConstraints = false

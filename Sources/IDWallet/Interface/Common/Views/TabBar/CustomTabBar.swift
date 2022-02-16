@@ -168,7 +168,7 @@ class CustomTabBar: UIView {
             separator.topAnchor.constraint(equalTo: topAnchor),
             separator.heightAnchor.constraint(equalToConstant: 1)
         ])
-        separator.backgroundColor = .init(hexString: "D8D8D8")
+        separator.backgroundColor = .grey6
     }
     
     private func setup() {

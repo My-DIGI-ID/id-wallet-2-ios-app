@@ -14,6 +14,10 @@
 import Foundation
 import UIKit
 
+fileprivate extension ImageNameIdentifier {
+    static let exclamation = ImageNameIdentifier(rawValue: "Exclamation")
+}
+
 extension PinEntryIntroViewController {
     enum ViewID: String, BaseViewID {
         case containerView
@@ -215,11 +219,19 @@ PinEntryIntroViewController.ViewModel
                     
                     infoBox.alignment = .leading
                     infoBox.layer.cornerRadius = 15
-                    infoBox.backgroundColor = .init(hexString: "F0F2FB")
+                    infoBox.backgroundColor = .grey7
                     infoBox.isLayoutMarginsRelativeArrangement = true
                     infoBox.directionalLayoutMargins = NSDirectionalEdgeInsets(
                         top: 20, leading: 20, bottom: 20, trailing: 20)
-
+                    
+                    makeOrUpdateImageView(
+                        id: .infoBoxIcon,
+                        image: .exclamation,
+                        in: infoBox, didMake: &didCreate
+                    ) { infoBoxIcon in
+                        infoBoxIcon.translatesAutoresizingMaskIntoConstraints = false
+                    }
+                    
                     makeOrUpdateVStack(
                         id: .infoBoxTextWrapper,
                         in: infoBox, didMake: &didCreate

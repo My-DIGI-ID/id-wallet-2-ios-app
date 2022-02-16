@@ -1,42 +1,14 @@
 //
-// Copyright 2022 Bundesrepublik Deutschland
+//  UIImageExtensions.swift
+//  IDWallet
 //
-// Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with
-// the License. You may obtain a copy of the License at
-//
-// http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
-// an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
-// specific language governing permissions and limitations under the License.
+//  Created by Michael Utech on 11.12.21.
 //
 
 import UIKit
 
 extension UIImage {
-    class func requiredImage(name: String) -> UIImage {
-        if let result = UIImage(
-            named: name, in: Bundle(for: CustomFontLoader.self), compatibleWith: nil
-        ) {
-            return result
-        }
-        
-        // If this fails, make sure that an image set with the specified name exists in Assets.
-        ContractError.missingImage(name).fatal()
-    }
-    
-    func scaledToWidth(width: CGFloat) -> UIImage {
-        let scale = width / size.width
-        let size = CGSize(width: width, height: scale * size.height)
-        return withSize(targetSize: size)
-    }
-    
-    func scaledToHeight(height: CGFloat) -> UIImage {
-        let scale = height / size.height
-        let size = CGSize(width: scale * size.width, height: height)
-        return withSize(targetSize: size)
-    }
-    
+    // FIXME: Size should be determined by constraints of the embedding view
     func withSize(targetSize: CGSize) -> UIImage {
         // https://stackoverflow.com/questions/31314412/how-to-resize-image-in-swift
         let image = self

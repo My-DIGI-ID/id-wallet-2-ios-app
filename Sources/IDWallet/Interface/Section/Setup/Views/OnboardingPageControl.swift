@@ -18,7 +18,10 @@ import UIKit
 class OnboardingPageControl: UIPageControl {
 }
 
-// MARK: - Local Types
+fileprivate extension ImageNameIdentifier {
+    static let activePage = ImageNameIdentifier(rawValue: "PageIndicatorActive")
+    static let inactivePage = ImageNameIdentifier(rawValue: "PageIndicatorInactive")
+}
 
 extension OnboardingPageControl {
 
@@ -27,9 +30,9 @@ extension OnboardingPageControl {
     let tintColor: UIColor?
 
     static let defaultActive = IndicatorStyle(
-      image: ThemeContext.alternative.images.onboardingActivePageIndicator)
+        image: .init(existing: .activePage))
     static let defaultInactive = IndicatorStyle(
-      image: ThemeContext.alternative.images.onboardingInactivePageIndicator)
+      image: .init(existing: .inactivePage))
 
     init(image: UIImage, tintColor: UIColor? = nil) {
       self.image = image

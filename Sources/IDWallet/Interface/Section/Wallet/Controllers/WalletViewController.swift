@@ -29,7 +29,7 @@ private enum Constants {
 }
 
 fileprivate extension ImageNameIdentifier {
-    static let userIcon = ImageNameIdentifier(rawValue: "ImageIconUser")
+    static let userIcon = ImageNameIdentifier(rawValue: "UserProfile")
     
     static let baseIDBackground = ImageNameIdentifier(rawValue: "BaseIDBackground")
     static let ddlBackground = ImageNameIdentifier(rawValue: "DDLBackground")

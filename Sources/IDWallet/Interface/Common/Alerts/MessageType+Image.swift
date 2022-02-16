@@ -14,35 +14,33 @@
 import Foundation
 import UIKit
 
-private enum Constants {
-    enum Image {
-        static let fail: UIImage = #imageLiteral(resourceName: "fail")
-        static let error: UIImage = #imageLiteral(resourceName: "error")
-        static let unkown: UIImage = #imageLiteral(resourceName: "unknownError")
-        static let jailbreak: UIImage = #imageLiteral(resourceName: "jailbreak")
-        static let noInternet: UIImage = #imageLiteral(resourceName: "noInternet")
-        static let timeout: UIImage = #imageLiteral(resourceName: "timeout")
-        static let success: UIImage = #imageLiteral(resourceName: "success")
-    }
+fileprivate extension ImageNameIdentifier {
+    static let fail = ImageNameIdentifier(rawValue: "Fail")
+    static let error = ImageNameIdentifier(rawValue: "Error")
+    static let unkown = ImageNameIdentifier(rawValue: "Unknown")
+    static let jailbreak = ImageNameIdentifier(rawValue: "Jailbreak")
+    static let noInternet = ImageNameIdentifier(rawValue: "NoInternet")
+    static let timeout = ImageNameIdentifier(rawValue: "Timeout")
+    static let success = ImageNameIdentifier(rawValue: "Success")
 }
 
 extension MessageViewType {
     var image: UIImage {
         switch self {
         case .fail:
-            return Constants.Image.fail
+            return .init(existing: .fail)
         case .error:
-            return Constants.Image.error
+            return .init(existing: .error)
         case .unknownError:
-            return Constants.Image.unkown
+            return .init(existing: .unkown)
         case .jailbreak:
-            return Constants.Image.jailbreak
+            return .init(existing: .jailbreak)
         case .noInternet:
-            return Constants.Image.noInternet
+            return .init(existing: .noInternet)
         case .timeout:
-            return Constants.Image.timeout
+            return .init(existing: .timeout)
         case .success:
-            return Constants.Image.success
+            return .init(existing: .success)
         }
     }
 }
