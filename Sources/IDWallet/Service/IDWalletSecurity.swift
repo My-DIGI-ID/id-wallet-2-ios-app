@@ -86,14 +86,23 @@ public class IDWalletSecurity: IDWalletSecure {
         try valet.removeObject(forKey: Constants.appAttestKeyId)
     }
 
-    func save(pin: String) async throws {
+    func save(pin: String) async throws -> Data {
         // 2 - 5
-        let preKey = try await DefaultWalletService.generateKey(with: pin)
+        guard let preKey = try await DefaultWalletService.generateKey(with: pin).data(using: .utf8) else {
+            throw CryptoError.general
+        }
         let walletSalt = try Data.generateSalt()
         try valet.setObject(walletSalt, forKey: Constants.walletSalt)
-        try valet.setString(preKey, forKey: Constants.preKey)
+        try valet.setObject(preKey, forKey: Constants.preKey)
 
         let walletKeyDerivat = try pin.pbkdf2(saltData: walletSalt)
+        var keyEncByte = Data()
+        keyEncByte.append(walletKeyDerivat)
+        keyEncByte.append(preKey)
+        let walletKeySha256 = SHA256.hash(data: keyEncByte)
+
+        // make step 8
+        let walletKey = Data()
 
         // 10 - 12
         guard let pinSalt = try? Data.generateSalt() else {
@@ -102,5 +111,13 @@ public class IDWalletSecurity: IDWalletSecure {
         let derivat = try pin.pbkdf2(saltData: pinSalt)
         try valet.setObject(pinSalt, forKey: Constants.pinSalt)
         try valet.setObject(derivat, forKey: Constants.walletPinDerivat)
+
+        return walletKey
+    }
+
+    func getStoredPassword() throws -> (Data, Data) {
+        let pinSalt = try valet.object(forKey: Constants.pinSalt)
+        let derivat = try valet.object(forKey: Constants.walletPinDerivat)
+        return (pinSalt, derivat)
     }
 }
