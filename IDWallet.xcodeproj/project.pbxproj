@@ -212,6 +212,7 @@
 		9555836F27B1827000D3E47B /* OverviewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9555836E27B1827000D3E47B /* OverviewCoordinator.swift */; };
 		9555837127B1AA5C00D3E47B /* UIImageView+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9555837027B1AA5C00D3E47B /* UIImageView+URL.swift */; };
 		955D3F2A27ADAB290004AD70 /* NSAttributedString+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 955D3F2927ADAB290004AD70 /* NSAttributedString+Image.swift */; };
+		9579D88027BD14C100598C07 /* Base58String in Frameworks */ = {isa = PBXBuildFile; productRef = 9579D87F27BD14C100598C07 /* Base58String */; };
 		9586384227A9926C0030DCF3 /* ScannerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9586384127A9926C0030DCF3 /* ScannerCoordinator.swift */; };
 		9586384427A993AF0030DCF3 /* QRScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9586384327A993AF0030DCF3 /* QRScannerViewController.swift */; };
 		95873EB42791A98700A924C8 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95873EB32791A98700A924C8 /* WebView.swift */; };
@@ -397,6 +398,7 @@
 				6306220A27B29BAF00BABE0B /* Aries in Frameworks */,
 				8EAF840C275EEEA000283D0B /* CocoaLumberjack in Frameworks */,
 				6FA511362771B7A100D068BD /* AusweisApp2 in Frameworks */,
+				9579D88027BD14C100598C07 /* Base58String in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1091,6 +1093,7 @@
 				6FA511352771B7A100D068BD /* AusweisApp2 */,
 				6F1A9B8727902711009B3359 /* Mediator */,
 				6306220927B29BAF00BABE0B /* Aries */,
+				9579D87F27BD14C100598C07 /* Base58String */,
 			);
 			productName = IDWallet;
 			productReference = 8847D7742756376000C2A25B /* IDWallet.app */;
@@ -1174,6 +1177,7 @@
 				6FA511342771B7A100D068BD /* XCRemoteSwiftPackageReference "AusweisApp2-SDK-iOS" */,
 				6F1A9B83279025EC009B3359 /* XCRemoteSwiftPackageReference "ios-aries-sdk" */,
 				6F1A9B8627902711009B3359 /* XCRemoteSwiftPackageReference "ios-mediator-sdk" */,
+				9579D87E27BD14C100598C07 /* XCRemoteSwiftPackageReference "Base58String" */,
 			);
 			productRefGroup = 8847D7752756376000C2A25B /* Products */;
 			projectDirPath = "";
@@ -1883,6 +1887,14 @@
 				minimumVersion = 3.7.0;
 			};
 		};
+		9579D87E27BD14C100598C07 /* XCRemoteSwiftPackageReference "Base58String" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/cloutiertyler/Base58String.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1920,6 +1932,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8EAF840A275EEEA000283D0B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
 			productName = CocoaLumberjack;
+		};
+		9579D87F27BD14C100598C07 /* Base58String */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9579D87E27BD14C100598C07 /* XCRemoteSwiftPackageReference "Base58String" */;
+			productName = Base58String;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -17,6 +17,7 @@ import Foundation
 import Valet
 import Aries
 import Mediator
+import Base58String
 
 private enum Constants {
     // swiftlint:disable:next force_unwrapping
@@ -86,7 +87,7 @@ public class IDWalletSecurity: IDWalletSecure {
         try valet.removeObject(forKey: Constants.appAttestKeyId)
     }
 
-    func save(pin: String) async throws -> Data {
+    func save(pin: String) async throws -> String {
         // 2 - 5
         guard let preKey = try await DefaultWalletService.generateKey(with: pin).data(using: .utf8) else {
             throw CryptoError.general
@@ -95,16 +96,6 @@ public class IDWalletSecurity: IDWalletSecure {
         try valet.setObject(walletSalt, forKey: Constants.walletSalt)
         try valet.setObject(preKey, forKey: Constants.preKey)
 
-        let walletKeyDerivat = try pin.pbkdf2(saltData: walletSalt)
-        var keyEncByte = Data()
-        keyEncByte.append(walletKeyDerivat)
-        keyEncByte.append(preKey)
-        let walletKeySha256 = SHA256.hash(data: keyEncByte)
-
-        // make step 8
-        let walletKey = Data()
-
-        // 10 - 12
         guard let pinSalt = try? Data.generateSalt() else {
             throw CryptoError.general
         }
@@ -112,7 +103,21 @@ public class IDWalletSecurity: IDWalletSecure {
         try valet.setObject(pinSalt, forKey: Constants.pinSalt)
         try valet.setObject(derivat, forKey: Constants.walletPinDerivat)
 
-        return walletKey
+        return try getWalletKey(for: pin)
+    }
+
+    func getWalletKey(for pin: String) throws -> String {
+        let preKey = try valet.object(forKey: Constants.preKey)
+        let walletSalt = try valet.object(forKey: Constants.walletSalt)
+        let walletKeyDerivat = try pin.pbkdf2(saltData: walletSalt)
+
+        var keyEncByte = Data()
+        keyEncByte.append(walletKeyDerivat)
+        keyEncByte.append(preKey)
+
+        let walletKeySha256 = SHA256.hash(data: keyEncByte)
+
+        return String(base58Encoding: Data(walletKeySha256))
     }
 
     func getStoredPassword() throws -> (Data, Data) {
