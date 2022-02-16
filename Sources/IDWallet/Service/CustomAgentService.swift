@@ -21,17 +21,18 @@ import CryptoKit
 
 class CustomAgentService {
     private static let id = "ID"
-    private static let key = "KEY"
     private static let genesis = "idw_eesditest"
     
-    func setup() async throws {
+    func setup(with pin: String) async throws {
         guard let url = Bundle.main.url(forResource: Self.genesis, withExtension: nil)?.path else {
             return
         }
-        
+
+        let walletKey = try IDWalletSecurity.shared().getWalletKey(for: pin)
+
         // First time setup of the agent
-        try await Aries.agent.initialize(with: Self.id, Self.key, url)
-        try await Aries.agent.open(with: Self.id, Self.key)
+        try await Aries.agent.initialize(with: Self.id, walletKey, url)
+        try await Aries.agent.open(with: Self.id, walletKey)
         
         // Set the first master secret to enable credential handling
         try await Aries.agent.run {

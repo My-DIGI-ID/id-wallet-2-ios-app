@@ -87,8 +87,7 @@ public class IDWalletSecurity: IDWalletSecure {
         try valet.removeObject(forKey: Constants.appAttestKeyId)
     }
 
-    func save(pin: String) async throws -> String {
-        // 2 - 5
+    func save(pin: String) async throws -> String {        
         guard let preKey = try await DefaultWalletService.generateKey(with: pin).data(using: .utf8) else {
             throw CryptoError.general
         }
