@@ -11,6 +11,24 @@
         }
       },
       {
+        "package": "Base58String",
+        "repositoryURL": "https://github.com/cloutiertyler/Base58String.git",
+        "state": {
+          "branch": null,
+          "revision": "496ad09a11f2212643a7413570effc16b7c76506",
+          "version": "0.1.0"
+        }
+      },
+      {
+        "package": "BigInt",
+        "repositoryURL": "https://github.com/attaswift/BigInt.git",
+        "state": {
+          "branch": null,
+          "revision": "018a5925f60f9e0523edd261de394a0898fe95b7",
+          "version": "3.1.0"
+        }
+      },
+      {
         "package": "CocoaLumberjack",
         "repositoryURL": "https://github.com/CocoaLumberjack/CocoaLumberjack.git",
         "state": {
@@ -44,6 +62,15 @@
           "branch": "feature/BKAWALIOS-215",
           "revision": "e5764c0d603d6250021e4bfb0efa00a8b0c6582c",
           "version": null
+        }
+      },
+      {
+        "package": "SipHash",
+        "repositoryURL": "https://github.com/attaswift/SipHash",
+        "state": {
+          "branch": null,
+          "revision": "e325083424688055363bbfcb7f1a440d7d7a1bae",
+          "version": "1.2.2"
         }
       },
       {
