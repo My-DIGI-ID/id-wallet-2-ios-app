@@ -91,7 +91,12 @@ extension SetupCoordinator {
                     switch result {
                     case .pin(let pin, _):
                         if pin == previousPin {
-                            self.startPinEntrySuccess(from: viewController, pin: pin)
+                            Task {
+                                self.presenter.presentModal(SpinnerViewController(), options: .init(animated: true, modalPresentationStyle: .fullScreen, modalTransitionStyle: .crossDissolve))
+                                await self.model.definePIN(pin: pin)
+                                self.presenter.dismissModal(completion: nil)
+                                self.startPinEntrySuccess(from: viewController, pin: pin)
+                            }
                         } else {
                             self.startPinEntryFailure(from: viewController)
                         }
@@ -105,10 +110,7 @@ extension SetupCoordinator {
     private func startPinEntrySuccess(from previous: PinEntryViewController, pin: String) {
         let viewModel = PinEntrySuccessViewController.ViewModel(
             commit: { viewController in
-                Task {
-                    await self.model.definePIN(pin: pin)
                     self.finish(from: viewController)
-                }
             },
             cancel: { viewController in
                 self.startOnboarding(from: viewController)
@@ -142,5 +144,21 @@ extension SetupCoordinator {
         } else {
             completion()
         }
+    }
+}
+
+class SpinnerViewController: UIViewController {
+    var spinner = UIActivityIndicatorView(style: .large)
+
+    override func loadView() {
+        view = UIView()
+        view.backgroundColor = .primaryBlue
+
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        spinner.startAnimating()
+        view.addSubview(spinner)
+
+        spinner.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 }

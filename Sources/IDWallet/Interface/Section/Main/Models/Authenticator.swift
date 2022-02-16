@@ -11,6 +11,7 @@
 // specific language governing permissions and limitations under the License.
 //
 import Foundation
+import Aries
 
 // This implementation is just a stub serving as placeholder until we
 // have a backend. I would use a to-do marker, but that would make
@@ -59,21 +60,30 @@ class Authenticator {
         }
         do {
             let walletKey = try await IDWalletSecurity.shared().save(pin: pin)
+            try await CustomAgentService().setup(with: walletKey)
             state = .authenticated(authenticationTime: Date())
             self.pin = pin
+            print("AGENT SETUP SUCCESSFUL")
         } catch {
+            print("AGENT SETUP FAILED: \(error)")
             state = .uninitialized
         }
-
     }
     
     func authenticate(pin: String) async -> AuthenticationState {
-        state = (
-            pin == self.pin ?
-                .authenticated(
-                    authenticationTime: Date()) :
-                    .authenticationFailed(
-                        authenticationTime: Date()))
+        do {
+            let storedPassword = try IDWalletSecurity.shared().getStoredPassword()
+            guard pin.validate(with: storedPassword) else {
+                state = .authenticationFailed(authenticationTime: Date())
+                return state
+            }
+            let walletKey = try IDWalletSecurity.shared().getWalletKey(for: pin)
+            try await Aries.agent.open(with: "ID", walletKey)
+            state = .authenticated(authenticationTime: Date())
+        } catch {
+            print(error)
+            state = .authenticationFailed(authenticationTime: Date())
+        }
         return state
     }
     

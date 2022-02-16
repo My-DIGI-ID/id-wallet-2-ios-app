@@ -21,17 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        initializeLogging()
-        
-        Task(priority: .userInitiated) {
-            do {
-                try await CustomAgentService().setup()
-                print("AGENT SETUP SUCCESSFUL")
-            } catch {
-                print("AGENT SETUP FAILED: \(error)")
-            }
-        }
-        
+        initializeLogging()        
         return true
     }
     

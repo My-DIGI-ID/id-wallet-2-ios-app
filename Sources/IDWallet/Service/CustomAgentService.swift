@@ -23,13 +23,10 @@ class CustomAgentService {
     private static let id = "ID"
     private static let genesis = "idw_eesditest"
     
-    func setup(with pin: String) async throws {
+    func setup(with walletKey: String) async throws {
         guard let url = Bundle.main.url(forResource: Self.genesis, withExtension: nil)?.path else {
             return
         }
-
-        let walletKey = try IDWalletSecurity.shared().getWalletKey(for: pin)
-
         // First time setup of the agent
         try await Aries.agent.initialize(with: Self.id, walletKey, url)
         try await Aries.agent.open(with: Self.id, walletKey)

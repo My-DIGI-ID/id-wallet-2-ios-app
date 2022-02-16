@@ -310,13 +310,16 @@ class PinEntryViewController: BaseViewController<
   }
 
   @objc func commitButtonTapped(sender: UIButton) {
-    if let viewModel = viewModel,
-      viewModel.canCommit {
-      viewModel.commit(self)
-    }
+      if let viewModel = self.viewModel,
+         self.viewModel.canCommit {
+          self.viewModel.commit(self)
+      }
   }
 
   @objc func cancelButtonTapped(sender: UIButton) {
     viewModel?.cancel(self)
   }
 }
+
+
+

@@ -63,23 +63,31 @@ extension AppCoordinator {
     }
     
     private func startAuthentication() {
-        let alert = UIAlertController(
-            title: "Anmeldung",
-            message:
-                "Die PIN wurde gesetzt wird aber zum Testen wieder gelöscht da " +
-            "die Wallet Funktionalität noch nicht implementiert ist.",
-            preferredStyle: .alert)
-        alert.addAction(
-            UIAlertAction(
-                title: "OK", style: .default,
-                handler: { [weak self] _ in
-                    if let self = self {
-                        self.appState.authenticator.reset()
-                        self.start()
-                    }
-                }
-            ))
-        presenter.present(alert)
+//        let alert = UIAlertController(
+//            title: "Anmeldung",
+//            message:
+//                "Die PIN wurde gesetzt wird aber zum Testen wieder gelöscht da " +
+//            "die Wallet Funktionalität noch nicht implementiert ist.",
+//            preferredStyle: .alert)
+//        alert.addAction(
+//            UIAlertAction(
+//                title: "OK", style: .default,
+//                handler: { [weak self] _ in
+//                    if let self = self {
+////                        self.appState.authenticator.reset()
+////                        self.start()
+//                        Task {
+//                            _ = await self.appState.authenticator.authenticate(pin: "111111")
+//                            self.start()
+//                        }
+//                    }
+//                }
+//            ))
+//        presenter.present(alert)
+        Task {
+            _ = await self.appState.authenticator.authenticate(pin: "111111")
+            self.start()
+        }
     }
     
     private func startWallet() {
