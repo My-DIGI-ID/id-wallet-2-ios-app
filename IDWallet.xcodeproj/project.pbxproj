@@ -18,6 +18,12 @@
 		88136CF327BCED2000799E94 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88136CF227BCED2000799E94 /* Colors.xcassets */; };
 		88136CF427BCED2000799E94 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88136CF227BCED2000799E94 /* Colors.xcassets */; };
 		88136CF527BCED2000799E94 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88136CF227BCED2000799E94 /* Colors.xcassets */; };
+		88136CF927BD305500799E94 /* AttributedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88136CF827BD305500799E94 /* AttributedStyle.swift */; };
+		88136CFA27BD305500799E94 /* AttributedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88136CF827BD305500799E94 /* AttributedStyle.swift */; };
+		88136CFB27BD305500799E94 /* AttributedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88136CF827BD305500799E94 /* AttributedStyle.swift */; };
+		88136CFD27BD30AB00799E94 /* AttributedStyle+Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88136CFC27BD30AB00799E94 /* AttributedStyle+Styles.swift */; };
+		88136CFE27BD30AB00799E94 /* AttributedStyle+Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88136CFC27BD30AB00799E94 /* AttributedStyle+Styles.swift */; };
+		88136CFF27BD30AB00799E94 /* AttributedStyle+Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88136CFC27BD30AB00799E94 /* AttributedStyle+Styles.swift */; };
 		8820CA3B27B13E8A00B5B485 /* UIView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8820CA3A27B13E8A00B5B485 /* UIView+Subviews.swift */; };
 		8820CA3D27B1468700B5B485 /* NSAttributedString+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8820CA3C27B1468700B5B485 /* NSAttributedString+Color.swift */; };
 		8847D7782756376000C2A25B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8847D7772756376000C2A25B /* AppDelegate.swift */; };
@@ -206,7 +212,6 @@
 		952FF66D2796E703003840F9 /* WebViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952FF66A2796E703003840F9 /* WebViewModel.swift */; };
 		953F26C827AD6B92008704E1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 953F26C627AD6B92008704E1 /* InfoPlist.strings */; };
 		953F26CE27AD71E3008704E1 /* ConnectionConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953F26CD27AD71E3008704E1 /* ConnectionConfirmationViewController.swift */; };
-		9542C7E327988FF400784147 /* String+AttributedStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E227988FF400784147 /* String+AttributedStyle.swift */; };
 		9542C7E5279890E300784147 /* NSAttributedString+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */; };
 		9542C7E727997A8800784147 /* Sequence+NSLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */; };
 		9555836B27B16A7900D3E47B /* OverviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9555836A27B16A7900D3E47B /* OverviewViewModel.swift */; };
@@ -258,6 +263,8 @@
 		6306220727B29B7800BABE0B /* idw_eesditest */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = idw_eesditest; sourceTree = "<group>"; };
 		88136CF027BB95B100799E94 /* UIScrollView+Bounce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Bounce.swift"; sourceTree = "<group>"; };
 		88136CF227BCED2000799E94 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		88136CF827BD305500799E94 /* AttributedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttributedStyle.swift; sourceTree = "<group>"; };
+		88136CFC27BD30AB00799E94 /* AttributedStyle+Styles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributedStyle+Styles.swift"; sourceTree = "<group>"; };
 		8820CA3A27B13E8A00B5B485 /* UIView+Subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Subviews.swift"; sourceTree = "<group>"; };
 		8820CA3C27B1468700B5B485 /* NSAttributedString+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Color.swift"; sourceTree = "<group>"; };
 		8847D7742756376000C2A25B /* IDWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IDWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -362,7 +369,6 @@
 		952FF66A2796E703003840F9 /* WebViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewModel.swift; sourceTree = "<group>"; };
 		953F26C727AD6B92008704E1 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = InfoPlist.strings; sourceTree = "<group>"; };
 		953F26CD27AD71E3008704E1 /* ConnectionConfirmationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionConfirmationViewController.swift; sourceTree = "<group>"; };
-		9542C7E227988FF400784147 /* String+AttributedStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+AttributedStyle.swift"; sourceTree = "<group>"; };
 		9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Alignment.swift"; sourceTree = "<group>"; };
 		9542C7E627997A8800784147 /* Sequence+NSLayoutConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Sequence+NSLayoutConstraint.swift"; sourceTree = "<group>"; };
 		9555836A27B16A7900D3E47B /* OverviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewViewModel.swift; sourceTree = "<group>"; };
@@ -445,9 +451,10 @@
 		88136CF627BD245800799E94 /* Attributed Strings */ = {
 			isa = PBXGroup;
 			children = (
-				9542C7E227988FF400784147 /* String+AttributedStyle.swift */,
 				9542C7E4279890E300784147 /* NSAttributedString+Alignment.swift */,
 				8820CA3C27B1468700B5B485 /* NSAttributedString+Color.swift */,
+				88136CF827BD305500799E94 /* AttributedStyle.swift */,
+				88136CFC27BD30AB00799E94 /* AttributedStyle+Styles.swift */,
 			);
 			path = "Attributed Strings";
 			sourceTree = "<group>";
@@ -1332,7 +1339,6 @@
 				8E988175276A37B0002F629C /* MainNavigationController.swift in Sources */,
 				8EAF841D275FE2F400283D0B /* UIFontExtensions.swift in Sources */,
 				8E988188276AB53D002F629C /* SetupCoordinator.swift in Sources */,
-				9542C7E327988FF400784147 /* String+AttributedStyle.swift in Sources */,
 				8EAF8418275F4CC700283D0B /* PinCharacterRepresentation.swift in Sources */,
 				8820CA3B27B13E8A00B5B485 /* UIView+Subviews.swift in Sources */,
 				6306220327B29B7300BABE0B /* CustomConnectionService.swift in Sources */,
@@ -1347,6 +1353,7 @@
 				8E83F4E9276B2EE300469187 /* UIViewExtensions.swift in Sources */,
 				9542C7E727997A8800784147 /* Sequence+NSLayoutConstraint.swift in Sources */,
 				8E8C404D2764BFB500DBC979 /* OnboardingPageControl.swift in Sources */,
+				88136CF927BD305500799E94 /* AttributedStyle.swift in Sources */,
 				8EAF841B275FE25600283D0B /* UIColorExtensions.swift in Sources */,
 				6306220527B29B7300BABE0B /* CustomCredentialService.swift in Sources */,
 				95F9FCDC27AAF27000C0603C /* BracketView.swift in Sources */,
@@ -1386,6 +1393,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88136CFA27BD305500799E94 /* AttributedStyle.swift in Sources */,
+				88136CFE27BD30AB00799E94 /* AttributedStyle+Styles.swift in Sources */,
 				8EAF843C276102CF00283D0B /* PinCharacterRepresentation.swift in Sources */,
 				8E7554CB27729A410016DEB0 /* BareBaseVC.swift in Sources */,
 				8E988183276AB437002F629C /* AppCoordinator.swift in Sources */,
@@ -1477,8 +1486,10 @@
 				95F9A2AD27A055DA003F15B5 /* UIColor+IDWallet.swift in Sources */,
 				8E8C404F2764BFB500DBC979 /* OnboardingPageControl.swift in Sources */,
 				952FF66D2796E703003840F9 /* WebViewModel.swift in Sources */,
+				88136CFB27BD305500799E94 /* AttributedStyle.swift in Sources */,
 				8E7554C4277291DA0016DEB0 /* BaseVCStyle.swift in Sources */,
 				8EAF8431276102BA00283D0B /* PinCodeView.swift in Sources */,
+				88136CFF27BD30AB00799E94 /* AttributedStyle+Styles.swift in Sources */,
 				8E88912A2774572500D0E6A3 /* LayoutFactory.swift in Sources */,
 				8EAF8430276102BA00283D0B /* PinValidationError.swift in Sources */,
 				8EAF8447276102D800283D0B /* ValidationError.swift in Sources */,

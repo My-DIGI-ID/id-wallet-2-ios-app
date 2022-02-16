@@ -14,16 +14,17 @@
 import UIKit
 
 private enum Constants {
-    enum Styles {
-        static let infoTextStyle: AttributedStyle = .walletInfoText
-    }
-    
     enum Layouts {
         static let emptyWalletImageAspectRatio: CGFloat = 1.0
         static let emptyWalletImageRelativeWidth: CGFloat = 0.7
         static let contentStackviewSpacing: CGFloat = 30
         static let documentButtonInset: UIEdgeInsets = .init(top: 0, left: 20, bottom: 0, right: 20)
     }
+}
+
+fileprivate extension AttributedStyle {
+    static var walletInfoText: AttributedStyle = .init([.foregroundColor: UIColor.grey1,
+                                                    .font: UIFont.plexSans(17)])
 }
 
 fileprivate extension ImageNameIdentifier {
@@ -33,7 +34,6 @@ fileprivate extension ImageNameIdentifier {
 
 /// Simple container view that wraps the content displayed when no wallet entries are available
 class NoContentWalletView: UIView {
-    fileprivate typealias Style = Constants.Styles
     fileprivate typealias Layout = Constants.Layouts
     
     /// Delegate that forwards `addDocument(:_)` calls from the addDocumentButton
@@ -119,7 +119,7 @@ class NoContentWalletView: UIView {
         contentStackView.addArrangedSubview(infoTextLabel)
         contentStackView.addArrangedSubview(addDocumentButtonContainer)
         
-        infoTextLabel.attributedText = NSLocalizedString("Die Wallet ist leer.\nFüge Dein erstes Dokument hinzu.", comment: "").styledAs(Style.infoTextStyle)
+        infoTextLabel.attributedText = NSLocalizedString("Die Wallet ist leer.\nFüge Dein erstes Dokument hinzu.", comment: "").styledAs(.walletInfoText)
         
         [
             emptyWalletContainer.widthAnchor.constraint(equalTo: contentStackView.widthAnchor),

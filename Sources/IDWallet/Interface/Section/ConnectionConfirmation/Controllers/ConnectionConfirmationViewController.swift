@@ -44,6 +44,11 @@ private enum Constants {
     static let checkmark: UIImage = #imageLiteral(resourceName: "solve")
 }
 
+fileprivate extension AttributedStyle {    
+    static var subHeaderLabel: AttributedStyle = .init([.foregroundColor: UIColor.walBlack,
+                                                        .font: UIFont.plexSans(25)])
+}
+
 enum ConnectionConfirmationResult {
     case confirm
     case cancel
@@ -236,7 +241,7 @@ class ConnectionConfirmationViewController: BareBaseViewController {
             .centered()
         
         subHeaderLabel.attributedText = Constants.Text.subHeader
-            .styledAs(.text(font: .plexSans(25)))
+            .styledAs(.subHeaderLabel)
             .centered()
         
         buttonsStackView.addArrangedSubview(allowButton)

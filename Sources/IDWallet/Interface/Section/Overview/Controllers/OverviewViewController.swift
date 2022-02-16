@@ -46,6 +46,23 @@ private enum Constants {
     }
 }
 
+fileprivate extension AttributedStyle {
+    static var headerLabel: AttributedStyle = .init([.foregroundColor: UIColor.walBlack,
+                                                     .font: UIFont.plexSansBold(15)])
+    
+    static var subHeaderLabel: AttributedStyle = .init([.foregroundColor: UIColor.walBlack,
+                                                        .font: UIFont.plexSans(15)])
+    
+    static var titleLabel: AttributedStyle = .init([.foregroundColor: UIColor.walBlack,
+                                                    .font: UIFont.plexSansBold(18)])
+    
+    static var rowTitle: AttributedStyle = .init([.foregroundColor: UIColor.grey1,
+                                                  .font: UIFont.plexSans(12)])
+    
+    static var rowValue: AttributedStyle = .init([.foregroundColor: UIColor.walBlack,
+                                                  .font: UIFont.plexSans(15)])
+}
+
 fileprivate extension ImageNameIdentifier {
     static let close = ImageNameIdentifier(rawValue: "Close")
 }
@@ -190,15 +207,15 @@ class OverviewViewController: BareBaseViewController {
         setupLayout()
 
         headerLabel.attributedText = viewModel.header
-            .styledAs(.text(font: Typography.regular.boldBodyFont))
+            .styledAs(.headerLabel)
             .centered()
 
         subHeaderLabel.attributedText = viewModel.subHeader
-            .styledAs(.text(font: Typography.regular.bodyFont))
+            .styledAs(.subHeaderLabel)
             .centered()
 
         titleLabel.attributedText = viewModel.title
-            .styledAs(.text(font: .plexSansBold(18)))
+            .styledAs(.titleLabel)
 
         if let imageURL = URL(string: viewModel.imageURL) {
             imageView.load(from: imageURL)
@@ -234,10 +251,10 @@ extension OverviewViewController {
 
     private func createView(for data: OverviewViewModel.DataRow, withRoundedBottomCorners: Bool) -> UIStackView {
         let titleLabel = UILabel(frame: .zero)
-        titleLabel.attributedText = data.title.styledAs(.text(color: .grey1, font: .plexSans(12)))
+        titleLabel.attributedText = data.title.styledAs(.rowTitle)
 
         let valueLabel = UILabel(frame: .zero)
-        valueLabel.attributedText = data.value.styledAs(.text(font: Typography.regular.bodyFont))
+        valueLabel.attributedText = data.value.styledAs(.rowValue)
 
         let view = UIStackView(arrangedSubviews: [titleLabel, valueLabel])
         view.axis = .vertical

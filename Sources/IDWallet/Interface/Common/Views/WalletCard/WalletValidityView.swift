@@ -15,8 +15,6 @@ import UIKit
 
 private enum Constants {
     enum Styles {
-        static let validityStyle: AttributedStyle = .validityLabel
-        
         static let bgColorExpired: UIColor = .white
         static let bgColorNearlyExpired: UIColor = .highlightYellow
     }
@@ -25,6 +23,12 @@ private enum Constants {
         static let validityLabelInset: UIEdgeInsets = .init(top: 3, left: 6, bottom: 3, right: 10)
     }
 }
+
+fileprivate extension AttributedStyle {
+    static var validityLabel: AttributedStyle = .init([.foregroundColor: UIColor.walBlack,
+                                                    .font: UIFont.plexSans(10)])
+}
+
 
 /// This view displays an info-text informing the user about the expiration state of the wallet-card.
 ///
@@ -54,10 +58,10 @@ class WalletValidityView: UIView {
     func configure(expires milliSeconds: Double) {
         
         if milliSeconds <= 0 { // Expired
-            validityLabel.attributedText = NSLocalizedString("Ungültig", comment: "").styledAs(Style.validityStyle)
+            validityLabel.attributedText = NSLocalizedString("Ungültig", comment: "").styledAs(.validityLabel)
             backgroundColor = Style.bgColorExpired
         } else if milliSeconds <= 900000 { // 15 Minutes remaining
-            validityLabel.attributedText = NSLocalizedString("Noch 15h gültig", comment: "").styledAs(Style.validityStyle)
+            validityLabel.attributedText = NSLocalizedString("Noch 15h gültig", comment: "").styledAs(.validityLabel)
             backgroundColor = Style.bgColorNearlyExpired
         } else {
             validityLabel.text = ""

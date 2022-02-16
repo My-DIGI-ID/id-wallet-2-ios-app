@@ -15,8 +15,6 @@ import UIKit
 
 private enum Constants {
     enum Styles {
-        static let titleStyle: AttributedStyle = .walletCardTitle
-        
         static let alphaExpired: CGFloat = 0.8
         static let alphaValid: CGFloat = 1.0
         
@@ -54,6 +52,11 @@ private enum Constants {
         static let valuesTopSpacing: CGFloat = 8
         static let valuesBottomSpacing: CGFloat = 13
     }
+}
+
+extension AttributedStyle {
+    static var walletCardTitle: AttributedStyle = .init([.foregroundColor: UIColor.walBlack,
+                                                    .font: UIFont.plexSans(20)])
 }
 
 extension WalletCardModel.TextStyle {
@@ -231,7 +234,7 @@ class WalletCardView: UIView {
         let expiryInterval = walletData.expiryDate.timeIntervalSinceNow
         validityView.configure(expires: expiryInterval)
         
-        titleLabel.attributedText = walletData.title.styledAs(Style.titleStyle).color(walletData.textStyle.color)
+        titleLabel.attributedText = walletData.title.styledAs(.walletCardTitle).color(walletData.textStyle.color)
         headerContainer.backgroundColor = walletData.headerBackgroundColor
         
         backgroundImage.isHidden = true
