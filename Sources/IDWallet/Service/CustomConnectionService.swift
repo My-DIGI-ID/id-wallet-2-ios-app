@@ -13,6 +13,7 @@
 
 import Foundation
 import Aries
+import Mediator
 
 class CustomConnectionService {
     /// Gets the name and image url from an invitation
@@ -46,6 +47,9 @@ class CustomConnectionService {
             
             let record = pair.1
             var request = pair.0
+            
+            try await MediatorService(urlString: nil).addRoute(destination: record.myVerkey!)
+            
             request.transport = TransportDecorator(mode: .all)
             
             let message = MessageRequest(

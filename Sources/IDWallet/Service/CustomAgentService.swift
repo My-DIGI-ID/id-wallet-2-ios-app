@@ -37,6 +37,7 @@ class CustomAgentService {
         try await Aries.agent.run {
             try? await Aries.provisioning.update(Self.id, with: $0)
             try? await Aries.provisioning.update(Owner(name: "ID Wallet"), with: $0)
+            try? await Aries.provisioning.update(Endpoint(uri: "https://www.example.com"), with: $0)
         }
         
         let m = MediatorService(urlString: "https://mediator.dev.essid-demo.com/.well-known/agent-configuration")
@@ -48,7 +49,14 @@ class CustomAgentService {
         try security.reset()
         let validation = try await security.getAttestionObject(challenge: Data())
         
-        _ = try await m.createInbox(deviceValidation: validation)
-
+        _ = try await m.createInbox(with: validation)
+        
+        try await m.addDeviceInfo(
+            deviceId: UUID().uuidString.lowercased(),
+            deviceMetadata: DeviceMetadata(
+                push: "Polling",
+                createdAt: Date().timeIntervalSince1970.rounded(.down)
+            )
+        )
     }
 }

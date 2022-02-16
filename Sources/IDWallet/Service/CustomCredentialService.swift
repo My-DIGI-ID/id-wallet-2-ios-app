@@ -40,24 +40,32 @@ class CustomCredentialService {
     }
     
     func preview(for connectionId: String) async throws -> (String, CredentialPreview) {
-        try await Aries.agent.run {
+        try await Aries.agent.run { context in
             // Loop query for offer message
             var offer: CredentialOfferMessage!
             
-            let decoder = JSONDecoder()
             while true {
-                guard let data = try await MediatorService(urlString: nil)
-                        .getInboxItems()
-                        .items
-                        .compactMap({ $0.data.data(using: .utf8) })
-                        .first(where: { try decoder.decode(HeaderMessage.self, from: $0).type == MessageType.credentialOffer.rawValue })
-                else { continue }
+                var data: Data?
+                for item in try await MediatorService(urlString: nil).getInboxItems().items {
+                    guard let d = item.data.data(using: .utf8) else { continue }
+                    
+                    let header: HeaderMessage = try await Aries.message.receive(d, with: context.wallet).message
+                    if header.type == MessageType.credentialOffer.rawValue {
+                        data = d
+                        break
+                    }
+                }
                 
-                offer = try decoder.decode(CredentialOfferMessage.self, from: data)
+                guard let d = data else {
+                    try await Task.sleep(nanoseconds: 100_000)
+                    continue
+                }
+                
+                offer = try await Aries.message.receive(d, with: context.wallet).message
                 break
             }
             
-            let id = try await Aries.credential.process(offer, for: connectionId, with: $0)
+            let id = try await Aries.credential.process(offer, for: connectionId, with: context)
             return (id, offer.preview!)
         }
     }
@@ -66,7 +74,7 @@ class CustomCredentialService {
         try await Aries.agent.run {
             let record = try await Aries.record.get(CredentialRecord.self, for: id, from: $0.wallet)
             let connection = try await Aries.record
-                .get(ConnectionRecord.self, for: record.tags["connectionKey"]!, from: $0.wallet)
+                .get(ConnectionRecord.self, for: record.tags[Tags.connectionKey]!, from: $0.wallet)
             guard let service = connection.theirDocument().services?.first else {
                 throw AriesError.notFound("No service found to send the credential request to")
             }
@@ -88,14 +96,4 @@ class CustomCredentialService {
             return try await Aries.credential.process(credentialIssue, with: $0)
         }
     }
-}
-
-public struct HeaderMessage: Message {
-    private enum CodingKeys: String, CodingKey {
-        case id = "@id"
-        case type = "@type"
-    }
-    
-    public let id: String
-    public let type: String
 }

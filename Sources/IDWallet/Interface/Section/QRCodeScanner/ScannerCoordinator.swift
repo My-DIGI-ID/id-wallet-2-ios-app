@@ -15,6 +15,7 @@ import Foundation
 import UIKit
 import AVFoundation
 import Combine
+import Aries
 
 private enum Constants {
     enum Text {
@@ -32,6 +33,7 @@ enum ScanError: Error {
     case failure
     case cancelled
 }
+
 
 @MainActor
 class ScannerCoordinator: Coordinator {
@@ -76,10 +78,8 @@ class ScannerCoordinator: Coordinator {
                 guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
                     return
                 }
-                UIApplication.shared.open(
-                    settingsURL,
-                    options: [:],
-                    completionHandler: { _ in
+                UIApplication.shared.open(settingsURL,
+                                          options: [:], completionHandler: { _ in
                     // TODO: is this what we want? Can we tell when settings are changed?
                     self.startRequestAccess()
                 })
@@ -116,7 +116,7 @@ class ScannerCoordinator: Coordinator {
                 case .success(let qrCode):
                     do {
                         // self.completion(Result.success(qrCode))
-                        
+
                         let connectionService = CustomConnectionService()
                         if let result = try connectionService.invitee(for: qrCode) {
                             let (name, imageUrl) = result
@@ -125,10 +125,10 @@ class ScannerCoordinator: Coordinator {
                     } catch let error {
                         self.completion(Result.failure(error))
                     }
-                    
+
                 case .failure(let error):
                     self.completion(Result.failure(error))
-                    
+
                 case .cancelled:
                     self.completion(Result.cancelled)
                 }
@@ -145,11 +145,9 @@ class ScannerCoordinator: Coordinator {
         imageUrl: String?
     ) {
         if var name = name {
-            name = "Mesa Deutschland GmbH"
-            
             let previous = currentViewController
             let viewModel = ConnectionConfirmationViewModel(connection: name)
-            
+
             currentViewController =
             ConnectionConfirmationViewController(viewModel: viewModel) { result in
                 switch result {
@@ -160,7 +158,8 @@ class ScannerCoordinator: Coordinator {
                             self.startOverview(
                                 connectionId: connectionId,
                                 name: viewModel.connection,
-                                imageUrl: imageUrl)
+                                imageUrl: imageUrl
+                            )
                         } catch let error {
                             print(error)
                             self.completion(.failure(error))
@@ -178,7 +177,18 @@ class ScannerCoordinator: Coordinator {
     
     func startOverview(connectionId: String, name: String?, imageUrl: String?) {
         Task(priority: .userInitiated) {
-            let (id, preview) = try await CustomCredentialService().preview(for: connectionId)
+            let credentialId: String
+            let preview: CredentialPreview
+            
+            do {
+                let pair = try await CustomCredentialService().preview(for: connectionId)
+                credentialId = pair.0
+                preview = pair.1
+            } catch {
+                print(error)
+                return
+            }
+            
             let rows: [OverviewViewModel.DataRow] = preview.attributes.map {
                 ($0.name, $0.value)
             }
@@ -195,7 +205,7 @@ class ScannerCoordinator: Coordinator {
                         }
                         Task {
                             do {
-                                let credentialId = try await CustomCredentialService().request(with: connectionId)
+                                let credentialId = try await CustomCredentialService().request(with: credentialId)
                                 self.startSuccessViewController(credentialId: credentialId)
                             } catch let error {
                                 self.completion(.failure(error))
