@@ -23,8 +23,10 @@ private enum Constants {
 }
 
 fileprivate extension AttributedStyle {
-    static var walletInfoText: AttributedStyle = .init([.foregroundColor: UIColor.grey1,
-                                                    .font: UIFont.plexSans(17)])
+    static var walletInfoText: AttributedStyle = .init([
+        .foregroundColor: UIColor.grey1,
+        .font: UIFont.plexSans(17)
+    ])
 }
 
 fileprivate extension ImageNameIdentifier {
@@ -93,8 +95,8 @@ class NoContentWalletView: UIView {
             imageAlignRight: false,
             style: .primary,
             primaryAction: .init { [weak self] _ in
-            self?.delegate?.addDocument()
-        })
+                self?.delegate?.addDocument()
+            })
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()

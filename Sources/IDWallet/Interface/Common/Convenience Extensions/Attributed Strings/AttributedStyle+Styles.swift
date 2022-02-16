@@ -15,9 +15,13 @@ import UIKit
 
 /// Globaly shared attribute styles for common elements
 extension AttributedStyle {
-    static var header: AttributedStyle = .init([.foregroundColor: UIColor.walBlack,
-                                                .font: UIFont.plexSansBold(25)])
+    static var header: AttributedStyle = .init([
+        .foregroundColor: UIColor.walBlack,
+        .font: UIFont.plexSansBold(25)
+    ])
     
-    static var subHeading: AttributedStyle = .init([.foregroundColor: UIColor.walBlack,
-                                                    .font: UIFont.plexSans(17)])
+    static var subHeading: AttributedStyle = .init([
+        .foregroundColor: UIColor.walBlack,
+        .font: UIFont.plexSans(17)
+    ])
 }

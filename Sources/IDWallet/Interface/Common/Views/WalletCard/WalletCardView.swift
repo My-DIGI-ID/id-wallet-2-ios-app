@@ -55,8 +55,10 @@ private enum Constants {
 }
 
 extension AttributedStyle {
-    static var walletCardTitle: AttributedStyle = .init([.foregroundColor: UIColor.walBlack,
-                                                    .font: UIFont.plexSans(20)])
+    static var walletCardTitle: AttributedStyle = .init([
+        .foregroundColor: UIColor.walBlack,
+        .font: UIFont.plexSans(20)
+    ])
 }
 
 extension WalletCardModel.TextStyle {

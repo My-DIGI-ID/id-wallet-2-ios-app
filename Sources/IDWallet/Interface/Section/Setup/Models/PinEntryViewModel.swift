@@ -164,8 +164,7 @@ class PinEntryViewModel {
     
     private func updateStateForPinChange() {
         canCommit =
-        ((minimumLength == nil || pin.count >= minimumLength!)
-         && (maximumLength == nil || pin.count <= maximumLength!) && isValidPin(self.clearTextPin))
+        ((minimumLength == nil || pin.count >= minimumLength!) && (maximumLength == nil || pin.count <= maximumLength!) && isValidPin(self.clearTextPin))
         canAdd = maximumLength == nil || clearTextPin.count < maximumLength!
         canRemove = !clearTextPin.isEmpty
         var newPin: [PinCharacterRepresentation] = []
@@ -180,6 +179,50 @@ class PinEntryViewModel {
             }
         }
         pin = newPin
+    }
+    
+    // MARK: - Initialization
+    
+    /// Initializes the view model with the specified parameters
+    ///
+    /// - Parameter presentation: Presentation related parameters
+    /// - Parameter resultHandler: A closure called with the result when the entry process is finished
+    /// - Parameter maximumLength: The maximum length of the PIN in characters
+    /// - Parameter minimumLength: The minimum length of the PIN in characters
+    /// - Parameter originalPin: If defined: will be used by `commit` to compare the entered PIN with  `originalPin`
+    /// - Parameter revealLastCharacterDuration The duration for how long the last typed character
+    ///     is displayed as clear text (not yet implemented)
+    /// - Parameter characterValidation: A regular expression defining the set of valid characters for
+    ///     the PIN, applicable to a single character, defaults to digits
+    required init(
+        presentation: PinEntryViewModel.Presentation,
+        resultHandler: @escaping (PinEntryViewModel.Result, PinEntryViewController) -> Void,
+        maximumLength: UInt?,
+        minimumLength: UInt?,
+        originalPin: String? = nil,
+        revealLastCharacterDuration: CGFloat? = nil,
+        characterValidation: NSRegularExpression? = allowOnlyDigitsRegExp
+    ) {
+        assert(maximumLength == nil || minimumLength == nil || minimumLength! <= maximumLength!)
+        
+        // Configuration
+        self.presentation = presentation
+        self.maximumLength = maximumLength
+        self.minimumLength = minimumLength
+        self.characterValidation = characterValidation
+        self.handleResult = resultHandler
+        self.revealLastCharacterDuration = revealLastCharacterDuration
+        
+        // Internal State
+        self.clearTextPin = ""
+        
+        // Published State
+        self.pin = []
+        self.canAdd = false
+        self.canRemove = false
+        self.canCommit = false
+        
+        updateStateForPinChange()
     }
 }
 

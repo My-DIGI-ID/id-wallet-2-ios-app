@@ -16,13 +16,13 @@ import UIKit
 private enum Constants {
     enum Text {}
     enum Layout {
-
+        
         static let dividerHeight: CGFloat = 1
         static let divderBottomSpace: CGFloat = -33
-
+        
         static let stackViewSpacing: CGFloat = 1
         static let scrollBarTopSpacing: CGFloat = 40
-
+        
         static let contenStackViewInsets = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
         static let buttonStackViewBottomDistance: CGFloat = -16
         static let buttonStackViewSpacing: CGFloat = 8
@@ -33,34 +33,44 @@ private enum Constants {
         static let headerInsets = UIEdgeInsets(top: 24, left: Constants.Layout.leadingSpace, bottom: 24, right: Constants.Layout.leadingSpace)
         static let cornerRadius: CGFloat = 16
         static let headerStackViewBottomSpace: CGFloat = -16
-
+        
         static let informationViewCornerRadius: CGFloat = 16
         static let informationViewLeading: CGFloat = 24
         static let informationViewHeight: CGFloat = 58
-
+        
         static let imageSize = CGSize(width: 100, height: 25)
-
+        
         static let rowColor: UIColor = .grey8
-
+        
         static let spacerHeight: CGFloat = 40
     }
 }
 
 fileprivate extension AttributedStyle {
-    static var headerLabel: AttributedStyle = .init([.foregroundColor: UIColor.walBlack,
-                                                     .font: UIFont.plexSansBold(15)])
+    static var headerLabel: AttributedStyle = .init([
+        .foregroundColor: UIColor.walBlack,
+        .font: UIFont.plexSansBold(15)
+    ])
     
-    static var subHeaderLabel: AttributedStyle = .init([.foregroundColor: UIColor.walBlack,
-                                                        .font: UIFont.plexSans(15)])
+    static var subHeaderLabel: AttributedStyle = .init([
+        .foregroundColor: UIColor.walBlack,
+        .font: UIFont.plexSans(15)
+    ])
     
-    static var titleLabel: AttributedStyle = .init([.foregroundColor: UIColor.walBlack,
-                                                    .font: UIFont.plexSansBold(18)])
+    static var titleLabel: AttributedStyle = .init([
+        .foregroundColor: UIColor.walBlack,
+        .font: UIFont.plexSansBold(18)
+    ])
     
-    static var rowTitle: AttributedStyle = .init([.foregroundColor: UIColor.grey1,
-                                                  .font: UIFont.plexSans(12)])
+    static var rowTitle: AttributedStyle = .init([
+        .foregroundColor: UIColor.grey1,
+        .font: UIFont.plexSans(12)
+    ])
     
-    static var rowValue: AttributedStyle = .init([.foregroundColor: UIColor.walBlack,
-                                                  .font: UIFont.plexSans(15)])
+    static var rowValue: AttributedStyle = .init([
+        .foregroundColor: UIColor.walBlack,
+        .font: UIFont.plexSans(15)
+    ])
 }
 
 fileprivate extension ImageNameIdentifier {
@@ -68,10 +78,10 @@ fileprivate extension ImageNameIdentifier {
 }
 
 class OverviewViewController: BareBaseViewController {
-
+    
     let viewModel: OverviewViewModel
     var completion: () -> Void
-
+    
     private lazy var closeButton: UIBarButtonItem = {
         let button = UIBarButtonItem(
             image: .init(identifiedBy: .close),
@@ -87,10 +97,10 @@ class OverviewViewController: BareBaseViewController {
             .font: Typography.regular.bodyFont], for: .highlighted)
         return button
     }()
-
+    
     private lazy var navigationBar: UINavigationBar = {
         navigationItem.rightBarButtonItem = closeButton
-
+        
         let navigationBar = UINavigationBar(frame: .zero)
         navigationBar.barTintColor = .white
         navigationBar.isTranslucent = false
@@ -98,23 +108,23 @@ class OverviewViewController: BareBaseViewController {
         navigationBar.shadowImage = UIImage()
         return navigationBar
     }()
-
+    
     private lazy var scrollView: UIScrollView = {
         let view = UIScrollView(frame: .zero)
         view.backgroundColor = .white
         view.addAutolayoutSubviews(contentView)
         return view
     }()
-
+    
     private lazy var buttonsStackView: UIStackView = {
         let view = UIStackView()
         view.axis = .vertical
         view.distribution = .equalSpacing
         return view
     }()
-
+    
     private lazy var spacer = UIView()
-
+    
     private lazy var stackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [
             headerStackView,
@@ -128,59 +138,59 @@ class OverviewViewController: BareBaseViewController {
         view.spacing = Constants.Layout.stackViewSpacing
         return view
     }()
-
+    
     private lazy var contentView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = .white
         view.addAutolayoutSubviews(stackView)
         return view
     }()
-
+    
     // MARK: Header
-
+    
     private lazy var headerLabel: UILabel = {
         let header = UILabel(frame: .zero)
         header.numberOfLines = 1
         return header
     }()
-
+    
     private lazy var subHeaderLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.numberOfLines = 1
         return label
     }()
-
+    
     private lazy var imageView: UIImageView = {
         let view = UIImageView(frame: .zero)
         view.contentMode = .scaleAspectFit
         return view
     }()
-
+    
     private lazy var divider: UIView = {
         let view = UIView()
         view.backgroundColor = .grey3
         return view
     }()
-
+    
     private lazy var headerStackView: UIStackView = {
         let vertical = UIStackView(arrangedSubviews: [headerLabel, subHeaderLabel])
         vertical.axis = .vertical
         vertical.alignment = .leading
-
+        
         let view = UIStackView(arrangedSubviews: [imageView, vertical])
         view.axis = .horizontal
         view.spacing = 8
         return view
     }()
-
+    
     // MARK: Title
-
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     private lazy var headerView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = UIColor.secondaryBlue
@@ -189,38 +199,38 @@ class OverviewViewController: BareBaseViewController {
         view.embed(titleLabel, insets: Constants.Layout.headerInsets)
         return view
     }()
-
+    
     init(viewModel: OverviewViewModel, completion: @escaping () -> Void) {
         self.viewModel = viewModel
         self.completion = completion
         super.init(style: nil)
     }
-
+    
     @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupLayout()
-
+        
         headerLabel.attributedText = viewModel.header
             .styledAs(.headerLabel)
             .centered()
-
+        
         subHeaderLabel.attributedText = viewModel.subHeader
             .styledAs(.subHeaderLabel)
             .centered()
-
+        
         titleLabel.attributedText = viewModel.title
             .styledAs(.titleLabel)
-
+        
         if let imageURL = URL(string: viewModel.imageURL) {
             imageView.load(from: imageURL)
         }
-
+        
         viewModel.buttons.forEach { (title: String, action: UIAction) in
             let button = WalletButton(titleText: title, primaryAction: action)
             if !buttonsStackView.arrangedSubviews.isEmpty {
@@ -228,7 +238,7 @@ class OverviewViewController: BareBaseViewController {
             }
             buttonsStackView.addArrangedSubview(button)
         }
-
+        
         for (index, row) in viewModel.rows.enumerated() {
             let view = createView(for: row, withRoundedBottomCorners: index == viewModel.rows.endIndex - 1)
             assert(stackView.subviews.count > 4)
@@ -238,7 +248,7 @@ class OverviewViewController: BareBaseViewController {
                 view.heightAnchor.constraint(equalToConstant: Constants.Layout.rowHeight)])
         }
     }
-
+    
     @objc
     private func closeView() {
         completion()
@@ -248,40 +258,40 @@ class OverviewViewController: BareBaseViewController {
 // MARK: Layout
 
 extension OverviewViewController {
-
+    
     private func createView(for data: OverviewViewModel.DataRow, withRoundedBottomCorners: Bool) -> UIStackView {
         let titleLabel = UILabel(frame: .zero)
         titleLabel.attributedText = data.title.styledAs(.rowTitle)
-
+        
         let valueLabel = UILabel(frame: .zero)
         valueLabel.attributedText = data.value.styledAs(.rowValue)
-
+        
         let view = UIStackView(arrangedSubviews: [titleLabel, valueLabel])
         view.axis = .vertical
         view.spacing = 0
         view.distribution = .fillEqually
         view.backgroundColor = Constants.Layout.rowColor
-
+        
         if withRoundedBottomCorners {
             view.layer.cornerRadius = Constants.Layout.cornerRadius
             view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         }
-
+        
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Layout.leadingSpace)])
         return view
     }
-
+    
     private func setupLayout() {
         view.backgroundColor = .white
-
+        
         view.addAutolayoutSubviews(navigationBar, scrollView)
-
+        
         // Layout ScrollView
         scrollView.embed(contentView)
         contentView.embed(stackView, insets: Constants.Layout.contenStackViewInsets)
         contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-
+        
         // Layout Complete View
         [
             "V:|-[navBar]-(spacing)-[scrollView]-|",
@@ -291,16 +301,16 @@ extension OverviewViewController {
                 with: ["navBar": navigationBar, "scrollView": scrollView],
                 metrics: ["spacing": Constants.Layout.scrollBarTopSpacing])
             .activate()
-
+        
         // Pin the button stackView to the bottom of the view
         let buttonStackViewPinToBottomConstraint = buttonsStackView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor)
         buttonStackViewPinToBottomConstraint.priority = .defaultLow
         buttonStackViewPinToBottomConstraint.constant = Constants.Layout.buttonStackViewBottomDistance
         buttonStackViewPinToBottomConstraint.isActive = true
-
+        
         buttonsStackView.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
         buttonsStackView.spacing = Constants.Layout.buttonStackViewSpacing
-
+        
         NSLayoutConstraint.activate([
             imageView.widthAnchor.constraint(equalToConstant: Constants.Layout.imageSize.width),
             imageView.heightAnchor.constraint(equalToConstant: Constants.Layout.imageSize.height),

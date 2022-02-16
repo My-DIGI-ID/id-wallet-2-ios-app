@@ -45,8 +45,10 @@ private enum Constants {
 }
 
 fileprivate extension AttributedStyle {    
-    static var subHeaderLabel: AttributedStyle = .init([.foregroundColor: UIColor.walBlack,
-                                                        .font: UIFont.plexSans(25)])
+    static var subHeaderLabel: AttributedStyle = .init([
+        .foregroundColor: UIColor.walBlack,
+        .font: UIFont.plexSans(25)
+    ])
 }
 
 enum ConnectionConfirmationResult {

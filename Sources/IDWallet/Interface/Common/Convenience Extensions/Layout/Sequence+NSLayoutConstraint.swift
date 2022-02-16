@@ -16,10 +16,14 @@ import UIKit
 
 extension Sequence where Element == String {
     public func constraints(with viewMap: [String: Any], metrics metricMap: [String: Any]? = nil, options: NSLayoutConstraint.FormatOptions = []) -> [NSLayoutConstraint] {
-        flatMap { NSLayoutConstraint.constraints(withVisualFormat: $0,
-                                                 options: options,
-                                                 metrics: metricMap,
-                                                 views: viewMap) }
+        flatMap {
+            NSLayoutConstraint.constraints(
+                withVisualFormat: $0,
+                options: options,
+                metrics: metricMap,
+                views: viewMap
+            )
+        }
     }
 }
 

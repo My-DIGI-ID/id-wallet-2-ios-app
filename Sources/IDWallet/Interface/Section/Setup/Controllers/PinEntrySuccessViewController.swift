@@ -245,8 +245,7 @@ PinEntrySuccessViewController.ViewModel
             views: viewsForLayout,
             identifier: "vertical")
 
-        if let imageView = controlledView(.imageView) as? UIImageView,
-           let containerView = controlledView(.containerView) {
+        if let imageView = controlledView(.imageView) as? UIImageView, let containerView = controlledView(.containerView) {
             addConstraint(
                 imageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor, constant: -35),
                 identifier: "image-centerX"
@@ -289,9 +288,9 @@ PinEntrySuccessViewController.ViewModel
         ])
     }
 
-    @objc func commitButtonTapped(sender: UIButton) {
-        if let viewModel = viewModel,
-           viewModel.canCommit {
+    @objc
+    func commitButtonTapped(sender: UIButton) {
+        if let viewModel = viewModel, viewModel.canCommit {
             viewModel.commit(self)
         }
     }

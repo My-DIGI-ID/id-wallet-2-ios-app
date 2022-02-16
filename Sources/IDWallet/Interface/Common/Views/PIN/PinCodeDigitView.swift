@@ -38,25 +38,6 @@ class PinCodeDigitView: UIView {
     
     var widthConstraint: NSLayoutConstraint?
     
-    // MARK: - Initialization
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.accessibilityIdentifier = "PinCodeDigitView"
-        layer.addSublayer(shapeLayer)
-        setNeedsDisplay()
-    }
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        self.accessibilityIdentifier = "PinCodeDigitView"
-        layer.addSublayer(shapeLayer)
-        setNeedsDisplay()
-    }
-    convenience init(style: Style = .regular, pin: PinCharacterRepresentation = .unset) {
-        self.init(frame: .zero)
-        self.style = style
-        self.pin = pin
-    }
-    
     // MARK: - Layout
     
     override var intrinsicContentSize: CGSize {
@@ -93,6 +74,25 @@ class PinCodeDigitView: UIView {
             shapeLayer.fillColor = UIColor.clear.cgColor
             shapeLayer.strokeColor = style.colors.tintColor.cgColor
         }
+    }
+    
+    // MARK: - Initialization
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.accessibilityIdentifier = "PinCodeDigitView"
+        layer.addSublayer(shapeLayer)
+        setNeedsDisplay()
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.accessibilityIdentifier = "PinCodeDigitView"
+        layer.addSublayer(shapeLayer)
+        setNeedsDisplay()
+    }
+    convenience init(style: Style = .regular, pin: PinCharacterRepresentation = .unset) {
+        self.init(frame: .zero)
+        self.style = style
+        self.pin = pin
     }
 }
 

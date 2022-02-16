@@ -357,8 +357,7 @@ PinEntryIntroViewController.ViewModel
     
     @objc
     func commitButtonTapped(sender: UIButton) {
-        if  let viewModel = viewModel,
-            viewModel.canCommit {
+        if let viewModel = viewModel, viewModel.canCommit {
             viewModel.commit(self)
         }
     }

@@ -93,6 +93,16 @@ class PinCodeView: UIView {
 // MARK: - Layout
 
 extension PinCodeView {
+    override var intrinsicContentSize: CGSize {
+        let digitSize: CGFloat = style.digitStyle.size
+        let count: CGFloat = CGFloat(pin.count)
+        let spacing = style.spacing
+        return CGSize(
+            width: count * digitSize + max(0, count - 1) * spacing,
+            height: self.style.digitStyle.size
+        )
+    }
+
     override func layoutSubviews() {
         let space = style.spacing
         var deltaX = bounds.origin.x + 0.0
@@ -110,16 +120,6 @@ extension PinCodeView {
     }
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return intrinsicContentSize
-    }
-    
-    override var intrinsicContentSize: CGSize {
-        let digitSize: CGFloat = style.digitStyle.size
-        let count: CGFloat = CGFloat(pin.count)
-        let spacing = style.spacing
-        return CGSize(
-            width: count * digitSize + max(0, count - 1) * spacing,
-            height: self.style.digitStyle.size
-        )
     }
 }
 

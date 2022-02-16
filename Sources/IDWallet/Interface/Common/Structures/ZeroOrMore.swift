@@ -26,6 +26,11 @@ enum Cardinality {
 /// ``.some([x])`` to ``.none`` and ``.one(x)`` respectively. The implementation of ``Equatable``
 /// will consider equivalent instances as equal.
 enum ZeroOrMore<T: Any>: Sequence {
+    
+    case none
+    case one(_: T)
+    case some(_: [T])
+    
     typealias Element = T
     
     struct Iterator: IteratorProtocol {
@@ -51,14 +56,6 @@ enum ZeroOrMore<T: Any>: Sequence {
                 return result
             }
         }
-    }
-    
-    case none
-    case one(_: T)
-    case some(_: [T])
-    
-    func makeIterator() -> Iterator {
-        Iterator(self)
     }
     
     var first: T? {
@@ -102,6 +99,10 @@ enum ZeroOrMore<T: Any>: Sequence {
                 return self
             }
         }
+    }
+    
+    func makeIterator() -> Iterator {
+        Iterator(self)
     }
 }
 

@@ -16,7 +16,7 @@ import UIKit
 
 protocol ViewFactory: ThemeContextDependent {
     associatedtype ViewIDType: BaseViewID
-
+    
     func controlledView(_ id: ViewIDType) -> UIView?
     func addControlledView<T: UIView>(_ id: ViewIDType, view: T, in parent: UIView?) -> T
 }
@@ -52,9 +52,9 @@ extension ViewFactory {
         }
         return nil
     }
-
+    
     // MARK: - Generic Views
-
+    
     private func makeOrGetView(_ id: ViewIDType, in parent: UIView? = nil, didMake: inout Bool)
     -> UIView {
         var result = controlledView(id, ofType: UIView.self, parent: parent)
@@ -64,31 +64,27 @@ extension ViewFactory {
         }
         return result!
     }
-
+    
     /// Creates or updates a generic ``UIView``
     ///
     /// - Parameter id: A unique ``BaseViewContainer.ViewID`` used as ``accessibilityIdentifier``
     /// - Parameter parent: The view's superview.
     @discardableResult
-    func makeOrUpdateView(
-        id: ViewIDType, in parent: UIView? = nil, didMake: inout Bool,
-        _ then: ((UIView) -> Void)? = nil
+    func makeOrUpdateView(id: ViewIDType, in parent: UIView? = nil, didMake: inout Bool, _ then: ((UIView) -> Void)? = nil
     ) -> UIView {
         let result = makeOrGetView(id, in: parent, didMake: &didMake)
         then?(result)
         return result
     }
-
+    
     // MARK: Layout Views
-
+    
     /// Creates or updates a generic ``UIView`` to be used as container.
     ///
     /// - Parameter id: A unique ``BaseViewContainer.ViewID`` used as ``accessibilityIdentifier``
     /// - Parameter parent: The view's superview.
     @discardableResult
-    func makeOrUpdateContainer(
-        id: ViewIDType, in parent: UIView? = nil, didMake: inout Bool,
-        _ then: ((UIView, inout Bool) -> Void)? = nil
+    func makeOrUpdateContainer(id: ViewIDType, in parent: UIView? = nil, didMake: inout Bool, _ then: ((UIView, inout Bool) -> Void)? = nil
     ) -> UIView {
         let result = makeOrGetView(id, in: parent, didMake: &didMake)
         var closureDidMake: Bool = didMake
@@ -96,7 +92,7 @@ extension ViewFactory {
         didMake = closureDidMake
         return result
     }
-
+    
     /// Creates or updates a generic ``UIView`` to be used as container.
     ///
     /// - Parameter id: A unique ``BaseViewContainer.ViewID`` used as ``accessibilityIdentifier``
@@ -106,7 +102,8 @@ extension ViewFactory {
         id: ViewIDType,
         horizontalAlignment: AlignmentWrapperView.HorizontalAlignment? = nil,
         verticalAlignment: AlignmentWrapperView.VerticalAlignment? = nil,
-        in parent: UIView? = nil, didMake: inout Bool,
+        in parent: UIView? = nil,
+        didMake: inout Bool,
         _ then: ((AlignmentWrapperView, inout Bool) -> Void)? = nil
     ) -> AlignmentWrapperView {
         var result = controlledView(id, ofType: AlignmentWrapperView.self, parent: parent)
@@ -114,9 +111,9 @@ extension ViewFactory {
             result = addControlledView(id, view: AlignmentWrapperView(), in: parent)
             didMake = true
         }
-
+        
         guard let result = result else { ContractError.guardAssertionFailed().fatal() }
-
+        
         if let horizontalAlignment = horizontalAlignment {
             result.horizontalAlignment = horizontalAlignment
         }
@@ -128,7 +125,7 @@ extension ViewFactory {
         didMake = closureDidMake
         return result
     }
-
+    
     @discardableResult
     func makeOrUpdateVStack(
         id: ViewIDType,
@@ -136,7 +133,8 @@ extension ViewFactory {
         distribution: UIStackView.Distribution? = nil,
         spacing: CGFloat? = nil,
         removeExistingArrangedViews: Bool = false,
-        in parent: UIView? = nil, didMake: inout Bool,
+        in parent: UIView? = nil,
+        didMake: inout Bool,
         _ then: ((UIStackView, inout Bool) -> Void)? = nil
     ) -> UIStackView {
         return makeOrUpdateStackView(
@@ -145,7 +143,7 @@ extension ViewFactory {
             removeExistingArrangedViews: removeExistingArrangedViews,
             in: parent, didMake: &didMake, then)
     }
-
+    
     @discardableResult
     func makeOrUpdateHStack(
         id: ViewIDType,
@@ -153,7 +151,8 @@ extension ViewFactory {
         distribution: UIStackView.Distribution? = nil,
         spacing: CGFloat? = nil,
         removeExistingArrangedViews: Bool = false,
-        in parent: UIView? = nil, didMake: inout Bool,
+        in parent: UIView? = nil,
+        didMake: inout Bool,
         _ then: ((UIStackView, inout Bool) -> Void)? = nil
     ) -> UIStackView {
         return makeOrUpdateStackView(
@@ -162,7 +161,7 @@ extension ViewFactory {
             removeExistingArrangedViews: removeExistingArrangedViews,
             in: parent, didMake: &didMake, then)
     }
-
+    
     @discardableResult
     func makeOrUpdateStackView(
         id: ViewIDType,
@@ -171,7 +170,8 @@ extension ViewFactory {
         distribution: UIStackView.Distribution? = nil,
         spacing: CGFloat? = nil,
         removeExistingArrangedViews: Bool = true,
-        in parent: UIView? = nil, didMake: inout Bool,
+        in parent: UIView? = nil,
+        didMake: inout Bool,
         _ then: ((UIStackView, inout Bool) -> Void)? = nil
     ) -> UIStackView {
         var result = controlledView(id, ofType: UIStackView.self, parent: parent)
@@ -185,7 +185,7 @@ extension ViewFactory {
             result = addControlledView(id, view: UIStackView(), in: parent)
             didMake = true
         }
-
+        
         if let result = result {  // this is always true, just convenient
             if let axis = axis {
                 result.axis = axis
@@ -200,16 +200,16 @@ extension ViewFactory {
                 result.spacing = spacing
             }
         }
-
+        
         var closureDidMake: Bool = didMake
         then?(result!, &closureDidMake)
         didMake = closureDidMake
-
+        
         return result!
     }
-
+    
     // MARK: - Labels
-
+    
     private func makeOrGetLabel(
         _ id: ViewIDType, text: String?, in parent: UIView? = nil, didMake: inout Bool
     ) -> UILabel {
@@ -223,78 +223,64 @@ extension ViewFactory {
         }
         return result!
     }
-
+    
     @discardableResult
-    func makeOrUpdateTitle(
-        id: ViewIDType, text: String? = nil, in parent: UIView? = nil, didMake: inout Bool,
-        _ then: ((UILabel) -> Void)? = nil
+    func makeOrUpdateTitle(id: ViewIDType, text: String? = nil, in parent: UIView? = nil, didMake: inout Bool, _ then: ((UILabel) -> Void)? = nil
     ) -> UILabel {
         let result = themeContext.applyTitleStyles(
             label: makeOrGetLabel(id, text: text, in: parent, didMake: &didMake))!
         then?(result)
         return result
     }
-
+    
     @discardableResult
-    func makeOrUpdateHeading(
-        id: ViewIDType, text: String? = nil, in parent: UIView? = nil, didMake: inout Bool,
-        _ then: ((UILabel) -> Void)? = nil
+    func makeOrUpdateHeading(id: ViewIDType, text: String? = nil, in parent: UIView? = nil, didMake: inout Bool, _ then: ((UILabel) -> Void)? = nil
     ) -> UILabel {
         let result = themeContext.applyHeadingStyles(
             label: makeOrGetLabel(id, text: text, in: parent, didMake: &didMake))!
         then?(result)
         return result
     }
-
+    
     @discardableResult
-    func makeOrUpdateSubHeading(
-        id: ViewIDType, text: String? = nil, in parent: UIView? = nil, didMake: inout Bool,
-        _ then: ((UILabel) -> Void)? = nil
+    func makeOrUpdateSubHeading(id: ViewIDType, text: String? = nil, in parent: UIView? = nil, didMake: inout Bool, _ then: ((UILabel) -> Void)? = nil
     ) -> UILabel {
         let result = themeContext.applySubHeadingStyles(
             label: makeOrGetLabel(id, text: text, in: parent, didMake: &didMake))!
         then?(result)
         return result
     }
-
+    
     @discardableResult
-    func makeOrUpdateBody(
-        id: ViewIDType, text: String? = nil, in parent: UIView? = nil, didMake: inout Bool,
-        _ then: ((UILabel) -> Void)? = nil
+    func makeOrUpdateBody(id: ViewIDType, text: String? = nil, in parent: UIView? = nil, didMake: inout Bool, _ then: ((UILabel) -> Void)? = nil
     ) -> UILabel {
         let result = themeContext.applyBodyStyles(
             label: makeOrGetLabel(id, text: text, in: parent, didMake: &didMake))!
         then?(result)
         return result
     }
-
+    
     @discardableResult
-    func makeOrUpdateBoldBody(
-        id: ViewIDType, text: String? = nil, in parent: UIView? = nil, didMake: inout Bool,
-        _ then: ((UILabel) -> Void)? = nil
+    func makeOrUpdateBoldBody(id: ViewIDType, text: String? = nil, in parent: UIView? = nil, didMake: inout Bool, _ then: ((UILabel) -> Void)? = nil
     ) -> UILabel {
         let result = themeContext.applyBoldBodyStyles(
             label: makeOrGetLabel(id, text: text, in: parent, didMake: &didMake))!
         then?(result)
         return result
     }
-
+    
     @discardableResult
-    func makeOrUpdateTipTitle(
-        id: ViewIDType, text: String? = nil, in parent: UIView? = nil, didMake: inout Bool,
-        _ then: ((UILabel) -> Void)? = nil
+    func makeOrUpdateTipTitle(id: ViewIDType, text: String? = nil, in parent: UIView? = nil, didMake: inout Bool, _ then: ((UILabel) -> Void)? = nil
     ) -> UILabel {
         let result = themeContext.applyBoldBodyStyles(
             label: makeOrGetLabel(id, text: text, in: parent, didMake: &didMake))!
         then?(result)
         return result
     }
-
+    
     // MARK: - Buttons
-
-    private func makeOrGetButton(
-        _ id: ViewIDType, title: String?, isEnabled: Bool? = nil, in parent: UIView? = nil,
-        didMake: inout Bool
+    
+    private func makeOrGetButton(_ id: ViewIDType, title: String?, isEnabled: Bool = false, in parent: UIView? = nil, didMake: inout Bool
     ) -> UIButton {
         var result = controlledView(id, ofType: UIButton.self, parent: parent)
         if result == nil {
@@ -304,16 +290,19 @@ extension ViewFactory {
         if let title = title {
             result!.setTitle(title, for: .normal)
         }
-        if let isEnabled = isEnabled {
-            result!.isEnabled = isEnabled
-        }
+        
+        result!.isEnabled = isEnabled
         return result!
     }
-
+    
     @discardableResult
     func makeOrUpdatePrimaryActionButton(
-        id: ViewIDType, title: String? = nil, isEnabled: Bool? = nil, in parent: UIView? = nil,
-        didMake: inout Bool, _ then: ((UIButton) -> Void)? = nil
+        id: ViewIDType,
+        title: String? = nil,
+        isEnabled: Bool = false,
+        in parent: UIView? = nil,
+        didMake: inout Bool,
+        _ then: ((UIButton) -> Void)? = nil
     ) -> UIButton {
         let result = themeContext.applyPrimaryActionButtonStyles(
             button: makeOrGetButton(id, title: title, isEnabled: isEnabled, in: parent, didMake: &didMake)
@@ -321,11 +310,15 @@ extension ViewFactory {
         then?(result)
         return result
     }
-
+    
     @discardableResult
     func makeOrUpdateSecondaryActionButton(
-        id: ViewIDType, title: String? = nil, isEnabled: Bool? = nil, in parent: UIView? = nil,
-        didMake: inout Bool, _ then: ((UIButton) -> Void)? = nil
+        id: ViewIDType,
+        title: String? = nil,
+        isEnabled: Bool = false,
+        in parent: UIView? = nil,
+        didMake: inout Bool,
+        _ then: ((UIButton) -> Void)? = nil
     ) -> UIButton {
         let result = themeContext.applySecondaryActionButtonStyles(
             button: makeOrGetButton(id, title: title, isEnabled: isEnabled, in: parent, didMake: &didMake)
@@ -333,12 +326,12 @@ extension ViewFactory {
         then?(result)
         return result
     }
-
+    
     @discardableResult
     func makeOrUpdateSymbolButton(
         id: ViewIDType,
         systemName: String? = nil,
-        isEnabled: Bool? = nil,
+        isEnabled: Bool = false,
         in parent: UIView? = nil,
         didMake: inout Bool,
         _ then: ((UIButton) -> Void)? = nil
@@ -351,11 +344,11 @@ extension ViewFactory {
         then?(result)
         return result
     }
-
+    
     @discardableResult
     func makeOrUpdateCloseButton(
         id: ViewIDType,
-        isEnabled: Bool? = nil,
+        isEnabled: Bool = false,
         in parent: UIView? = nil,
         didMake: inout Bool,
         _ then: ((UIButton) -> Void)? = nil
@@ -369,11 +362,15 @@ extension ViewFactory {
         }
         return result
     }
-
+    
     @discardableResult
     func makeOrUpdateLinkButton(
-        id: ViewIDType, title: String? = nil, isEnabled: Bool? = nil, in parent: UIView? = nil,
-        didMake: inout Bool, _ then: ((UIButton) -> Void)? = nil
+        id: ViewIDType,
+        title: String? = nil,
+        isEnabled: Bool = false,
+        in parent: UIView? = nil,
+        didMake: inout Bool,
+        _ then: ((UIButton) -> Void)? = nil
     ) -> UIButton {
         let result = themeContext.applyLinkButtonStyles(
             button: makeOrGetButton(id, title: title, isEnabled: isEnabled, in: parent, didMake: &didMake)
@@ -381,11 +378,15 @@ extension ViewFactory {
         then?(result)
         return result
     }
-
+    
     @discardableResult
     func makeOrUpdateExternalLinkButton(
-        id: ViewIDType, title: String? = nil, isEnabled: Bool? = nil, in parent: UIView? = nil,
-        didMake: inout Bool, _ then: ((UIButton) -> Void)? = nil
+        id: ViewIDType,
+        title: String? = nil,
+        isEnabled: Bool = false,
+        in parent: UIView? = nil,
+        didMake: inout Bool,
+        _ then: ((UIButton) -> Void)? = nil
     ) -> UIButton {
         let result = themeContext.applyExternalLinkButtonStyles(
             button: makeOrGetButton(id, title: title, isEnabled: isEnabled, in: parent, didMake: &didMake)
@@ -393,9 +394,9 @@ extension ViewFactory {
         then?(result)
         return result
     }
-
+    
     // MARK: - Other views
-
+    
     @discardableResult
     func makeOrUpdatePinCodeView(
         id: ViewIDType,
@@ -422,7 +423,7 @@ extension ViewFactory {
         then?(result!)
         return result!
     }
-
+    
     @discardableResult
     func makeOrUpdateNumberPad(
         id: ViewIDType,
@@ -445,7 +446,7 @@ extension ViewFactory {
         then?(result!)
         return result!
     }
-
+    
     @discardableResult
     func makeOrUpdateImageView(
         id: ViewIDType,
@@ -467,7 +468,7 @@ extension ViewFactory {
         then?(result!)
         return result!
     }
-
+    
     @discardableResult
     func makeOrUpdatePageControl(
         id: ViewIDType,

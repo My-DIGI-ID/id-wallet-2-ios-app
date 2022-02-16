@@ -24,91 +24,91 @@ fileprivate extension ImageNameIdentifier {
 }
 
 extension OnboardingPageControl {
-
-  struct IndicatorStyle {
-    let image: UIImage
-    let tintColor: UIColor?
-
-    static let defaultActive = IndicatorStyle(
-        image: .init(existing: .activePage))
-    static let defaultInactive = IndicatorStyle(
-      image: .init(existing: .inactivePage))
-
-    init(image: UIImage, tintColor: UIColor? = nil) {
-      self.image = image
-      self.tintColor = tintColor
-    }
-
-    func applyTo(imageView: UIImageView) {
-      if let tintColor = tintColor {
-        imageView.image = image.withRenderingMode(.alwaysTemplate)
-        imageView.tintColor = tintColor
-      } else {
-        imageView.image = image
-      }
-    }
-  }
-
-  struct Style {
-    let themeContext: ThemeContext
-    let activeIndicatorStyle: IndicatorStyle
-    let inactiveIndicatorStyle: IndicatorStyle
-
-    init(
-      _ themeContext: ThemeContext,
-      activeIndicatorStyle: IndicatorStyle? = nil,
-      inactiveIndicatorStyle: IndicatorStyle? = nil
-    ) {
-      self.themeContext = themeContext
-      self.activeIndicatorStyle =
-        activeIndicatorStyle
-        ?? OnboardingPageControl.IndicatorStyle(
-          image: themeContext.images.onboardingActivePageIndicator)
-      self.inactiveIndicatorStyle =
-        inactiveIndicatorStyle
-        ?? OnboardingPageControl.IndicatorStyle(
-          image: themeContext.images.onboardingInactivePageIndicator)
-    }
-
-    /// Applies indicator stlyes `pageIndicators` (subviews of a UIPageControl) assuming that
-    /// the subview at index `currentPage` is active.
-    func applyTo(_ pageIndicatorContentView: UIView, currentPage: UInt, numberOfPages: UInt) {
-      guard numberOfPages > 0 else { return }
-
-      guard currentPage < numberOfPages else { ContractError.guardAssertionFailed().fatal() }
-
-      let pageIndicators = pageIndicatorContentView.subviews
-      let center = pageIndicatorContentView.center
-      let spacing = 10.0
-      let width =
-        activeIndicatorStyle.image.size.width + Double(numberOfPages - 1)
-        * (inactiveIndicatorStyle.image.size.width + spacing)
-      let height = max(
-        activeIndicatorStyle.image.size.height, inactiveIndicatorStyle.image.size.height)
-      pageIndicatorContentView.clipsToBounds = false
-      pageIndicatorContentView.superview?.clipsToBounds = false
-      var centerX = center.x - width / 2.0
-      let centerY = center.y - height / 2.0
-      for (index, indicatorView) in pageIndicators.enumerated() {
-        var imageView = locateIndicatorImageView(indicatorView)
-        if imageView == nil {
-          imageView = UIImageView()
-          indicatorView.addSubview(imageView!)
+    
+    struct IndicatorStyle {
+        let image: UIImage
+        let tintColor: UIColor?
+        
+        static let defaultActive = IndicatorStyle(
+            image: .init(existing: .activePage))
+        static let defaultInactive = IndicatorStyle(
+            image: .init(existing: .inactivePage))
+        
+        init(image: UIImage, tintColor: UIColor? = nil) {
+            self.image = image
+            self.tintColor = tintColor
         }
-        if let imageView = imageView {
-          let indicatorStyle = index == currentPage ? activeIndicatorStyle : inactiveIndicatorStyle
-          indicatorStyle.applyTo(imageView: imageView)
-          imageView.frame.origin = CGPoint(x: centerX, y: centerY)
-          centerX += imageView.frame.size.width
+        
+        func applyTo(imageView: UIImageView) {
+            if let tintColor = tintColor {
+                imageView.image = image.withRenderingMode(.alwaysTemplate)
+                imageView.tintColor = tintColor
+            } else {
+                imageView.image = image
+            }
         }
-      }
     }
-
-    func locateIndicatorImageView(_ view: UIView) -> UIImageView? {
-      if let result = view as? UIImageView {
-        return result
-      }
-      return view.subviews.first(where: { $0 is UIImageView }) as? UIImageView
+    
+    struct Style {
+        let themeContext: ThemeContext
+        let activeIndicatorStyle: IndicatorStyle
+        let inactiveIndicatorStyle: IndicatorStyle
+        
+        init(
+            _ themeContext: ThemeContext,
+            activeIndicatorStyle: IndicatorStyle? = nil,
+            inactiveIndicatorStyle: IndicatorStyle? = nil
+        ) {
+            self.themeContext = themeContext
+            self.activeIndicatorStyle =
+            activeIndicatorStyle
+            ?? OnboardingPageControl.IndicatorStyle(
+                image: themeContext.images.onboardingActivePageIndicator)
+            self.inactiveIndicatorStyle =
+            inactiveIndicatorStyle
+            ?? OnboardingPageControl.IndicatorStyle(
+                image: themeContext.images.onboardingInactivePageIndicator)
+        }
+        
+        /// Applies indicator stlyes `pageIndicators` (subviews of a UIPageControl) assuming that
+        /// the subview at index `currentPage` is active.
+        func applyTo(_ pageIndicatorContentView: UIView, currentPage: UInt, numberOfPages: UInt) {
+            guard numberOfPages > 0 else { return }
+            
+            guard currentPage < numberOfPages else { ContractError.guardAssertionFailed().fatal() }
+            
+            let pageIndicators = pageIndicatorContentView.subviews
+            let center = pageIndicatorContentView.center
+            let spacing = 10.0
+            let width =
+            activeIndicatorStyle.image.size.width + Double(numberOfPages - 1)
+            * (inactiveIndicatorStyle.image.size.width + spacing)
+            let height = max(
+                activeIndicatorStyle.image.size.height, inactiveIndicatorStyle.image.size.height)
+            pageIndicatorContentView.clipsToBounds = false
+            pageIndicatorContentView.superview?.clipsToBounds = false
+            var centerX = center.x - width / 2.0
+            let centerY = center.y - height / 2.0
+            for (index, indicatorView) in pageIndicators.enumerated() {
+                var imageView = locateIndicatorImageView(indicatorView)
+                if imageView == nil {
+                    imageView = UIImageView()
+                    indicatorView.addSubview(imageView!)
+                }
+                if let imageView = imageView {
+                    let indicatorStyle = index == currentPage ? activeIndicatorStyle : inactiveIndicatorStyle
+                    indicatorStyle.applyTo(imageView: imageView)
+                    imageView.frame.origin = CGPoint(x: centerX, y: centerY)
+                    centerX += imageView.frame.size.width
+                }
+            }
+        }
+        
+        func locateIndicatorImageView(_ view: UIView) -> UIImageView? {
+            if let result = view as? UIImageView {
+                return result
+            }
+            return view.subviews.first(where: { $0 is UIImageView }) as? UIImageView
+        }
     }
-  }
 }

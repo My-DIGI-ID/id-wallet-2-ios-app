@@ -14,13 +14,16 @@
 import UIKit
 
 fileprivate extension AttributedStyle {
-    static var walletCardValueTitle: AttributedStyle = .init([.foregroundColor: UIColor.walBlack,
-                                                    .font: UIFont.plexSansBold(12)])
+    static var walletCardValueTitle: AttributedStyle = .init([
+        .foregroundColor: UIColor.walBlack,
+        .font: UIFont.plexSansBold(12)
+    ])
     
-    static var walletCardValue: AttributedStyle = .init([.foregroundColor: UIColor.walBlack,
-                                                    .font: UIFont.plexSans(12)])
+    static var walletCardValue: AttributedStyle = .init([
+        .foregroundColor: UIColor.walBlack,
+        .font: UIFont.plexSans(12)
+    ])
 }
-
 
 /// Represents a key-value pair (primary or secondary) of a Wallet-Card
 /// Title and Value are arranged in vertival order and aligned to the left

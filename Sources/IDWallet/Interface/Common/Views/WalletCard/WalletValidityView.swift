@@ -25,10 +25,11 @@ private enum Constants {
 }
 
 fileprivate extension AttributedStyle {
-    static var validityLabel: AttributedStyle = .init([.foregroundColor: UIColor.walBlack,
-                                                    .font: UIFont.plexSans(10)])
+    static var validityLabel: AttributedStyle = .init([
+        .foregroundColor: UIColor.walBlack,
+        .font: UIFont.plexSans(10)
+    ])
 }
-
 
 /// This view displays an info-text informing the user about the expiration state of the wallet-card.
 ///

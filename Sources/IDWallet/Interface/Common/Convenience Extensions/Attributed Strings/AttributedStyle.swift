@@ -32,7 +32,6 @@ extension NSMutableAttributedString {
     }
 }
 
-
 extension String {
     func styledAs(_ style: AttributedStyle) -> NSAttributedString {
         let attrString = NSMutableAttributedString(string: self)
