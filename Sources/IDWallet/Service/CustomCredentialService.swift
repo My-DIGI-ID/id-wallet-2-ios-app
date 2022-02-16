@@ -66,7 +66,12 @@ class CustomCredentialService {
             }
             
             let id = try await Aries.credential.process(offer, for: connectionId, with: context)
-            return (id, offer.preview!)
+            
+            var preview = offer.preview!
+            preview.attributes = preview.attributes.map { attr in
+                CredentialAttribute(name: mapping[attr.name]!, value: attr.value)
+            }
+            return (id, preview)
         }
     }
     
