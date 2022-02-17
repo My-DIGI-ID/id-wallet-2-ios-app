@@ -12,11 +12,11 @@
       },
       {
         "package": "Base58String",
-        "repositoryURL": "https://github.com/cloutiertyler/Base58String.git",
+        "repositoryURL": "https://github.com/TheVanDoom/Base58String",
         "state": {
           "branch": null,
-          "revision": "496ad09a11f2212643a7413570effc16b7c76506",
-          "version": "0.1.0"
+          "revision": "a6f2758c13fbf86ad6788eabbf7bdf0cfbeb52e1",
+          "version": "1.0.0"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/attaswift/BigInt.git",
         "state": {
           "branch": null,
-          "revision": "018a5925f60f9e0523edd261de394a0898fe95b7",
-          "version": "3.1.0"
+          "revision": "0ed110f7555c34ff468e72e1686e59721f2b0da6",
+          "version": "5.3.0"
         }
       },
       {
@@ -62,15 +62,6 @@
           "branch": "feature/BKAWALIOS-215",
           "revision": "4968ab22f7bc500afbc46111d5e8a7b8e6464ed8",
           "version": null
-        }
-      },
-      {
-        "package": "SipHash",
-        "repositoryURL": "https://github.com/attaswift/SipHash",
-        "state": {
-          "branch": null,
-          "revision": "e325083424688055363bbfcb7f1a440d7d7a1bae",
-          "version": "1.2.2"
         }
       },
       {
