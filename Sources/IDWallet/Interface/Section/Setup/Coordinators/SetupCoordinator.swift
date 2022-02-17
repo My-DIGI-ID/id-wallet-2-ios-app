@@ -108,17 +108,22 @@ extension SetupCoordinator {
     }
     
     private func startPinEntrySuccess(from previous: PinEntryViewController, pin: String) {
-        let viewModel = PinEntrySuccessViewController.ViewModel(
-            commit: { viewController in
-                    self.finish(from: viewController)
-            },
-            cancel: { viewController in
-                self.startOnboarding(from: viewController)
-            }
-        )
-        let style = PinEntrySuccessViewController.Style()
+        var viewController: UIViewController?
+        let viewModel = MessageViewModel(
+            messageType: .success,
+            header: "ID Wallet einrichten",
+            text: "Du hast Deinen Zugangscode erfolgreich festgelegt.\n\n" +
+                "Du kannst jetzt weiter zur Wallet und dort Deine ersten Nachweise erstellen",
+            buttons: [
+                ("Weiter zur Wallet", UIAction { _ in
+                    self.finish(from: viewController!)
+                })
+            ])
+
+        viewController = WalletMessageViewController(viewModel: viewModel)
         presenter.present(
-            PinEntrySuccessViewController(style: style, viewModel: viewModel), replacing: previous)
+            viewController!,
+            replacing: previous)
     }
     
     private func startPinEntryFailure(from previous: PinEntryViewController) {

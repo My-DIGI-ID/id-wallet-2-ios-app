@@ -68,7 +68,7 @@ extension OnboardingViewController {
                 subHeading: NSLocalizedString(
                     "Deine Nachweise werden nur lokal auf deinem Smartphone gespeichert. " +
                     "Sie sind verschlüsselt gesichert, durch deinen Zugangscode geschützt " +
-                    "und können jederzeit von dir gelöscht werden",
+                    "und können jederzeit von dir gelöscht werden.",
                     comment: "Onboarding Page 2 Sub Heading")
             ),
             OnboardingPageViewController.ViewModel(
@@ -78,7 +78,7 @@ extension OnboardingViewController {
                     comment: "Onboarding Page 3 Heading"),
                 subHeading: NSLocalizedString(
                     "Die Bundesregierung und die größten deutschen Unternehmen arbeiten zusammen daran, " +
-                    "dass du ID in Zukunft für immer mehr Anwendungen einsetzen kannst",
+                    "dass du ID in Zukunft für immer mehr Anwendungen einsetzen kannst.",
                     comment: "Onboarding Page 3 Sub Heading")
             )
         ]
@@ -239,7 +239,7 @@ final class OnboardingViewController: BareBaseViewController {
         let result = WalletButton(
             titleText: NSLocalizedString(
                 "Mehr erfahren", comment: "Show Info Button Title"),
-            image: nil,
+            image: UIImage(systemName: "arrow.up.right")?.withSize(targetSize: CGSize(width: 14, height: 14)),
             imageAlignRight: true,
             style: .link)
         self.containerView.addSubview(result)
@@ -369,7 +369,7 @@ final class OnboardingViewController: BareBaseViewController {
         ).activate()
 
         [
-            pageContainerView.heightAnchor.constraint(greaterThanOrEqualToConstant: 450.0),
+            pageContainerView.heightAnchor.constraint(greaterThanOrEqualToConstant: 500.0),
             startButton.widthAnchor.constraint(greaterThanOrEqualToConstant: Layout.actionButtonMinWidth)
         ].activate()
         

@@ -20,6 +20,7 @@ extension PinEntryIntroViewController {
         case headingLabel
         case subHeadingLabel
         case infoBox
+        case infoBoxTitleWrapper
         case infoBoxIcon
         case infoBoxTextWrapper
         case infoBoxTippLabel
@@ -80,18 +81,18 @@ extension PinEntryIntroViewController {
     }
     
     struct Presentation {
-        let title: String = NSLocalizedString("Richte Deine Wallet ein", comment: "Page Title")
-        let heading: String = NSLocalizedString("ID Wallet aktivieren", comment: "Heading")
+        let title: String = NSLocalizedString("ID Wallet einrichten", comment: "Page Title")
+        let heading: String = NSLocalizedString("ID Wallet absichern", comment: "Heading")
         let subHeading: String = NSLocalizedString(
-            "Lege einen Zugangscode fest, um Deine ID Wallet zu aktivieren. " +
-            "Den Zugangscode brauchst Du bei jeder Benutzung der ID Wallet App.",
+            "Lege einen Zugangscode fest, um Deine ID Wallet vor Zugriff auf andere zu schützen. " +
+            "Den Zugangscode brauchst Du bei jeder Nutzung der ID Wallet App.",
             comment: "Sub Heading")
         let tipTitle: String = NSLocalizedString("Hinweis:", comment: "Tip Title")
         let tipText: String = NSLocalizedString(
             "Der Zugangscode ist nur auf Deinem Smartphone gespeichert. " +
-            "Wenn Du Ihn verlierst kann er nicht zurückgesetzt werden",
+            "Wenn Du Ihn verlierst, musst Du die App neu installieren und einrichten",
             comment: "Tip Text")
-        let commitTitle: String = NSLocalizedString("Jetzt festlegen", comment: "Commit Action Title")
+        let commitTitle: String = NSLocalizedString("Zugangscode festlegen", comment: "Commit Action Title")
     }
     
     class ViewModel {
@@ -199,42 +200,53 @@ PinEntryIntroViewController.ViewModel
                     label.textAlignment = .left
                 }
                 
-                makeOrUpdateHStack(
+                makeOrUpdateVStack(
                     id: .infoBox,
                     spacing: style.layout.mainContentSpacing,
                     in: mainContentContainer, didMake: &didCreate
                 ) { infoBox, didCreate in
                     infoBox.translatesAutoresizingMaskIntoConstraints = false
                     
-                    infoBox.alignment = .center
+                    infoBox.alignment = .leading
                     infoBox.layer.cornerRadius = 15
                     infoBox.backgroundColor = .init(hexString: "F0F2FB")
                     infoBox.isLayoutMarginsRelativeArrangement = true
                     infoBox.directionalLayoutMargins = NSDirectionalEdgeInsets(
                         top: 20, leading: 20, bottom: 20, trailing: 20)
-                    
-                    makeOrUpdateImageView(
-                        id: .infoBoxIcon,
-                        imageName: "ImageIconExclamation",
-                        in: infoBox, didMake: &didCreate
-                    ) { infoBoxIcon in
-                        infoBoxIcon.translatesAutoresizingMaskIntoConstraints = false
-                    }
-                    
+
                     makeOrUpdateVStack(
                         id: .infoBoxTextWrapper,
                         in: infoBox, didMake: &didCreate
                     ) { [self] infoBoxTextWrapper, didCreate in
                         infoBoxTextWrapper.translatesAutoresizingMaskIntoConstraints = false
-                        
-                        makeOrUpdateTipTitle(
-                            id: .infoBoxTippLabel,
-                            text: viewModel.presentation.tipTitle,
+                        infoBoxTextWrapper.alignment = .leading
+                        infoBoxTextWrapper.spacing = 8.0
+
+                        makeOrUpdateHStack(
+                            id: .infoBoxTitleWrapper,
+                            spacing: 8.0,
                             in: infoBoxTextWrapper, didMake: &didCreate
-                        ) { infoBoxTippLabel in
-                            infoBoxTippLabel.translatesAutoresizingMaskIntoConstraints = false
+                        ) { infoBoxTitleWrapper, didCreate in
+                            infoBoxTitleWrapper.alignment = .leading
+                            infoBoxTitleWrapper.distribution = .fillProportionally
+
+                            makeOrUpdateImageView(
+                                id: .infoBoxIcon,
+                                image: UIImage(systemName: "exclamationmark.circle"),
+                                in: infoBoxTitleWrapper, didMake: &didCreate
+                            ) { infoBoxIcon in
+                                infoBoxIcon.translatesAutoresizingMaskIntoConstraints = false
+                            }
+
+                            makeOrUpdateTipTitle(
+                                id: .infoBoxTippLabel,
+                                text: viewModel.presentation.tipTitle,
+                                in: infoBoxTitleWrapper, didMake: &didCreate
+                            ) { infoBoxTippLabel in
+                                infoBoxTippLabel.translatesAutoresizingMaskIntoConstraints = false
+                            }
                         }
-                        
+
                         makeOrUpdateBody(
                             id: .infoBoxTextLabel,
                             text: viewModel.presentation.tipText,
@@ -325,14 +337,16 @@ PinEntryIntroViewController.ViewModel
         ])
     }
     
-    @objc func commitButtonTapped(sender: UIButton) {
-        if let viewModel = viewModel,
-           viewModel.canCommit {
+    @objc
+    func commitButtonTapped(sender: UIButton) {
+        if  let viewModel = viewModel,
+            viewModel.canCommit {
             viewModel.commit(self)
         }
     }
     
-    @objc func cancelButtonTapped(sender: UIButton) {
+    @objc
+    func cancelButtonTapped(sender: UIButton) {
         viewModel?.cancel(self)
     }
 }
