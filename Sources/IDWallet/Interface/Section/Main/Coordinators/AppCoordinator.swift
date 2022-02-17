@@ -61,7 +61,7 @@ extension AppCoordinator {
             presenter: presenter,
             model: appState.authenticator,
             completion: { [weak self] in
-                self?.startAuthentication()
+                self?.startWallet()
             }
         )
         setupCoordinator.start()
@@ -81,6 +81,12 @@ extension AppCoordinator {
                                 switch state {
                                 case .authenticated:
                                     self.startWallet(from: spinner)
+                                case .uninitialized:
+                                    self.presenter.dismiss(options: .init(animated: false), completion: nil)
+                                    self.start()
+                                case .authenticationError(let error):
+                                    print(error._code)
+                                    self.startAuthentication(attempt: attempt + 1, from: spinner)
                                 default:
                                     self.startAuthentication(attempt: attempt + 1, from: spinner)
                                 }
