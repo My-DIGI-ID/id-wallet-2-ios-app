@@ -119,6 +119,14 @@ public class IDWalletSecurity: IDWalletSecure {
         return String(base58Encoding: Data(walletKeySha256))
     }
 
+    func isInitialized() -> Bool {
+        do {
+            return try valet.containsObject(forKey: Constants.pinSalt)
+        } catch {
+            return false
+        }
+    }
+
     func getStoredPassword() throws -> (Data, Data) {
         let pinSalt = try valet.object(forKey: Constants.pinSalt)
         let derivat = try valet.object(forKey: Constants.walletPinDerivat)

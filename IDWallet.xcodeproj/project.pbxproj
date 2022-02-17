@@ -218,6 +218,7 @@
 		95873EBA2791B23300A924C8 /* HelpViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95873EB92791B23300A924C8 /* HelpViewCoordinator.swift */; };
 		95873EBC2791C01400A924C8 /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95873EBB2791C01400A924C8 /* UIView+Layout.swift */; };
 		95B2F12B27BE49FE007291D4 /* Base58String in Frameworks */ = {isa = PBXBuildFile; productRef = 95B2F12A27BE49FE007291D4 /* Base58String */; };
+		95B2F12D27BE5D11007291D4 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B2F12C27BE5D11007291D4 /* SpinnerViewController.swift */; };
 		95C107DA2795896300FB02AD /* learn-more-de.html in Resources */ = {isa = PBXBuildFile; fileRef = 95873EBF2791F8A000A924C8 /* learn-more-de.html */; };
 		95C107DC27958FCB00FB02AD /* WalletMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107DB27958FCB00FB02AD /* WalletMessageViewController.swift */; };
 		95C1083F27BC102C001248F0 /* String+Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C1083E27BC102C001248F0 /* String+Crypto.swift */; };
@@ -374,6 +375,7 @@
 		95873EB92791B23300A924C8 /* HelpViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewCoordinator.swift; sourceTree = "<group>"; };
 		95873EBB2791C01400A924C8 /* UIView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		95873EBF2791F8A000A924C8 /* learn-more-de.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "learn-more-de.html"; sourceTree = "<group>"; };
+		95B2F12C27BE5D11007291D4 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		95C107DB27958FCB00FB02AD /* WalletMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMessageViewController.swift; sourceTree = "<group>"; };
 		95C107DF2795B7E300FB02AD /* MessageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCoordinator.swift; sourceTree = "<group>"; };
 		95C107E42796CEE200FB02AD /* MessageType+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageType+Image.swift"; sourceTree = "<group>"; };
@@ -698,6 +700,7 @@
 				8E7554C927729A410016DEB0 /* BareBaseVC.swift */,
 				95193729279187D200ED0AF2 /* WebViewController.swift */,
 				95C107DB27958FCB00FB02AD /* WalletMessageViewController.swift */,
+				95B2F12C27BE5D11007291D4 /* SpinnerViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1342,6 +1345,7 @@
 				8862A8A527AD6A1F00C9780B /* WalletValueView.swift in Sources */,
 				95873EBA2791B23300A924C8 /* HelpViewCoordinator.swift in Sources */,
 				8EAF8422275FE6D000283D0B /* Typography.swift in Sources */,
+				95B2F12D27BE5D11007291D4 /* SpinnerViewController.swift in Sources */,
 				953F26D227AD9170008704E1 /* UILabel+ImageAttachment.swift in Sources */,
 				8862A88D27AC217B00C9780B /* WalletCardModel.swift in Sources */,
 				95C1084127BC1036001248F0 /* Data+Crypto.swift in Sources */,

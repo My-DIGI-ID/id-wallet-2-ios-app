@@ -61,36 +61,37 @@ extension AppCoordinator {
         )
         setupCoordinator.start()
     }
-    
+
     private func startAuthentication() {
-//        let alert = UIAlertController(
-//            title: "Anmeldung",
-//            message:
-//                "Die PIN wurde gesetzt wird aber zum Testen wieder gelöscht da " +
-//            "die Wallet Funktionalität noch nicht implementiert ist.",
-//            preferredStyle: .alert)
-//        alert.addAction(
-//            UIAlertAction(
-//                title: "OK", style: .default,
-//                handler: { [weak self] _ in
-//                    if let self = self {
-////                        self.appState.authenticator.reset()
-////                        self.start()
-//                        Task {
-//                            _ = await self.appState.authenticator.authenticate(pin: "111111")
-//                            self.start()
-//                        }
-//                    }
-//                }
-//            ))
-//        presenter.present(alert)
-        Task {
-            _ = await self.appState.authenticator.authenticate(pin: "111111")
-            self.start()
-        }
+
+        let viewController = PinEntryViewController(
+            style: .regular,
+            viewModel: PinEntryViewModel.viewModelForInitialPinEntry(
+                resultHandler: { result, viewController in
+                    self.presenter.presentModal(SpinnerViewController(), options: .init(animated: true, modalPresentationStyle: .fullScreen, modalTransitionStyle: .crossDissolve))
+                    switch result {
+                    case .pin(let pin, _):
+                        Task {
+                            let state: Authenticator.AuthenticationState = await self.appState.authenticator.authenticate(pin: pin)
+                            switch state {
+                            case .authenticated:
+                                self.presenter.dismissModal {
+                                    self.startWallet(from: viewController)
+                                }
+                            default:
+                                self.presenter.dismissModal(completion: nil)
+                            }
+                        }
+                    case .cancelled:
+                        self.presenter.dismissModal(completion: nil)
+                    }
+                },
+                length: 6
+            ))
+        presenter.present(viewController)
     }
     
-    private func startWallet() {
-        presenter.present(WalletTabBarController(presenter: presenter))
+    private func startWallet(from viewController: UIViewController? = nil) {
+        presenter.present(WalletTabBarController(presenter: presenter), replacing: viewController)
     }
 }

@@ -25,48 +25,23 @@ class Authenticator {
         case uninitialized
     }
     
-    // the pin should obviously not be stored here but instead queried from
-    // secured storage
-    private var pin: String?
-    
-    private var state: AuthenticationState
-    
-    private let maxAge: TimeInterval = 60.0 * 30.0
-    
     init() {
-        pin = nil
-        state = .uninitialized
+
     }
     
     // Queries the state and expires the authentication if necessary
-    func authenticationState() async -> AuthenticationState {
-        switch state {
-        case .authenticated(let authenticationTime):
-            let age: TimeInterval = Date().timeIntervalSince(authenticationTime)
-            if age > maxAge {
-                state = .authenticationExpired(authenticationTime: authenticationTime)
-            }
-            return state
-        default:
-            return state
-        }
+    func authenticationState() -> AuthenticationState {
+        return IDWalletSecurity.shared().isInitialized() ? .unauthenticated : .uninitialized
     }
     
     // Sets the specified pin if no pin is defined
     func definePIN(pin: String) async {
-        guard self.pin == nil else {
-            ContractError.guardAssertionFailed("Attempt to define PIN even though it is already defined.")
-                .fatal()
-        }
         do {
             let walletKey = try await IDWalletSecurity.shared().save(pin: pin)
             try await CustomAgentService().setup(with: walletKey)
-            state = .authenticated(authenticationTime: Date())
-            self.pin = pin
             print("AGENT SETUP SUCCESSFUL")
         } catch {
             print("AGENT SETUP FAILED: \(error)")
-            state = .uninitialized
         }
     }
     
@@ -74,21 +49,18 @@ class Authenticator {
         do {
             let storedPassword = try IDWalletSecurity.shared().getStoredPassword()
             guard pin.validate(with: storedPassword) else {
-                state = .authenticationFailed(authenticationTime: Date())
-                return state
+                return .authenticationFailed(authenticationTime: Date())
             }
             let walletKey = try IDWalletSecurity.shared().getWalletKey(for: pin)
             try await Aries.agent.open(with: "ID", walletKey)
-            state = .authenticated(authenticationTime: Date())
+            return .authenticated(authenticationTime: Date())
         } catch {
             print(error)
-            state = .authenticationFailed(authenticationTime: Date())
+            return .authenticationFailed(authenticationTime: Date())
         }
-        return state
     }
     
     func reset() {
-        state = .uninitialized
-        pin = nil
+
     }
 }
