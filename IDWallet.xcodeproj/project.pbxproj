@@ -1863,7 +1863,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-aries-sdk";
 			requirement = {
-				branch = "feature/BKAWALIOS-215";
+				branch = development;
 				kind = branch;
 			};
 		};
@@ -1871,7 +1871,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-mediator-sdk";
 			requirement = {
-				branch = "feature/BKAWALIOS-215";
+				branch = development;
 				kind = branch;
 			};
 		};

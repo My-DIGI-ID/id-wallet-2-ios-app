@@ -6,8 +6,8 @@
         "repositoryURL": "https://github.com/Governikus/AusweisApp2-SDK-iOS",
         "state": {
           "branch": null,
-          "revision": "880b1e042764a427e50d7964e2b19b6cd7ca1a4a",
-          "version": "1.22.4"
+          "revision": "15a0cf65a638224a155e178a01a296a6b263dfc0",
+          "version": "1.22.3"
         }
       },
       {
@@ -41,8 +41,8 @@
         "package": "Aries",
         "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-aries-sdk",
         "state": {
-          "branch": "feature/BKAWALIOS-215",
-          "revision": "e019cf29ac5ceed8c23ee76b3c1aefa339cfc726",
+          "branch": "development",
+          "revision": "ee56ecfbcabf42b795ebe58a8eef123d68d0dc2a",
           "version": null
         }
       },
@@ -59,8 +59,8 @@
         "package": "Mediator",
         "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-mediator-sdk",
         "state": {
-          "branch": "feature/BKAWALIOS-215",
-          "revision": "4968ab22f7bc500afbc46111d5e8a7b8e6464ed8",
+          "branch": "development",
+          "revision": "48d37bd239e0119b774d04efe2e0c251c03ce143",
           "version": null
         }
       },
