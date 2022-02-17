@@ -14,6 +14,8 @@
 import Foundation
 import UIKit
 import Combine
+import SwiftUI
+import CocoaLumberjackSwift
 
 // MARK: - Coordinator Interface
 
@@ -40,6 +42,9 @@ class AppCoordinator: Coordinator {
                 startSetup()
             case .unauthenticated, .authenticationFailed, .authenticationExpired:
                 startAuthentication()
+            case .authenticationError(let error):
+                DDLogError(error)
+                startAuthentication()
             case .authenticated:
                 startWallet()
             }
@@ -56,39 +61,48 @@ extension AppCoordinator {
             presenter: presenter,
             model: appState.authenticator,
             completion: { [weak self] in
-                self?.start()
+                self?.startAuthentication()
             }
         )
         setupCoordinator.start()
     }
 
-    private func startAuthentication() {
+    private func startAuthentication(attempt: Int = 0, from previous: UIViewController? = nil) {
+        if attempt > 5 {
+            // TODO: message to user
+            Task {
+                try await appState.authenticator.reset()
+                self.presenter.dismiss(options: .defaultOptions, completion: {
+                    self.start()
+                })
+            }
+        }
 
         let viewController = PinEntryViewController(
             style: .regular,
-            viewModel: PinEntryViewModel.viewModelForInitialPinEntry(
-                resultHandler: { result, viewController in
-                    self.presenter.presentModal(SpinnerViewController(), options: .init(animated: true, modalPresentationStyle: .fullScreen, modalTransitionStyle: .crossDissolve))
+            viewModel: PinEntryViewModel.viewModelForPinEntry(
+                resultHandler: { result, previous in
                     switch result {
                     case .pin(let pin, _):
-                        Task {
-                            let state: Authenticator.AuthenticationState = await self.appState.authenticator.authenticate(pin: pin)
-                            switch state {
-                            case .authenticated:
-                                self.presenter.dismissModal {
-                                    self.startWallet(from: viewController)
+                        let spinner = SpinnerViewController()
+                        self.presenter.present(spinner, replacing: previous, options: .defaultOptions) {
+                            Task {
+                                let state: Authenticator.AuthenticationState = await self.appState.authenticator.authenticate(pin: pin)
+                                switch state {
+                                case .authenticated:
+                                    self.startWallet(from: spinner)
+                                default:
+                                    self.startAuthentication(attempt: attempt + 1, from: spinner)
                                 }
-                            default:
-                                self.presenter.dismissModal(completion: nil)
                             }
                         }
-                    case .cancelled:
-                        self.presenter.dismissModal(completion: nil)
+                    default:
+                        self.startAuthentication(attempt: attempt, from: previous)
                     }
                 },
                 length: 6
             ))
-        presenter.present(viewController)
+        presenter.present(viewController, replacing: previous)
     }
     
     private func startWallet(from viewController: UIViewController? = nil) {

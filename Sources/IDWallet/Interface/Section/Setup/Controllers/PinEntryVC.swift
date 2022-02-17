@@ -282,6 +282,9 @@ class PinEntryViewController: BaseViewController<
         }
       },
       viewModel.$canCommit.sink { value in
+          if viewModel.autoCommit {
+              commitButton.isHidden = true
+          }
         UIView.animate(withDuration: animationDuration) {
           commitButton.isEnabled = value
           viewModel.presentation.themeContext.applyPrimaryActionButtonStyles(
@@ -305,7 +308,7 @@ class PinEntryViewController: BaseViewController<
 
   func numberPad(_ numberPad: NumberPad, didAddDigit digit: String) {
     if let viewModel = viewModel, viewModel.canAdd && viewModel.isValidPinCharacter(digit) {
-      viewModel.add(digit)
+        viewModel.add(digit, viewController: self)
     }
   }
 

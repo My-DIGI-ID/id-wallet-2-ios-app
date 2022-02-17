@@ -203,7 +203,6 @@ class RootPresenter: NSObject, PresenterProtocol, CAAnimationDelegate {
         }
     }
 
-
     func dismiss(
         options: PresentationOptions,
         completion: (() -> Void)?
@@ -263,6 +262,13 @@ class RootPresenter: NSObject, PresenterProtocol, CAAnimationDelegate {
             DDLogDebug("Animation did end: \(anim), finished: \(flag), calling completion")
             completionByAnimation.removeValue(forKey: anim)
             completion()
+        } else if completionByAnimation.count == 1 {
+            if let original = completionByAnimation.keys.first, let completion = completionByAnimation[original] {
+
+                DDLogWarn("Unknown animation did end: \(anim), finished: \(flag), calling completion for \(original)")
+                completionByAnimation.removeAll()
+                completion()
+            }
         } else {
             DDLogDebug("Animation did end: \(anim), finished: \(flag), no completion registered")
         }

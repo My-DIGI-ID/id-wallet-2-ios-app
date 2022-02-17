@@ -144,7 +144,7 @@ class ScannerCoordinator: Coordinator {
         name: String?,
         imageUrl: String?
     ) {
-        if var name = name {
+        if let name = name {
             let previous = currentViewController
             let viewModel = ConnectionConfirmationViewModel(connection: name)
 

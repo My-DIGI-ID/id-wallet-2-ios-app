@@ -12,25 +12,20 @@
 //
 import Foundation
 import Aries
+import CocoaLumberjackSwift
 
-// This implementation is just a stub serving as placeholder until we
-// have a backend. I would use a to-do marker, but that would make
-// swiftlint unhappy.
 class Authenticator {
     enum AuthenticationState {
         case authenticated(authenticationTime: Date)
         case authenticationExpired(authenticationTime: Date)
         case authenticationFailed(authenticationTime: Date)
+        case authenticationError(error: Error)
         case unauthenticated
         case uninitialized
     }
-    
-    init() {
 
-    }
-    
-    // Queries the state and expires the authentication if necessary
-    func authenticationState() -> AuthenticationState {
+    // Queries the state
+    func authenticationState() async -> AuthenticationState {
         return IDWalletSecurity.shared().isInitialized() ? .unauthenticated : .uninitialized
     }
     
@@ -38,13 +33,30 @@ class Authenticator {
     func definePIN(pin: String) async {
         do {
             let walletKey = try await IDWalletSecurity.shared().save(pin: pin)
+            guard IDWalletSecurity.shared().isInitialized() else {
+                fatalError("definedPIN: IDWalletSecurity.save(pin:) failed to save PIN")
+            }
+            let other = try IDWalletSecurity.shared().getWalletKey(for: pin)
+            guard other == walletKey else {
+                fatalError("definePIN: Wallet key mismatch: \(walletKey) != \(other)")
+            }
             try await CustomAgentService().setup(with: walletKey)
-            print("AGENT SETUP SUCCESSFUL")
+            DDLogDebug("definePIN: AGENT SETUP SUCCESSFUL")
+
         } catch {
-            print("AGENT SETUP FAILED: \(error)")
+            DDLogError("definePIN: AGENT SETUP FAILED: \(error)")
+            do {
+                try IDWalletSecurity.shared().reset()
+            } catch {
+                DDLogError("definePIN: Failed to reset keychain entries: \(error)")
+            }
         }
     }
-    
+
+    func reset() async throws {
+        try IDWalletSecurity.shared().reset()
+    }
+
     func authenticate(pin: String) async -> AuthenticationState {
         do {
             let storedPassword = try IDWalletSecurity.shared().getStoredPassword()
@@ -52,15 +64,16 @@ class Authenticator {
                 return .authenticationFailed(authenticationTime: Date())
             }
             let walletKey = try IDWalletSecurity.shared().getWalletKey(for: pin)
-            try await Aries.agent.open(with: "ID", walletKey)
-            return .authenticated(authenticationTime: Date())
+            do {
+                try await Aries.agent.open(with: "ID", walletKey)
+                return .authenticated(authenticationTime: Date())
+            } catch {
+                DDLogError(error)
+                return .authenticationFailed(authenticationTime: Date())
+            }
         } catch {
-            print(error)
-            return .authenticationFailed(authenticationTime: Date())
+            DDLogError("authenticate: failed: \(error)")
+            return .authenticationError(error: error)
         }
-    }
-    
-    func reset() {
-
     }
 }

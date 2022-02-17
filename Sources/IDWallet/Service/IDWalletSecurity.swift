@@ -36,8 +36,9 @@ protocol IDWalletSecure {
 }
 
 public class IDWalletSecurity: IDWalletSecure {
-    private let valet = Valet.valet(with: Constants.valetIdentifier,
-                                    accessibility: .whenUnlockedThisDeviceOnly)
+    private let valet = Valet.valet(
+        with: Constants.valetIdentifier,
+        accessibility: .whenUnlockedThisDeviceOnly)
 
     private static var sharedAppSecurity: IDWalletSecurity = {
         let security = IDWalletSecurity()
@@ -83,8 +84,18 @@ public class IDWalletSecurity: IDWalletSecure {
         return data.base64EncodedString()
     }
 
+    func resetDeviceAttestID() {
+        do {
+            try valet.removeObject(forKey: Constants.appAttestKeyId)
+        } catch {}
+    }
+
     func reset() throws {
-        try valet.removeObject(forKey: Constants.appAttestKeyId)
+        resetDeviceAttestID()
+        try valet.removeObject(forKey: Constants.pinSalt)
+        try valet.removeObject(forKey: Constants.walletPinDerivat)
+        try valet.removeObject(forKey: Constants.walletSalt)
+        try valet.removeObject(forKey: Constants.preKey)
     }
 
     func save(pin: String) async throws -> String {        

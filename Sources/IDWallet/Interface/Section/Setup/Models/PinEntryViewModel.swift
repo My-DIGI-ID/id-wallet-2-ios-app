@@ -19,7 +19,13 @@ class PinEntryViewModel {
     // MARK: - Storage
     
     // MARK: Configuration
-    
+
+    /// Whether commit should be called automatically when the last digit was entered
+    let autoCommit: Bool
+
+    /// Maximum number of attempts (display only)
+    let maxAttempts: Int
+
     /// The minimum valid length of a PIN
     let minimumLength: UInt?
     
@@ -58,6 +64,9 @@ class PinEntryViewModel {
         maximumLength: UInt?,
         minimumLength: UInt?,
         originalPin: String? = nil,
+        autoCommit: Bool = false,
+        attempt: Int = 0,
+        maxAttempts: Int = 5,
         revealLastCharacterDuration: CGFloat? = nil,
         characterValidation: NSRegularExpression? = allowOnlyDigitsRegExp
     ) {
@@ -79,12 +88,16 @@ class PinEntryViewModel {
         self.canAdd = false
         self.canRemove = false
         self.canCommit = false
-        
+        self.autoCommit = autoCommit
+        self.attempt = attempt
+        self.maxAttempts = maxAttempts
         updateStateForPinChange()
     }
     
     // MARK: - Exposed State
-    
+
+    @Published var attempt: Int = 0
+
     // Presentation related parameters
     @Published var presentation: PinEntryViewModel.Presentation
     
@@ -105,7 +118,8 @@ class PinEntryViewModel {
     /// Adds a character to the end of the current PIN code. Requires `canAdd`
     ///
     /// - Parameter character: a valid PIN code character to be added
-    func add(_ character: String) {
+    /// - Parameter viewController: passed to commit() if autoCommit and canCommit are true
+    func add(_ character: String, viewController: UIViewController) {
         guard isValidPinCharacter(character) else {
             ContractError.preconditionUnsatisfied("add(c)", condition: "c is valid PIN character").fatal()
         }
@@ -115,6 +129,9 @@ class PinEntryViewModel {
         
         clearTextPin += character
         updateStateForPinChange()
+
+        if autoCommit && canCommit {
+        }
     }
     
     /// Removes the last character from the current PIN code. Requires `canRemove`
@@ -226,7 +243,19 @@ extension PinEntryViewModel {
 // MARK: - Convenience Initializers
 
 extension PinEntryViewModel {
-    
+
+    static func viewModelForPinEntry(
+        presentation: PinEntryViewModel.Presentation = .pinEntry,
+        resultHandler: @escaping (PinEntryViewModel.Result, PinEntryViewController) -> Void,
+        length: UInt = 6
+    ) -> PinEntryViewModel {
+        return PinEntryViewModel(
+            presentation: presentation,
+            resultHandler: resultHandler,
+            length: length
+        )
+    }
+
     static func viewModelForInitialPinEntry(
         presentation: PinEntryViewModel.Presentation = .initialPinEntry,
         resultHandler: @escaping (PinEntryViewModel.Result, PinEntryViewController) -> Void,
@@ -266,12 +295,18 @@ extension PinEntryViewModel {
         resultHandler: @escaping (PinEntryViewModel.Result, PinEntryViewController) -> Void,
         length: UInt,
         revealLastCharacterDuration: CGFloat? = nil,
-        characterValidation: NSRegularExpression? = allowOnlyDigitsRegExp
+        characterValidation: NSRegularExpression? = allowOnlyDigitsRegExp,
+        autoCommit: Bool = false,
+        attempt: Int = 0,
+        maxAttempts: Int = 5
     ) {
         self.init(
             presentation: presentation,
             resultHandler: resultHandler,
             maximumLength: length, minimumLength: length,
+            autoCommit: autoCommit,
+            attempt: attempt,
+            maxAttempts: maxAttempts,
             revealLastCharacterDuration: revealLastCharacterDuration,
             characterValidation: characterValidation
         )
@@ -283,6 +318,20 @@ extension PinEntryViewModel {
 extension PinEntryViewModel {
     
     struct Presentation {
+        static var pinEntry: PinEntryViewModel.Presentation {
+            Presentation(
+                title: NSLocalizedString(
+                    "ID Wallet entsperren", comment: "Navigation context"),
+                heading: NSLocalizedString(
+                    "Bitte gib Deinen Zugangscode ein", comment: "Action title"),
+                subHeading: NSLocalizedString(
+                    "",
+                    comment: "Action instructions"),
+                commitActionTitle: NSLocalizedString(
+                    "Weiter", comment: "Commit button title, next step"),
+                themeContext: .main
+            )
+        }
         static var initialPinEntry: PinEntryViewModel.Presentation {
             Presentation(
                 title: NSLocalizedString(
