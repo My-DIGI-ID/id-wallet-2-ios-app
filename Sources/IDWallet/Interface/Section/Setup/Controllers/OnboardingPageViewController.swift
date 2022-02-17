@@ -15,7 +15,6 @@ import CocoaLumberjackSwift
 import UIKit
 
 // MARK: - Configuration
-
 private enum Constants {
     enum Styles {
         static let backgroundColor: UIColor = .white
@@ -27,13 +26,124 @@ private enum Constants {
         static let verticalSpacing = 40.0
         static let verticalTextSpacing = 18.0
         static let horizontalTextPadding = 24.0
+        static let horizontalImageMargin = 17.0
+    }
+}
+
+final class OnboardingPageViewController: BareBaseViewController {
+    fileprivate typealias Styles = Constants.Styles
+    fileprivate typealias Layout = Constants.Layout
+    
+    private let viewModel: ViewModel
+    
+    lazy var imageView: UIImageView = {
+        let result = UIImageView()
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.imageView.key
+        result.image = viewModel.image
+        return result
+    }()
+    
+    lazy var headingLabel: UILabel = {
+        let result = UILabel()
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.headingLabel.key
+        result.text = viewModel.heading
+        result.font = .plexSansBold(25)
+        result.textColor = .black
+        result.numberOfLines = 0
+        result.lineBreakMode = .byWordWrapping
+        result.textAlignment = .center
+        return result
+    }()
+    
+    lazy var subHeadingLabel: UILabel = {
+        let result = UILabel()
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.subHeadingLabel.key
+        result.text = viewModel.subHeading
+        result.font = .plexSans(17)
+        result.textColor = .black
+        result.numberOfLines = 0
+        result.lineBreakMode = .byWordWrapping
+        result.textAlignment = .center
+        return result
+    }()
+    
+    lazy var textWrapper: UIView = {
+        let result = UIView()
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.textWrapper.key
+        result.addSubview(headingLabel)
+        result.addSubview(subHeadingLabel)
+        
+        [
+            "H:|[heading]|",
+            "H:|[subHeading]|",
+            "V:|[heading]-(textspc)-[subHeading]-(>=0)-|",
+        ].constraints(
+            with: ["heading": headingLabel, "subHeading": subHeadingLabel],
+            metrics: ["textspc": Layout.verticalTextSpacing]
+        ).activate()
+        
+        return result
+    }()
+    
+    lazy var imageWrapper: UIView = {
+        let result = UIView()
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.imageWrapper.key
+        result.addSubview(imageView)
+        
+        let constraints = [
+            "V:|[img]|",
+            "H:|-(==margin)-[img]-(==margin)-|",
+        ].constraints(
+            with: ["img": imageView],
+            metrics: ["margin": Layout.horizontalImageMargin]
+        ) + [
+            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor), // ratio 1:1
+        ]
+        
+        constraints.activate()
+        
+        return result
+    }()
+    
+    lazy var stackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [imageWrapper, textWrapper])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = Layout.verticalTextSpacing
+        return stackView
+    }()
+    
+    // MARK: - Initialization
+    init(viewModel: ViewModel) {
+        self.viewModel = viewModel
+        super.init(style: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) is not supported. Use init(viewModel:completion:) instead")
+    }
+    
+    // MARK: - Life Cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = Styles.backgroundColor
+        view.embed(stackView, insets: .init(top: 0, left: Layout.horizontalTextPadding, bottom: 0, right: Layout.horizontalTextPadding))
+        
+        [
+            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
+        ].activate()
     }
 }
 
 extension OnboardingPageViewController {
     enum ViewID: String, BaseViewID {
-        case containerView
-        case contentWrapper
+        case imageWrapper
+        case textWrapper
         case imageView
         case headingLabel
         case subHeadingLabel
@@ -49,145 +159,6 @@ extension OnboardingPageViewController {
             self.image = image
             self.heading = heading
             self.subHeading = subHeading
-        }
-    }
-}
-
-final class OnboardingPageViewController: BareBaseViewController {
-    fileprivate typealias Styles = Constants.Styles
-    fileprivate typealias Layout = Constants.Layout
-    
-    private let viewModel: ViewModel
-    
-    lazy var containerView: AlignmentWrapperView = {
-        let result = AlignmentWrapperView()
-        self.view.addSubview(result)
-        
-        result.translatesAutoresizingMaskIntoConstraints = false
-        result.accessibilityIdentifier = ViewID.containerView.key
-        
-        result.horizontalAlignment = .center
-        result.verticalAlignment = .center
-        
-        return result
-    }()
-    
-    lazy var contentWrapper: UIView = {
-        let result = UIView()
-        self.containerView.arrangedView = result
-        
-        result.translatesAutoresizingMaskIntoConstraints = false
-        result.accessibilityIdentifier = ViewID.contentWrapper.key
-        
-        return result
-    }()
-    
-    lazy var imageView: UIImageView = {
-        let result = UIImageView()
-        self.contentWrapper.addSubview(result)
-        
-        result.translatesAutoresizingMaskIntoConstraints = false
-        result.accessibilityIdentifier = ViewID.imageView.key
-        
-        result.image = viewModel.image
-        
-        return result
-    }()
-    
-    lazy var headingLabel: UILabel = {
-        let result = UILabel()
-        self.contentWrapper.addSubview(result)
-        
-        result.translatesAutoresizingMaskIntoConstraints = false
-        result.accessibilityIdentifier = ViewID.headingLabel.key
-        
-        result.text = viewModel.heading
-        result.font = .plexSansBold(25)
-        result.textColor = .black
-        result.numberOfLines = 0
-        result.lineBreakMode = .byWordWrapping
-        result.textAlignment = .center
-        
-        return result
-    }()
-    
-    lazy var subHeadingLabel: UILabel = {
-        let result = UILabel()
-        self.contentWrapper.addSubview(result)
-        
-        result.translatesAutoresizingMaskIntoConstraints = false
-        result.accessibilityIdentifier = ViewID.subHeadingLabel.key
-        
-        result.text = viewModel.subHeading
-        result.font = .plexSans(17)
-        result.textColor = .black
-        result.numberOfLines = 0
-        result.lineBreakMode = .byWordWrapping
-        result.textAlignment = .center
-        
-        return result
-    }()
-    
-    // MARK: - Initialization
-    
-    init(viewModel: ViewModel) {
-        self.viewModel = viewModel
-        super.init(style: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) is not supported. Use init(viewModel:completion:) instead")
-    }
-    
-    // MARK: - Life Cycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = Styles.backgroundColor
-        
-        createLayoutConstraints()
-    }
-    
-    // MARK: - Layout
-    
-    private func createLayoutConstraints() {
-        let views: [String: Any] = [
-            "container": containerView,
-            "image": imageView,
-            "heading": headingLabel,
-            "subHeading": subHeadingLabel
-        ]
-        
-        let metrics: [String: Any] = [
-            "vspc": Layout.verticalSpacing,
-            "vspctxt": Layout.verticalTextSpacing,
-            "hpadtxt": Layout.horizontalTextPadding
-        ]
-        
-        [
-            "H:|-[container]-|",
-            "V:|-[container]-|",
-            "H:|-(hpadtxt)-[heading]-(hpadtxt)-|",
-            "H:|-(hpadtxt)-[subHeading]-(hpadtxt)-|"
-        ].constraints(
-            with: views, metrics: metrics, options: []
-        ).activate()
-        
-        [
-            "V:|-[image]-(vspc)-[heading]-(vspctxt)-[subHeading]-|"
-        ].constraints(
-            with: views, metrics: metrics, options: .alignAllCenterX
-        ).activate()
-        
-        headingLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
-            .isActive = true
-        
-        if let image = imageView.image {
-            [
-                imageView.heightAnchor.constraint(equalToConstant: image.size.height),
-                imageView.widthAnchor.constraint(equalToConstant: image.size.width)
-            ].activate()
         }
     }
 }
