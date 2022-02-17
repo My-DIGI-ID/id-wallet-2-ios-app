@@ -68,16 +68,6 @@ extension AppCoordinator {
     }
 
     private func startAuthentication(attempt: Int = 0, from previous: UIViewController? = nil) {
-        if attempt > 5 {
-            // TODO: message to user
-            Task {
-                try await appState.authenticator.reset()
-                self.presenter.dismiss(options: .defaultOptions, completion: {
-                    self.start()
-                })
-            }
-        }
-
         let viewController = PinEntryViewController(
             style: .regular,
             viewModel: PinEntryViewModel.viewModelForPinEntry(
