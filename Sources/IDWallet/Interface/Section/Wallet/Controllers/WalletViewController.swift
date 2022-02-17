@@ -166,7 +166,6 @@ final class WalletViewController: BareBaseViewController {
 
 extension WalletViewController: AddDocumentDelegate {
     func addDocument() {
-        // TODO: Trigger add Document here
         print("Add Document")
     }
 }

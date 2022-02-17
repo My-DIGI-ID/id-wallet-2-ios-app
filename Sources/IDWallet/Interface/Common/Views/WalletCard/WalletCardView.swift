@@ -43,10 +43,12 @@ private enum Constants {
         
         static let valuesSpacing: CGFloat = 10
         
-        static let headerInset: UIEdgeInsets = .init(top: 0,
-                                                     left: cardInsetLeftRight,
-                                                     bottom: 0,
-                                                     right: cardInsetLeftRight)
+        static let headerInset: UIEdgeInsets = .init(
+            top: 0,
+            left: cardInsetLeftRight,
+            bottom: 0,
+            right: cardInsetLeftRight
+        )
         
         static let valuesContainerSpacing: CGFloat = 15
         static let valuesTopSpacing: CGFloat = 8

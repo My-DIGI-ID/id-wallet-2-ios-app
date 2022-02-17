@@ -91,7 +91,7 @@ class ContentWalletView: UIView {
         contentStackView.removeArrangedSubviews()
         walletData.enumerated().forEach {
             let walletView = WalletCardView(with: $0.element, offset: $0.offset) { _ in
-                // TODO: Trigger Detail from here
+                // Trigger Detail from here
             }
             contentStackView.addArrangedSubview(walletView)
             
