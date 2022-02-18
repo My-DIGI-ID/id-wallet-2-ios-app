@@ -84,14 +84,12 @@ public class IDWalletSecurity: IDWalletSecure {
         return data.base64EncodedString()
     }
 
-    func resetDeviceAttestID() {
-        do {
-            try valet.removeObject(forKey: Constants.appAttestKeyId)
-        } catch {}
+    func resetDeviceAttestID() throws {
+        try valet.removeObject(forKey: Constants.appAttestKeyId)
     }
 
     func reset() throws {
-        resetDeviceAttestID()
+        try resetDeviceAttestID()
         try valet.removeObject(forKey: Constants.pinSalt)
         try valet.removeObject(forKey: Constants.walletPinDerivat)
         try valet.removeObject(forKey: Constants.walletSalt)

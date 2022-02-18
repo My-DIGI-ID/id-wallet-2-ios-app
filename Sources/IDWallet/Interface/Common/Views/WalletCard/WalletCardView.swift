@@ -94,7 +94,7 @@ class WalletCardView: UIView {
         view.addSubview(validityView)
         
         let constraints = [
-            "H:|[validityView]|",
+            "H:|[validityView]|"
         ].constraints(with: ["validityView": validityView]) + [
             view.centerYAnchor.constraint(equalTo: validityView.centerYAnchor),
             validityView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Layout.validityViewHeightRatio)
@@ -210,7 +210,7 @@ class WalletCardView: UIView {
             
             "V:|[header]",
             "V:[header]-(containerTop)-[primaryContainer]-(containerBottom)-|",
-            "V:[header]-(containerTop)-[secondaryContainer]-(containerBottom)-|",
+            "V:[header]-(containerTop)-[secondaryContainer]-(containerBottom)-|"
         ].constraints(with: ["header": headerContainer,
                              "primaryContainer": primaryValuesContainer,
                              "secondaryContainer": secondaryValuesContainer],

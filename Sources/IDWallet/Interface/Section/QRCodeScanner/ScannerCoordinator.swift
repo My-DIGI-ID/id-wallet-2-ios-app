@@ -34,7 +34,6 @@ enum ScanError: Error {
     case cancelled
 }
 
-
 @MainActor
 class ScannerCoordinator: Coordinator {
     enum Result {
@@ -78,11 +77,12 @@ class ScannerCoordinator: Coordinator {
                 guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {
                     return
                 }
-                UIApplication.shared.open(settingsURL,
-                                          options: [:], completionHandler: { _ in
-                    // TODO: is this what we want? Can we tell when settings are changed?
-                    self.startRequestAccess()
-                })
+                UIApplication.shared.open(
+                    settingsURL,
+                    options: [:], completionHandler: { _ in
+                        // TODO: is this what we want? Can we tell when settings are changed?
+                        self.startRequestAccess()
+                    })
             })
             
             presenter.presentModal(alert, options: .init(animated: true, modalPresentationStyle: .automatic, modalTransitionStyle: .crossDissolve))
@@ -116,7 +116,7 @@ class ScannerCoordinator: Coordinator {
                 case .success(let qrCode):
                     do {
                         // self.completion(Result.success(qrCode))
-
+                        
                         let connectionService = CustomConnectionService()
                         if let result = try connectionService.invitee(for: qrCode) {
                             let (name, imageUrl) = result
@@ -125,10 +125,10 @@ class ScannerCoordinator: Coordinator {
                     } catch let error {
                         self.completion(Result.failure(error))
                     }
-
+                    
                 case .failure(let error):
                     self.completion(Result.failure(error))
-
+                    
                 case .cancelled:
                     self.completion(Result.cancelled)
                 }
@@ -147,7 +147,7 @@ class ScannerCoordinator: Coordinator {
         if let name = name {
             let previous = currentViewController
             let viewModel = ConnectionConfirmationViewModel(connection: name)
-
+            
             currentViewController =
             ConnectionConfirmationViewController(viewModel: viewModel) { result in
                 switch result {

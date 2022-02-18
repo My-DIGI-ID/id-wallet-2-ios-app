@@ -98,7 +98,7 @@ extension UIColor {
     }
     
     static var appGrey1: UIColor {
-        UIColor.init(hexString: "#55576B")!
+        UIColor(hexString: "#55576B")!
     }
 }
 
