@@ -26,7 +26,7 @@ private enum Constants {
         static let verticalSpacing = 40.0
         static let verticalTextSpacing = 18.0
         static let horizontalTextPadding = 24.0
-        static let horizontalImageMargin = 17.0
+        static let horizontalImageMargin = 0.0
     }
 }
 
@@ -41,6 +41,11 @@ final class OnboardingPageViewController: BareBaseViewController {
         result.translatesAutoresizingMaskIntoConstraints = false
         result.accessibilityIdentifier = ViewID.imageView.key
         result.image = viewModel.image
+        
+        [
+            result.heightAnchor.constraint(equalTo: result.widthAnchor), // ratio 1:1
+        ].activate()
+        
         return result
     }()
     
@@ -57,16 +62,15 @@ final class OnboardingPageViewController: BareBaseViewController {
         return result
     }()
     
-    lazy var subHeadingLabel: UILabel = {
-        let result = UILabel()
+    lazy var subHeadingLabel: ScrollableTextView = {
+        let result = ScrollableTextView()
         result.translatesAutoresizingMaskIntoConstraints = false
         result.accessibilityIdentifier = ViewID.subHeadingLabel.key
-        result.text = viewModel.subHeading
-        result.font = .plexSans(17)
-        result.textColor = .black
-        result.numberOfLines = 0
-        result.lineBreakMode = .byWordWrapping
-        result.textAlignment = .center
+        result.label.text = viewModel.subHeading
+        result.label.font = .plexSans(17)
+        result.label.textColor = .black
+        result.label.lineBreakMode = .byWordWrapping
+        result.label.textAlignment = .center
         return result
     }()
     
@@ -80,7 +84,7 @@ final class OnboardingPageViewController: BareBaseViewController {
         [
             "H:|[heading]|",
             "H:|[subHeading]|",
-            "V:|[heading]-(textspc)-[subHeading]-(>=0)-|",
+            "V:|[heading]-(textspc)-[subHeading]|",
         ].constraints(
             with: ["heading": headingLabel, "subHeading": subHeadingLabel],
             metrics: ["textspc": Layout.verticalTextSpacing]
@@ -97,12 +101,10 @@ final class OnboardingPageViewController: BareBaseViewController {
         
         let constraints = [
             "V:|[img]|",
-            "H:|-(==margin)-[img]-(==margin)-|",
         ].constraints(
-            with: ["img": imageView],
-            metrics: ["margin": Layout.horizontalImageMargin]
+            with: ["img": imageView]
         ) + [
-            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor), // ratio 1:1
+            imageView.centerXAnchor.constraint(equalTo: result.centerXAnchor),
         ]
         
         constraints.activate()
@@ -135,8 +137,49 @@ final class OnboardingPageViewController: BareBaseViewController {
         view.embed(stackView, insets: .init(top: 0, left: Layout.horizontalTextPadding, bottom: 0, right: Layout.horizontalTextPadding))
         
         [
-            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor),
+            imageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 235 / 414)
         ].activate()
+    }
+}
+
+final class ScrollableTextView: UIView {
+    lazy var label: UILabel = {
+        let result = UILabel()
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.numberOfLines = 0
+        return result
+    }()
+    
+    lazy var scrollView: UIScrollView = {
+        let view = UIScrollView(frame: .zero)
+        view.backgroundColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
+    private func setupLayout() {
+        embed(scrollView)
+        scrollView.embed(label)
+        
+        [
+            label.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+        ].activate()
+    }
+    
+    // MARK: Lifecycle
+    init() {
+        super.init(frame: .zero)
+        setupLayout()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupLayout()
     }
 }
 

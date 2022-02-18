@@ -1698,7 +1698,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = D8KT3C957D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/IDWallet/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "ID Wallet";
@@ -1714,7 +1714,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.bsi.IDWallet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.bsi.IDWallet.mhader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -1731,7 +1731,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = D8KT3C957D;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Sources/IDWallet/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "ID Wallet";
@@ -1747,7 +1747,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.bsi.IDWallet;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ibm.bsi.IDWallet.mhader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
