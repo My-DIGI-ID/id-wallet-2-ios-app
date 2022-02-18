@@ -202,13 +202,13 @@ final class OnboardingViewController: BareBaseViewController {
         pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
         pageViewController.didMove(toParent: self)
         
-        view.addSubview(pageViewController.view)
+        view.addSubview(pageViewControllerView)
         view.addSubview(pageControl)
         view.addSubview(startButton)
         view.addSubview(showInfoButton)
         
         let constraints = [
-            "H:|[pageContainer]|",
+            "H:|-(25)-[pageContainer]-(25)-|",
             "H:|[pageControl]|",
             "H:|[showInfo]|",
             
@@ -225,7 +225,7 @@ final class OnboardingViewController: BareBaseViewController {
             
             // Note: Presenter should ensure that we are layout relative to the saveArea
             // For now, we use the guide manually.
-            pageViewControllerView.safeAreaLayoutGuide.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 26)
+            pageViewControllerView.safeAreaLayoutGuide.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 26),
         ]
             
         constraints.activate()
