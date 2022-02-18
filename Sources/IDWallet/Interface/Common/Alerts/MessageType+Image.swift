@@ -26,7 +26,7 @@ private enum Constants {
     }
 }
 
-extension AlertType {
+extension MessageViewType {
     var image: UIImage {
         switch self {
         case .fail:
