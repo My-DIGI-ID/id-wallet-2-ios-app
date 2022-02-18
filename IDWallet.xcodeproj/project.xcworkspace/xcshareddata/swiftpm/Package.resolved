@@ -1,0 +1,88 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "AusweisApp2",
+        "repositoryURL": "https://github.com/Governikus/AusweisApp2-SDK-iOS",
+        "state": {
+          "branch": null,
+          "revision": "880b1e042764a427e50d7964e2b19b6cd7ca1a4a",
+          "version": "1.22.4"
+        }
+      },
+      {
+        "package": "Base58String",
+        "repositoryURL": "https://github.com/TheVanDoom/Base58String",
+        "state": {
+          "branch": null,
+          "revision": "a6f2758c13fbf86ad6788eabbf7bdf0cfbeb52e1",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "package": "BigInt",
+        "repositoryURL": "https://github.com/attaswift/BigInt.git",
+        "state": {
+          "branch": null,
+          "revision": "0ed110f7555c34ff468e72e1686e59721f2b0da6",
+          "version": "5.3.0"
+        }
+      },
+      {
+        "package": "CocoaLumberjack",
+        "repositoryURL": "https://github.com/CocoaLumberjack/CocoaLumberjack.git",
+        "state": {
+          "branch": null,
+          "revision": "80ada1f753b0d53d9b57c465936a7c4169375002",
+          "version": "3.7.4"
+        }
+      },
+      {
+        "package": "Aries",
+        "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-aries-sdk",
+        "state": {
+          "branch": null,
+          "revision": "92252025c05ea5fd6ffabe7e3b72ead24906774b",
+          "version": "0.1.0"
+        }
+      },
+      {
+        "package": "Indy",
+        "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-indy-sdk",
+        "state": {
+          "branch": null,
+          "revision": "16b646a6942a206a9dd9e423cfcf4880942c3758",
+          "version": "0.1.0"
+        }
+      },
+      {
+        "package": "Mediator",
+        "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-mediator-sdk",
+        "state": {
+          "branch": null,
+          "revision": "c4010a2250ba920c647c62682a8ebded909cf482",
+          "version": "0.1.0"
+        }
+      },
+      {
+        "package": "swift-log",
+        "repositoryURL": "https://github.com/apple/swift-log.git",
+        "state": {
+          "branch": null,
+          "revision": "5d66f7ba25daf4f94100e7022febf3c75e37a6c7",
+          "version": "1.4.2"
+        }
+      },
+      {
+        "package": "Valet",
+        "repositoryURL": "https://github.com/square/Valet",
+        "state": {
+          "branch": null,
+          "revision": "2bf3329055f5d71d42a12801dd69d1d770fafa5e",
+          "version": "4.1.2"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

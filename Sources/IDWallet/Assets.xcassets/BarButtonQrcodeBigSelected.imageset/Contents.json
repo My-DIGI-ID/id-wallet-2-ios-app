@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "barbutton-big-qrcode-selected.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

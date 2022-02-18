@@ -1,0 +1,81 @@
+# Note: This section lists rules that are enabled by default.
+# This means: A rule commented out here is actually enabled in this config!
+disabled_rules:
+- cyclomatic_complexity
+- file_length
+- generic_type_name
+- identifier_name
+- nesting
+- redundant_string_enum_value
+- trailing_whitespace
+- type_body_length
+- type_name
+- line_length
+- function_body_length
+
+# Note: This section lists rules that are disabled by default.
+# So a commented out rule here is (still) a disabled one.
+opt_in_rules:
+- array_init
+- attributes
+- closure_spacing
+#- conditional_returns_on_newline
+- contains_over_filter_count
+- contains_over_filter_is_empty
+- contains_over_first_not_nil
+- contains_over_range_nil_comparison
+- discarded_notification_center_observer
+- discouraged_optional_boolean
+- empty_collection_literal
+- empty_count
+- empty_string
+- explicit_init
+- fallthrough
+- fatal_error_message
+- first_where
+- flatmap_over_map_reduce
+#- force_unwrapping
+#- implicitly_unwrapped_optional
+- indentation_width
+- joined_default_parameter
+- last_where
+- legacy_multiple
+#- lower_acl_than_parent
+- multiline_parameters
+- operator_usage_whitespace
+- overridden_super_call
+- override_in_extension
+- private_action
+- private_outlet
+- prohibited_super_call
+- redundant_nil_coalescing
+- required_enum_case
+- sorted_first_last
+- type_contents_order
+- unowned_variable_capture
+- vertical_parameter_alignment_on_call
+- vertical_whitespace_closing_braces
+- yoda_condition
+
+#line_length:
+    #warning: 150
+    #ignores_function_declarations: true
+    #ignores_comments: true
+    #ignores_urls: true
+    
+type_contents_order:
+  order:
+    - case
+    - associated_type
+    - type_alias
+    - subtype
+    - [type_property, instance_property, ib_outlet, ib_inspectable]
+    - [
+        initializer,
+        deinitializer,
+        type_method,
+        view_life_cycle_method,
+        subscript,
+        other_method,
+        ib_action,
+    ]

@@ -1,0 +1,9 @@
+"error" = "Error";
+"cancel" = "Cancel";
+"settings" = "Settings";
+
+// QR Code Scanner
+"qr_code_title" = "QR-Code Scan";
+"qr_code_hint" = "Point the camera at a QR code";
+"qr_code_request_camera_access" = "„ID Wallet“ would like to access the camera";
+"qr_code_request_camera_access_disabled" = "Allow access to be able to scan QR codes";
