@@ -14,6 +14,10 @@
 import UIKit
 import AVFoundation
 
+fileprivate extension ImageNameIdentifier {
+    static let flashlight = ImageNameIdentifier(rawValue: "flashlight")
+}
+
 private enum Constants {
     
     enum Text {
@@ -28,6 +32,7 @@ private enum Constants {
     enum Layout {
         static let cameraSize: CGFloat = 300
         static let navBarTopSpacing: CGFloat = 40
+        static let hintToFlashlightSpacing: CGFloat = 40
         static let navBarToCameraSpacing: CGFloat = 42
         static let cameraToHintSpacing: CGFloat = 48
         static let cornerRadius: CGFloat = 20
@@ -42,6 +47,12 @@ private enum Constants {
     
     enum Color {
         static let divder = UIColor(hexString: "#D9D9D9")
+    }
+
+    enum Accessibility {
+        static let torchOn = VoiceOverSettings(label: "accessibility_button_label_torch_on".localized)
+        static let torchOff = VoiceOverSettings(label: "accessibility_button_label_torch_off".localized)
+        static let scanner: String = "accessibility_scan_camera_announce".localized
     }
 }
 
@@ -67,7 +78,7 @@ class QRScannerViewController: BareBaseViewController {
         return button
     }()
     
-    private lazy var brackeView: BracketView = {
+    private lazy var bracketView: BracketView = {
         let view = BracketView(
             lineLength: Constants.Layout.Bracket.lineLength,
             lineWidth: Constants.Layout.Bracket.lineWidth,
@@ -112,12 +123,20 @@ class QRScannerViewController: BareBaseViewController {
     }()
     
     let captureSession = AVCaptureSession()
+    private(set) var videoCaptureDevice: AVCaptureDevice?
     
     private lazy var previewLayer: AVCaptureVideoPreviewLayer = {
         let layer = AVCaptureVideoPreviewLayer(session: captureSession)
         layer.connection?.videoOrientation = .portrait
         layer.videoGravity = .resizeAspectFill
         return layer
+    }()
+
+    private lazy var flashLightButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(identifiedBy: .flashlight), for: .normal)
+        button.addTarget(self, action: #selector(toggleFlashlight), for: .touchUpInside)
+        return button
     }()
     
     override var prefersStatusBarHidden: Bool {
@@ -126,6 +145,12 @@ class QRScannerViewController: BareBaseViewController {
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
+    }
+
+    private(set) var isFlashlightOn = false {
+        didSet {
+            setupAccessibility()
+        }
     }
     
     init(completion: @escaping (QRScannerResult) -> Void) {
@@ -141,48 +166,67 @@ class QRScannerViewController: BareBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayout()
+        setupAccessibility()
         
 #if targetEnvironment(simulator)
 #else
-    guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
-        completion(.failure(error: .acesss))
-        return
-    }
-    
-    let videoInput: AVCaptureDeviceInput
-    
-    do {
-        videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-    } catch {
-        completion(.failure(error: .failure))
-        return
-    }
-    
-    if captureSession.canAddInput(videoInput) {
-        captureSession.addInput(videoInput)
-    } else {
-        completion(.failure(error: .acesss))
-        return
-    }
-    
-    let metadataOutput = AVCaptureMetadataOutput()
-    
-    if captureSession.canAddOutput(metadataOutput) {
-        captureSession.addOutput(metadataOutput)
-        
-        metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-        metadataOutput.metadataObjectTypes = [.qr]
-    } else {
-        completion(.failure(error: .failure))
-        return
-    }
-    
-    if !captureSession.isRunning {
-        DispatchQueue.global(qos: .userInitiated).async {
-            self.captureSession.startRunning()
+        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
+            completion(.failure(error: .acesss))
+            self.videoCaptureDevice = nil
+            return
         }
-    }
+        self.flashLightButton.isEnabled = videoCaptureDevice.hasTorch
+        self.videoCaptureDevice = videoCaptureDevice
+
+        let videoInput: AVCaptureDeviceInput
+
+        do {
+            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+        } catch {
+            completion(.failure(error: .failure))
+            return
+        }
+
+        if captureSession.canAddInput(videoInput) {
+            captureSession.addInput(videoInput)
+        } else {
+            completion(.failure(error: .acesss))
+            return
+        }
+
+        let metadataOutput = AVCaptureMetadataOutput()
+
+        if captureSession.canAddOutput(metadataOutput) {
+            captureSession.addOutput(metadataOutput)
+
+            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+            metadataOutput.metadataObjectTypes = [.qr]
+        } else {
+            completion(.failure(error: .failure))
+            return
+        }
+
+        if !captureSession.isRunning {
+            DispatchQueue.global(qos: .userInitiated).async {
+                self.captureSession.startRunning()
+            }
+        }
 #endif
+    }
+
+    @objc
+    private func toggleFlashlight() {
+        guard let device = self.videoCaptureDevice, device.hasTorch else {
+            return
+        }
+        do {
+            try device.lockForConfiguration()
+            isFlashlightOn.toggle()
+            flashLightButton.isSelected.toggle()
+            device.torchMode = isFlashlightOn ? .on : .off
+            device.unlockForConfiguration()
+        } catch {
+        }
     }
     
     @objc
@@ -197,24 +241,27 @@ extension QRScannerViewController {
     private func setupLayout() {
         
         view.backgroundColor = .white
-        view.addAutolayoutSubviews(navigationBar, scannerContentView, hintLabel)
+        view.addAutolayoutSubviews(navigationBar, scannerContentView, hintLabel, flashLightButton)
         
-        scannerContentView.layer.insertSublayer(previewLayer, below: brackeView.layer)
-        scannerContentView.embed(brackeView, insets: Constants.Layout.Bracket.insets)
+        scannerContentView.layer.insertSublayer(previewLayer, below: bracketView.layer)
+        scannerContentView.embed(bracketView, insets: Constants.Layout.Bracket.insets)
         [
-            "V:|-(s1)-[navBar]-(s2)-[camera(camSize)]-(s3)-[hint]",
+            "V:|-(s1)-[navBar]-(s2)-[camera(camSize)]-(s3)-[hint]-(s4)-[flashlight]",
             "H:|[navBar]|",
             "H:|-[hint]-|",
+            "H:|-[flashlight]-|",
             "H:|-(>=0)-[camera(camSize)]-(>=0)-|"
         ].constraints(
             with: [
                 "navBar": navigationBar,
                 "camera": scannerContentView,
-                "hint": hintLabel],
+                "hint": hintLabel,
+                "flashlight": flashLightButton],
             metrics: [
                 "s1": Constants.Layout.navBarTopSpacing,
                 "s2": Constants.Layout.navBarToCameraSpacing,
                 "s3": Constants.Layout.cameraToHintSpacing,
+                "s4": Constants.Layout.hintToFlashlightSpacing,
                 "camSize": Constants.Layout.cameraSize])
             .activate()
         NSLayoutConstraint.activate([scannerContentView.centerXAnchor.constraint(equalTo: view.centerXAnchor)])
@@ -222,6 +269,15 @@ extension QRScannerViewController {
     
     override func viewDidLayoutSubviews() {
         previewLayer.frame = scannerContentView.layer.bounds
+    }
+}
+
+extension QRScannerViewController {
+    private func setupAccessibility() {
+        flashLightButton.enableAccessibility(
+            label: isFlashlightOn ? Constants.Accessibility.torchOff.label : Constants.Accessibility.torchOn.label,
+            hint: isFlashlightOn ? Constants.Accessibility.torchOff.hint : Constants.Accessibility.torchOn.hint,
+            traits: isFlashlightOn ? Constants.Accessibility.torchOff.traits : Constants.Accessibility.torchOn.traits)
     }
 }
 
