@@ -6,6 +6,7 @@
 "qr_code_title" = "QR-Code Scan";
 "qr_code_hint" = "Point the camera at a QR code";
 "qr_code_request_camera_access" = "„ID Wallet“ would like to access the camera";
-"qr_code_request_camera_access_disabled" = "Allow access to be able to scan QR codes";
+"qr_code_request_camera_access_disabled" = "ID Wallet does not have access to your camera. You can manage access in your settings.";
 "accessibility_button_label_torch_on" = "Switch torch on";
 "accessibility_button_label_torch_off" = "Switch torch off";
+"access_denied" = "Access denied";

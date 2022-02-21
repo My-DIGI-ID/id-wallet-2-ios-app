@@ -24,6 +24,7 @@ private enum Constants {
             static let message = "qr_code_request_camera_access_disabled".localized
             static let cancel = "cancel".localized
             static let settings = "settings".localized
+            static let access_denied_title = "access_denied".localized
         }
     }
 }
@@ -64,7 +65,7 @@ class ScannerCoordinator: Coordinator {
             startRequestAccess()
         case .denied:
             let alert = UIAlertController(
-                title: Constants.Text.Alert.title,
+                title: Constants.Text.Alert.access_denied_title,
                 message: Constants.Text.Alert.message,
                 preferredStyle: UIAlertController.Style.alert)
             
