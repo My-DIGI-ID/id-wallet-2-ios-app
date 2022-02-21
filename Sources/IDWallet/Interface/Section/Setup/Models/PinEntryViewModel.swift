@@ -222,6 +222,9 @@ class PinEntryViewModel {
         self.canRemove = false
         self.canCommit = false
         
+        self.autoCommit = false
+        self.maxAttempts = 5
+        
         updateStateForPinChange()
     }
 }

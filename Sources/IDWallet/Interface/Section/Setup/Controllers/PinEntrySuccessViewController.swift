@@ -171,7 +171,7 @@ PinEntrySuccessViewController.ViewModel
 
             makeOrUpdateImageView(
                 id: .imageView,
-                image: .pinSuccess,
+                imageId: .pinSuccess,
                 in: containerView, didMake: &didCreate
             ) { imageView in
                 imageView.translatesAutoresizingMaskIntoConstraints = false

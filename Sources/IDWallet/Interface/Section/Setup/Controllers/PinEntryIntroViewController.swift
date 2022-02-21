@@ -16,6 +16,7 @@ import UIKit
 
 fileprivate extension ImageNameIdentifier {
     static let exclamation = ImageNameIdentifier(rawValue: "Exclamation")
+    static let error = ImageNameIdentifier(rawValue: "Error")
 }
 
 extension PinEntryIntroViewController {
@@ -226,7 +227,7 @@ PinEntryIntroViewController.ViewModel
                     
                     makeOrUpdateImageView(
                         id: .infoBoxIcon,
-                        image: .exclamation,
+                        imageId: .exclamation,
                         in: infoBox, didMake: &didCreate
                     ) { infoBoxIcon in
                         infoBoxIcon.translatesAutoresizingMaskIntoConstraints = false
@@ -250,7 +251,7 @@ PinEntryIntroViewController.ViewModel
 
                             makeOrUpdateImageView(
                                 id: .infoBoxIcon,
-                                image: UIImage(systemName: "exclamationmark.circle"),
+                                image: .init(identifiedBy: .error)?.withTintColor(.white),
                                 in: infoBoxTitleWrapper, didMake: &didCreate
                             ) { infoBoxIcon in
                                 infoBoxIcon.translatesAutoresizingMaskIntoConstraints = false

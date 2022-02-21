@@ -27,6 +27,12 @@ private enum Constants {
         static let verticalTextSpacing = 18.0
         static let horizontalTextPadding = 24.0
         static let horizontalImageMargin = 0.0
+        
+        static let imageWidthToViewWidthRatio: CGFloat = 235 / 414
+        static let contentStackViewInset: UIEdgeInsets = .init(top: 0,
+                                                               left: horizontalTextPadding,
+                                                               bottom: 0,
+                                                               right: horizontalTextPadding)
     }
 }
 
@@ -134,10 +140,10 @@ final class OnboardingPageViewController: BareBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Styles.backgroundColor
-        view.embed(stackView, insets: .init(top: 0, left: Layout.horizontalTextPadding, bottom: 0, right: Layout.horizontalTextPadding))
+        view.embed(stackView, insets: Layout.contentStackViewInset)
         
         [
-            imageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 235 / 414)
+            imageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: Layout.imageWidthToViewWidthRatio)
         ].activate()
     }
 }
