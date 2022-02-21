@@ -224,15 +224,7 @@ PinEntryIntroViewController.ViewModel
                     infoBox.isLayoutMarginsRelativeArrangement = true
                     infoBox.directionalLayoutMargins = NSDirectionalEdgeInsets(
                         top: 20, leading: 20, bottom: 20, trailing: 20)
-                    
-                    makeOrUpdateImageView(
-                        id: .infoBoxIcon,
-                        imageId: .exclamation,
-                        in: infoBox, didMake: &didCreate
-                    ) { infoBoxIcon in
-                        infoBoxIcon.translatesAutoresizingMaskIntoConstraints = false
-                    }
-                    
+
                     makeOrUpdateVStack(
                         id: .infoBoxTextWrapper,
                         in: infoBox, didMake: &didCreate
