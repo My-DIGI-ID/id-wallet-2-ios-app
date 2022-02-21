@@ -25,6 +25,14 @@ private enum Constants {
 
     enum Layout {
         static let actionButtonMinWidth = 200.0
+        
+        enum Padding {
+            static let horizontal = 25.0
+            static let vContainerToControl = 19
+            static let vControlToButton = 49
+            static let vButtonToInfo = 14
+            static let vInfoToTrailing = 38
+        }
     }
 }
 
@@ -38,6 +46,7 @@ fileprivate extension ImageNameIdentifier {
 final class OnboardingViewController: BareBaseViewController {
     fileprivate typealias Styles = Constants.Styles
     fileprivate typealias Layout = Constants.Layout
+    fileprivate typealias Padding = Constants.Layout.Padding
 
     // MARK: - Components
 
@@ -208,16 +217,22 @@ final class OnboardingViewController: BareBaseViewController {
         view.addSubview(showInfoButton)
         
         let constraints = [
-            "H:|-(25)-[pageContainer]-(25)-|",
+            "H:|-(hPad)-[pageContainer]-(hPad)-|",
             "H:|[pageControl]|",
             "H:|[showInfo]|",
             
-            "V:[pageContainer]-(19)-[pageControl]-(49)-[start]-(14)-[showInfo]-(38)-|"
+            "V:[pageContainer]-(vContCtrl)-[pageControl]-(vCtrlBtn)-[start]-(vBtnInfo)-[showInfo]-(vInfoTrailing)-|"
         ].constraints(with: [
             "pageContainer": pageViewControllerView,
             "pageControl": pageControl,
             "showInfo": showInfoButton,
-            "start": startButton
+            "start": startButton,
+        ], metrics: [
+            "hPad": Padding.horizontal,
+            "vContCtrl": Padding.vContainerToControl,
+            "vCtrlBtn": Padding.vControlToButton,
+            "vBtnInfo": Padding.vButtonToInfo,
+            "vInfoTrailing": Padding.vInfoToTrailing,
         ]) + [
             startButton.widthAnchor.constraint(greaterThanOrEqualToConstant: Layout.actionButtonMinWidth),
             startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),

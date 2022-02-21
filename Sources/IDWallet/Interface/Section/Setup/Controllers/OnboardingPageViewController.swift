@@ -29,10 +29,12 @@ private enum Constants {
         static let horizontalImageMargin = 0.0
         
         static let imageWidthToViewWidthRatio: CGFloat = 235 / 414
-        static let contentStackViewInset: UIEdgeInsets = .init(top: 0,
-                                                               left: horizontalTextPadding,
-                                                               bottom: 0,
-                                                               right: horizontalTextPadding)
+        static let contentStackViewInset: UIEdgeInsets = .init(
+            top: 0,
+            left: horizontalTextPadding,
+            bottom: 0,
+            right: horizontalTextPadding
+        )
     }
 }
 
@@ -43,49 +45,49 @@ final class OnboardingPageViewController: BareBaseViewController {
     private let viewModel: ViewModel
     
     lazy var imageView: UIImageView = {
-        let result = UIImageView()
-        result.translatesAutoresizingMaskIntoConstraints = false
-        result.accessibilityIdentifier = ViewID.imageView.key
-        result.image = viewModel.image
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.accessibilityIdentifier = ViewID.imageView.key
+        imageView.image = viewModel.image
         
         [
-            result.heightAnchor.constraint(equalTo: result.widthAnchor), // ratio 1:1
+            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor), // ratio 1:1
         ].activate()
         
-        return result
+        return imageView
     }()
     
     lazy var headingLabel: UILabel = {
-        let result = UILabel()
-        result.translatesAutoresizingMaskIntoConstraints = false
-        result.accessibilityIdentifier = ViewID.headingLabel.key
-        result.text = viewModel.heading
-        result.font = .plexSansBold(25)
-        result.textColor = .black
-        result.numberOfLines = 0
-        result.lineBreakMode = .byWordWrapping
-        result.textAlignment = .center
-        return result
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.accessibilityIdentifier = ViewID.headingLabel.key
+        label.text = viewModel.heading
+        label.font = .plexSansBold(25)
+        label.textColor = .black
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
+        label.textAlignment = .center
+        return label
     }()
     
     lazy var subHeadingLabel: ScrollableTextView = {
-        let result = ScrollableTextView()
-        result.translatesAutoresizingMaskIntoConstraints = false
-        result.accessibilityIdentifier = ViewID.subHeadingLabel.key
-        result.label.text = viewModel.subHeading
-        result.label.font = .plexSans(17)
-        result.label.textColor = .black
-        result.label.lineBreakMode = .byWordWrapping
-        result.label.textAlignment = .center
-        return result
+        let textView = ScrollableTextView()
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.accessibilityIdentifier = ViewID.subHeadingLabel.key
+        textView.label.text = viewModel.subHeading
+        textView.label.font = .plexSans(17)
+        textView.label.textColor = .black
+        textView.label.lineBreakMode = .byWordWrapping
+        textView.label.textAlignment = .center
+        return textView
     }()
     
     lazy var textWrapper: UIView = {
-        let result = UIView()
-        result.translatesAutoresizingMaskIntoConstraints = false
-        result.accessibilityIdentifier = ViewID.textWrapper.key
-        result.addSubview(headingLabel)
-        result.addSubview(subHeadingLabel)
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.accessibilityIdentifier = ViewID.textWrapper.key
+        view.addSubview(headingLabel)
+        view.addSubview(subHeadingLabel)
         
         [
             "H:|[heading]|",
@@ -96,30 +98,31 @@ final class OnboardingPageViewController: BareBaseViewController {
             metrics: ["textspc": Layout.verticalTextSpacing]
         ).activate()
         
-        return result
+        return view
     }()
     
     lazy var imageWrapper: UIView = {
-        let result = UIView()
-        result.translatesAutoresizingMaskIntoConstraints = false
-        result.accessibilityIdentifier = ViewID.imageWrapper.key
-        result.addSubview(imageView)
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.accessibilityIdentifier = ViewID.imageWrapper.key
+        view.addSubview(imageView)
         
         let constraints = [
             "V:|[img]|",
         ].constraints(
             with: ["img": imageView]
         ) + [
-            imageView.centerXAnchor.constraint(equalTo: result.centerXAnchor),
+            imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ]
         
         constraints.activate()
         
-        return result
+        return view
     }()
     
     lazy var stackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [imageWrapper, textWrapper])
+        stackView.accessibilityIdentifier = ViewID.stackView.key
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = Layout.verticalTextSpacing
@@ -148,47 +151,6 @@ final class OnboardingPageViewController: BareBaseViewController {
     }
 }
 
-final class ScrollableTextView: UIView {
-    lazy var label: UILabel = {
-        let result = UILabel()
-        result.translatesAutoresizingMaskIntoConstraints = false
-        result.numberOfLines = 0
-        return result
-    }()
-    
-    lazy var scrollView: UIScrollView = {
-        let view = UIScrollView(frame: .zero)
-        view.backgroundColor = .clear
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        return view
-    }()
-    
-    private func setupLayout() {
-        embed(scrollView)
-        scrollView.embed(label)
-        
-        [
-            label.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
-        ].activate()
-    }
-    
-    // MARK: Lifecycle
-    init() {
-        super.init(frame: .zero)
-        setupLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        setupLayout()
-    }
-}
-
 extension OnboardingPageViewController {
     enum ViewID: String, BaseViewID {
         case imageWrapper
@@ -196,6 +158,7 @@ extension OnboardingPageViewController {
         case imageView
         case headingLabel
         case subHeadingLabel
+        case stackView
         
         var key: String { return rawValue }
     }

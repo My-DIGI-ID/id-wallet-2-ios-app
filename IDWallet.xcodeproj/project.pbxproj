@@ -44,6 +44,7 @@
 		8862A8A527AD6A1F00C9780B /* WalletValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A8A427AD6A1F00C9780B /* WalletValueView.swift */; };
 		8896727127C380FF00E5DF56 /* AttributedStyle+Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88136CFC27BD30AB00799E94 /* AttributedStyle+Styles.swift */; };
 		8896727327C3833200E5DF56 /* UIImageView+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8896727227C3833200E5DF56 /* UIImageView+URL.swift */; };
+		8896727627C395D300E5DF56 /* ScrollableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8896727527C395D300E5DF56 /* ScrollableTextView.swift */; };
 		8E43319D27590FB700D50127 /* NumberPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E43319C27590FB700D50127 /* NumberPad.swift */; };
 		8E4331BA2759152B00D50127 /* IBMPlexSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E4331AA2759152B00D50127 /* IBMPlexSans-Regular.ttf */; };
 		8E4331BB2759152B00D50127 /* IBMPlexSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E4331AB2759152B00D50127 /* IBMPlexSans-Bold.ttf */; };
@@ -286,6 +287,7 @@
 		8862A8A227AD697B00C9780B /* WalletValidityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletValidityView.swift; sourceTree = "<group>"; };
 		8862A8A427AD6A1F00C9780B /* WalletValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletValueView.swift; sourceTree = "<group>"; };
 		8896727227C3833200E5DF56 /* UIImageView+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+URL.swift"; sourceTree = "<group>"; };
+		8896727527C395D300E5DF56 /* ScrollableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableTextView.swift; sourceTree = "<group>"; };
 		8E43319C27590FB700D50127 /* NumberPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPad.swift; sourceTree = "<group>"; };
 		8E43319F2759152B00D50127 /* IBMPlexSans-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-MediumItalic.ttf"; sourceTree = "<group>"; };
 		8E4331A02759152B00D50127 /* IBMPlexSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-Medium.ttf"; sourceTree = "<group>"; };
@@ -654,6 +656,14 @@
 			path = WalletCard;
 			sourceTree = "<group>";
 		};
+		8896727427C395C600E5DF56 /* TextView */ = {
+			isa = PBXGroup;
+			children = (
+				8896727527C395D300E5DF56 /* ScrollableTextView.swift */,
+			);
+			path = TextView;
+			sourceTree = "<group>";
+		};
 		8E43319E275914CF00D50127 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -738,6 +748,7 @@
 		8E8C405F276650B200DBC979 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				8896727427C395C600E5DF56 /* TextView */,
 				8862A89F27AD517100C9780B /* WalletCard */,
 				95F9A2B327A06CC1003F15B5 /* Button */,
 				8E8C40622766516000DBC979 /* README.md */,
@@ -1375,6 +1386,7 @@
 				95F9A2AC27A05482003F15B5 /* UIColor+IDWallet.swift in Sources */,
 				8E988179276AB3CF002F629C /* AppState.swift in Sources */,
 				8E98818C276AB815002F629C /* Presenter.swift in Sources */,
+				8896727627C395D300E5DF56 /* ScrollableTextView.swift in Sources */,
 				8EF5CD3427577BBB00F464B7 /* NumberPadKey.swift in Sources */,
 				8E8C40422763264800DBC979 /* MultipleErrors.swift in Sources */,
 				885C384F27B3DC7B00B35A19 /* MessageCoordinator.swift in Sources */,
