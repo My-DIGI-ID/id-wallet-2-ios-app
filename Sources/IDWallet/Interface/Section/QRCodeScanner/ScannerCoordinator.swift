@@ -80,7 +80,6 @@ class ScannerCoordinator: Coordinator {
                 UIApplication.shared.open(
                     settingsURL,
                     options: [:], completionHandler: { _ in
-                        // TODO: is this what we want? Can we tell when settings are changed?
                         self.startRequestAccess()
                     })
             })
@@ -115,8 +114,7 @@ class ScannerCoordinator: Coordinator {
                 switch result {
                 case .success(let qrCode):
                     do {
-                        // self.completion(Result.success(qrCode))
-                        
+                        // self.completion(Result.success(qrCode))                        
                         let connectionService = CustomConnectionService()
                         if let result = try connectionService.invitee(for: qrCode) {
                             let (name, imageUrl) = result
