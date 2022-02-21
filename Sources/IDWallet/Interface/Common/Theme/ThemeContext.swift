@@ -26,22 +26,6 @@ func defaultOrCompressed<T>(_ defaultItem: T, _ compressedItem: T) -> T {
 }
 
 struct ThemeContext {
-    static var main = ThemeContext(
-        typography: defaultOrCompressed(.regular, .compressed),
-        colors: .main,
-        images: .regular,
-        layout: defaultOrCompressed(.regular, .compressed)
-    )
-    static var alternative = ThemeContext(
-        typography: defaultOrCompressed(.regular, .compressed),
-        colors: .alternative,
-        images: .regular,
-        layout: defaultOrCompressed(.regular, .compressed)
-    )
-    let typography: Typography
-    let colors: ColorScheme
-    let images: Images
-    let layout: Layout
     struct Layout {
         static let regular = Layout(
             primaryButton: .defaultCapsuleLayout(),
@@ -115,6 +99,23 @@ struct ThemeContext {
             }
         }
     }
+
+    static var main = ThemeContext(
+        typography: defaultOrCompressed(.regular, .compressed),
+        colors: .main,
+        images: .regular,
+        layout: defaultOrCompressed(.regular, .compressed)
+    )
+    static var alternative = ThemeContext(
+        typography: defaultOrCompressed(.regular, .compressed),
+        colors: .alternative,
+        images: .regular,
+        layout: defaultOrCompressed(.regular, .compressed)
+    )
+    let typography: Typography
+    let colors: ColorScheme
+    let images: Images
+    let layout: Layout
 }
 
 extension ThemeContext {

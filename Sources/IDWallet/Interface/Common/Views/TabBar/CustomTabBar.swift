@@ -15,7 +15,8 @@ import UIKit
 
 @MainActor
 @objc protocol CustomTabBarDelegate: AnyObject {
-    @objc optional func customTabBar(_ bar: CustomTabBar, didSelect item: UITabBarItem)
+    @objc
+    optional func customTabBar(_ bar: CustomTabBar, didSelect item: UITabBarItem)
 }
 
 @MainActor
@@ -69,29 +70,6 @@ class CustomTabBar: UIView {
         }
     }
     
-    // MARK: - Initialization
-    
-    init(
-        tabBarItems: [UITabBarItem]
-    ) {
-        super.init(frame: CGRect.zero)
-        
-        // swiftlint:disable inert_defer
-        // (defer is used to trigger didSet)
-        defer {
-            items = tabBarItems
-        }
-        // swiftlint:enable inert_defer
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
     // MARK: - Setup
     
     private var controlledConstraints: [NSLayoutConstraint] = []
@@ -127,7 +105,8 @@ class CustomTabBar: UIView {
         }
     }
     
-    @objc func buttonTap(sender: CustomBarButton) {
+    @objc
+    func buttonTap(sender: CustomBarButton) {
         guard let index = buttons.firstIndex(of: sender) else {
             return
         }
@@ -168,7 +147,7 @@ class CustomTabBar: UIView {
             separator.topAnchor.constraint(equalTo: topAnchor),
             separator.heightAnchor.constraint(equalToConstant: 1)
         ])
-        separator.backgroundColor = .init(hexString: "D8D8D8")
+        separator.backgroundColor = .grey6
     }
     
     private func setup() {
@@ -222,5 +201,28 @@ class CustomTabBar: UIView {
         controlledConstraints.append(
             trailing.trailingAnchor.constraint(equalTo: trailingAnchor))
         NSLayoutConstraint.activate(controlledConstraints)
+    }
+    
+    // MARK: - Initialization
+    
+    init(
+        tabBarItems: [UITabBarItem]
+    ) {
+        super.init(frame: CGRect.zero)
+        
+        // swiftlint:disable inert_defer
+        // (defer is used to trigger didSet)
+        defer {
+            items = tabBarItems
+        }
+        // swiftlint:enable inert_defer
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
     }
 }

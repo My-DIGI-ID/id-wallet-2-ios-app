@@ -32,36 +32,6 @@ class AlignmentWrapperView: UIView {
         case trailing
     }
     
-    // MARK: - Initialization
-    init(
-        _ arrangedView: UIView? = nil,
-        horizontalAlignment: HorizontalAlignment = .fill,
-        verticalAlignment: VerticalAlignment = .center
-    ) {
-        super.init(frame: CGRect.zero)
-        setupOnce()
-        self.horizontalAlignment = horizontalAlignment
-        self.verticalAlignment = verticalAlignment
-        self.arrangedView = arrangedView
-    }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupOnce()
-    }
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setupOnce()
-    }
-    
-    // MARK: - Setup
-    
-    private func setupOnce() {
-        setupLayoutGuides()
-        setupVerticalAlignmentConstraints()
-        setupHorizontalAlignmentConstraints()
-    }
-    
     // MARK: - Arranged View
     
     var arrangedView: UIView? {
@@ -110,13 +80,33 @@ class AlignmentWrapperView: UIView {
     }
     private var arrangedViewConstraints: [NSLayoutConstraint]?
     
-    // MARK: - Layout Guides
-    
     private var topGuide: UILayoutGuide!
     private var trailingGuide: UILayoutGuide!
     private var bottomGuide: UILayoutGuide!
     private var leadingGuide: UILayoutGuide!
     private var guideConstraints: [NSLayoutConstraint]!
+    
+    var verticalAlignment: VerticalAlignment = .center {
+        didSet {
+            updateVerticalAlignmentConstraints()
+        }
+    }
+    private var verticalAlignmentConstraints = [VerticalAlignment: [NSLayoutConstraint]]()
+    
+    var horizontalAlignment: HorizontalAlignment = .center {
+        didSet {
+            updateHorizontalAlignmentConstraints()
+        }
+    }
+    private var horizontalAlignmentConstraints = [HorizontalAlignment: [NSLayoutConstraint]]()
+        
+    // MARK: - Layout Guides
+    private func setupOnce() {
+        setupLayoutGuides()
+        setupVerticalAlignmentConstraints()
+        setupHorizontalAlignmentConstraints()
+    }
+    
     private func setupLayoutGuides() {
         topGuide = UILayoutGuide()
         topGuide.identifier = "topGuide"
@@ -144,13 +134,6 @@ class AlignmentWrapperView: UIView {
     }
     
     // MARK: - Vertical Alignment
-    
-    var verticalAlignment: VerticalAlignment = .center {
-        didSet {
-            updateVerticalAlignmentConstraints()
-        }
-    }
-    private var verticalAlignmentConstraints = [VerticalAlignment: [NSLayoutConstraint]]()
     private func setupVerticalAlignmentConstraints() {
         verticalAlignmentConstraints = [
             .top: [
@@ -182,13 +165,6 @@ class AlignmentWrapperView: UIView {
     }
     
     // MARK: - Horizontal Alignment
-    
-    var horizontalAlignment: HorizontalAlignment = .center {
-        didSet {
-            updateHorizontalAlignmentConstraints()
-        }
-    }
-    private var horizontalAlignmentConstraints = [HorizontalAlignment: [NSLayoutConstraint]]()
     private func setupHorizontalAlignmentConstraints() {
         horizontalAlignmentConstraints = [
             .leading: [
@@ -217,5 +193,27 @@ class AlignmentWrapperView: UIView {
                 NSLayoutConstraint.deactivate(horizontalAlignmentConstraints[key]!)
             }
         }
+    }
+    
+    // MARK: - Initialization
+    init(
+        _ arrangedView: UIView? = nil,
+        horizontalAlignment: HorizontalAlignment = .fill,
+        verticalAlignment: VerticalAlignment = .center
+    ) {
+        super.init(frame: CGRect.zero)
+        setupOnce()
+        self.horizontalAlignment = horizontalAlignment
+        self.verticalAlignment = verticalAlignment
+        self.arrangedView = arrangedView
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupOnce()
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setupOnce()
     }
 }

@@ -35,21 +35,28 @@ private enum Constants {
     }
 }
 
+fileprivate extension ImageNameIdentifier {
+    static let close = ImageNameIdentifier(rawValue: "Close")
+}
+
 class WalletMessageViewController: BareBaseViewController {
     
     private lazy var closeButton: UIBarButtonItem = {
         let button = UIBarButtonItem(
-            image: Images.regular.close,
+            image: .init(identifiedBy: .close),
             style: .plain,
             target: self,
-            action: #selector(closeView))
+            action: #selector(closeView)
+        )
         button.tintColor = .primaryBlue
         button.setTitleTextAttributes([
             .foregroundColor: UIColor.primaryBlue,
-            .font: Typography.regular.bodyFont], for: .normal)
+            .font: Typography.regular.bodyFont
+        ], for: .normal)
         button.setTitleTextAttributes([
             .foregroundColor: UIColor.primaryBlue,
-            .font: Typography.regular.bodyFont], for: .highlighted)
+            .font: Typography.regular.bodyFont
+        ], for: .highlighted)
         return button
     }()
     
@@ -64,7 +71,8 @@ class WalletMessageViewController: BareBaseViewController {
         navigationBar.isTranslucent = false
         navigationBar.titleTextAttributes = [
             .foregroundColor: UIColor.walBlack,
-            .font: Constants.NavigationBar.titleFont]
+            .font: Constants.NavigationBar.titleFont
+        ]
         
         navigationBar.shadowImage = UIImage()
         navigationBar.pushItem(navigationItem, animated: false)
@@ -105,11 +113,12 @@ class WalletMessageViewController: BareBaseViewController {
     
     private lazy var stackView: UIStackView = {
         let view = UIStackView(arrangedSubviews: [
-            messageTypeImageView,                          
+            messageTypeImageView,
             headerLabel,
             subHeaderLabel,
             UIView(),
-            buttonsStackView])
+            buttonsStackView
+        ])
         view.axis = .vertical
         view.alignment = .center
         view.distribution = .fill
@@ -178,11 +187,11 @@ extension WalletMessageViewController {
         [
             "V:|-[navBar]-(spacing)-[scrollView]-|",
             "H:|[navBar]|",
-            "H:|[scrollView]|"]
-            .constraints(
-                with: ["navBar": navigationBar, "scrollView": scrollView],
-                metrics: ["spacing": Constants.Layout.scrollBarTopSpacing])
-            .activate()
+            "H:|[scrollView]|",
+        ].constraints(
+            with: ["navBar": navigationBar, "scrollView": scrollView],
+            metrics: ["spacing": Constants.Layout.scrollBarTopSpacing]
+        ).activate()
         
         // Pin the button stackView to the bottom of the view
         let buttonStackViewPinToBottomConstraint = buttonsStackView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor)

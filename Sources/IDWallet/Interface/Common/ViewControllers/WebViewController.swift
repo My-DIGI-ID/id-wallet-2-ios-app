@@ -25,7 +25,7 @@ private enum Constants {
     }
     
     enum Color {
-        static let divder = UIColor(hexString: "#D9D9D9")
+        static let divder: UIColor = .grey5
     }
 }
 
@@ -36,10 +36,12 @@ class WebViewController: BareBaseViewController {
         button.tintColor = .primaryBlue
         button.setTitleTextAttributes([
             .foregroundColor: UIColor.primaryBlue,
-            .font: Typography.regular.bodyFont], for: .normal)
+            .font: Typography.regular.bodyFont
+        ], for: .normal)
         button.setTitleTextAttributes([
             .foregroundColor: UIColor.primaryBlue,
-            .font: Typography.regular.bodyFont], for: .highlighted)
+            .font: Typography.regular.bodyFont
+        ], for: .highlighted)
         return button
     }()
     
@@ -52,9 +54,10 @@ class WebViewController: BareBaseViewController {
         navigationBar.isTranslucent = false
         navigationBar.titleTextAttributes = [
             .foregroundColor: UIColor.walBlack,
-            .font: Constants.NavigationBar.titleFont]
+            .font: Constants.NavigationBar.titleFont
+        ]
         
-        navigationBar.shadowImage = Constants.Color.divder?.image()
+        navigationBar.shadowImage = Constants.Color.divder.image()
         
         navigationBar.pushItem(navigationItem, animated: false)
         
@@ -97,16 +100,20 @@ class WebViewController: BareBaseViewController {
 // MARK: Layout
 
 extension WebViewController {
-    
     private func setupLayout() {
         view.addAutolayoutSubviews(navigationBar, webview)
         [
             "V:|-[navBar]-(spacing)-[webView]-|",
             "H:|[navBar]|",
-            "H:|[webView]|"]
-            .constraints(with: [
+            "H:|[webView]|",
+        ].constraints(
+            with: [
                 "navBar": navigationBar,
-                "webView": webview], metrics: ["spacing": Constants.Layout.dividerHeight])
-            .activate()
+                "webView": webview,
+            ],
+            metrics: [
+                "spacing": Constants.Layout.dividerHeight,
+            ]
+        ).activate()
     }
 }

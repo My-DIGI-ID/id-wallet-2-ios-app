@@ -46,7 +46,7 @@ private enum Constants {
     }
     
     enum Color {
-        static let divder = UIColor(hexString: "#D9D9D9")
+        static let divder: UIColor = .grey5
     }
 
     enum Accessibility {
@@ -54,6 +54,10 @@ private enum Constants {
         static let torchOff = VoiceOverSettings(label: "accessibility_button_label_torch_off".localized)
         static let scanner: String = "accessibility_scan_camera_announce".localized
     }
+}
+
+fileprivate extension ImageNameIdentifier {
+    static let close = ImageNameIdentifier(rawValue: "Close")
 }
 
 enum QRScannerResult {
@@ -67,14 +71,16 @@ class QRScannerViewController: BareBaseViewController {
     var completion: (QRScannerResult) -> Void
     
     private lazy var closeButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(image: Images.regular.close, style: .plain, target: self, action: #selector(closeView))
+        let button = UIBarButtonItem(image: .init(identifiedBy: .close), style: .plain, target: self, action: #selector(closeView))
         button.tintColor = .primaryBlue
         button.setTitleTextAttributes([
             .foregroundColor: UIColor.primaryBlue,
-            .font: Typography.regular.bodyFont], for: .normal)
+            .font: Typography.regular.bodyFont
+        ], for: .normal)
         button.setTitleTextAttributes([
             .foregroundColor: UIColor.primaryBlue,
-            .font: Typography.regular.bodyFont], for: .highlighted)
+            .font: Typography.regular.bodyFont
+        ], for: .highlighted)
         return button
     }()
     
@@ -82,7 +88,8 @@ class QRScannerViewController: BareBaseViewController {
         let view = BracketView(
             lineLength: Constants.Layout.Bracket.lineLength,
             lineWidth: Constants.Layout.Bracket.lineWidth,
-            cornerRadius: Constants.Layout.Bracket.cornerRadius)
+            cornerRadius: Constants.Layout.Bracket.cornerRadius
+        )
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -96,7 +103,8 @@ class QRScannerViewController: BareBaseViewController {
         navigationBar.isTranslucent = false
         navigationBar.titleTextAttributes = [
             .foregroundColor: UIColor.walBlack,
-            .font: Constants.NavigationBar.titleFont]
+            .font: Constants.NavigationBar.titleFont
+        ]
         
         navigationBar.shadowImage = UIImage()
         navigationBar.pushItem(navigationItem, animated: false)
@@ -111,7 +119,9 @@ class QRScannerViewController: BareBaseViewController {
             string: Constants.Text.hint,
             attributes: [
                 .foregroundColor: UIColor.grey1,
-                .font: Typography.regular.subHeadingFont])
+                .font: Typography.regular.subHeadingFont
+            ]
+        )
         return label
     }()
     
@@ -167,7 +177,7 @@ class QRScannerViewController: BareBaseViewController {
         super.viewDidLoad()
         setupLayout()
         setupAccessibility()
-        
+
 #if targetEnvironment(simulator)
 #else
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {

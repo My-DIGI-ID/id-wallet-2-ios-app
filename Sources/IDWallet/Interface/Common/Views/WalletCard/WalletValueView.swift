@@ -13,17 +13,21 @@
 
 import UIKit
 
-private enum Constants {
-    enum Styles {
-        static let titleStyle: AttributedStyle = .walletCardValueTitle
-        static let valueStyle: AttributedStyle = .walletCardValue
-    }
+fileprivate extension AttributedStyle {
+    static var walletCardValueTitle: AttributedStyle = .init([
+        .foregroundColor: UIColor.walBlack,
+        .font: UIFont.plexSansBold(12)
+    ])
+    
+    static var walletCardValue: AttributedStyle = .init([
+        .foregroundColor: UIColor.walBlack,
+        .font: UIFont.plexSans(12)
+    ])
 }
 
 /// Represents a key-value pair (primary or secondary) of a Wallet-Card
 /// Title and Value are arranged in vertival order and aligned to the left
 class WalletValueView: UIView {
-    fileprivate typealias Style = Constants.Styles
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -49,8 +53,8 @@ class WalletValueView: UIView {
     }
     
     func configure(value: WalletCardModel.WalletValue, textStyle: WalletCardModel.TextStyle) {
-        titleLabel.attributedText = value.title.styledAs(Style.titleStyle).color(textStyle.color)
-        valueLabel.attributedText = value.value.styledAs(Style.valueStyle).color(textStyle.color)
+        titleLabel.attributedText = value.title.styledAs(.walletCardValueTitle).color(textStyle.color)
+        valueLabel.attributedText = value.value.styledAs(.walletCardValue).color(textStyle.color)
     }
     
     // MARK: Lifecycle

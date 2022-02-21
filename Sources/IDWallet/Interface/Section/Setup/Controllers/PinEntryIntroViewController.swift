@@ -14,6 +14,11 @@
 import Foundation
 import UIKit
 
+fileprivate extension ImageNameIdentifier {
+    static let exclamation = ImageNameIdentifier(rawValue: "Exclamation")
+    static let error = ImageNameIdentifier(rawValue: "Error")
+}
+
 extension PinEntryIntroViewController {
     enum ViewID: String, BaseViewID {
         case containerView
@@ -215,7 +220,7 @@ PinEntryIntroViewController.ViewModel
                     
                     infoBox.alignment = .leading
                     infoBox.layer.cornerRadius = 15
-                    infoBox.backgroundColor = .init(hexString: "F0F2FB")
+                    infoBox.backgroundColor = .grey7
                     infoBox.isLayoutMarginsRelativeArrangement = true
                     infoBox.directionalLayoutMargins = NSDirectionalEdgeInsets(
                         top: 20, leading: 20, bottom: 20, trailing: 20)
@@ -238,7 +243,7 @@ PinEntryIntroViewController.ViewModel
 
                             makeOrUpdateImageView(
                                 id: .infoBoxIcon,
-                                image: UIImage(systemName: "exclamationmark.circle"),
+                                image: .init(identifiedBy: .error)?.withTintColor(.white),
                                 in: infoBoxTitleWrapper, didMake: &didCreate
                             ) { infoBoxIcon in
                                 infoBoxIcon.translatesAutoresizingMaskIntoConstraints = false
@@ -345,8 +350,7 @@ PinEntryIntroViewController.ViewModel
     
     @objc
     func commitButtonTapped(sender: UIButton) {
-        if  let viewModel = viewModel,
-            viewModel.canCommit {
+        if let viewModel = viewModel, viewModel.canCommit {
             viewModel.commit(self)
         }
     }

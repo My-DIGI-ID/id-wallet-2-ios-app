@@ -34,18 +34,11 @@ class Rounded: UIView {
     @IBInspectable var height: CGFloat = -1 {
         didSet { update() }
     }
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        fillColor = tintColor
-    }
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        strokeWidth = coder.decodeDouble(forKey: "strokeWidth")
-        strokeColor = coder.decodeObject(forKey: "strokeColor") as? UIColor
-        fillColor = coder.decodeObject(forKey: "fillColor") as? UIColor
-        width = coder.decodeDouble(forKey: "width")
-        height = coder.decodeDouble(forKey: "height")
+    override var intrinsicContentSize: CGSize {
+        let size = super.intrinsicContentSize
+        return CGSize(
+            width: width >= 0 ? width : size.width,
+            height: height >= 0 ? height : size.height)
     }
     override func encode(with coder: NSCoder) {
         super.encode(with: coder)
@@ -59,12 +52,7 @@ class Rounded: UIView {
         }
         coder.encode(strokeWidth, forKey: "strokeWidth")
     }
-    override var intrinsicContentSize: CGSize {
-        let size = super.intrinsicContentSize
-        return CGSize(
-            width: width >= 0 ? width : size.width,
-            height: height >= 0 ? height : size.height)
-    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         update()
@@ -78,5 +66,18 @@ class Rounded: UIView {
         layer.borderWidth = strokeWidth
         layer.borderColor = strokeColor?.cgColor ?? UIColor.clear.cgColor
         layer.backgroundColor = fillColor?.cgColor ?? tintColor.cgColor
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        fillColor = tintColor
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        strokeWidth = coder.decodeDouble(forKey: "strokeWidth")
+        strokeColor = coder.decodeObject(forKey: "strokeColor") as? UIColor
+        fillColor = coder.decodeObject(forKey: "fillColor") as? UIColor
+        width = coder.decodeDouble(forKey: "width")
+        height = coder.decodeDouble(forKey: "height")
     }
 }

@@ -15,24 +15,24 @@ import UIKit
 
 extension CALayer {
     // See https://stackoverflow.com/a/48489506/1479608
-    func applySketchShadow(
-        color: UIColor = .shadow,
-        offsetX: CGFloat = 0,
-        offsetY: CGFloat = 0,
-        blur: CGFloat = 80,
-        spread: CGFloat = 0) {
-            
-            masksToBounds = false
-            shadowColor = color.cgColor
-            shadowOffset = CGSize(width: offsetX, height: offsetY)
-            shadowRadius = blur * 0.5
-            
-            if spread == 0 {
-                shadowPath = nil
-            } else {
-                let deltaX = -spread
-                let rect = bounds.insetBy(dx: deltaX, dy: deltaX)
-                shadowPath = UIBezierPath(rect: rect).cgPath
-            }
-        }
+//    func applySketchShadow(
+//        color: UIColor = .shadow,
+//        offsetX: CGFloat = 0,
+//        offsetY: CGFloat = 0,
+//        blur: CGFloat = 80,
+//        spread: CGFloat = 0) {
+//
+//            masksToBounds = false
+//            shadowColor = color.cgColor
+//            shadowOffset = CGSize(width: offsetX, height: offsetY)
+//            shadowRadius = blur * 0.5
+//
+//            if spread == 0 {
+//                shadowPath = nil
+//            } else {
+//                let deltaX = -spread
+//                let rect = bounds.insetBy(dx: deltaX, dy: deltaX)
+//                shadowPath = UIBezierPath(rect: rect).cgPath
+//            }
+//        }
 }

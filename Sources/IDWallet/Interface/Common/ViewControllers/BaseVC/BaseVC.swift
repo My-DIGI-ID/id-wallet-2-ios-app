@@ -65,51 +65,24 @@ class BaseViewController<
     private var controlledConstraints: Set<NSLayoutConstraint> = []
     private var controlledBindings: [Binding] = []
     
-    // MARK: - Initialization
+    private var createOrUpdateViewsCounter: UInt = 0
+    private var resetViewsCounter: UInt = 0
+    private var deactivateBindingsCounter = 0
+    private var activateBindingsCounter = 0
+    private var createOrUpdateConstraintsCounter: UInt = 0
     
-    init(style: Style, viewModel: ViewModel) {
-        super.init()
-        self.style = style
-        self.viewModel = viewModel
+    // MARK: - Default Behaviour Configuration
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return style.themeContext.colors.preferredStatusBarStyle
     }
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    // MARK: - Life Cycle
-    
-    /// This implementation deactivates bindings, creates or update views, update constraints and then activates bindings
-    /// in this order to integrate the functionality provided by ``renderingDelegate``
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        deactivateBindingsCounting()
-        createOrUpdateViewsCounting()
-        createOrUpdateConstraintsCounting()
-        activateBindingsCounting()
-    }
-    
-    /// This implementation calls the ``renderingDelegate``s ``updateContstraints`` method here.
-    override func updateViewConstraints() {
-        DDLogVerbose("\(String(describing: type(of: self))).updateViewConstraints() started")
-        
-        createOrUpdateConstraintsCounting()
-        super.updateViewConstraints()
-        
-        DDLogVerbose("\(String(describing: type(of: self))).updateViewConstraints() finished")
-    }
-    
-    /// This implementation deactivates bindings here.
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        deactivateBindingsCounting()
-    }
+    /// Indicates where there are any active controlled bindings. This is to be interpreted
+    /// as all-or-nothing state.
+    var areBindingsActive: Bool { !controlledBindings.isEmpty }
     
     // MARK: - View Factory Integration
     
-    private var createOrUpdateViewsCounter: UInt = 0
     private func createOrUpdateViewsCounting() {
         let oldCount = createOrUpdateViewsCounter
         createOrUpdateViews()
@@ -133,7 +106,6 @@ class BaseViewController<
         createOrUpdateViewsCounter += 1
     }
     
-    private var resetViewsCounter: UInt = 0
     private func resetViewsCounting() {
         let oldCount = resetViewsCounter
         resetViews()
@@ -160,7 +132,6 @@ class BaseViewController<
     
     // MARK: - Constraint Factory Integration
     
-    private var createOrUpdateConstraintsCounter: UInt = 0
     private func createOrUpdateConstraintsCounting() {
         let oldCount = createOrUpdateConstraintsCounter
         createOrUpdateConstraints()
@@ -203,11 +174,6 @@ class BaseViewController<
     
     // MARK: - Binding Factory Integration
     
-    /// Indicates where there are any active controlled bindings. This is to be interpreted
-    /// as all-or-nothing state.
-    var areBindingsActive: Bool { !controlledBindings.isEmpty }
-    
-    private var activateBindingsCounter = 0
     private func activateBindingsCounting() {
         let oldCount = activateBindingsCounter
         activateBindings()
@@ -221,11 +187,11 @@ class BaseViewController<
     /// using the mechanism provided by ``BindingFactory``
     ///
     /// Implementations should check ``areBindingsActive`` and do nothing if `true`.
-    @objc func activateBindings() {
+    @objc
+    func activateBindings() {
         activateBindingsCounter += 1
     }
     
-    private var deactivateBindingsCounter = 0
     private func deactivateBindingsCounting() {
         let oldCount = deactivateBindingsCounter
         deactivateBindings()
@@ -255,10 +221,46 @@ class BaseViewController<
         }
     }
     
-    // MARK: - Default Behaviour Configuration
+    // MARK: - Initialization
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return style.themeContext.colors.preferredStatusBarStyle
+    init(style: Style, viewModel: ViewModel) {
+        super.init()
+        self.style = style
+        self.viewModel = viewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    // MARK: - Life Cycle
+    
+    /// This implementation deactivates bindings, creates or update views, update constraints and then activates bindings
+    /// in this order to integrate the functionality provided by ``renderingDelegate``
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        deactivateBindingsCounting()
+        createOrUpdateViewsCounting()
+        createOrUpdateConstraintsCounting()
+        activateBindingsCounting()
+    }
+    
+    /// This implementation calls the ``renderingDelegate``s ``updateContstraints`` method here.
+    override func updateViewConstraints() {
+        DDLogVerbose("\(String(describing: type(of: self))).updateViewConstraints() started")
+        
+        createOrUpdateConstraintsCounting()
+        super.updateViewConstraints()
+        
+        DDLogVerbose("\(String(describing: type(of: self))).updateViewConstraints() finished")
+    }
+    
+    /// This implementation deactivates bindings here.
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        deactivateBindingsCounting()
     }
 }
 

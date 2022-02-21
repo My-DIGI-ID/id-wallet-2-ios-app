@@ -14,10 +14,6 @@
 import UIKit
 
 private enum Constants {
-    enum Styles {
-        static let infoTextStyle: AttributedStyle = .walletInfoText
-    }
-    
     enum Layouts {
         static let emptyWalletImageAspectRatio: CGFloat = 1.0
         static let emptyWalletImageRelativeWidth: CGFloat = 0.7
@@ -26,14 +22,20 @@ private enum Constants {
     }
 }
 
+fileprivate extension AttributedStyle {
+    static var walletInfoText: AttributedStyle = .init([
+        .foregroundColor: UIColor.grey1,
+        .font: UIFont.plexSans(17)
+    ])
+}
+
 fileprivate extension ImageNameIdentifier {
-    static let emptyWalletIcon = ImageNameIdentifier(rawValue: "ImageEmptyWalletPage")
+    static let emptyWalletIcon = ImageNameIdentifier(rawValue: "EmptyWallet")
     static let systemPlus = ImageNameIdentifier(rawValue: "plus")
 }
 
 /// Simple container view that wraps the content displayed when no wallet entries are available
 class NoContentWalletView: UIView {
-    fileprivate typealias Style = Constants.Styles
     fileprivate typealias Layout = Constants.Layouts
     
     /// Delegate that forwards `addDocument(:_)` calls from the addDocumentButton
@@ -93,8 +95,8 @@ class NoContentWalletView: UIView {
             imageAlignRight: false,
             style: .primary,
             primaryAction: .init { [weak self] _ in
-            self?.delegate?.addDocument()
-        })
+                self?.delegate?.addDocument()
+            })
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -119,7 +121,7 @@ class NoContentWalletView: UIView {
         contentStackView.addArrangedSubview(infoTextLabel)
         contentStackView.addArrangedSubview(addDocumentButtonContainer)
         
-        infoTextLabel.attributedText = NSLocalizedString("Die Wallet ist leer.\nFüge Dein erstes Dokument hinzu.", comment: "").styledAs(Style.infoTextStyle)
+        infoTextLabel.attributedText = NSLocalizedString("Die Wallet ist leer.\nFüge Dein erstes Dokument hinzu.", comment: "").styledAs(.walletInfoText)
         
         [
             emptyWalletContainer.widthAnchor.constraint(equalTo: contentStackView.widthAnchor),

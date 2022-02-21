@@ -14,6 +14,12 @@
 import Foundation
 
 class MultipleErrors: Error, AppError {
+   
+    var title: String = "Multiple Errors"
+    var problem: String
+    let details: String
+    let errors: [Error]
+    
     static func from(_ errors: [Error]) -> Error? {
         switch errors.compactMap({ $0 }).count {
         case 0:
@@ -24,14 +30,6 @@ class MultipleErrors: Error, AppError {
             return MultipleErrors(errors)
         }
     }
-    
-    var title: String = "Multiple Errors"
-    
-    var problem: String
-    
-    let details: String
-    
-    let errors: [Error]
     
     private init(_ errors: [Error]) {
         self.errors = errors

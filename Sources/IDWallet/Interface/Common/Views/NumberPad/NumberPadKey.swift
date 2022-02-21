@@ -203,33 +203,29 @@ class NumberPadKey: UIControl {
             }
         }
     }
-    
-    // MARK: - Initialization
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setup()
-    }
-    
-    convenience init(
-        _ primaryKey: String, withSecondaryKeys secondaryKeys: String = "", style: NumberPadKey.Style?
-    ) {
-        self.init(frame: CGRect.zero)
-        
-        self.primaryKey = primaryKey
-        self.secondaryKeys = secondaryKeys
-        if let style = style {
-            self.style = style
-        }
+    private var _needsUpdateStyles: Bool = true
+    override var intrinsicContentSize: CGSize {
+        return CGSize(
+            width: (
+                CGFloat(style.layout.hPadding * 2) + max(
+                    primaryKeyLabel.intrinsicContentSize.width,
+                    secondaryKeysLabel.intrinsicContentSize.width)),
+            height: (
+                CGFloat(style.layout.vPadding * 2) +
+                primaryKeyLabel.intrinsicContentSize.height +
+                secondaryKeysLabel.intrinsicContentSize.height +
+                CGFloat(style.layout.auxiliarySpacing))
+        )
     }
     
-    convenience init(_ primaryKey: String, withStyle style: NumberPadKey.Style?) {
-        self.init(primaryKey, withSecondaryKeys: "", style: style)
-    }
+    /// This view will not work using autoresizing
+    override final class var requiresConstraintBasedLayout: Bool { return true }
+    
+    /// Uses the (primary) key label for baseline alignment
+    override var forFirstBaselineLayout: UIView { primaryKeyLabel }
+    
+    /// Uses the (primary) key label for baseline alignment
+    override var forLastBaselineLayout: UIView { primaryKeyLabel }
     
     // MARK: - Setup
     
@@ -249,7 +245,6 @@ class NumberPadKey: UIControl {
     
     // MARK: - Layout
     
-    private var _needsUpdateStyles: Bool = true
     private func setNeedsUpdateStyles() {
         if !_needsUpdateStyles {
             _needsUpdateStyles = true
@@ -316,28 +311,6 @@ class NumberPadKey: UIControl {
         super.updateConstraints()
     }
     
-    override var intrinsicContentSize: CGSize {
-        return CGSize(
-            width: (
-                CGFloat(style.layout.hPadding * 2) + max(
-                    primaryKeyLabel.intrinsicContentSize.width,
-                    secondaryKeysLabel.intrinsicContentSize.width)),
-            height: (
-                CGFloat(style.layout.vPadding * 2) +
-                primaryKeyLabel.intrinsicContentSize.height +
-                secondaryKeysLabel.intrinsicContentSize.height +
-                CGFloat(style.layout.auxiliarySpacing))
-        )
-    }
-    /// This view will not work using autoresizing
-    override final class var requiresConstraintBasedLayout: Bool { return true }
-    
-    /// Uses the (primary) key label for baseline alignment
-    override var forFirstBaselineLayout: UIView { primaryKeyLabel }
-    
-    /// Uses the (primary) key label for baseline alignment
-    override var forLastBaselineLayout: UIView { primaryKeyLabel }
-    
     /// Uses the (primary) key label for alignment
     override func alignmentRect(forFrame frame: CGRect) -> CGRect {
         primaryKeyLabel.alignmentRect(forFrame: frame)
@@ -345,6 +318,33 @@ class NumberPadKey: UIControl {
     /// Uses the (primary) key label for alignment
     override func frame(forAlignmentRect alignmentRect: CGRect) -> CGRect {
         primaryKeyLabel.frame(forAlignmentRect: alignmentRect)
+    }
+    
+    // MARK: - Initialization
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+    
+    convenience init(
+        _ primaryKey: String, withSecondaryKeys secondaryKeys: String = "", style: NumberPadKey.Style?
+    ) {
+        self.init(frame: CGRect.zero)
+        
+        self.primaryKey = primaryKey
+        self.secondaryKeys = secondaryKeys
+        if let style = style {
+            self.style = style
+        }
+    }
+    
+    convenience init(_ primaryKey: String, withStyle style: NumberPadKey.Style?) {
+        self.init(primaryKey, withSecondaryKeys: "", style: style)
     }
 }
 

@@ -14,29 +14,7 @@
 import UIKit
 
 extension UIImage {
-    class func requiredImage(name: String) -> UIImage {
-        if let result = UIImage(
-            named: name, in: Bundle(for: CustomFontLoader.self), compatibleWith: nil
-        ) {
-            return result
-        }
-        
-        // If this fails, make sure that an image set with the specified name exists in Assets.
-        ContractError.missingImage(name).fatal()
-    }
-    
-    func scaledToWidth(width: CGFloat) -> UIImage {
-        let scale = width / size.width
-        let size = CGSize(width: width, height: scale * size.height)
-        return withSize(targetSize: size)
-    }
-    
-    func scaledToHeight(height: CGFloat) -> UIImage {
-        let scale = height / size.height
-        let size = CGSize(width: scale * size.width, height: height)
-        return withSize(targetSize: size)
-    }
-    
+    // FIXME: Size should be determined by constraints of the embedding view
     func withSize(targetSize: CGSize) -> UIImage {
         // https://stackoverflow.com/questions/31314412/how-to-resize-image-in-swift
         let image = self

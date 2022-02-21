@@ -13,7 +13,9 @@
 
 import UIKit
 
-// MARK: - Configuration
+fileprivate extension ImageNameIdentifier {
+    static let deleteBack = ImageNameIdentifier(rawValue: "DeleteLeft")
+}
 
 extension NumberPad {
     struct Style {
@@ -125,22 +127,6 @@ class NumberPad: UIView {
         }
     }
     
-    // MARK: - Initialization
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    required init(style: NumberPad.Style = .regular) {
-        super.init(frame: CGRect.zero)
-        
-        setup(style)
-    }
-    
     // MARK: - Setup
     
     private var _needsUpdateStyles = false
@@ -194,7 +180,7 @@ class NumberPad: UIView {
         
         func deleteKey() -> UIView {
             let result = UIButton.systemButton(
-                with: UIImage.requiredImage(name: "delete.backward.pdf").withSize(targetSize: CGSize(width: 30, height: 30)),
+                with: UIImage(existing: .deleteBack).withSize(targetSize: CGSize(width: 30, height: 30)),
                 target: self,
                 action: #selector(didTapDeleteKey(sender:))
             )
@@ -297,16 +283,34 @@ class NumberPad: UIView {
         }
         controlledConstraints.removeAllObjects()
     }
+    
+    // MARK: - Initialization
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    required init(style: NumberPad.Style = .regular) {
+        super.init(frame: CGRect.zero)
+        
+        setup(style)
+    }
 }
 
 // MARK: - Actions
 
 extension NumberPad {
-    @objc func didTapDeleteKey(sender: UIButton) {
+    @objc
+    func didTapDeleteKey(sender: UIButton) {
         delegate?.numberPadDidRemoveLastDigit?(self)
     }
     
-    @objc func didTapNumberKey(sender: NumberPadKey) {
+    @objc
+    func didTapNumberKey(sender: NumberPadKey) {
         delegate?.numberPad?(self, didAddDigit: sender.primaryKey)
     }
 }
@@ -314,9 +318,22 @@ extension NumberPad {
 // MARK: - Layout
 
 extension NumberPad {
+    
+    /// This view will not work using autoresizing
+    override final class var requiresConstraintBasedLayout: Bool { return true }
+    
+    /// Uses the (primary) key label for baseline alignment
+    override var forFirstBaselineLayout: UIView { return keyViewsByName["4"] ?? self }
+    
+    /// Uses the (primary) key label for baseline alignment
+    override var forLastBaselineLayout: UIView { return keyViewsByName["6"] ?? self }
+    
     /// Sets up constraints if controlledConstraints is empty
     override func updateConstraints() {
-        super.updateConstraints()
+        defer {
+            super.updateConstraints()
+        }
+        
         if controlledConstraints.count >= 4 {
             // Constraints already set up
             return
@@ -325,7 +342,6 @@ extension NumberPad {
         guard keyViewsByName.count >= 10 else {
             // Sub views not present, need setup
             // (we're not supporting storyboard setup or init(frame) yet)
-            super.updateConstraints()
             // Logging
             return
         }
@@ -349,16 +365,5 @@ extension NumberPad {
             constraint.isActive = true
             controlledConstraints.add(constraint)
         }
-        
-        super.updateConstraints()
     }
-    
-    /// This view will not work using autoresizing
-    override final class var requiresConstraintBasedLayout: Bool { return true }
-    
-    /// Uses the (primary) key label for baseline alignment
-    override var forFirstBaselineLayout: UIView { return keyViewsByName["4"] ?? self }
-    
-    /// Uses the (primary) key label for baseline alignment
-    override var forLastBaselineLayout: UIView { return keyViewsByName["6"] ?? self }
 }

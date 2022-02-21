@@ -14,91 +14,9 @@
 import UIKit
 
 // MARK: - Custom Color Assignments
-
 extension UIColor {
-    
-    // Main Colors (white on blue/violet-ish background)
-    
-    static var appMainBackground: UIColor {
-        requiredColor(named: "AppMainBackground")
-    }
-    
-    static var appMainGradientStart: UIColor {
-        requiredColor(named: "AppMainGradientStart")
-    }
-    
-    static var appMainGradientEnd: UIColor {
-        requiredColor(named: "AppMainGradientEnd")
-    }
-    
-    static var appMainText: UIColor {
-        requiredColor(named: "AppMainText")
-    }
-    
-    static var appMainTextSecondary: UIColor {
-        requiredColor(named: "AppMainTextSecondary")
-    }
-    
-    static var appMainTint: UIColor {
-        requiredColor(named: "AppMainTint")
-    }
-    
-    static var appMainTintContrast: UIColor {
-        requiredColor(named: "AppMainTintContrast")
-    }
-    
-    static var appMainTintInactive: UIColor {
-        requiredColor(named: "AppMainTintInactive")
-    }
-    
-    static var appMainTintInactiveContrast: UIColor {
-        requiredColor(named: "AppMainTintInactiveContrast")
-    }
-    
-    // Alternative 1 (blue/violet-ish on white background)
-    
-    static var appAlt1Background: UIColor {
-        requiredColor(named: "AppAlt1Background")
-    }
-    
-    static var appAlt1GradientStart: UIColor? {
-        UIColor(named: "AppAlt1GradientStart")
-    }
-    
-    static var appAlt1GradientEnd: UIColor? {
-        UIColor(named: "AppAlt1GradientEnd")
-    }
-    
-    static var appAlt1Text: UIColor {
-        requiredColor(named: "AppAlt1Text")
-    }
-    
-    static var appAlt1TextSecondary: UIColor {
-        requiredColor(named: "AppAlt1TextSecondary")
-    }
-    
-    static var appAlt1Tint: UIColor {
-        requiredColor(named: "AppAlt1Tint")
-    }
-    
-    static var appAlt1TintContrast: UIColor {
-        requiredColor(named: "AppAlt1TintContrast")
-    }
-    
-    static var appAlt1TintInactive: UIColor {
-        requiredColor(named: "AppAlt1TintInactive")
-    }
-    
-    static var appAlt1TintInactiveContrast: UIColor {
-        requiredColor(named: "AppAlt1TintInactiveContrast")
-    }    
-    
     private static var disabledAlpha: CGFloat {
         return 100 / 255
-    }
-    
-    static var appGrey1: UIColor {
-        UIColor(hexString: "#55576B")!
     }
 }
 
