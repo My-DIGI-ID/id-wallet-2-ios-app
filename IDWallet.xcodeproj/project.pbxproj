@@ -1921,7 +1921,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/help-screens.git";
 			requirement = {
-				branch = "feature/BKAWALIOS-99";
+				branch = development;
 				kind = branch;
 			};
 		};
