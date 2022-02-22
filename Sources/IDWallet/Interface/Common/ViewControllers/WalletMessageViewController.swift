@@ -162,10 +162,6 @@ class WalletMessageViewController: BareBaseViewController {
             let button = WalletButton(config: $0)
             buttonsStackView.addArrangedSubview(button)
         }
-//        viewModel.buttons.forEach { (title: String, action: UIAction) in
-//            let button = WalletButton(titleText: title, primaryAction: action)
-//            buttonsStackView.addArrangedSubview(button)
-//        }
     }
     @objc
     private func closeView() {
