@@ -1,6 +1,7 @@
 "error" = "Error";
 "cancel" = "Cancel";
 "settings" = "Settings";
+"close" = "Close";
 
 // QR Code Scanner
 "qr_code_title" = "QR-Code Scan";
@@ -10,3 +11,7 @@
 "accessibility_button_label_torch_on" = "Switch torch on";
 "accessibility_button_label_torch_off" = "Switch torch off";
 "access_denied" = "Access denied";
+
+"request_blocked" = "Request blocked";
+"request_blocked_message" = "This connection is not encrypted and therefore insecure. It has been blocked because of this. It's not your smartphone and it's not your wallet. You cannot therefore correct this error.";
+"request_blocked_link" = "What can I do instead?";

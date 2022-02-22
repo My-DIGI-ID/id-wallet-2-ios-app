@@ -25,6 +25,8 @@ fileprivate extension ImageNameIdentifier {
 @MainActor
 class WalletTabBarController: BareBaseViewController {
 
+    var messageViewController: WalletMessageViewController?
+
     var viewControllers: [UIViewController] = [] {
         didSet {
             // See tabBar.items for how selection is updated:
@@ -185,7 +187,7 @@ extension WalletTabBarController: CustomTabBarDelegate {
 //                    print(error)
 //                    self.presenter.presentModal(alert, options: .defaultOptions)
 //                    self.presenter.dismiss(options: .defaultOptions, completion: nil)
-                    
+                    self.selectedIndex = previouslySelected
                     self.startErrorViewController(alertLevel: .currentValue)
                     self.presenter.dismiss(options: .defaultOptions, completion: nil)
                 case .cancelled:
@@ -213,12 +215,27 @@ extension WalletTabBarController: CustomTabBarDelegate {
             self.presenter.dismissModal(completion: nil)
         }
 
+        let linkAction = UIAction { [weak self] _ in
+            guard
+                let self = self,
+                let url = Bundle.main.url(forResource: "learn-more-de", withExtension: "html"),
+                let viewController = self.messageViewController
+            else {
+                return
+            }
+            let viewModel = WebViewModel(title: "Hilfe", url: url)
+            viewController.present(WebViewController(viewModel: viewModel), animated: true, completion: nil)
+        }
+
         let viewModel = MessageViewModel(
             messageType: .blocked,
-            header: "Anfrage blockiert",
-            text: "Diese Verbindung ist nicht verschlüsselt und daher unsicher. Sie wurde deswegen blockiert. Es liegt nicht an Deinem Smartphone und nicht an Deiner Wallet. Du kannst diesen Fehler daher nicht beheben.",
-            buttons: [("Schließen", doneAction)])
+            header: "request_blocked".localized,
+            text: "request_blocked_message".localized,
+            buttons: [
+                ButtonConfig(title: "request_blocked_link".localized, image: nil, style: .link, action: linkAction),
+                ButtonConfig(title: "close".localized, image: nil, action: doneAction)])
 
-        presenter.presentModal(WalletMessageViewController(viewModel: viewModel), options: .defaultOptions)
+        messageViewController = WalletMessageViewController(viewModel: viewModel)
+        presenter.presentModal(messageViewController!, options: .defaultOptions)
     }
 }

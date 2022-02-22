@@ -119,10 +119,9 @@ extension SetupCoordinator {
             header: "ID Wallet einrichten",
             text: "Du hast Deinen Zugangscode erfolgreich festgelegt.\n\n" +
                 "Du kannst jetzt weiter zur Wallet und dort Deine ersten Nachweise erstellen",
-            buttons: [
-                ("Weiter zur Wallet", UIAction { _ in
-                    self.finish(from: viewController!)
-                })
+            buttons: [ButtonConfig(title: "Weiter zur Wallet", image: nil, action: UIAction { _ in
+                self.finish(from: viewController!)
+            })
             ])
 
         viewController = WalletMessageViewController(viewModel: viewModel)

@@ -1,6 +1,7 @@
 "error" = "Fehler";
 "cancel" = "Abbrechen";
 "settings" = "Einstellungen";
+"close" = "Schließen";
 
 // QR Code Scanner
 "qr_code_title" = "QR-Code Scan";
@@ -10,3 +11,7 @@
 "accessibility_button_label_torch_on" = "Taschenlampe einschalten";
 "accessibility_button_label_torch_off" = "Taschenlampe ausschalten";
 "access_denied" = "Zugriff nicht erlaubt";
+
+"request_blocked" = "Anfrage blockiert";
+"request_blocked_message" = "Diese Verbindung ist nicht verschlüsselt und daher unsicher. Sie wurde deswegen blockiert. Es liegt nicht an Deinem Smartphone und nicht an Deiner Wallet. Du kannst diesen Fehler daher nicht beheben.";
+"request_blocked_link" = "Was kann ich stattdessen machen?";

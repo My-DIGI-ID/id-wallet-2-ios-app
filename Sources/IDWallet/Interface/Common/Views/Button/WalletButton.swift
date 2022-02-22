@@ -13,6 +13,14 @@
 
 import UIKit
 
+struct ButtonConfig {
+    let title: String?
+    let image: UIImage?
+    var imageAlignRight: Bool = true
+    var style: WalletButton.Style = .primary
+    let action: UIAction?
+}
+
 private enum Constants {
     enum Layout {
         static let cornderRadius: CGFloat = 30
@@ -71,7 +79,21 @@ class WalletButton: UIButton {
         
         updateUI()
     }
-    
+
+    convenience init(config: ButtonConfig) {
+        self.init(primaryAction: config.action)
+        self.style = config.style
+        self.titleText = config.title
+        self.buttonImage = config.image
+        imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: Constants.Layout.imageSpacing)
+        if config.imageAlignRight {
+            semanticContentAttribute = .forceRightToLeft
+            imageEdgeInsets = UIEdgeInsets(top: 0, left: Constants.Layout.imageSpacing, bottom: 0, right: 0)
+        }
+
+        updateUI()
+    }
+
     convenience init(
         titleText: String? = nil,
         image: UIImage? = nil,

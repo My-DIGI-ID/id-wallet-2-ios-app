@@ -236,7 +236,7 @@ class ScannerCoordinator: Coordinator {
         let viewModel = MessageViewModel(
             messageType: .success,
             header: "Daten erfolgreich übermittelt",
-            buttons: [("Fertig", doneAction)])
+            buttons: [ButtonConfig(title: "Fertig", image: nil, action: doneAction)])
         
         presenter.presentModal(WalletMessageViewController(viewModel: viewModel), options: .defaultOptions)
     }

@@ -24,7 +24,7 @@ protocol MessageModelProtocol {
     var messageType: MessageViewType { get }
     var header: String { get }
     var text: String { get }
-    var buttons: [ButtonModel] { get }
+    var buttons: [ButtonConfig] { get }
 }
 
 struct MessageViewModel: MessageModelProtocol {
@@ -33,9 +33,9 @@ struct MessageViewModel: MessageModelProtocol {
     var messageType: MessageViewType
     var header: String
     var text: String
-    var buttons: [ButtonModel]
+    var buttons: [ButtonConfig]
     
-    internal init(title: String = "", messageType: MessageViewType, header: String = "", text: String = "", buttons: [ButtonModel]) {
+    internal init(title: String = "", messageType: MessageViewType, header: String = "", text: String = "", buttons: [ButtonConfig]) {
         self.title = title
         self.messageType = messageType
         self.header = header

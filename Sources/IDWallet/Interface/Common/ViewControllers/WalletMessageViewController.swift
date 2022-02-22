@@ -157,13 +157,16 @@ class WalletMessageViewController: BareBaseViewController {
         subHeaderLabel.attributedText = viewModel.text
             .styledAs(.subHeading)
             .centered()
-        
-        viewModel.buttons.forEach { (title: String, action: UIAction) in
-            let button = WalletButton(titleText: title, primaryAction: action)
+
+        viewModel.buttons.forEach {
+            let button = WalletButton(config: $0)
             buttonsStackView.addArrangedSubview(button)
         }
+//        viewModel.buttons.forEach { (title: String, action: UIAction) in
+//            let button = WalletButton(titleText: title, primaryAction: action)
+//            buttonsStackView.addArrangedSubview(button)
+//        }
     }
-    
     @objc
     private func closeView() {
         dismiss(animated: true, completion: nil)

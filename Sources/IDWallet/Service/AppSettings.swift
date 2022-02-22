@@ -17,9 +17,10 @@ enum AlertLevel: String {
     case noLevel, levelX
 
     static var currentValue: Self {
-        guard let stored = UserDefaults.standard.string(forKey: "alertLevel"),
-              let level = AlertLevel(rawValue: stored) else {
-            return .noLevel
+        guard
+            let stored = UserDefaults.standard.string(forKey: "alertLevel"),
+            let level = AlertLevel(rawValue: stored) else {
+                return .noLevel
         }
         return level
     }
