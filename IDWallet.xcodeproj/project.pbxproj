@@ -225,6 +225,7 @@
 		9592B61C27C3DFE9002A4EFB /* NSAttributedString+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592B61A27C3DFE9002A4EFB /* NSAttributedString+Alignment.swift */; };
 		9592B61F27C4EE49002A4EFB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9592B61E27C4EE49002A4EFB /* Settings.bundle */; };
 		9592B62127C4F240002A4EFB /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592B62027C4F240002A4EFB /* AppSettings.swift */; };
+		9592B62327C53C8D002A4EFB /* level-x-help.html in Resources */ = {isa = PBXBuildFile; fileRef = 9592B62227C53C8D002A4EFB /* level-x-help.html */; };
 		95B2F12B27BE49FE007291D4 /* Base58String in Frameworks */ = {isa = PBXBuildFile; productRef = 95B2F12A27BE49FE007291D4 /* Base58String */; };
 		95B2F12D27BE5D11007291D4 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B2F12C27BE5D11007291D4 /* SpinnerViewController.swift */; };
 		95C107DC27958FCB00FB02AD /* WalletMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107DB27958FCB00FB02AD /* WalletMessageViewController.swift */; };
@@ -386,6 +387,7 @@
 		9592B61A27C3DFE9002A4EFB /* NSAttributedString+Alignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Alignment.swift"; sourceTree = "<group>"; };
 		9592B61E27C4EE49002A4EFB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		9592B62027C4F240002A4EFB /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		9592B62227C53C8D002A4EFB /* level-x-help.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "level-x-help.html"; sourceTree = "<group>"; };
 		95B2F12C27BE5D11007291D4 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		95C107DB27958FCB00FB02AD /* WalletMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMessageViewController.swift; sourceTree = "<group>"; };
 		95C107DF2795B7E300FB02AD /* MessageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCoordinator.swift; sourceTree = "<group>"; };
@@ -1248,6 +1250,7 @@
 				950C06A027AD3EF6006D0CAB /* Localizable.strings in Resources */,
 				8847D7812756376200C2A25B /* Assets.xcassets in Resources */,
 				6306220827B29B7900BABE0B /* idw_eesditest in Resources */,
+				9592B62327C53C8D002A4EFB /* level-x-help.html in Resources */,
 				950C06A327AD3F00006D0CAB /* Localizable.strings in Resources */,
 				8E4331BA2759152B00D50127 /* IBMPlexSans-Regular.ttf in Resources */,
 				950B422827AD6A1E002C03B6 /* InfoPlist.strings in Resources */,

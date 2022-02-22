@@ -218,7 +218,7 @@ extension WalletTabBarController: CustomTabBarDelegate {
         let linkAction = UIAction { [weak self] _ in
             guard
                 let self = self,
-                let url = Bundle.main.url(forResource: "learn-more-de", withExtension: "html"),
+                let url = Bundle.main.url(forResource: "level-x-help", withExtension: "html"),
                 let viewController = self.messageViewController
             else {
                 return
