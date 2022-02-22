@@ -179,50 +179,50 @@ class QRScannerViewController: BareBaseViewController {
         setupLayout()
         setupAccessibility()
 
-#if targetEnvironment(simulator)
-#else
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
-            completion(.failure(error: .acesss))
-            self.videoCaptureDevice = nil
-            return
+    #if targetEnvironment(simulator)
+    #else
+    guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {
+        completion(.failure(error: .acesss))
+        self.videoCaptureDevice = nil
+        return
+    }
+    self.flashLightButton.isEnabled = videoCaptureDevice.hasTorch
+    self.videoCaptureDevice = videoCaptureDevice
+
+    let videoInput: AVCaptureDeviceInput
+
+    do {
+        videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
+    } catch {
+        completion(.failure(error: .failure))
+        return
+    }
+
+    if captureSession.canAddInput(videoInput) {
+        captureSession.addInput(videoInput)
+    } else {
+        completion(.failure(error: .acesss))
+        return
+    }
+
+    let metadataOutput = AVCaptureMetadataOutput()
+
+    if captureSession.canAddOutput(metadataOutput) {
+        captureSession.addOutput(metadataOutput)
+
+        metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        metadataOutput.metadataObjectTypes = [.qr]
+    } else {
+        completion(.failure(error: .failure))
+        return
+    }
+
+    if !captureSession.isRunning {
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.captureSession.startRunning()
         }
-        self.flashLightButton.isEnabled = videoCaptureDevice.hasTorch
-        self.videoCaptureDevice = videoCaptureDevice
-
-        let videoInput: AVCaptureDeviceInput
-
-        do {
-            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-        } catch {
-            completion(.failure(error: .failure))
-            return
-        }
-
-        if captureSession.canAddInput(videoInput) {
-            captureSession.addInput(videoInput)
-        } else {
-            completion(.failure(error: .acesss))
-            return
-        }
-
-        let metadataOutput = AVCaptureMetadataOutput()
-
-        if captureSession.canAddOutput(metadataOutput) {
-            captureSession.addOutput(metadataOutput)
-
-            metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            metadataOutput.metadataObjectTypes = [.qr]
-        } else {
-            completion(.failure(error: .failure))
-            return
-        }
-
-        if !captureSession.isRunning {
-            DispatchQueue.global(qos: .userInitiated).async {
-                self.captureSession.startRunning()
-            }
-        }
-#endif
+    }
+    #endif
     }
 
     @objc

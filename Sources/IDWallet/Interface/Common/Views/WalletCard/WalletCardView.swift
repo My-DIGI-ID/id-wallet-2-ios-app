@@ -216,13 +216,15 @@ class WalletCardView: UIView {
             "V:|[header]",
             "V:[header]-(containerTop)-[primaryContainer]-(containerBottom)-|",
             "V:[header]-(containerTop)-[secondaryContainer]-(containerBottom)-|"
-        ].constraints(with: ["header": headerContainer,
-                             "primaryContainer": primaryValuesContainer,
-                             "secondaryContainer": secondaryValuesContainer],
-                      metrics: ["containerSpacing": Layout.valuesContainerSpacing,
-                                "containerTop": Layout.valuesTopSpacing,
-                                "containerBottom": Layout.valuesBottomSpacing]) + [
-                                
+        ].constraints(
+            with: [
+                "header": headerContainer,
+                "primaryContainer": primaryValuesContainer,
+                "secondaryContainer": secondaryValuesContainer],
+            metrics: [
+                "containerSpacing": Layout.valuesContainerSpacing,
+                "containerTop": Layout.valuesTopSpacing,
+                "containerBottom": Layout.valuesBottomSpacing]) + [
             widthAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardWidthHeightRatio),
             headerContainer.heightAnchor.constraint(equalTo: heightAnchor, multiplier: Layout.walletCardHeaderHeightRatio),
             primaryValuesContainer.widthAnchor.constraint(equalTo: secondaryValuesContainer.widthAnchor)

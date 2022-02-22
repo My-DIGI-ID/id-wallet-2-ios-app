@@ -50,6 +50,25 @@ class PinEntryViewModel {
     
     private let handleResult: (PinEntryViewModel.Result, PinEntryViewController) -> Void
     
+    // MARK: - Exposed State
+
+    @Published var attempt: Int = 0
+
+    // Presentation related parameters
+    @Published var presentation: PinEntryViewModel.Presentation
+    
+    /// Indicates whether a `commit` action can currently be performed
+    @Published var canCommit: Bool = false
+    
+    /// Indicates whether an `add` action can currently be performed
+    @Published var canAdd: Bool
+    
+    /// Indicates whether a `remove` action can currently be performed
+    @Published var canRemove: Bool
+    
+    /// Representation of the PIN that does not reveal its contents (except the last character if so configured)
+    @Published var pin: [PinCharacterRepresentation]
+    
     // MARK: - Initialization
     
     /// Initializes the view model with the specified parameters
@@ -98,25 +117,6 @@ class PinEntryViewModel {
         self.maxAttempts = maxAttempts
         updateStateForPinChange()
     }
-    
-    // MARK: - Exposed State
-
-    @Published var attempt: Int = 0
-
-    // Presentation related parameters
-    @Published var presentation: PinEntryViewModel.Presentation
-    
-    /// Indicates whether a `commit` action can currently be performed
-    @Published var canCommit: Bool = false
-    
-    /// Indicates whether an `add` action can currently be performed
-    @Published var canAdd: Bool
-    
-    /// Indicates whether a `remove` action can currently be performed
-    @Published var canRemove: Bool
-    
-    /// Representation of the PIN that does not reveal its contents (except the last character if so configured)
-    @Published var pin: [PinCharacterRepresentation]
     
     // MARK: - Exposed Actions
     
