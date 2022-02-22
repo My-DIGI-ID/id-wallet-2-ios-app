@@ -44,8 +44,6 @@ private enum Constants {
         
         static let spacherHeight: CGFloat = 40
     }
-    static let image: UIImage = UIImage(existing: .checkmark)
-    static let checkmark: UIImage = UIImage(existing: .checkmark)
 }
 
 fileprivate extension AttributedStyle {    
@@ -141,7 +139,7 @@ class ConnectionConfirmationViewController: BareBaseViewController {
     }()
     
     private lazy var alertTypeImageView: UIImageView = {
-        return UIImageView(image: Constants.image)
+        return UIImageView(image: UIImage(existing: .checkmark))
             .withEqualAutolayoutSize(constant: Constants.Layout.iconSize)
     }()
     
