@@ -177,12 +177,16 @@ extension WalletTabBarController: CustomTabBarDelegate {
                     self.selectedIndex = 0
                     self.presenter.dismiss(options: .defaultOptions, completion: nil)
                 case .failure(let error):
-                    let alert = UIAlertController(title: "Fehler", message: error.localizedDescription, preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
-                    self.selectedIndex = previouslySelected
-                    print(error)
-                    self.presenter.presentModal(alert, options: .defaultOptions)
+//                    let alert = UIAlertController(title: "Fehler", message: error.localizedDescription, preferredStyle: .alert)
+//                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+//
+//                    self.selectedIndex = previouslySelected
+//                    print(error)
+//                    self.presenter.presentModal(alert, options: .defaultOptions)
+//                    self.presenter.dismiss(options: .defaultOptions, completion: nil)
+                    
+                    self.startErrorViewController(alertLevel: .currentValue)
                     self.presenter.dismiss(options: .defaultOptions, completion: nil)
                 case .cancelled:
                     self.selectedIndex = previouslySelected
@@ -201,5 +205,20 @@ extension WalletTabBarController: CustomTabBarDelegate {
         if let index = viewControllers.firstIndex(where: { viewController in viewController.tabBarItem == item }) {
             selectedIndex = index
         }
+    }
+
+    func startErrorViewController(alertLevel: AlertLevel) {
+        let doneAction = UIAction { [weak self] _ in
+            guard let self = self else { return }
+            self.presenter.dismissModal(completion: nil)
+        }
+
+        let viewModel = MessageViewModel(
+            messageType: .blocked,
+            header: "Anfrage blockiert",
+            text: "Diese Verbindung ist nicht verschlüsselt und daher unsicher. Sie wurde deswegen blockiert. Es liegt nicht an Deinem Smartphone und nicht an Deiner Wallet. Du kannst diesen Fehler daher nicht beheben.",
+            buttons: [("Schließen", doneAction)])
+
+        presenter.presentModal(WalletMessageViewController(viewModel: viewModel), options: .defaultOptions)
     }
 }

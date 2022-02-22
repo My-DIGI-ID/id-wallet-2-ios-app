@@ -13,6 +13,10 @@
 
 import UIKit
 
+fileprivate extension ImageNameIdentifier {
+    static let checkmark = ImageNameIdentifier(rawValue: "Success")
+}
+
 private enum Constants {
     
     enum Text {
@@ -40,8 +44,8 @@ private enum Constants {
         
         static let spacherHeight: CGFloat = 40
     }
-    static let image: UIImage = #imageLiteral(resourceName: "verfified")
-    static let checkmark: UIImage = #imageLiteral(resourceName: "solve")
+    static let image: UIImage = UIImage(existing: .checkmark)
+    static let checkmark: UIImage = UIImage(existing: .checkmark)
 }
 
 fileprivate extension AttributedStyle {    

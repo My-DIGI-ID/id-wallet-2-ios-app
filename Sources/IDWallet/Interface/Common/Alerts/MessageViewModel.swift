@@ -15,7 +15,7 @@ import Foundation
 import UIKit
 
 enum MessageViewType {
-    case error, fail, unknownError, jailbreak, noInternet, timeout, success
+    case error, fail, unknownError, jailbreak, noInternet, timeout, success, blocked
 }
 
 protocol MessageModelProtocol {

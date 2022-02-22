@@ -22,6 +22,7 @@ fileprivate extension ImageNameIdentifier {
     static let noInternet = ImageNameIdentifier(rawValue: "NoInternet")
     static let timeout = ImageNameIdentifier(rawValue: "Timeout")
     static let success = ImageNameIdentifier(rawValue: "Success")
+    static let blocked = ImageNameIdentifier(rawValue: "Blocked")
 }
 
 extension MessageViewType {
@@ -41,6 +42,8 @@ extension MessageViewType {
             return .init(existing: .timeout)
         case .success:
             return .init(existing: .success)
+        case .blocked:
+            return .init(existing: .blocked)
         }
     }
 }

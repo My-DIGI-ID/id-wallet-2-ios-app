@@ -302,7 +302,11 @@ extension QRScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else { return }
             guard let value = readableObject.stringValue else { return }
             dismiss(animated: true) {
-                self.completion(.success(value: value))
+                if AlertLevel.currentValue == .noLevel {
+                    self.completion(.success(value: value))
+                } else {
+                    self.completion(.failure(error: .failure))
+                }
             }
         } else {
             captureSession.startRunning()

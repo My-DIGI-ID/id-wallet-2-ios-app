@@ -223,6 +223,8 @@
 		9592B61827C3DFC1002A4EFB /* UIView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592B61627C3DFC1002A4EFB /* UIView+Layout.swift */; };
 		9592B61B27C3DFE9002A4EFB /* NSAttributedString+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592B61927C3DFE9002A4EFB /* NSAttributedString+Color.swift */; };
 		9592B61C27C3DFE9002A4EFB /* NSAttributedString+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592B61A27C3DFE9002A4EFB /* NSAttributedString+Alignment.swift */; };
+		9592B61F27C4EE49002A4EFB /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9592B61E27C4EE49002A4EFB /* Settings.bundle */; };
+		9592B62127C4F240002A4EFB /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592B62027C4F240002A4EFB /* AppSettings.swift */; };
 		95B2F12B27BE49FE007291D4 /* Base58String in Frameworks */ = {isa = PBXBuildFile; productRef = 95B2F12A27BE49FE007291D4 /* Base58String */; };
 		95B2F12D27BE5D11007291D4 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B2F12C27BE5D11007291D4 /* SpinnerViewController.swift */; };
 		95C107DC27958FCB00FB02AD /* WalletMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107DB27958FCB00FB02AD /* WalletMessageViewController.swift */; };
@@ -382,6 +384,8 @@
 		9592B61627C3DFC1002A4EFB /* UIView+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Layout.swift"; sourceTree = "<group>"; };
 		9592B61927C3DFE9002A4EFB /* NSAttributedString+Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Color.swift"; sourceTree = "<group>"; };
 		9592B61A27C3DFE9002A4EFB /* NSAttributedString+Alignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+Alignment.swift"; sourceTree = "<group>"; };
+		9592B61E27C4EE49002A4EFB /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		9592B62027C4F240002A4EFB /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		95B2F12C27BE5D11007291D4 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		95C107DB27958FCB00FB02AD /* WalletMessageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletMessageViewController.swift; sourceTree = "<group>"; };
 		95C107DF2795B7E300FB02AD /* MessageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCoordinator.swift; sourceTree = "<group>"; };
@@ -438,6 +442,7 @@
 				6306220127B29B7300BABE0B /* CustomAgentService.swift */,
 				6306220027B29B7300BABE0B /* CustomConnectionService.swift */,
 				6306220227B29B7300BABE0B /* CustomCredentialService.swift */,
+				9592B62027C4F240002A4EFB /* AppSettings.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -512,6 +517,7 @@
 				8847D7772756376000C2A25B /* AppDelegate.swift */,
 				8847D7792756376000C2A25B /* SceneDelegate.swift */,
 				8E7554B827727AE80016DEB0 /* Documentation.docc */,
+				9592B61E27C4EE49002A4EFB /* Settings.bundle */,
 			);
 			name = IDWallet;
 			path = Sources/IDWallet;
@@ -1118,6 +1124,7 @@
 				8847D7702756376000C2A25B /* Sources */,
 				8847D7712756376000C2A25B /* Frameworks */,
 				8847D7722756376000C2A25B /* Resources */,
+				9592B61D27C4EDAC002A4EFB /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -1236,6 +1243,8 @@
 			files = (
 				8847D7D827563F6200C2A25B /* LaunchScreen.storyboard in Resources */,
 				8E4331BB2759152B00D50127 /* IBMPlexSans-Bold.ttf in Resources */,
+				9592B61F27C4EE49002A4EFB /* Settings.bundle in Resources */,
+				95C107DA2795896300FB02AD /* learn-more-de.html in Resources */,
 				950C06A027AD3EF6006D0CAB /* Localizable.strings in Resources */,
 				8847D7812756376200C2A25B /* Assets.xcassets in Resources */,
 				6306220827B29B7900BABE0B /* idw_eesditest in Resources */,
@@ -1290,6 +1299,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		9592B61D27C4EDAC002A4EFB /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "BUILD_APP_DIR=\"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME.app\"\n\nif [ $CONFIGURATION == \"Release\" ]; then\n    rm -rf \"$BUILD_APP_DIR/Settings.bundle\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1376,6 +1403,7 @@
 				8EAF8411275F421900283D0B /* AppError.swift in Sources */,
 				9586384427A993AF0030DCF3 /* QRScannerViewController.swift in Sources */,
 				8ECA228A277084CB00CB8D81 /* AlignmentWrapperView.swift in Sources */,
+				9592B62127C4F240002A4EFB /* AppSettings.swift in Sources */,
 				9555836D27B16A9F00D3E47B /* OverviewViewController.swift in Sources */,
 				8EAF8416275F4B5E00283D0B /* PinValidationError.swift in Sources */,
 				952FF66B2796E703003840F9 /* WebViewModel.swift in Sources */,
