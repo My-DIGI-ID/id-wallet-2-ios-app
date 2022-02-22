@@ -13,6 +13,7 @@
 		6306220827B29B7900BABE0B /* idw_eesditest in Resources */ = {isa = PBXBuildFile; fileRef = 6306220727B29B7800BABE0B /* idw_eesditest */; };
 		6306220A27B29BAF00BABE0B /* Aries in Frameworks */ = {isa = PBXBuildFile; productRef = 6306220927B29BAF00BABE0B /* Aries */; };
 		6F1A9B8827902711009B3359 /* Mediator in Frameworks */ = {isa = PBXBuildFile; productRef = 6F1A9B8727902711009B3359 /* Mediator */; };
+		6F2F307A27C50C6C00CE029C /* HelpScreens in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2F307927C50C6C00CE029C /* HelpScreens */; };
 		6FA511362771B7A100D068BD /* AusweisApp2 in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA511352771B7A100D068BD /* AusweisApp2 */; };
 		88136CF127BB95B100799E94 /* UIScrollView+Bounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88136CF027BB95B100799E94 /* UIScrollView+Bounce.swift */; };
 		88136CF327BCED2000799E94 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88136CF227BCED2000799E94 /* Colors.xcassets */; };
@@ -224,7 +225,6 @@
 		9592B61C27C3DFE9002A4EFB /* NSAttributedString+Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9592B61A27C3DFE9002A4EFB /* NSAttributedString+Alignment.swift */; };
 		95B2F12B27BE49FE007291D4 /* Base58String in Frameworks */ = {isa = PBXBuildFile; productRef = 95B2F12A27BE49FE007291D4 /* Base58String */; };
 		95B2F12D27BE5D11007291D4 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B2F12C27BE5D11007291D4 /* SpinnerViewController.swift */; };
-		95C107DA2795896300FB02AD /* learn-more-de.html in Resources */ = {isa = PBXBuildFile; fileRef = 95873EBF2791F8A000A924C8 /* learn-more-de.html */; };
 		95C107DC27958FCB00FB02AD /* WalletMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C107DB27958FCB00FB02AD /* WalletMessageViewController.swift */; };
 		95C1083F27BC102C001248F0 /* String+Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C1083E27BC102C001248F0 /* String+Crypto.swift */; };
 		95C1084127BC1036001248F0 /* Data+Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C1084027BC1036001248F0 /* Data+Crypto.swift */; };
@@ -376,7 +376,6 @@
 		9586384327A993AF0030DCF3 /* QRScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRScannerViewController.swift; sourceTree = "<group>"; };
 		95873EB32791A98700A924C8 /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		95873EB92791B23300A924C8 /* HelpViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewCoordinator.swift; sourceTree = "<group>"; };
-		95873EBF2791F8A000A924C8 /* learn-more-de.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = "learn-more-de.html"; sourceTree = "<group>"; };
 		9592B61027C3BF86002A4EFB /* UIView+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Accessibility.swift"; sourceTree = "<group>"; };
 		9592B61327C3CE61002A4EFB /* VoiceOverSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceOverSettings.swift; sourceTree = "<group>"; };
 		9592B61527C3DFC1002A4EFB /* Sequence+NSLayoutConstraint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Sequence+NSLayoutConstraint.swift"; sourceTree = "<group>"; };
@@ -408,6 +407,7 @@
 				6306220A27B29BAF00BABE0B /* Aries in Frameworks */,
 				8EAF840C275EEEA000283D0B /* CocoaLumberjack in Frameworks */,
 				6FA511362771B7A100D068BD /* AusweisApp2 in Frameworks */,
+				6F2F307A27C50C6C00CE029C /* HelpScreens in Frameworks */,
 				95B2F12B27BE49FE007291D4 /* Base58String in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1053,17 +1053,8 @@
 				88136CF227BCED2000799E94 /* Colors.xcassets */,
 				6306220627B29B7800BABE0B /* Genesis */,
 				950C069927AD3EB0006D0CAB /* Locale */,
-				95873EBE2791F85B00A924C8 /* Html */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		95873EBE2791F85B00A924C8 /* Html */ = {
-			isa = PBXGroup;
-			children = (
-				95873EBF2791F8A000A924C8 /* learn-more-de.html */,
-			);
-			path = Html;
 			sourceTree = "<group>";
 		};
 		9592B61227C3CE51002A4EFB /* Accessibility */ = {
@@ -1140,6 +1131,7 @@
 				6F1A9B8727902711009B3359 /* Mediator */,
 				6306220927B29BAF00BABE0B /* Aries */,
 				95B2F12A27BE49FE007291D4 /* Base58String */,
+				6F2F307927C50C6C00CE029C /* HelpScreens */,
 			);
 			productName = IDWallet;
 			productReference = 8847D7742756376000C2A25B /* IDWallet.app */;
@@ -1224,6 +1216,7 @@
 				6F1A9B83279025EC009B3359 /* XCRemoteSwiftPackageReference "ios-aries-sdk" */,
 				6F1A9B8627902711009B3359 /* XCRemoteSwiftPackageReference "ios-mediator-sdk" */,
 				95B2F12927BE49FE007291D4 /* XCRemoteSwiftPackageReference "Base58String" */,
+				6F2F307827C50C6C00CE029C /* XCRemoteSwiftPackageReference "help-screens" */,
 			);
 			productRefGroup = 8847D7752756376000C2A25B /* Products */;
 			projectDirPath = "";
@@ -1243,7 +1236,6 @@
 			files = (
 				8847D7D827563F6200C2A25B /* LaunchScreen.storyboard in Resources */,
 				8E4331BB2759152B00D50127 /* IBMPlexSans-Bold.ttf in Resources */,
-				95C107DA2795896300FB02AD /* learn-more-de.html in Resources */,
 				950C06A027AD3EF6006D0CAB /* Localizable.strings in Resources */,
 				8847D7812756376200C2A25B /* Assets.xcassets in Resources */,
 				6306220827B29B7900BABE0B /* idw_eesditest in Resources */,
@@ -1925,6 +1917,14 @@
 				kind = branch;
 			};
 		};
+		6F2F307827C50C6C00CE029C /* XCRemoteSwiftPackageReference "help-screens" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/help-screens.git";
+			requirement = {
+				branch = "feature/BKAWALIOS-99";
+				kind = branch;
+			};
+		};
 		6FA511342771B7A100D068BD /* XCRemoteSwiftPackageReference "AusweisApp2-SDK-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Governikus/AusweisApp2-SDK-iOS";
@@ -1961,6 +1961,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F1A9B8627902711009B3359 /* XCRemoteSwiftPackageReference "ios-mediator-sdk" */;
 			productName = Mediator;
+		};
+		6F2F307927C50C6C00CE029C /* HelpScreens */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F2F307827C50C6C00CE029C /* XCRemoteSwiftPackageReference "help-screens" */;
+			productName = HelpScreens;
 		};
 		6FA511352771B7A100D068BD /* AusweisApp2 */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -13,6 +13,7 @@
 
 import Combine
 import UIKit
+import HelpScreens
 
 // MARK: - Configuration
 
@@ -365,14 +366,7 @@ extension OnboardingViewController {
         ) {
             // FIXME: This should not be here. The ViewModel has no responsibility over VC logic whatsoever
             self.showInfo = { _ in
-                guard let url = Bundle.main.url(
-                    forResource: "learn-more-de",
-                    withExtension: "html")
-                else {
-                    return
-                }
-
-                let viewModel = WebViewModel(title: "Mehr erfahren", url: url)
+                let viewModel = WebViewModel(title: "Mehr erfahren", url: HelpScreens.HTMLResourceIdentifier.learnMore)
                 let webViewController = WebViewController(viewModel: viewModel)
 
                 modalPresenter.presentModal(

@@ -38,6 +38,15 @@
         }
       },
       {
+        "package": "HelpScreens",
+        "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/help-screens.git",
+        "state": {
+          "branch": "feature/BKAWALIOS-99",
+          "revision": "ede587f95a17285c62b7f03c2bd7787f35e42650",
+          "version": null
+        }
+      },
+      {
         "package": "Aries",
         "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-aries-sdk",
         "state": {

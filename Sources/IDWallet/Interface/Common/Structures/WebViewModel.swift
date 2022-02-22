@@ -12,13 +12,14 @@
 //
 
 import Foundation
+import HelpScreens
 
 protocol WebViewViewModelProtocol {
     var title: String { get }
-    var url: URL { get }
+    var url: HTMLResourceIdentifier { get }
 }
 
 struct WebViewModel: WebViewViewModelProtocol {
     var title: String
-    var url: URL
+    var url: HTMLResourceIdentifier
 }

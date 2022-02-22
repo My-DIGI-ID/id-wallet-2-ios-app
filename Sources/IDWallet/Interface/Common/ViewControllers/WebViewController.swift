@@ -86,9 +86,11 @@ class WebViewController: BareBaseViewController {
         super.viewDidLoad()
         
         setupLayout()
-        
-        let request = URLRequest(url: viewModel.url)
-        webview.load(request)
+        guard let url = viewModel.url.url
+        else {
+            return
+        }
+        webview.load(URLRequest(url: url))
     }
     
     @objc
