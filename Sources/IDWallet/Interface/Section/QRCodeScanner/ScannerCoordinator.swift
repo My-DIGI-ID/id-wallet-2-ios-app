@@ -33,6 +33,7 @@ enum ScanError: Error {
     case acesss
     case failure
     case cancelled
+    case level
 }
 
 @MainActor
@@ -42,6 +43,7 @@ class ScannerCoordinator: Coordinator {
         case failure(_ error: Error)
         case cancelled
         case cameraPermissionDenied
+        case level(_ error: AlertLevel)
     }
     
     let presenter: PresenterProtocol
@@ -130,6 +132,8 @@ class ScannerCoordinator: Coordinator {
                     
                 case .cancelled:
                     self.completion(Result.cancelled)
+                case .level(let level):
+                    self.completion(Result.level(level))
                 }
             }
         }

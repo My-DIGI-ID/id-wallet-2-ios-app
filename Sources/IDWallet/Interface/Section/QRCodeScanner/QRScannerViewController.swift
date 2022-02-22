@@ -63,6 +63,7 @@ fileprivate extension ImageNameIdentifier {
 enum QRScannerResult {
     case success(value: String)
     case failure(error: ScanError)
+    case level(error: AlertLevel)
     case cancelled
 }
 
@@ -305,7 +306,7 @@ extension QRScannerViewController: AVCaptureMetadataOutputObjectsDelegate {
                 if AlertLevel.currentValue == .noLevel {
                     self.completion(.success(value: value))
                 } else {
-                    self.completion(.failure(error: .failure))
+                    self.completion(.level(error: AlertLevel.currentValue))
                 }
             }
         } else {

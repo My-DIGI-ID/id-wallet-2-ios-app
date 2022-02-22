@@ -179,16 +179,11 @@ extension WalletTabBarController: CustomTabBarDelegate {
                     self.selectedIndex = 0
                     self.presenter.dismiss(options: .defaultOptions, completion: nil)
                 case .failure(let error):
+                    let alert = UIAlertController(title: "Fehler", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
-//                    let alert = UIAlertController(title: "Fehler", message: error.localizedDescription, preferredStyle: .alert)
-//                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-//
-//                    self.selectedIndex = previouslySelected
-//                    print(error)
-//                    self.presenter.presentModal(alert, options: .defaultOptions)
-//                    self.presenter.dismiss(options: .defaultOptions, completion: nil)
                     self.selectedIndex = previouslySelected
-                    self.startErrorViewController(alertLevel: .currentValue)
+                    self.presenter.presentModal(alert, options: .defaultOptions)
                     self.presenter.dismiss(options: .defaultOptions, completion: nil)
                 case .cancelled:
                     self.selectedIndex = previouslySelected
@@ -197,6 +192,10 @@ extension WalletTabBarController: CustomTabBarDelegate {
                     self.selectedIndex = previouslySelected
                     // No dismiss here, because camera permission dialog is not
                     // presented using the presenter
+                case .level:
+                    self.selectedIndex = previouslySelected
+                    self.startErrorViewController(alertLevel: .currentValue)
+                    self.presenter.dismiss(options: .defaultOptions, completion: nil)
                 }
 
                 self.scannerCoordinator = nil
