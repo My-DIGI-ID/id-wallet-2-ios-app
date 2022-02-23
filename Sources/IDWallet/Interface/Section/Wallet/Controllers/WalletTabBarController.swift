@@ -12,6 +12,7 @@
 //
 
 import UIKit
+import HelpScreens
 
 fileprivate extension ImageNameIdentifier {
     static let wallet = ImageNameIdentifier(rawValue: "Wallet")
@@ -217,12 +218,11 @@ extension WalletTabBarController: CustomTabBarDelegate {
         let linkAction = UIAction { [weak self] _ in
             guard
                 let self = self,
-                let url = Bundle.main.url(forResource: "level-x-help", withExtension: "html"),
                 let viewController = self.messageViewController
             else {
                 return
             }
-            let viewModel = WebViewModel(title: "Hilfe", url: url)
+            let viewModel = WebViewModel(title: "Hilfe", url: HelpScreens.HTMLResourceIdentifier.helpLevelX)
             viewController.present(WebViewController(viewModel: viewModel), animated: true, completion: nil)
         }
 
