@@ -160,6 +160,8 @@ class WalletMessageViewController: BareBaseViewController {
 
         viewModel.buttons.forEach {
             let button = WalletButton(config: $0)
+            button.titleLabel?.numberOfLines = 2
+            button.titleLabel?.textAlignment = .center
             buttonsStackView.addArrangedSubview(button)
         }
     }

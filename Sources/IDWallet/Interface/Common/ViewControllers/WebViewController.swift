@@ -105,7 +105,7 @@ extension WebViewController {
     private func setupLayout() {
         view.addAutolayoutSubviews(navigationBar, webview)
         [
-            "V:|-[navBar]-(spacing)-[webView]-|",
+            "V:|-[navBar]-(spacing)-[webView]|",
             "H:|[navBar]|",
             "H:|[webView]|",
         ].constraints(
