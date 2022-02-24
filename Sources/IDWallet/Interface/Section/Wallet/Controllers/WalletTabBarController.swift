@@ -30,22 +30,22 @@ fileprivate extension ImageNameIdentifier {
 }
 
 private extension UIImage {
-    func scaledFor(maxWidthAndHeight: CGFloat) -> CGFloat {
+    func scaleFor(maxWidthAndHeight: CGFloat) -> CGFloat {
         let hScale = size.width > maxWidthAndHeight ? maxWidthAndHeight / size.width : 1.0
         let vScale = size.height > maxWidthAndHeight ? maxWidthAndHeight / size.height : 1.0
         return min(hScale, vScale)
     }
     func scaledTo(maxWidthAndHeight: CGFloat) -> UIImage {
-        let scale = scaledFor(maxWidthAndHeight: maxWidthAndHeight)
+        let scale = scaleFor(maxWidthAndHeight: maxWidthAndHeight)
         return self.withSize(targetSize: CGSize(width: size.width * scale, height: size.height * scale))
     }
-    func scaledFor(minWidthAndHeight: CGFloat) -> CGFloat {
+    func scaleFor(minWidthAndHeight: CGFloat) -> CGFloat {
         let hScale = size.width < minWidthAndHeight ?  size.width / minWidthAndHeight : 1.0
         let vScale = size.height < minWidthAndHeight ? size.height / minWidthAndHeight : 1.0
         return max(hScale, vScale)
     }
     func scaledTo(minWidthAndHeight: CGFloat) -> UIImage {
-        let scale = scaledFor(minWidthAndHeight: minWidthAndHeight)
+        let scale = scaleFor(minWidthAndHeight: minWidthAndHeight)
         return self.withSize(targetSize: CGSize(width: size.width * scale, height: size.height * scale))
     }
 }
