@@ -19,8 +19,14 @@ import UIKit
 // in appdelegate and ``AppCoordinator`` can take over from there.
 
 class MainNavigationController: UINavigationController {
-    private var appCoordinator: AppCoordinator?
-    
+    private lazy var appCoordinator: AppCoordinator = {
+        AppCoordinator(presenter: rootPresenter, appState: AppState())
+    }()
+
+    private lazy var rootPresenter = {
+        RootPresenter(self)
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,14 +34,13 @@ class MainNavigationController: UINavigationController {
         hidesBarsOnSwipe = false
         setNavigationBarHidden(true, animated: false)
         setToolbarHidden(true, animated: false)
+
+        rootPresenter.present(BackgroundViewController(), options: .notAnimated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if appCoordinator == nil {
-            appCoordinator = AppCoordinator(presenter: RootPresenter(self), appState: AppState())
-            appCoordinator?.start()
-        }
+        appCoordinator.start()
     }
 }

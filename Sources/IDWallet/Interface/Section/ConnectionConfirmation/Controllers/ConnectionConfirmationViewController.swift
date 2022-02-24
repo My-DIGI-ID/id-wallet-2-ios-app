@@ -59,7 +59,7 @@ enum ConnectionConfirmationResult {
     case deny
 }
 
-class ConnectionConfirmationViewController: BareBaseViewController {
+class ConnectionConfirmationViewController: BaseViewController {
     
     private let viewModel: ConnectionConfirmationViewModel
     
@@ -227,7 +227,7 @@ class ConnectionConfirmationViewController: BareBaseViewController {
     init(viewModel: ConnectionConfirmationViewModel, completion: @escaping (ConnectionConfirmationResult) -> Void) {
         self.viewModel = viewModel
         self.completion = completion
-        super.init(style: nil)
+        super.init()
     }
     
     @available(*, unavailable)

@@ -29,7 +29,7 @@ private enum Constants {
     }
 }
 
-class WebViewController: BareBaseViewController {
+class WebViewController: BaseViewController {
     
     private lazy var doneButton: UIBarButtonItem = {
         let button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(closeView))
@@ -74,7 +74,7 @@ class WebViewController: BareBaseViewController {
     
     init(viewModel: WebViewViewModelProtocol) {
         self.viewModel = viewModel
-        super.init(style: nil)
+        super.init()
     }
     
     @available(*, unavailable)

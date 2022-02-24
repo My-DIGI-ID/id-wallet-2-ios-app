@@ -19,344 +19,377 @@ fileprivate extension ImageNameIdentifier {
     static let error = ImageNameIdentifier(rawValue: "Error")
 }
 
-extension PinEntryIntroViewController {
+private enum Constants {
+    enum Styles {
+        static let backgroundColor: UIColor = .white
+        static let textColor: UIColor = .black
+        static let titleFont: UIFont = .plexSans(15.0)
+        static let headerFont: UIFont = .plexSansBold(25.0)
+        static let subHeaderFont: UIFont = .plexSans(17.0)
+        static let subHeaderTextColor: UIColor = .grey1
+        static let infoBoxTitleFont: UIFont = .plexSansBold(15.0)
+        static let infoBoxFont: UIFont = .plexSans(15.0)
+        static let infoBoxIconColor: UIColor = .primaryBlue
+        static let infoBoxBackgroundColor: UIColor = .secondaryBlue
+        static let infoBoxItemSize: CGSize = CGSize(width: 18.0, height: 18.0)
+        static let commitButtonFont: UIFont = .plexSansBold(15.0)
+    }
+
+    enum Layout {
+        static let paddingTop = 60.0
+        static let paddingBottom = 48.0
+        static let paddingHorizontal = 24.0
+
+        static let mainContentSpacing = 24.0
+
+        static let infoBoxPadding = 20.0
+        static let infoBoxSpacing = 8.0
+
+        static let minPrimaryButtonWidth = 240.0
+    }
+
+    enum Texts {
+        static var title: String = NSLocalizedString("ID Wallet einrichten", comment: "Page Title")
+        static var heading: String = NSLocalizedString("ID Wallet absichern", comment: "Heading")
+        static var subHeading: String = NSLocalizedString(
+            "Lege einen Zugangscode fest, um Deine ID Wallet vor Zugriff auf andere zu schützen. " +
+            "Den Zugangscode brauchst Du bei jeder Nutzung der ID Wallet App.",
+            comment: "Sub Heading")
+        static var infoBoxTitle: String = NSLocalizedString("Hinweis:", comment: "Tip Title")
+        static var infoBoxText: String = NSLocalizedString(
+            "Der Zugangscode ist nur auf Deinem Smartphone gespeichert. " +
+            "Wenn Du Ihn verlierst, musst Du die App neu installieren und einrichten.",
+            comment: "Tip Text")
+        static var commitTitle: String = NSLocalizedString("Zugangscode festlegen", comment: "Commit Action Title")
+    }
+}
+
+// MARK: -
+
+class PinEntryIntroViewController: BaseViewController {
+
+    enum Result {
+        case committed
+        case cancelled
+    }
+
+    // MARK: - Views
+
     enum ViewID: String, BaseViewID {
         case containerView
+
         case headerContainer
         case titleLabel
-        case titleSpacer
         case cancelButton
-        
+
         case mainContentContainer
         case headingLabel
         case subHeadingLabel
+
         case infoBox
         case infoBoxTitleWrapper
         case infoBoxIcon
         case infoBoxTextWrapper
-        case infoBoxTippLabel
+        case infoBoxTitleLabel
         case infoBoxTextLabel
-        
+
         case footerContainer
         case commitButton
-        
+
         var key: String { return rawValue }
     }
-    
-    struct Style: BaseViewControllerStyle {
-        // swiftlint:disable nesting
-        typealias LayoutType = Layout
-        // swiftlint:enable nesting
-        
-        var themeContext: ThemeContext
-        var layout: PinEntryIntroViewController.Layout
-        
-        init(
-            themeContext: ThemeContext = .alternative,
-            layout: Layout = .regular
-        ) {
-            self.themeContext = themeContext
-            self.layout = layout
-        }
-        
-        init() { self.init(themeContext: .alternative, layout: .regular) }
-    }
-    
-    struct Layout: BaseViewControllerLayout {
-        // swiftlint:disable nesting
-        typealias ViewIDType = ViewID
-        // swiftlint:enable nesting
-        
-        static var regular: PinEntryIntroViewController.Layout = .init()
-        
-        let headerMainSpacing: [LayoutPredicate] = .equal(50)
-        let mainContentSpacing: CGFloat = 24
-        let mainFooterSpacing: [LayoutPredicate] = .greaterThanOrEqual(20)
-        
-        let views: ViewsLayout<PinEntryIntroViewController.ViewID> = [
-            .containerView: .init(
-                padding: .init(horizontal: 20, top: 60, bottom: 40)
-            ),
-            .headerContainer: .init(
-                padding: .init(horizontal: 0, top: 0)
-            ),
-            .mainContentContainer: .init(
-                padding: .init(horizontal: 0)
-            ),
-            .footerContainer: .init(
-                padding: .init(horizontal: 0, bottom: 0)
-            )
-        ]
-        
-        init() {}
-    }
-    
-    struct Presentation {
-        let title: String = NSLocalizedString("ID Wallet einrichten", comment: "Page Title")
-        let heading: String = NSLocalizedString("ID Wallet absichern", comment: "Heading")
-        let subHeading: String = NSLocalizedString(
-            "Lege einen Zugangscode fest, um Deine ID Wallet vor Zugriff auf andere zu schützen. " +
-            "Den Zugangscode brauchst Du bei jeder Nutzung der ID Wallet App.",
-            comment: "Sub Heading")
-        let tipTitle: String = NSLocalizedString("Hinweis:", comment: "Tip Title")
-        let tipText: String = NSLocalizedString(
-            "Der Zugangscode ist nur auf Deinem Smartphone gespeichert. " +
-            "Wenn Du Ihn verlierst, musst Du die App neu installieren und einrichten",
-            comment: "Tip Text")
-        let commitTitle: String = NSLocalizedString("Zugangscode festlegen", comment: "Commit Action Title")
-    }
-    
-    class ViewModel {
-        @Published var presentation: Presentation
-        
-        @Published var canCommit: Bool = true
-        fileprivate let commit: (PinEntryIntroViewController) -> Void
-        
-        @Published var canCancel: Bool = true
-        fileprivate let cancel: (PinEntryIntroViewController) -> Void
-        
-        init(
-            commit: @escaping (PinEntryIntroViewController) -> Void,
-            cancel: @escaping (PinEntryIntroViewController) -> Void,
-            presentation: Presentation = Presentation()
-        ) {
-            self.commit = commit
-            self.cancel = cancel
-            self.presentation = presentation
-        }
-    }
-}
 
-class PinEntryIntroViewController: BaseViewController<
-PinEntryIntroViewController.ViewID, PinEntryIntroViewController.Style,
-PinEntryIntroViewController.ViewModel
-> {
-    
-    // MARK: - Views
-    
-    // swiftlint:disable function_body_length
-    override func createOrUpdateViews() {
-        super.createOrUpdateViews()
-        
-        var didCreate: Bool = false
-        
-        style.themeContext.applyPageBackgroundStyles(view: view)
-        
-        makeOrUpdateContainer(
-            id: .containerView,
-            in: view, didMake: &didCreate
-        ) { [self] containerView, didCreate in
-            containerView.translatesAutoresizingMaskIntoConstraints = false
-            
-            makeOrUpdateHStack(
-                id: .headerContainer,
-                alignment: .firstBaseline,
-                distribution: .fill,
-                removeExistingArrangedViews: false,
-                in: containerView, didMake: &didCreate
-            ) { [self] headerContainer, didCreate in
-                headerContainer.translatesAutoresizingMaskIntoConstraints = false
-                
-                makeOrUpdateTitle(
-                    id: .titleLabel,
-                    text: viewModel.presentation.title,
-                    in: headerContainer, didMake: &didCreate
-                ) { label in
-                    label.translatesAutoresizingMaskIntoConstraints = false
-                    label.textAlignment = .left
-                }
-                
-                makeOrUpdateView(
-                    id: .titleSpacer,
-                    in: headerContainer, didMake: &didCreate
-                ) { spacer in
-                    spacer.translatesAutoresizingMaskIntoConstraints = false
-                }
-                
-                makeOrUpdateCloseButton(
-                    id: .cancelButton,
-                    in: headerContainer, didMake: &didCreate
-                ) { cancelButton in
-                    cancelButton.translatesAutoresizingMaskIntoConstraints = false
-                }
-            }
-            makeOrUpdateVStack(
-                id: .mainContentContainer,
-                spacing: style.layout.mainContentSpacing,
-                in: containerView, didMake: &didCreate
-            ) { mainContentContainer, didCreate in
-                mainContentContainer.translatesAutoresizingMaskIntoConstraints = false
-                
-                mainContentContainer.alignment = .center
-                
-                makeOrUpdateHeading(
-                    id: .headingLabel,
-                    text: viewModel.presentation.heading,
-                    in: mainContentContainer, didMake: &didCreate
-                ) { label in
-                    label.translatesAutoresizingMaskIntoConstraints = false
-                    label.numberOfLines = 0
-                    label.lineBreakMode = .byWordWrapping
-                    label.textAlignment = .left
-                }
-                
-                makeOrUpdateSubHeading(
-                    id: .subHeadingLabel,
-                    text: viewModel.presentation.subHeading,
-                    in: mainContentContainer, didMake: &didCreate
-                ) { label in
-                    label.translatesAutoresizingMaskIntoConstraints = false
-                    label.numberOfLines = 0
-                    label.lineBreakMode = .byWordWrapping
-                    label.textAlignment = .left
-                }
-                
-                makeOrUpdateVStack(
-                    id: .infoBox,
-                    spacing: style.layout.mainContentSpacing,
-                    in: mainContentContainer, didMake: &didCreate
-                ) { infoBox, didCreate in
-                    infoBox.translatesAutoresizingMaskIntoConstraints = false
-                    
-                    infoBox.alignment = .leading
-                    infoBox.layer.cornerRadius = 15
-                    infoBox.backgroundColor = .grey7
-                    infoBox.isLayoutMarginsRelativeArrangement = true
-                    infoBox.directionalLayoutMargins = NSDirectionalEdgeInsets(
-                        top: 20, leading: 20, bottom: 20, trailing: 20)
+    lazy var containerView: UIStackView = {
+        let result = UIStackView()
 
-                    makeOrUpdateVStack(
-                        id: .infoBoxTextWrapper,
-                        in: infoBox, didMake: &didCreate
-                    ) { [self] infoBoxTextWrapper, didCreate in
-                        infoBoxTextWrapper.translatesAutoresizingMaskIntoConstraints = false
-                        infoBoxTextWrapper.alignment = .leading
-                        infoBoxTextWrapper.spacing = 8.0
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.containerView.key
 
-                        makeOrUpdateHStack(
-                            id: .infoBoxTitleWrapper,
-                            spacing: 8.0,
-                            in: infoBoxTextWrapper, didMake: &didCreate
-                        ) { infoBoxTitleWrapper, didCreate in
-                            infoBoxTitleWrapper.alignment = .leading
-                            infoBoxTitleWrapper.distribution = .fillProportionally
+        result.axis = .vertical
 
-                            makeOrUpdateImageView(
-                                id: .infoBoxIcon,
-                                image: .init(identifiedBy: .error)?.withTintColor(.white),
-                                in: infoBoxTitleWrapper, didMake: &didCreate
-                            ) { infoBoxIcon in
-                                infoBoxIcon.translatesAutoresizingMaskIntoConstraints = false
-                            }
+        result.addArrangedSubview(headerContainer)
+        result.addArrangedSubview(mainContentContainer)
+        result.addArrangedSubview(footerContainer)
 
-                            makeOrUpdateTipTitle(
-                                id: .infoBoxTippLabel,
-                                text: viewModel.presentation.tipTitle,
-                                in: infoBoxTitleWrapper, didMake: &didCreate
-                            ) { infoBoxTippLabel in
-                                infoBoxTippLabel.translatesAutoresizingMaskIntoConstraints = false
-                            }
-                        }
+        return result
+    }()
 
-                        makeOrUpdateBody(
-                            id: .infoBoxTextLabel,
-                            text: viewModel.presentation.tipText,
-                            in: infoBoxTextWrapper, didMake: &didCreate
-                        ) { infoBoxTextLabel in
-                            infoBoxTextLabel.translatesAutoresizingMaskIntoConstraints = false
-                            infoBoxTextLabel.numberOfLines = 0
-                            infoBoxTextLabel.lineBreakMode = .byWordWrapping
-                        }
-                    }
-                }
-            }
-            
-            makeOrUpdateAlignmentWrapper(
-                id: .footerContainer,
-                horizontalAlignment: .center, verticalAlignment: .bottom,
-                in: containerView, didMake: &didCreate
-            ) { [self] footerContainer, didCreate in
-                footerContainer.translatesAutoresizingMaskIntoConstraints = false
-                
-                makeOrUpdatePrimaryActionButton(
-                    id: .commitButton, title: viewModel.presentation.commitTitle,
-                    isEnabled: viewModel.canCommit,
-                    in: footerContainer, didMake: &didCreate
-                ) { commitButton in
-                    commitButton.translatesAutoresizingMaskIntoConstraints = false
-                    footerContainer.arrangedView = commitButton
-                }
-            }
-        }
+    lazy var headerContainer: UIStackView = {
+        let result = UIStackView()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.headerContainer.key
+
+        result.axis = .horizontal
+
+        result.addArrangedSubview(titleLabel)
+        result.addArrangedSubview(cancelButton)
+
+        return result
+    }()
+
+    lazy var titleLabel: UILabel = {
+        let result = UILabel()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.titleLabel.key
+
+        result.text = Constants.Texts.title
+        result.font = Constants.Styles.infoBoxTitleFont
+        result.textColor = Constants.Styles.textColor
+        result.textAlignment = .center
+
+        return result
+    }()
+
+    lazy var cancelButton: UIButton = {
+        let result = UIButton()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.cancelButton.key
+
+        result.setImage(.init(systemName: "xmark")?.withTintColor(.primaryBlue), for: .normal)
+
+        result.addAction(.init(handler: { [weak self] _ in if let self = self { self.completion(self, .cancelled)
+        }}), for: .touchUpInside)
+
+        return result
+    }()
+
+    lazy var mainContentContainer: UIStackView = {
+        let result = UIStackView()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.mainContentContainer.key
+
+        result.axis = .vertical
+
+        result.addArrangedSubview(headingLabel)
+        result.addArrangedSubview(subHeadingLabel)
+        result.addArrangedSubview(infoBox)
+
+        return result
+    }()
+
+    lazy var headingLabel: UILabel = {
+        let result = UILabel()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.headerContainer.key
+
+        result.text = Constants.Texts.heading
+        result.font = Constants.Styles.headerFont
+        result.textColor = Constants.Styles.textColor
+        result.textAlignment = .left
+        result.numberOfLines = 0
+        result.lineBreakMode = .byWordWrapping
+        result.textAlignment = .left
+
+        return result
+    }()
+
+    lazy var subHeadingLabel: UILabel = {
+        let result = UILabel()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.subHeadingLabel.key
+
+        result.text = Constants.Texts.subHeading
+        result.font = Constants.Styles.subHeaderFont
+        result.textColor = Constants.Styles.subHeaderTextColor
+        result.textAlignment = .left
+        result.numberOfLines = 0
+        result.lineBreakMode = .byWordWrapping
+        result.textAlignment = .left
+
+        return result
+    }()
+
+    lazy var infoBox: UIStackView = {
+        let result = UIStackView()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.infoBox.key
+
+        result.axis = .vertical
+
+        result.layer.cornerRadius = 15
+        result.backgroundColor = .grey7
+
+        result.addArrangedSubview(infoBoxTitleWrapper)
+        result.addArrangedSubview(infoBoxTextLabel)
+
+        return result
+    }()
+
+    lazy var infoBoxTitleWrapper: UIStackView = {
+        let result = UIStackView()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.infoBoxTitleWrapper.key
+
+        result.axis = .horizontal
+
+        result.addArrangedSubview(infoBoxIcon)
+        result.addArrangedSubview(infoBoxTitleLabel)
+
+        return result
+    }()
+
+    lazy var infoBoxIcon: UIImageView = {
+        let result = UIImageView(image: .init(identifiedBy: .error)?.withTintColor(.primaryBlue))
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.infoBoxIcon.key
+
+        [ // Alternatively: resize image, PDF dimensions are not ok
+            result.widthAnchor.constraint(equalToConstant: 18),
+            result.heightAnchor.constraint(equalToConstant: 18),
+        ].activate()
+
+        return result
+    }()
+
+    lazy var infoBoxTitleLabel: UILabel = {
+        let result = UILabel()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.infoBoxTitleLabel.key
+
+        result.text = Constants.Texts.infoBoxTitle
+        result.font = Constants.Styles.infoBoxTitleFont
+        result.textColor = Constants.Styles.textColor
+        result.textAlignment = .left
+
+        return result
+    }()
+
+    lazy var infoBoxTextLabel: UILabel = {
+        let result = UILabel()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.infoBoxTextLabel.key
+
+        result.text = Constants.Texts.infoBoxText
+        result.font = Constants.Styles.infoBoxFont
+        result.textColor = Constants.Styles.textColor
+        result.textAlignment = .left
+        result.numberOfLines = 0
+        result.lineBreakMode = .byWordWrapping
+        result.textAlignment = .left
+
+        return result
+    }()
+
+    lazy var footerContainer: UIStackView = {
+        let result = UIStackView()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.footerContainer.key
+
+        result.axis = .vertical
+
+        result.addArrangedSubview(commitButton)
+
+        return result
+    }()
+
+    lazy var commitButton: WalletButton = {
+        let result = WalletButton(
+            titleText: Constants.Texts.commitTitle,
+            image: nil,
+            imageAlignRight: false,
+            style: .primary,
+            primaryAction: .init(handler: { [weak self] _ in if let self = self { self.completion(self, .committed)
+            }})
+        )
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.commitButton.key
+
+        return result
+    }()
+
+    // MARK: - Configuration
+
+    let completion: (PinEntryIntroViewController, _ result: Result) -> Void
+
+    // MARK: - Initialization
+
+    init(completion: @escaping (PinEntryIntroViewController, _ result: Result) -> Void) {
+        self.completion = completion
+        super.init()
     }
-    // swiftlint:enable function_body_length
-    
-    override func createOrUpdateConstraints() {
-        super.createOrUpdateConstraints()
-        
-        guard !hasControlledConstraints else { return }
-        
-        addConstraintsForViewsLayout(
-            identifier: "style.layout.views")
-        
-        let spc1 = style.layout.headerMainSpacing.vfl ?? "-"
-        let spc2 = style.layout.mainFooterSpacing.vfl ?? "-"
-        addConstraints(
-            withVisualFormat:
-                "V:[\(ViewID.headerContainer)]\(spc1)[\(ViewID.mainContentContainer)]\(spc2)[\(ViewID.footerContainer)]",
-            views: viewsForLayout,
-            identifier: "vertical")
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-    
-    override func activateBindings() {
-        super.activateBindings()
-        
-        guard
-            !areBindingsActive,
-            let viewModel = viewModel,
-            let commitButton = controlledView(.commitButton) as? UIButton,
-            let cancelButton = controlledView(.cancelButton) as? UIButton,
-            let titleLabel = controlledView(.titleLabel) as? UILabel,
-            let headingLabel = controlledView(.headingLabel) as? UILabel,
-            let subHeadingLabel = controlledView(.subHeadingLabel) as? UILabel
-        else {
-            return
-        }
-        
-        bind(
-            control: commitButton, target: self, action: #selector(commitButtonTapped(sender:)),
-            for: .touchUpInside)
-        bind(
-            control: cancelButton, target: self, action: #selector(cancelButtonTapped(sender:)),
-            for: .touchUpInside)
-        
-        let animationDuration = 0.25
-        bind(subscriptions: [
-            viewModel.$presentation.sink { presentation in
-                titleLabel.text = presentation.title
-                headingLabel.text = presentation.heading
-                subHeadingLabel.text = presentation.subHeading
-                commitButton.setTitle(presentation.commitTitle, for: .normal)
-            },
-            viewModel.$canCommit.sink { [weak self] value in
-                UIView.animate(withDuration: animationDuration) {
-                    commitButton.isEnabled = value
-                    self?.style.themeContext.applyPrimaryActionButtonStyles(
-                        button: commitButton)
-                }
-            }
-        ])
+
+    // MARK: - Life Cycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        view.backgroundColor = .white
+
+        view.addSubview(self.containerView)
+        setupLayout()
     }
-    
-    @objc
-    func commitButtonTapped(sender: UIButton) {
-        if let viewModel = viewModel, viewModel.canCommit {
-            viewModel.commit(self)
-        }
-    }
-    
-    @objc
-    func cancelButtonTapped(sender: UIButton) {
-        viewModel?.cancel(self)
+
+    // MARK: - Layout
+
+    func setupLayout() {
+        containerView.distribution = .equalCentering
+        containerView.alignment = .fill
+        containerView.insertArrangedSubview(UIView(), at: 2)
+
+        headerContainer.alignment = .firstBaseline
+        headerContainer.distribution = .fill
+
+        mainContentContainer.alignment = .fill
+        mainContentContainer.spacing = Constants.Layout.mainContentSpacing
+
+        footerContainer.distribution = .equalSpacing
+        footerContainer.alignment = .center
+
+        infoBox.alignment = .fill
+        infoBox.distribution = .fill
+        infoBox.spacing = Constants.Layout.infoBoxSpacing
+        infoBox.isLayoutMarginsRelativeArrangement = true
+        infoBox.directionalLayoutMargins = NSDirectionalEdgeInsets(
+            top: Constants.Layout.infoBoxPadding,
+            leading: Constants.Layout.infoBoxPadding,
+            bottom: Constants.Layout.infoBoxPadding,
+            trailing: Constants.Layout.infoBoxPadding)
+
+        infoBoxTitleWrapper.alignment = .fill
+        infoBoxTitleWrapper.distribution = .fill
+        infoBoxTitleWrapper.spacing = Constants.Layout.infoBoxSpacing
+
+        [
+            "V:|-(padTop)-[container]-(padBot)-|",
+                "H:|-(padH)-[container]-(padH)-|",
+        ].constraints(
+            with: [
+                "container": containerView,
+                "header": headerContainer,
+                "main": mainContentContainer,
+                "headingLabel": headingLabel,
+                "subHeadingLabel": subHeadingLabel,
+                "infoBox": infoBox,
+                "commit": commitButton,
+            ], metrics: [
+                "padTop": Constants.Layout.paddingTop,
+                "padBot": Constants.Layout.paddingBottom,
+                "padH": Constants.Layout.paddingHorizontal
+            ]
+        ).activate()
+
+        [
+            commitButton.centerXAnchor.constraint(
+                equalTo: mainContentContainer.centerXAnchor),
+            commitButton.widthAnchor.constraint(
+                greaterThanOrEqualToConstant: Constants.Layout.minPrimaryButtonWidth)
+        ].activate()
     }
 }

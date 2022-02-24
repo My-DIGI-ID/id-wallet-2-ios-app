@@ -20,6 +20,8 @@ struct PresentationOptions {
     /// Default presentation options
     static var defaultOptions = PresentationOptions()
 
+    static var notAnimated = PresentationOptions(animated: false)
+    
     /// Determines whether a transition should be animated, defaults to `true`
     var animated: Bool = true
 

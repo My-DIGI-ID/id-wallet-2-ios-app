@@ -52,17 +52,16 @@ extension SetupCoordinator {
     ///
     /// Called from onboarding and after a failed confirmation PIN entry
     private func startPinEntryInstructions(from previous: UIViewController) {
-        let viewModel = PinEntryIntroViewController.ViewModel(
-            commit: { viewController in
-                self.startInitialPinEntry(from: viewController)
-            },
-            cancel: { viewController in
-                self.startOnboarding(from: viewController)
-            }
-        )
-        let style = PinEntryIntroViewController.Style()
         presenter.present(
-            PinEntryIntroViewController(style: style, viewModel: viewModel), replacing: previous)
+            PinEntryIntroViewController { viewController, result in
+                switch result {
+                case .committed:
+                    self.startInitialPinEntry(from: viewController)
+                case .cancelled:
+                    self.startOnboarding(from: viewController)
+                }
+            },
+            replacing: previous)
     }
 
     /// Displays a form letting the user enter the PIN
@@ -70,7 +69,6 @@ extension SetupCoordinator {
     /// Called from PIN Entry Instructions or after a failed PIN entry
     private func startInitialPinEntry(from previous: UIViewController) {
         let viewController = PinEntryViewController(
-            style: .regular,
             viewModel: PinEntryViewModel.viewModelForInitialPinEntry(
                 resultHandler: { result, viewController in
                     switch result {
@@ -90,14 +88,13 @@ extension SetupCoordinator {
         from previous: PinEntryViewController, pin previousPin: String
     ) {
         let viewController = PinEntryViewController(
-            style: .regular,
             viewModel: previous.viewModel.viewModelForConfirmation(
                 resultHandler: { result, viewController in
                     switch result {
                     case .pin(let pin, _):
                         if pin == previousPin {
                             Task {
-                                self.presenter.presentModal(SpinnerViewController(), options: .init(animated: true, modalPresentationStyle: .fullScreen, modalTransitionStyle: .crossDissolve))
+                                self.presenter.presentModal(SpinnerViewController(), options: .defaultOptions)
                                 await self.model.definePIN(pin: pin)
                                 self.presenter.dismissModal(completion: nil)
                                 self.startPinEntrySuccess(from: viewController, pin: pin)
@@ -112,7 +109,7 @@ extension SetupCoordinator {
         presenter.present(viewController, replacing: previous)
     }
     
-    private func startPinEntrySuccess(from previous: PinEntryViewController, pin: String) {
+    private func startPinEntrySuccess(from previous: PinEntryViewController?, pin: String) {
         var viewController: UIViewController?
         let viewModel = MessageViewModel(
             messageType: .success,

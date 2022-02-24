@@ -39,7 +39,7 @@ fileprivate extension ImageNameIdentifier {
     static let close = ImageNameIdentifier(rawValue: "Close")
 }
 
-class WalletMessageViewController: BareBaseViewController {
+class WalletMessageViewController: BaseViewController {
     
     private lazy var closeButton: UIBarButtonItem = {
         let button = UIBarButtonItem(
@@ -137,7 +137,7 @@ class WalletMessageViewController: BareBaseViewController {
     
     init(viewModel: MessageModelProtocol) {
         self.viewModel = viewModel
-        super.init(style: nil)
+        super.init()
     }
     
     @available(*, unavailable)

@@ -13,6 +13,13 @@
 
 import UIKit
 
+private enum Constants {
+    enum Styles {
+        static let activeColor: UIColor = .white
+        static let inactiveColor: UIColor = .white.withAlphaComponent(0.3)
+    }
+}
+
 class PinCodeDigitView: UIView {
     
     // MARK: - Storage
@@ -65,14 +72,14 @@ class PinCodeDigitView: UIView {
         shapeLayer.lineWidth = style.lineWidth
         switch pin {
         case .set, .setHidden:
-            shapeLayer.fillColor = style.colors.tintColor.cgColor
-            shapeLayer.strokeColor = style.colors.tintColor.cgColor
+            shapeLayer.fillColor = Constants.Styles.activeColor.cgColor
+            shapeLayer.strokeColor = Constants.Styles.activeColor.cgColor
         case .unset, .unsetOptional:
             shapeLayer.fillColor = UIColor.clear.cgColor
-            shapeLayer.strokeColor = style.colors.tintInactiveColor.cgColor
+            shapeLayer.strokeColor = Constants.Styles.inactiveColor.cgColor
         case .unsetActive, .unsetOptionalActive:
             shapeLayer.fillColor = UIColor.clear.cgColor
-            shapeLayer.strokeColor = style.colors.tintColor.cgColor
+            shapeLayer.strokeColor = Constants.Styles.activeColor.cgColor
         }
     }
     
@@ -103,15 +110,12 @@ extension PinCodeDigitView {
         static let regular = Style()
         static let small = Style(size: 12.0)
         
-        let colors: ColorScheme
         let lineWidth: CGFloat
         let size: CGFloat
         init(
-            colors: ColorScheme = .main,
             lineWidth: CGFloat = 2.0,
             size: CGFloat = 14.0
         ) {
-            self.colors = colors
             self.lineWidth = lineWidth
             self.size = size
         }

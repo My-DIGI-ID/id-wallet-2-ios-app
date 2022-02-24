@@ -77,7 +77,7 @@ fileprivate extension ImageNameIdentifier {
     static let close = ImageNameIdentifier(rawValue: "Close")
 }
 
-class OverviewViewController: BareBaseViewController {
+class OverviewViewController: BaseViewController {
     
     let viewModel: OverviewViewModel
     var completion: () -> Void
@@ -203,7 +203,7 @@ class OverviewViewController: BareBaseViewController {
     init(viewModel: OverviewViewModel, completion: @escaping () -> Void) {
         self.viewModel = viewModel
         self.completion = completion
-        super.init(style: nil)
+        super.init()
     }
     
     @available(*, unavailable)

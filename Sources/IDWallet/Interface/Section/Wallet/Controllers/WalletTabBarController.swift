@@ -14,6 +14,12 @@
 import UIKit
 import HelpScreens
 
+private enum Constants {
+    enum Styles {
+        static let maxNormalIconSize = 36.0
+    }
+}
+
 fileprivate extension ImageNameIdentifier {
     static let wallet = ImageNameIdentifier(rawValue: "Wallet")
     static let walletSelected = ImageNameIdentifier(rawValue: "WalletSelected")
@@ -23,8 +29,29 @@ fileprivate extension ImageNameIdentifier {
     static let activitiesSelected = ImageNameIdentifier(rawValue: "ActivitiesSelected")
 }
 
+private extension UIImage {
+    func scaledFor(maxWidthAndHeight: CGFloat) -> CGFloat {
+        let hScale = size.width > maxWidthAndHeight ? maxWidthAndHeight / size.width : 1.0
+        let vScale = size.height > maxWidthAndHeight ? maxWidthAndHeight / size.height : 1.0
+        return min(hScale, vScale)
+    }
+    func scaledTo(maxWidthAndHeight: CGFloat) -> UIImage {
+        let scale = scaledFor(maxWidthAndHeight: maxWidthAndHeight)
+        return self.withSize(targetSize: CGSize(width: size.width * scale, height: size.height * scale))
+    }
+    func scaledFor(minWidthAndHeight: CGFloat) -> CGFloat {
+        let hScale = size.width < minWidthAndHeight ?  size.width / minWidthAndHeight : 1.0
+        let vScale = size.height < minWidthAndHeight ? size.height / minWidthAndHeight : 1.0
+        return max(hScale, vScale)
+    }
+    func scaledTo(minWidthAndHeight: CGFloat) -> UIImage {
+        let scale = scaledFor(minWidthAndHeight: minWidthAndHeight)
+        return self.withSize(targetSize: CGSize(width: size.width * scale, height: size.height * scale))
+    }
+}
+
 @MainActor
-class WalletTabBarController: BareBaseViewController {
+class WalletTabBarController: BaseViewController {
 
     var messageViewController: WalletMessageViewController?
 
@@ -67,13 +94,15 @@ class WalletTabBarController: BareBaseViewController {
             if let viewController = newValue {
                 addChild(viewController)
                 contentView.addSubview(viewController.view)
+
                 viewController.view.translatesAutoresizingMaskIntoConstraints = false
-                NSLayoutConstraint.activate([
+                [
                     contentView.topAnchor.constraint(equalTo: viewController.view.topAnchor),
                     contentView.leadingAnchor.constraint(equalTo: viewController.view.leadingAnchor),
                     contentView.trailingAnchor.constraint(equalTo: viewController.view.trailingAnchor),
                     contentView.bottomAnchor.constraint(equalTo: viewController.view.bottomAnchor)
-                ])
+                ].activate()
+
                 selectedViewController?.removeFromParent()
                 selectedViewController?.view.removeFromSuperview()
                 viewController.didMove(toParent: self)
@@ -95,20 +124,30 @@ class WalletTabBarController: BareBaseViewController {
     private var walletController = WalletViewController()
     private var walletBarItem = UITabBarItem(
         title: "Wallet",
-        image: UIImage(existing: .wallet).withRenderingMode(.alwaysOriginal),
-        selectedImage: UIImage(existing: .walletSelected).withRenderingMode(.alwaysOriginal))
+        image: UIImage(existing: .wallet)
+            .withRenderingMode(.alwaysOriginal)
+            .scaledTo(maxWidthAndHeight: Constants.Styles.maxNormalIconSize),
+        selectedImage: UIImage(existing: .walletSelected)
+            .withRenderingMode(.alwaysOriginal)
+            .scaledTo(maxWidthAndHeight: Constants.Styles.maxNormalIconSize))
 
     private var qrcodeScanController = UIViewController()
     private var qrcodeScanBarItem = UITabBarItem(
         title: "QR-Code Scan",
-        image: UIImage(existing: .qrBig).withRenderingMode(.alwaysOriginal),
-        selectedImage: UIImage(existing: .qrBigSelected).withRenderingMode(.alwaysOriginal))
+        image: UIImage(existing: .qrBig)
+            .withRenderingMode(.alwaysOriginal),
+        selectedImage: UIImage(existing: .qrBigSelected)
+            .withRenderingMode(.alwaysOriginal))
 
     private var activitiesController = UIViewController()
     private var activitiesBarItem = UITabBarItem(
         title: "Aktivitäten",
-        image: UIImage(existing: .activities).withRenderingMode(.alwaysOriginal),
-        selectedImage: UIImage(existing: .activitiesSelected).withRenderingMode(.alwaysOriginal))
+        image: UIImage(existing: .activities)
+            .withRenderingMode(.alwaysOriginal)
+            .scaledTo(maxWidthAndHeight: Constants.Styles.maxNormalIconSize),
+        selectedImage: UIImage(existing: .activitiesSelected)
+            .withRenderingMode(.alwaysOriginal)
+            .scaledTo(maxWidthAndHeight: Constants.Styles.maxNormalIconSize))
 
     @available(*, unavailable)
     required init?(coder: NSCoder) {
@@ -117,7 +156,7 @@ class WalletTabBarController: BareBaseViewController {
 
     init(presenter: PresenterProtocol) {
         self.presenter = presenter
-        super.init(style: nil)
+        super.init()
         setupOnce()
     }
 

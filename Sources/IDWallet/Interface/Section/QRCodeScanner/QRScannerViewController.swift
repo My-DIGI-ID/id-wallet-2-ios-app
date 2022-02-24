@@ -67,7 +67,7 @@ enum QRScannerResult {
     case cancelled
 }
 
-class QRScannerViewController: BareBaseViewController {
+class QRScannerViewController: BaseViewController {
     
     var completion: (QRScannerResult) -> Void
     
@@ -166,7 +166,7 @@ class QRScannerViewController: BareBaseViewController {
     
     init(completion: @escaping (QRScannerResult) -> Void) {
         self.completion = completion
-        super.init(style: nil)
+        super.init()
     }
     
     @available(*, unavailable)

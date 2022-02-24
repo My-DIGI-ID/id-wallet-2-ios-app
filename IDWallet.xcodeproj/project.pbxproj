@@ -49,13 +49,7 @@
 		8E4331BA2759152B00D50127 /* IBMPlexSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E4331AA2759152B00D50127 /* IBMPlexSans-Regular.ttf */; };
 		8E4331BB2759152B00D50127 /* IBMPlexSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E4331AB2759152B00D50127 /* IBMPlexSans-Bold.ttf */; };
 		8E7554B927727AE90016DEB0 /* Documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = 8E7554B827727AE80016DEB0 /* Documentation.docc */; };
-		8E7554BD277290D90016DEB0 /* BaseVCLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7554BC277290D90016DEB0 /* BaseVCLayout.swift */; };
 		8E7554C02772918E0016DEB0 /* BaseViewID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7554BF2772918E0016DEB0 /* BaseViewID.swift */; };
-		8E7554C2277291DA0016DEB0 /* BaseVCStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7554C1277291DA0016DEB0 /* BaseVCStyle.swift */; };
-		8E7554C3277291DA0016DEB0 /* BaseVCStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7554C1277291DA0016DEB0 /* BaseVCStyle.swift */; };
-		8E7554C4277291DA0016DEB0 /* BaseVCStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7554C1277291DA0016DEB0 /* BaseVCStyle.swift */; };
-		8E7554C5277291E10016DEB0 /* BaseVCLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7554BC277290D90016DEB0 /* BaseVCLayout.swift */; };
-		8E7554C6277291E10016DEB0 /* BaseVCLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7554BC277290D90016DEB0 /* BaseVCLayout.swift */; };
 		8E7554C7277291E50016DEB0 /* BaseViewID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7554BF2772918E0016DEB0 /* BaseViewID.swift */; };
 		8E7554C8277291E50016DEB0 /* BaseViewID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7554BF2772918E0016DEB0 /* BaseViewID.swift */; };
 		8E7554CA27729A410016DEB0 /* BareBaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7554C927729A410016DEB0 /* BareBaseVC.swift */; };
@@ -67,15 +61,6 @@
 		8E83F4E9276B2EE300469187 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E83F4E8276B2EE200469187 /* UIViewExtensions.swift */; };
 		8E83F4EA276B2EE300469187 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E83F4E8276B2EE200469187 /* UIViewExtensions.swift */; };
 		8E83F4EB276B2EE300469187 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E83F4E8276B2EE200469187 /* UIViewExtensions.swift */; };
-		8E88912427744F2E00D0E6A3 /* ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88912327744F2E00D0E6A3 /* ViewFactory.swift */; };
-		8E88912527744F2E00D0E6A3 /* ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88912327744F2E00D0E6A3 /* ViewFactory.swift */; };
-		8E88912627744F2E00D0E6A3 /* ViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88912327744F2E00D0E6A3 /* ViewFactory.swift */; };
-		8E8891282774572500D0E6A3 /* LayoutFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8891272774572500D0E6A3 /* LayoutFactory.swift */; };
-		8E8891292774572500D0E6A3 /* LayoutFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8891272774572500D0E6A3 /* LayoutFactory.swift */; };
-		8E88912A2774572500D0E6A3 /* LayoutFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8891272774572500D0E6A3 /* LayoutFactory.swift */; };
-		8E88912C27745A6500D0E6A3 /* BindingFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88912B27745A6500D0E6A3 /* BindingFactory.swift */; };
-		8E88912D27745A6500D0E6A3 /* BindingFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88912B27745A6500D0E6A3 /* BindingFactory.swift */; };
-		8E88912E27745A6500D0E6A3 /* BindingFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E88912B27745A6500D0E6A3 /* BindingFactory.swift */; };
 		8E8C40422763264800DBC979 /* MultipleErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C40412763264800DBC979 /* MultipleErrors.swift */; };
 		8E8C40432763264800DBC979 /* MultipleErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C40412763264800DBC979 /* MultipleErrors.swift */; };
 		8E8C40442763264800DBC979 /* MultipleErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C40412763264800DBC979 /* MultipleErrors.swift */; };
@@ -84,18 +69,12 @@
 		8E8C40492764BF6B00DBC979 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C40482764BF6B00DBC979 /* OnboardingViewController.swift */; };
 		8E8C404A2764BF6C00DBC979 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C40482764BF6B00DBC979 /* OnboardingViewController.swift */; };
 		8E8C404B2764BF6C00DBC979 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C40482764BF6B00DBC979 /* OnboardingViewController.swift */; };
-		8E8C404D2764BFB500DBC979 /* OnboardingPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C404C2764BFB500DBC979 /* OnboardingPageControl.swift */; };
-		8E8C404E2764BFB500DBC979 /* OnboardingPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C404C2764BFB500DBC979 /* OnboardingPageControl.swift */; };
-		8E8C404F2764BFB500DBC979 /* OnboardingPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C404C2764BFB500DBC979 /* OnboardingPageControl.swift */; };
 		8E8C405127650C7700DBC979 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C405027650C7700DBC979 /* Images.swift */; };
 		8E8C405227650C7700DBC979 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C405027650C7700DBC979 /* Images.swift */; };
 		8E8C405327650C7700DBC979 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C405027650C7700DBC979 /* Images.swift */; };
 		8E8C405527650CBB00DBC979 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C405427650CBB00DBC979 /* UIImageExtensions.swift */; };
 		8E8C405627650CBB00DBC979 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C405427650CBB00DBC979 /* UIImageExtensions.swift */; };
 		8E8C405727650CBB00DBC979 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C405427650CBB00DBC979 /* UIImageExtensions.swift */; };
-		8E8C40592765FA6F00DBC979 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C40582765FA6F00DBC979 /* BaseVC.swift */; };
-		8E8C405A2765FA7000DBC979 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C40582765FA6F00DBC979 /* BaseVC.swift */; };
-		8E8C405B2765FA7000DBC979 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C40582765FA6F00DBC979 /* BaseVC.swift */; };
 		8E8C40712767373600DBC979 /* Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C40702767373600DBC979 /* Rounded.swift */; };
 		8E8C40722767373600DBC979 /* Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C40702767373600DBC979 /* Rounded.swift */; };
 		8E8C40732767373600DBC979 /* Rounded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C40702767373600DBC979 /* Rounded.swift */; };
@@ -138,7 +117,6 @@
 		8EAF8418275F4CC700283D0B /* PinCharacterRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF8417275F4CC700283D0B /* PinCharacterRepresentation.swift */; };
 		8EAF841B275FE25600283D0B /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF841A275FE25600283D0B /* UIColorExtensions.swift */; };
 		8EAF841D275FE2F400283D0B /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF841C275FE2F400283D0B /* UIFontExtensions.swift */; };
-		8EAF841F275FE36F00283D0B /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF841E275FE36F00283D0B /* ColorScheme.swift */; };
 		8EAF8422275FE6D000283D0B /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF8421275FE6D000283D0B /* Typography.swift */; };
 		8EAF84262760B45D00283D0B /* DevicePinEntryProcessTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF84242760B31C00283D0B /* DevicePinEntryProcessTest.swift */; };
 		8EAF842D2760BA8000283D0B /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8EAF842C2760BA8000283D0B /* CocoaLumberjackSwift */; };
@@ -167,17 +145,13 @@
 		8EAF8445276102D700283D0B /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF8412275F443A00283D0B /* ValidationError.swift */; };
 		8EAF8446276102D800283D0B /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF8410275F421900283D0B /* AppError.swift */; };
 		8EAF8447276102D800283D0B /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF8412275F443A00283D0B /* ValidationError.swift */; };
-		8EAF8448276102DF00283D0B /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF841E275FE36F00283D0B /* ColorScheme.swift */; };
 		8EAF8449276102DF00283D0B /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF8421275FE6D000283D0B /* Typography.swift */; };
-		8EAF844A276102DF00283D0B /* ThemeContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4018C275CEFA100484161 /* ThemeContext.swift */; };
-		8EAF844B276102E000283D0B /* ColorScheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF841E275FE36F00283D0B /* ColorScheme.swift */; };
 		8EAF844C276102E000283D0B /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF8421275FE6D000283D0B /* Typography.swift */; };
-		8EAF844D276102E000283D0B /* ThemeContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4018C275CEFA100484161 /* ThemeContext.swift */; };
 		8EAF844E27622C6D00283D0B /* IBMPlexSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E4331AB2759152B00D50127 /* IBMPlexSans-Bold.ttf */; };
 		8EAF844F27622C6F00283D0B /* IBMPlexSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E4331AB2759152B00D50127 /* IBMPlexSans-Bold.ttf */; };
 		8EAF845027622C7C00283D0B /* IBMPlexSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E4331AA2759152B00D50127 /* IBMPlexSans-Regular.ttf */; };
 		8EAF845127622C7D00283D0B /* IBMPlexSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E4331AA2759152B00D50127 /* IBMPlexSans-Regular.ttf */; };
-		8EB4018D275CEFA100484161 /* ThemeContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4018C275CEFA100484161 /* ThemeContext.swift */; };
+		8EAFED5627C71E330072866E /* BackgroundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAFED5527C71E330072866E /* BackgroundViewController.swift */; };
 		8ECA2280276F3E4200CB8D81 /* ZeroOrMore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA227F276F3D9D00CB8D81 /* ZeroOrMore.swift */; };
 		8ECA2281276F3E4300CB8D81 /* ZeroOrMore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA227F276F3D9D00CB8D81 /* ZeroOrMore.swift */; };
 		8ECA2282276F3E4300CB8D81 /* ZeroOrMore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA227F276F3D9D00CB8D81 /* ZeroOrMore.swift */; };
@@ -194,9 +168,6 @@
 		8EF1199F277168CA00BDC5CE /* PinEntryIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF1199E277168CA00BDC5CE /* PinEntryIntroViewController.swift */; };
 		8EF119A0277168CA00BDC5CE /* PinEntryIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF1199E277168CA00BDC5CE /* PinEntryIntroViewController.swift */; };
 		8EF119A1277168CA00BDC5CE /* PinEntryIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF1199E277168CA00BDC5CE /* PinEntryIntroViewController.swift */; };
-		8EF119A327718A8A00BDC5CE /* PinEntrySuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF119A22771857E00BDC5CE /* PinEntrySuccessViewController.swift */; };
-		8EF119A427718A8B00BDC5CE /* PinEntrySuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF119A22771857E00BDC5CE /* PinEntrySuccessViewController.swift */; };
-		8EF119A527718A8B00BDC5CE /* PinEntrySuccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF119A22771857E00BDC5CE /* PinEntrySuccessViewController.swift */; };
 		8EF5CD30275777B900F464B7 /* PinEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5CD2F275777B900F464B7 /* PinEntryViewController.swift */; };
 		8EF5CD3427577BBB00F464B7 /* NumberPadKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EF5CD3327577BBB00F464B7 /* NumberPadKey.swift */; };
 		950B422827AD6A1E002C03B6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 950B422627AD6A1E002C03B6 /* InfoPlist.strings */; };
@@ -309,21 +280,14 @@
 		8E4331AD2759152B00D50127 /* IBMPlexSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-Light.ttf"; sourceTree = "<group>"; };
 		8E4331AE2759152B00D50127 /* IBMPlexSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "IBMPlexSans-Italic.ttf"; sourceTree = "<group>"; };
 		8E7554B827727AE80016DEB0 /* Documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = Documentation.docc; sourceTree = "<group>"; };
-		8E7554BC277290D90016DEB0 /* BaseVCLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVCLayout.swift; sourceTree = "<group>"; };
 		8E7554BF2772918E0016DEB0 /* BaseViewID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewID.swift; sourceTree = "<group>"; };
-		8E7554C1277291DA0016DEB0 /* BaseVCStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVCStyle.swift; sourceTree = "<group>"; };
 		8E7554C927729A410016DEB0 /* BareBaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BareBaseVC.swift; sourceTree = "<group>"; };
 		8E7554CD277305580016DEB0 /* ContractError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractError.swift; sourceTree = "<group>"; };
 		8E83F4E8276B2EE200469187 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
-		8E88912327744F2E00D0E6A3 /* ViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewFactory.swift; sourceTree = "<group>"; };
-		8E8891272774572500D0E6A3 /* LayoutFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutFactory.swift; sourceTree = "<group>"; };
-		8E88912B27745A6500D0E6A3 /* BindingFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindingFactory.swift; sourceTree = "<group>"; };
 		8E8C40412763264800DBC979 /* MultipleErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleErrors.swift; sourceTree = "<group>"; };
 		8E8C40482764BF6B00DBC979 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		8E8C404C2764BFB500DBC979 /* OnboardingPageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageControl.swift; sourceTree = "<group>"; };
 		8E8C405027650C7700DBC979 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		8E8C405427650CBB00DBC979 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
-		8E8C40582765FA6F00DBC979 /* BaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 		8E8C40622766516000DBC979 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8E8C4063276651CC00DBC979 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8E8C40702767373600DBC979 /* Rounded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rounded.swift; sourceTree = "<group>"; };
@@ -346,11 +310,10 @@
 		8EAF8417275F4CC700283D0B /* PinCharacterRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCharacterRepresentation.swift; sourceTree = "<group>"; };
 		8EAF841A275FE25600283D0B /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		8EAF841C275FE2F400283D0B /* UIFontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtensions.swift; sourceTree = "<group>"; };
-		8EAF841E275FE36F00283D0B /* ColorScheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorScheme.swift; sourceTree = "<group>"; };
 		8EAF8420275FE42C00283D0B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8EAF8421275FE6D000283D0B /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 		8EAF84242760B31C00283D0B /* DevicePinEntryProcessTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicePinEntryProcessTest.swift; sourceTree = "<group>"; };
-		8EB4018C275CEFA100484161 /* ThemeContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeContext.swift; sourceTree = "<group>"; };
+		8EAFED5527C71E330072866E /* BackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundViewController.swift; sourceTree = "<group>"; };
 		8ECA227F276F3D9D00CB8D81 /* ZeroOrMore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroOrMore.swift; sourceTree = "<group>"; };
 		8ECA2283276F596F00CB8D81 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		8ECA2289277084CB00CB8D81 /* AlignmentWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlignmentWrapperView.swift; sourceTree = "<group>"; };
@@ -359,7 +322,6 @@
 		8EDC79D0279679A90032E348 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		8EDC79D32797EFC00032E348 /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		8EF1199E277168CA00BDC5CE /* PinEntryIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinEntryIntroViewController.swift; sourceTree = "<group>"; };
-		8EF119A22771857E00BDC5CE /* PinEntrySuccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinEntrySuccessViewController.swift; sourceTree = "<group>"; };
 		8EF5CD2F275777B900F464B7 /* PinEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinEntryViewController.swift; sourceTree = "<group>"; };
 		8EF5CD3327577BBB00F464B7 /* NumberPadKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPadKey.swift; sourceTree = "<group>"; };
 		950B422727AD6A1E002C03B6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
@@ -701,14 +663,9 @@
 		8E4331BF2759164900D50127 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
-				8EB4018C275CEFA100484161 /* ThemeContext.swift */,
-				8EAF841E275FE36F00283D0B /* ColorScheme.swift */,
 				8EAF8421275FE6D000283D0B /* Typography.swift */,
 				8E8C405027650C7700DBC979 /* Images.swift */,
 				8ECA2283276F596F00CB8D81 /* Layout.swift */,
-				8E88912327744F2E00D0E6A3 /* ViewFactory.swift */,
-				8E8891272774572500D0E6A3 /* LayoutFactory.swift */,
-				8E88912B27745A6500D0E6A3 /* BindingFactory.swift */,
 				95F9A2AB27A05482003F15B5 /* UIColor+IDWallet.swift */,
 			);
 			path = Theme;
@@ -737,12 +694,13 @@
 		8E8C405C27660DC300DBC979 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				8E8C4063276651CC00DBC979 /* README.md */,
-				8E8C40742767DB0D00DBC979 /* BaseVC */,
+				8EAFED5527C71E330072866E /* BackgroundViewController.swift */,
 				8E7554C927729A410016DEB0 /* BareBaseVC.swift */,
-				95193729279187D200ED0AF2 /* WebViewController.swift */,
-				95C107DB27958FCB00FB02AD /* WalletMessageViewController.swift */,
+				8E8C40742767DB0D00DBC979 /* BaseVC */,
+				8E8C4063276651CC00DBC979 /* README.md */,
 				95B2F12C27BE5D11007291D4 /* SpinnerViewController.swift */,
+				95C107DB27958FCB00FB02AD /* WalletMessageViewController.swift */,
+				95193729279187D200ED0AF2 /* WebViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -777,10 +735,7 @@
 		8E8C40742767DB0D00DBC979 /* BaseVC */ = {
 			isa = PBXGroup;
 			children = (
-				8E8C40582765FA6F00DBC979 /* BaseVC.swift */,
 				8E7554BF2772918E0016DEB0 /* BaseViewID.swift */,
-				8E7554BC277290D90016DEB0 /* BaseVCLayout.swift */,
-				8E7554C1277291DA0016DEB0 /* BaseVCStyle.swift */,
 			);
 			path = BaseVC;
 			sourceTree = "<group>";
@@ -792,7 +747,6 @@
 				8E8C408327680AE400DBC979 /* OnboardingPageViewController.swift */,
 				8EF1199E277168CA00BDC5CE /* PinEntryIntroViewController.swift */,
 				8EF5CD2F275777B900F464B7 /* PinEntryViewController.swift */,
-				8EF119A22771857E00BDC5CE /* PinEntrySuccessViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -825,7 +779,6 @@
 		8E988185276AB47D002F629C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8E8C404C2764BFB500DBC979 /* OnboardingPageControl.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1325,7 +1278,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8862A89427AD1AF900C9780B /* UIImageView+Named.swift in Sources */,
-				8E7554C2277291DA0016DEB0 /* BaseVCStyle.swift in Sources */,
 				8862A89027AD15EE00C9780B /* UIImage+Named.swift in Sources */,
 				8E7554CA27729A410016DEB0 /* BareBaseVC.swift in Sources */,
 				885C384D27B3DC2800B35A19 /* MessageViewModel.swift in Sources */,
@@ -1336,25 +1288,20 @@
 				95C1083F27BC102C001248F0 /* String+Crypto.swift in Sources */,
 				8E9CF75C27B3C73E005BB929 /* ConnectionConfirmationViewModel.swift in Sources */,
 				8E7554B927727AE90016DEB0 /* Documentation.docc in Sources */,
-				8EB4018D275CEFA100484161 /* ThemeContext.swift in Sources */,
 				950C069427AC6145006D0CAB /* Strings+Localize.swift in Sources */,
 				8E8C405127650C7700DBC979 /* Images.swift in Sources */,
 				8862A8A127AD518300C9780B /* WalletCardView.swift in Sources */,
 				95C1084327BC1068001248F0 /* CryptoError.swift in Sources */,
 				8EDC79D42797EFC10032E348 /* WalletViewController.swift in Sources */,
 				8ECA2284276F596F00CB8D81 /* Layout.swift in Sources */,
-				8EAF841F275FE36F00283D0B /* ColorScheme.swift in Sources */,
 				9586384227A9926C0030DCF3 /* ScannerCoordinator.swift in Sources */,
-				8E88912C27745A6500D0E6A3 /* BindingFactory.swift in Sources */,
 				8862A8A327AD697B00C9780B /* WalletValidityView.swift in Sources */,
 				95873EB42791A98700A924C8 /* WebView.swift in Sources */,
 				8862A89927AD26D600C9780B /* ContentWalletView.swift in Sources */,
 				8E8C40882768AD6900DBC979 /* UIButtonExtensions.swift in Sources */,
 				9592B61C27C3DFE9002A4EFB /* NSAttributedString+Alignment.swift in Sources */,
 				8EF1199F277168CA00BDC5CE /* PinEntryIntroViewController.swift in Sources */,
-				8E88912427744F2E00D0E6A3 /* ViewFactory.swift in Sources */,
 				8E8C40712767373600DBC979 /* Rounded.swift in Sources */,
-				8E8C40592765FA6F00DBC979 /* BaseVC.swift in Sources */,
 				95F9A2B527A06CE4003F15B5 /* WalletButton.swift in Sources */,
 				885C384E27B3DC3600B35A19 /* MessageType+Image.swift in Sources */,
 				8E8C408C2769C15400DBC979 /* Coordinator.swift in Sources */,
@@ -1388,9 +1335,7 @@
 				9521F56527BBF41D003E2CCF /* IDWalletSecurity.swift in Sources */,
 				9592B61B27C3DFE9002A4EFB /* NSAttributedString+Color.swift in Sources */,
 				9555836B27B16A7900D3E47B /* OverviewViewModel.swift in Sources */,
-				8EF119A327718A8A00BDC5CE /* PinEntrySuccessViewController.swift in Sources */,
 				8E83F4E9276B2EE300469187 /* UIViewExtensions.swift in Sources */,
-				8E8C404D2764BFB500DBC979 /* OnboardingPageControl.swift in Sources */,
 				88136CF927BD305500799E94 /* AttributedStyle.swift in Sources */,
 				8EAF841B275FE25600283D0B /* UIColorExtensions.swift in Sources */,
 				6306220527B29B7300BABE0B /* CustomCredentialService.swift in Sources */,
@@ -1398,7 +1343,6 @@
 				8896727327C3833200E5DF56 /* UIImageView+URL.swift in Sources */,
 				8862A89727AD26B900C9780B /* NoContentWalletView.swift in Sources */,
 				8EF5CD30275777B900F464B7 /* PinEntryViewController.swift in Sources */,
-				8E8891282774572500D0E6A3 /* LayoutFactory.swift in Sources */,
 				8EAF8411275F421900283D0B /* AppError.swift in Sources */,
 				9586384427A993AF0030DCF3 /* QRScannerViewController.swift in Sources */,
 				8ECA228A277084CB00CB8D81 /* AlignmentWrapperView.swift in Sources */,
@@ -1420,6 +1364,7 @@
 				95F9A2AC27A05482003F15B5 /* UIColor+IDWallet.swift in Sources */,
 				8E988179276AB3CF002F629C /* AppState.swift in Sources */,
 				8E98818C276AB815002F629C /* Presenter.swift in Sources */,
+				8EAFED5627C71E330072866E /* BackgroundViewController.swift in Sources */,
 				8896727627C395D300E5DF56 /* ScrollableTextView.swift in Sources */,
 				8EF5CD3427577BBB00F464B7 /* NumberPadKey.swift in Sources */,
 				8E8C40422763264800DBC979 /* MultipleErrors.swift in Sources */,
@@ -1427,7 +1372,6 @@
 				9519372A279187D200ED0AF2 /* WebViewController.swift in Sources */,
 				9592B61827C3DFC1002A4EFB /* UIView+Layout.swift in Sources */,
 				8E7554C02772918E0016DEB0 /* BaseViewID.swift in Sources */,
-				8E7554BD277290D90016DEB0 /* BaseVCLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1444,14 +1388,11 @@
 				8ECA228B277084CB00CB8D81 /* AlignmentWrapperView.swift in Sources */,
 				8EAF8443276102CF00283D0B /* PinCodeView.swift in Sources */,
 				8EAF8445276102D700283D0B /* ValidationError.swift in Sources */,
-				8E88912D27745A6500D0E6A3 /* BindingFactory.swift in Sources */,
 				8EAF8439276102C600283D0B /* UIColorExtensions.swift in Sources */,
 				8E8C40432763264800DBC979 /* MultipleErrors.swift in Sources */,
 				8E988176276A37B0002F629C /* MainNavigationController.swift in Sources */,
-				8EAF844A276102DF00283D0B /* ThemeContext.swift in Sources */,
 				8E8C404A2764BF6C00DBC979 /* OnboardingViewController.swift in Sources */,
 				8EAF843D276102CF00283D0B /* NumberPad.swift in Sources */,
-				8E7554C3277291DA0016DEB0 /* BaseVCStyle.swift in Sources */,
 				8E8C405627650CBB00DBC979 /* UIImageExtensions.swift in Sources */,
 				8EAF843E276102CF00283D0B /* PinCodeDigitView.swift in Sources */,
 				952FF66C2796E703003840F9 /* WebViewModel.swift in Sources */,
@@ -1459,21 +1400,15 @@
 				8EF119A0277168CA00BDC5CE /* PinEntryIntroViewController.swift in Sources */,
 				8EAF8440276102CF00283D0B /* NumberPadKey.swift in Sources */,
 				8E98817A276AB3CF002F629C /* AppState.swift in Sources */,
-				8E88912527744F2E00D0E6A3 /* ViewFactory.swift in Sources */,
 				8E988189276AB53D002F629C /* SetupCoordinator.swift in Sources */,
 				8E98817E276AB3EB002F629C /* Authenticator.swift in Sources */,
 				8E7554CF277305580016DEB0 /* ContractError.swift in Sources */,
 				8EAF8441276102CF00283D0B /* PinValidationError.swift in Sources */,
-				8E7554C5277291E10016DEB0 /* BaseVCLayout.swift in Sources */,
 				8E8C408D2769C15400DBC979 /* Coordinator.swift in Sources */,
 				95F9A2AE27A055DA003F15B5 /* UIColor+IDWallet.swift in Sources */,
-				8E8C405A2765FA7000DBC979 /* BaseVC.swift in Sources */,
 				8EAF8444276102D700283D0B /* AppError.swift in Sources */,
 				8E8C408527680AE400DBC979 /* OnboardingPageViewController.swift in Sources */,
 				8EAF8449276102DF00283D0B /* Typography.swift in Sources */,
-				8E8891292774572500D0E6A3 /* LayoutFactory.swift in Sources */,
-				8EF119A427718A8B00BDC5CE /* PinEntrySuccessViewController.swift in Sources */,
-				8EAF8448276102DF00283D0B /* ColorScheme.swift in Sources */,
 				8E8C40722767373600DBC979 /* Rounded.swift in Sources */,
 				8EAF8438276102C600283D0B /* UIFontExtensions.swift in Sources */,
 				8EAF843F276102CF00283D0B /* PinEntryViewController.swift in Sources */,
@@ -1482,7 +1417,6 @@
 				8E98818D276AB815002F629C /* Presenter.swift in Sources */,
 				8ECA2285276F596F00CB8D81 /* Layout.swift in Sources */,
 				8E8C40892768AD6900DBC979 /* UIButtonExtensions.swift in Sources */,
-				8E8C404E2764BFB500DBC979 /* OnboardingPageControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1490,7 +1424,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8EAF844B276102E000283D0B /* ColorScheme.swift in Sources */,
 				8E7554CC27729A410016DEB0 /* BareBaseVC.swift in Sources */,
 				8E98817F276AB3EB002F629C /* Authenticator.swift in Sources */,
 				8EAF8432276102BA00283D0B /* NumberPad.swift in Sources */,
@@ -1499,13 +1432,8 @@
 				8E7554C8277291E50016DEB0 /* BaseViewID.swift in Sources */,
 				8E8C405327650C7700DBC979 /* Images.swift in Sources */,
 				8EAF844C276102E000283D0B /* Typography.swift in Sources */,
-				8EF119A527718A8B00BDC5CE /* PinEntrySuccessViewController.swift in Sources */,
-				8E88912E27745A6500D0E6A3 /* BindingFactory.swift in Sources */,
 				8E8C408A2768AD6900DBC979 /* UIButtonExtensions.swift in Sources */,
 				8E8C40732767373600DBC979 /* Rounded.swift in Sources */,
-				8E88912627744F2E00D0E6A3 /* ViewFactory.swift in Sources */,
-				8E8C405B2765FA7000DBC979 /* BaseVC.swift in Sources */,
-				8E7554C6277291E10016DEB0 /* BaseVCLayout.swift in Sources */,
 				8E8C408E2769C15400DBC979 /* Coordinator.swift in Sources */,
 				8EAF843B276102C700283D0B /* UIColorExtensions.swift in Sources */,
 				8E8C408627680AE400DBC979 /* OnboardingPageViewController.swift in Sources */,
@@ -1524,11 +1452,8 @@
 				8EAF84262760B45D00283D0B /* DevicePinEntryProcessTest.swift in Sources */,
 				8ECA2282276F3E4300CB8D81 /* ZeroOrMore.swift in Sources */,
 				95F9A2AD27A055DA003F15B5 /* UIColor+IDWallet.swift in Sources */,
-				8E8C404F2764BFB500DBC979 /* OnboardingPageControl.swift in Sources */,
 				952FF66D2796E703003840F9 /* WebViewModel.swift in Sources */,
-				8E7554C4277291DA0016DEB0 /* BaseVCStyle.swift in Sources */,
 				8EAF8431276102BA00283D0B /* PinCodeView.swift in Sources */,
-				8E88912A2774572500D0E6A3 /* LayoutFactory.swift in Sources */,
 				8EAF8430276102BA00283D0B /* PinValidationError.swift in Sources */,
 				8EAF8447276102D800283D0B /* ValidationError.swift in Sources */,
 				8EAF8433276102BA00283D0B /* PinCharacterRepresentation.swift in Sources */,
@@ -1538,7 +1463,6 @@
 				8EF119A1277168CA00BDC5CE /* PinEntryIntroViewController.swift in Sources */,
 				8E98817B276AB3CF002F629C /* AppState.swift in Sources */,
 				8E98818E276AB815002F629C /* Presenter.swift in Sources */,
-				8EAF844D276102E000283D0B /* ThemeContext.swift in Sources */,
 				8E8C40442763264800DBC979 /* MultipleErrors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
