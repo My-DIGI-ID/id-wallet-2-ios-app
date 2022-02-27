@@ -183,7 +183,6 @@ class PinEntryIntroViewController: BaseViewController {
         result.textAlignment = .left
         result.numberOfLines = 0
         result.lineBreakMode = .byWordWrapping
-        result.textAlignment = .left
 
         return result
     }()
@@ -200,7 +199,6 @@ class PinEntryIntroViewController: BaseViewController {
         result.textAlignment = .left
         result.numberOfLines = 0
         result.lineBreakMode = .byWordWrapping
-        result.textAlignment = .left
 
         return result
     }()
