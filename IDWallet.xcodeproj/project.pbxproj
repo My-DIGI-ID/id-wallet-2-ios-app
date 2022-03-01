@@ -69,9 +69,6 @@
 		8E8C40492764BF6B00DBC979 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C40482764BF6B00DBC979 /* OnboardingViewController.swift */; };
 		8E8C404A2764BF6C00DBC979 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C40482764BF6B00DBC979 /* OnboardingViewController.swift */; };
 		8E8C404B2764BF6C00DBC979 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C40482764BF6B00DBC979 /* OnboardingViewController.swift */; };
-		8E8C405127650C7700DBC979 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C405027650C7700DBC979 /* Images.swift */; };
-		8E8C405227650C7700DBC979 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C405027650C7700DBC979 /* Images.swift */; };
-		8E8C405327650C7700DBC979 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C405027650C7700DBC979 /* Images.swift */; };
 		8E8C405527650CBB00DBC979 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C405427650CBB00DBC979 /* UIImageExtensions.swift */; };
 		8E8C405627650CBB00DBC979 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C405427650CBB00DBC979 /* UIImageExtensions.swift */; };
 		8E8C405727650CBB00DBC979 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E8C405427650CBB00DBC979 /* UIImageExtensions.swift */; };
@@ -155,9 +152,6 @@
 		8ECA2280276F3E4200CB8D81 /* ZeroOrMore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA227F276F3D9D00CB8D81 /* ZeroOrMore.swift */; };
 		8ECA2281276F3E4300CB8D81 /* ZeroOrMore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA227F276F3D9D00CB8D81 /* ZeroOrMore.swift */; };
 		8ECA2282276F3E4300CB8D81 /* ZeroOrMore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA227F276F3D9D00CB8D81 /* ZeroOrMore.swift */; };
-		8ECA2284276F596F00CB8D81 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA2283276F596F00CB8D81 /* Layout.swift */; };
-		8ECA2285276F596F00CB8D81 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA2283276F596F00CB8D81 /* Layout.swift */; };
-		8ECA2286276F596F00CB8D81 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA2283276F596F00CB8D81 /* Layout.swift */; };
 		8ECA228A277084CB00CB8D81 /* AlignmentWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA2289277084CB00CB8D81 /* AlignmentWrapperView.swift */; };
 		8ECA228B277084CB00CB8D81 /* AlignmentWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA2289277084CB00CB8D81 /* AlignmentWrapperView.swift */; };
 		8ECA228C277084CB00CB8D81 /* AlignmentWrapperView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECA2289277084CB00CB8D81 /* AlignmentWrapperView.swift */; };
@@ -286,7 +280,6 @@
 		8E83F4E8276B2EE200469187 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		8E8C40412763264800DBC979 /* MultipleErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleErrors.swift; sourceTree = "<group>"; };
 		8E8C40482764BF6B00DBC979 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		8E8C405027650C7700DBC979 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		8E8C405427650CBB00DBC979 /* UIImageExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		8E8C40622766516000DBC979 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		8E8C4063276651CC00DBC979 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -315,7 +308,6 @@
 		8EAF84242760B31C00283D0B /* DevicePinEntryProcessTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicePinEntryProcessTest.swift; sourceTree = "<group>"; };
 		8EAFED5527C71E330072866E /* BackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundViewController.swift; sourceTree = "<group>"; };
 		8ECA227F276F3D9D00CB8D81 /* ZeroOrMore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroOrMore.swift; sourceTree = "<group>"; };
-		8ECA2283276F596F00CB8D81 /* Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		8ECA2289277084CB00CB8D81 /* AlignmentWrapperView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlignmentWrapperView.swift; sourceTree = "<group>"; };
 		8EDC79C9278F727F0032E348 /* WalletTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTabBarController.swift; sourceTree = "<group>"; };
 		8EDC79CC27916B620032E348 /* CustomBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBarButton.swift; sourceTree = "<group>"; };
@@ -664,8 +656,6 @@
 			isa = PBXGroup;
 			children = (
 				8EAF8421275FE6D000283D0B /* Typography.swift */,
-				8E8C405027650C7700DBC979 /* Images.swift */,
-				8ECA2283276F596F00CB8D81 /* Layout.swift */,
 				95F9A2AB27A05482003F15B5 /* UIColor+IDWallet.swift */,
 			);
 			path = Theme;
@@ -1289,11 +1279,9 @@
 				8E9CF75C27B3C73E005BB929 /* ConnectionConfirmationViewModel.swift in Sources */,
 				8E7554B927727AE90016DEB0 /* Documentation.docc in Sources */,
 				950C069427AC6145006D0CAB /* Strings+Localize.swift in Sources */,
-				8E8C405127650C7700DBC979 /* Images.swift in Sources */,
 				8862A8A127AD518300C9780B /* WalletCardView.swift in Sources */,
 				95C1084327BC1068001248F0 /* CryptoError.swift in Sources */,
 				8EDC79D42797EFC10032E348 /* WalletViewController.swift in Sources */,
-				8ECA2284276F596F00CB8D81 /* Layout.swift in Sources */,
 				9586384227A9926C0030DCF3 /* ScannerCoordinator.swift in Sources */,
 				8862A8A327AD697B00C9780B /* WalletValidityView.swift in Sources */,
 				95873EB42791A98700A924C8 /* WebView.swift in Sources */,
@@ -1412,10 +1400,8 @@
 				8E8C40722767373600DBC979 /* Rounded.swift in Sources */,
 				8EAF8438276102C600283D0B /* UIFontExtensions.swift in Sources */,
 				8EAF843F276102CF00283D0B /* PinEntryViewController.swift in Sources */,
-				8E8C405227650C7700DBC979 /* Images.swift in Sources */,
 				8847D78F2756376300C2A25B /* IDWalletTests.swift in Sources */,
 				8E98818D276AB815002F629C /* Presenter.swift in Sources */,
-				8ECA2285276F596F00CB8D81 /* Layout.swift in Sources */,
 				8E8C40892768AD6900DBC979 /* UIButtonExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1430,7 +1416,6 @@
 				8E83F4EB276B2EE300469187 /* UIViewExtensions.swift in Sources */,
 				8847D79B2756376300C2A25B /* IDWalletUITestsLaunchTests.swift in Sources */,
 				8E7554C8277291E50016DEB0 /* BaseViewID.swift in Sources */,
-				8E8C405327650C7700DBC979 /* Images.swift in Sources */,
 				8EAF844C276102E000283D0B /* Typography.swift in Sources */,
 				8E8C408A2768AD6900DBC979 /* UIButtonExtensions.swift in Sources */,
 				8E8C40732767373600DBC979 /* Rounded.swift in Sources */,
@@ -1439,7 +1424,6 @@
 				8E8C408627680AE400DBC979 /* OnboardingPageViewController.swift in Sources */,
 				8EAF843A276102C700283D0B /* UIFontExtensions.swift in Sources */,
 				8E988184276AB437002F629C /* AppCoordinator.swift in Sources */,
-				8ECA2286276F596F00CB8D81 /* Layout.swift in Sources */,
 				8E8C405727650CBB00DBC979 /* UIImageExtensions.swift in Sources */,
 				8847D7992756376300C2A25B /* IDWalletUITests.swift in Sources */,
 				8ECA228C277084CB00CB8D81 /* AlignmentWrapperView.swift in Sources */,
