@@ -16,7 +16,7 @@ import UIKit
 private enum Constants {
     
     enum NavigationBar {
-        static let titleFont = Typography.regular.titleFont
+        static let titleFont: UIFont = .plexSansBold(15)
     }
     
     enum Layout {
@@ -51,11 +51,11 @@ class WalletMessageViewController: BaseViewController {
         button.tintColor = .primaryBlue
         button.setTitleTextAttributes([
             .foregroundColor: UIColor.primaryBlue,
-            .font: Typography.regular.bodyFont
+            .font: UIFont.plexSans(15)
         ], for: .normal)
         button.setTitleTextAttributes([
             .foregroundColor: UIColor.primaryBlue,
-            .font: Typography.regular.bodyFont
+            .font: UIFont.plexSans(15)
         ], for: .highlighted)
         return button
     }()

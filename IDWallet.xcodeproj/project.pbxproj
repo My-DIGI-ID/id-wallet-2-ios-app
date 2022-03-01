@@ -42,6 +42,7 @@
 		8862A8A127AD518300C9780B /* WalletCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A8A027AD518300C9780B /* WalletCardView.swift */; };
 		8862A8A327AD697B00C9780B /* WalletValidityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A8A227AD697B00C9780B /* WalletValidityView.swift */; };
 		8862A8A527AD6A1F00C9780B /* WalletValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A8A427AD6A1F00C9780B /* WalletValueView.swift */; };
+		88776D3327CCE55400C240CE /* UIFont+IBMPlex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88776D3227CCE50800C240CE /* UIFont+IBMPlex.swift */; };
 		8896727127C380FF00E5DF56 /* AttributedStyle+Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88136CFC27BD30AB00799E94 /* AttributedStyle+Styles.swift */; };
 		8896727327C3833200E5DF56 /* UIImageView+URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8896727227C3833200E5DF56 /* UIImageView+URL.swift */; };
 		8896727627C395D300E5DF56 /* ScrollableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8896727527C395D300E5DF56 /* ScrollableTextView.swift */; };
@@ -114,7 +115,6 @@
 		8EAF8418275F4CC700283D0B /* PinCharacterRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF8417275F4CC700283D0B /* PinCharacterRepresentation.swift */; };
 		8EAF841B275FE25600283D0B /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF841A275FE25600283D0B /* UIColorExtensions.swift */; };
 		8EAF841D275FE2F400283D0B /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF841C275FE2F400283D0B /* UIFontExtensions.swift */; };
-		8EAF8422275FE6D000283D0B /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF8421275FE6D000283D0B /* Typography.swift */; };
 		8EAF84262760B45D00283D0B /* DevicePinEntryProcessTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF84242760B31C00283D0B /* DevicePinEntryProcessTest.swift */; };
 		8EAF842D2760BA8000283D0B /* CocoaLumberjackSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8EAF842C2760BA8000283D0B /* CocoaLumberjackSwift */; };
 		8EAF842F2760BA8700283D0B /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = 8EAF842E2760BA8700283D0B /* CocoaLumberjack */; };
@@ -142,8 +142,6 @@
 		8EAF8445276102D700283D0B /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF8412275F443A00283D0B /* ValidationError.swift */; };
 		8EAF8446276102D800283D0B /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF8410275F421900283D0B /* AppError.swift */; };
 		8EAF8447276102D800283D0B /* ValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF8412275F443A00283D0B /* ValidationError.swift */; };
-		8EAF8449276102DF00283D0B /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF8421275FE6D000283D0B /* Typography.swift */; };
-		8EAF844C276102E000283D0B /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EAF8421275FE6D000283D0B /* Typography.swift */; };
 		8EAF844E27622C6D00283D0B /* IBMPlexSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E4331AB2759152B00D50127 /* IBMPlexSans-Bold.ttf */; };
 		8EAF844F27622C6F00283D0B /* IBMPlexSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E4331AB2759152B00D50127 /* IBMPlexSans-Bold.ttf */; };
 		8EAF845027622C7C00283D0B /* IBMPlexSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E4331AA2759152B00D50127 /* IBMPlexSans-Regular.ttf */; };
@@ -254,6 +252,7 @@
 		8862A8A027AD518300C9780B /* WalletCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCardView.swift; sourceTree = "<group>"; };
 		8862A8A227AD697B00C9780B /* WalletValidityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletValidityView.swift; sourceTree = "<group>"; };
 		8862A8A427AD6A1F00C9780B /* WalletValueView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletValueView.swift; sourceTree = "<group>"; };
+		88776D3227CCE50800C240CE /* UIFont+IBMPlex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+IBMPlex.swift"; sourceTree = "<group>"; };
 		8896727227C3833200E5DF56 /* UIImageView+URL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+URL.swift"; sourceTree = "<group>"; };
 		8896727527C395D300E5DF56 /* ScrollableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableTextView.swift; sourceTree = "<group>"; };
 		8E43319C27590FB700D50127 /* NumberPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPad.swift; sourceTree = "<group>"; };
@@ -304,7 +303,6 @@
 		8EAF841A275FE25600283D0B /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		8EAF841C275FE2F400283D0B /* UIFontExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIFontExtensions.swift; sourceTree = "<group>"; };
 		8EAF8420275FE42C00283D0B /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		8EAF8421275FE6D000283D0B /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
 		8EAF84242760B31C00283D0B /* DevicePinEntryProcessTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicePinEntryProcessTest.swift; sourceTree = "<group>"; };
 		8EAFED5527C71E330072866E /* BackgroundViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundViewController.swift; sourceTree = "<group>"; };
 		8ECA227F276F3D9D00CB8D81 /* ZeroOrMore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZeroOrMore.swift; sourceTree = "<group>"; };
@@ -632,6 +630,7 @@
 		8E43319E275914CF00D50127 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				88776D3227CCE50800C240CE /* UIFont+IBMPlex.swift */,
 				8E4331AB2759152B00D50127 /* IBMPlexSans-Bold.ttf */,
 				8E4331AC2759152B00D50127 /* IBMPlexSans-BoldItalic.ttf */,
 				8E4331A92759152B00D50127 /* IBMPlexSans-ExtraLight.ttf */,
@@ -655,7 +654,6 @@
 		8E4331BF2759164900D50127 /* Theme */ = {
 			isa = PBXGroup;
 			children = (
-				8EAF8421275FE6D000283D0B /* Typography.swift */,
 				95F9A2AB27A05482003F15B5 /* UIColor+IDWallet.swift */,
 			);
 			path = Theme;
@@ -1276,6 +1274,7 @@
 				8EDC79CD27916B620032E348 /* CustomBarButton.swift in Sources */,
 				8EAF8409275EE35A00283D0B /* PinEntryViewModel.swift in Sources */,
 				95C1083F27BC102C001248F0 /* String+Crypto.swift in Sources */,
+				88776D3327CCE55400C240CE /* UIFont+IBMPlex.swift in Sources */,
 				8E9CF75C27B3C73E005BB929 /* ConnectionConfirmationViewModel.swift in Sources */,
 				8E7554B927727AE90016DEB0 /* Documentation.docc in Sources */,
 				950C069427AC6145006D0CAB /* Strings+Localize.swift in Sources */,
@@ -1341,7 +1340,6 @@
 				8862A8A527AD6A1F00C9780B /* WalletValueView.swift in Sources */,
 				9592B61727C3DFC1002A4EFB /* Sequence+NSLayoutConstraint.swift in Sources */,
 				95873EBA2791B23300A924C8 /* HelpViewCoordinator.swift in Sources */,
-				8EAF8422275FE6D000283D0B /* Typography.swift in Sources */,
 				95B2F12D27BE5D11007291D4 /* SpinnerViewController.swift in Sources */,
 				8862A88D27AC217B00C9780B /* WalletCardModel.swift in Sources */,
 				95C1084127BC1036001248F0 /* Data+Crypto.swift in Sources */,
@@ -1396,7 +1394,6 @@
 				95F9A2AE27A055DA003F15B5 /* UIColor+IDWallet.swift in Sources */,
 				8EAF8444276102D700283D0B /* AppError.swift in Sources */,
 				8E8C408527680AE400DBC979 /* OnboardingPageViewController.swift in Sources */,
-				8EAF8449276102DF00283D0B /* Typography.swift in Sources */,
 				8E8C40722767373600DBC979 /* Rounded.swift in Sources */,
 				8EAF8438276102C600283D0B /* UIFontExtensions.swift in Sources */,
 				8EAF843F276102CF00283D0B /* PinEntryViewController.swift in Sources */,
@@ -1416,7 +1413,6 @@
 				8E83F4EB276B2EE300469187 /* UIViewExtensions.swift in Sources */,
 				8847D79B2756376300C2A25B /* IDWalletUITestsLaunchTests.swift in Sources */,
 				8E7554C8277291E50016DEB0 /* BaseViewID.swift in Sources */,
-				8EAF844C276102E000283D0B /* Typography.swift in Sources */,
 				8E8C408A2768AD6900DBC979 /* UIButtonExtensions.swift in Sources */,
 				8E8C40732767373600DBC979 /* Rounded.swift in Sources */,
 				8E8C408E2769C15400DBC979 /* Coordinator.swift in Sources */,

@@ -26,7 +26,7 @@ private enum Constants {
     }
     
     enum NavigationBar {
-        static let titleFont = Typography.regular.headingFont
+        static let titleFont: UIFont = .plexSansBold(25)
     }
     
     enum Layout {
@@ -76,11 +76,11 @@ class QRScannerViewController: BaseViewController {
         button.tintColor = .primaryBlue
         button.setTitleTextAttributes([
             .foregroundColor: UIColor.primaryBlue,
-            .font: Typography.regular.bodyFont
+            .font: UIFont.plexSans(15)
         ], for: .normal)
         button.setTitleTextAttributes([
             .foregroundColor: UIColor.primaryBlue,
-            .font: Typography.regular.bodyFont
+            .font: UIFont.plexSans(15)
         ], for: .highlighted)
         return button
     }()
@@ -120,7 +120,7 @@ class QRScannerViewController: BaseViewController {
             string: Constants.Text.hint,
             attributes: [
                 .foregroundColor: UIColor.grey1,
-                .font: Typography.regular.subHeadingFont
+                .font: UIFont.plexSans(17)
             ]
         )
         return label

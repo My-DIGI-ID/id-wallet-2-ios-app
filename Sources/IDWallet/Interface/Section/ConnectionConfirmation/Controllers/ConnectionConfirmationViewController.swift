@@ -94,10 +94,10 @@ class ConnectionConfirmationViewController: BaseViewController {
     //        button.tintColor = .primaryBlue
     //        button.setTitleTextAttributes([
     //            .foregroundColor: UIColor.primaryBlue,
-    //            .font: Typography.regular.bodyFont], for: .normal)
+    //            .font: UIFont.plexSans(15)], for: .normal)
     //        button.setTitleTextAttributes([
     //            .foregroundColor: UIColor.primaryBlue,
-    //            .font: Typography.regular.bodyFont], for: .highlighted)
+    //            .font: UIFont.plexSans(15)], for: .highlighted)
     //        return button
     //    }()
     //
