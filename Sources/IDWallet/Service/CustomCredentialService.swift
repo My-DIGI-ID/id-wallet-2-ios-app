@@ -29,7 +29,7 @@ class CustomCredentialService {
     
     func credentials() async throws -> [CredentialPreview] {
         try await Aries.agent.run {
-            try await Aries.record.search(CredentialRecord.self, in: $0.wallet, with: .none, count: nil, skip: nil)
+            try await Aries.record.search(CredentialRecord.self, with: $0, matching: .none, count: nil, skip: nil)
         }.map { record in
             var preview = CredentialPreview()
             preview.attributes = record.attributes.map { attr in
@@ -77,9 +77,9 @@ class CustomCredentialService {
     
     func request(with id: String) async throws -> String {
         try await Aries.agent.run {
-            let record = try await Aries.record.get(CredentialRecord.self, for: id, from: $0.wallet)
+            let record = try await Aries.record.get(CredentialRecord.self, for: id, with: $0)
             let connection = try await Aries.record
-                .get(ConnectionRecord.self, for: record.tags[Tags.connectionKey]!, from: $0.wallet)
+                .get(ConnectionRecord.self, for: record.tags[Tags.connectionKey]!, with: $0)
             guard let service = connection.theirDocument().services?.first else {
                 throw AriesError.notFound("No service found to send the credential request to")
             }

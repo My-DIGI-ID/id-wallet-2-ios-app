@@ -42,7 +42,7 @@
         "repositoryURL": "git@github.com:My-DIGI-ID/id-wallet-2-ios-aries-sdk.git",
         "state": {
           "branch": "development",
-          "revision": "f49fbcf5c6f3f3388641adebfc6b329eaf1b625a",
+          "revision": "6d56c6bc485c29ac4f465b372b0e1a9824166d47",
           "version": null
         }
       },
@@ -59,9 +59,9 @@
         "package": "Indy",
         "repositoryURL": "git@github.com:My-DIGI-ID/id-wallet-2-ios-indy-sdk.git",
         "state": {
-          "branch": null,
+          "branch": "development",
           "revision": "9af41c219f1d1a6d31f6251be3289a844cbbf106",
-          "version": "0.1.0"
+          "version": null
         }
       },
       {
@@ -69,7 +69,7 @@
         "repositoryURL": "git@github.com:My-DIGI-ID/id-wallet-2-ios-mediator-sdk.git",
         "state": {
           "branch": "development",
-          "revision": "c31465633c44a1d514fa701ca53a5a7f2057b01a",
+          "revision": "76f65914c91803843e163967180f85d14cbc4b58",
           "version": null
         }
       },
