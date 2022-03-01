@@ -39,28 +39,28 @@
       },
       {
         "package": "Aries",
-        "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-aries-sdk",
+        "repositoryURL": "git@github.com:My-DIGI-ID/id-wallet-2-ios-aries-sdk.git",
         "state": {
           "branch": null,
-          "revision": "92252025c05ea5fd6ffabe7e3b72ead24906774b",
+          "revision": "d6967a10db6c9f051d0cf7ab05cdac93dc4841e9",
           "version": "0.1.0"
         }
       },
       {
         "package": "Indy",
-        "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-indy-sdk",
+        "repositoryURL": "git@github.com:My-DIGI-ID/id-wallet-2-ios-indy-sdk.git",
         "state": {
           "branch": null,
-          "revision": "16b646a6942a206a9dd9e423cfcf4880942c3758",
+          "revision": "9af41c219f1d1a6d31f6251be3289a844cbbf106",
           "version": "0.1.0"
         }
       },
       {
         "package": "Mediator",
-        "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-mediator-sdk",
+        "repositoryURL": "git@github.com:My-DIGI-ID/id-wallet-2-ios-mediator-sdk.git",
         "state": {
           "branch": null,
-          "revision": "c4010a2250ba920c647c62682a8ebded909cf482",
+          "revision": "80c4cbfc3570acd720b4e8d29aa9834c7734e9a8",
           "version": "0.1.0"
         }
       },

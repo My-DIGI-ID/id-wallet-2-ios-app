@@ -11,8 +11,6 @@
 		6306220427B29B7300BABE0B /* CustomAgentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6306220127B29B7300BABE0B /* CustomAgentService.swift */; };
 		6306220527B29B7300BABE0B /* CustomCredentialService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6306220227B29B7300BABE0B /* CustomCredentialService.swift */; };
 		6306220827B29B7900BABE0B /* idw_eesditest in Resources */ = {isa = PBXBuildFile; fileRef = 6306220727B29B7800BABE0B /* idw_eesditest */; };
-		6306220A27B29BAF00BABE0B /* Aries in Frameworks */ = {isa = PBXBuildFile; productRef = 6306220927B29BAF00BABE0B /* Aries */; };
-		6F1A9B8827902711009B3359 /* Mediator in Frameworks */ = {isa = PBXBuildFile; productRef = 6F1A9B8727902711009B3359 /* Mediator */; };
 		6FA511362771B7A100D068BD /* AusweisApp2 in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA511352771B7A100D068BD /* AusweisApp2 */; };
 		88136CF127BB95B100799E94 /* UIScrollView+Bounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88136CF027BB95B100799E94 /* UIScrollView+Bounce.swift */; };
 		8820CA3B27B13E8A00B5B485 /* UIView+Subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8820CA3A27B13E8A00B5B485 /* UIView+Subviews.swift */; };
@@ -38,6 +36,7 @@
 		8862A8A127AD518300C9780B /* WalletCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A8A027AD518300C9780B /* WalletCardView.swift */; };
 		8862A8A327AD697B00C9780B /* WalletValidityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A8A227AD697B00C9780B /* WalletValidityView.swift */; };
 		8862A8A527AD6A1F00C9780B /* WalletValueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8862A8A427AD6A1F00C9780B /* WalletValueView.swift */; };
+		88ABD93427CE1D7A00EE3311 /* Mediator in Frameworks */ = {isa = PBXBuildFile; productRef = 88ABD93327CE1D7A00EE3311 /* Mediator */; };
 		8E43319D27590FB700D50127 /* NumberPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E43319C27590FB700D50127 /* NumberPad.swift */; };
 		8E4331BA2759152B00D50127 /* IBMPlexSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E4331AA2759152B00D50127 /* IBMPlexSans-Regular.ttf */; };
 		8E4331BB2759152B00D50127 /* IBMPlexSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E4331AB2759152B00D50127 /* IBMPlexSans-Bold.ttf */; };
@@ -396,8 +395,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8EAF840E275EEEA000283D0B /* CocoaLumberjackSwift in Frameworks */,
-				6F1A9B8827902711009B3359 /* Mediator in Frameworks */,
-				6306220A27B29BAF00BABE0B /* Aries in Frameworks */,
+				88ABD93427CE1D7A00EE3311 /* Mediator in Frameworks */,
 				8EAF840C275EEEA000283D0B /* CocoaLumberjack in Frameworks */,
 				6FA511362771B7A100D068BD /* AusweisApp2 in Frameworks */,
 				95B2F12B27BE49FE007291D4 /* Base58String in Frameworks */,
@@ -1094,9 +1092,8 @@
 				8EAF840B275EEEA000283D0B /* CocoaLumberjack */,
 				8EAF840D275EEEA000283D0B /* CocoaLumberjackSwift */,
 				6FA511352771B7A100D068BD /* AusweisApp2 */,
-				6F1A9B8727902711009B3359 /* Mediator */,
-				6306220927B29BAF00BABE0B /* Aries */,
 				95B2F12A27BE49FE007291D4 /* Base58String */,
+				88ABD93327CE1D7A00EE3311 /* Mediator */,
 			);
 			productName = IDWallet;
 			productReference = 8847D7742756376000C2A25B /* IDWallet.app */;
@@ -1178,9 +1175,9 @@
 			packageReferences = (
 				8EAF840A275EEEA000283D0B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
 				6FA511342771B7A100D068BD /* XCRemoteSwiftPackageReference "AusweisApp2-SDK-iOS" */,
-				6F1A9B83279025EC009B3359 /* XCRemoteSwiftPackageReference "ios-aries-sdk" */,
-				6F1A9B8627902711009B3359 /* XCRemoteSwiftPackageReference "ios-mediator-sdk" */,
 				95B2F12927BE49FE007291D4 /* XCRemoteSwiftPackageReference "Base58String" */,
+				88ABD93127CE1D5B00EE3311 /* XCRemoteSwiftPackageReference "id-wallet-2-ios-aries-sdk" */,
+				88ABD93227CE1D7A00EE3311 /* XCRemoteSwiftPackageReference "id-wallet-2-ios-mediator-sdk" */,
 			);
 			productRefGroup = 8847D7752756376000C2A25B /* Products */;
 			projectDirPath = "";
@@ -1861,28 +1858,28 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		6F1A9B83279025EC009B3359 /* XCRemoteSwiftPackageReference "ios-aries-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-aries-sdk";
-			requirement = {
-				kind = exactVersion;
-				version = 0.1.0;
-			};
-		};
-		6F1A9B8627902711009B3359 /* XCRemoteSwiftPackageReference "ios-mediator-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-mediator-sdk";
-			requirement = {
-				kind = exactVersion;
-				version = 0.1.0;
-			};
-		};
 		6FA511342771B7A100D068BD /* XCRemoteSwiftPackageReference "AusweisApp2-SDK-iOS" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Governikus/AusweisApp2-SDK-iOS";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.0.0;
+			};
+		};
+		88ABD93127CE1D5B00EE3311 /* XCRemoteSwiftPackageReference "id-wallet-2-ios-aries-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:My-DIGI-ID/id-wallet-2-ios-aries-sdk.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.1.0;
+			};
+		};
+		88ABD93227CE1D7A00EE3311 /* XCRemoteSwiftPackageReference "id-wallet-2-ios-mediator-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:My-DIGI-ID/id-wallet-2-ios-mediator-sdk.git";
+			requirement = {
+				kind = exactVersion;
+				version = 0.1.0;
 			};
 		};
 		8EAF840A275EEEA000283D0B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
@@ -1904,20 +1901,15 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		6306220927B29BAF00BABE0B /* Aries */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6F1A9B83279025EC009B3359 /* XCRemoteSwiftPackageReference "ios-aries-sdk" */;
-			productName = Aries;
-		};
-		6F1A9B8727902711009B3359 /* Mediator */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6F1A9B8627902711009B3359 /* XCRemoteSwiftPackageReference "ios-mediator-sdk" */;
-			productName = Mediator;
-		};
 		6FA511352771B7A100D068BD /* AusweisApp2 */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6FA511342771B7A100D068BD /* XCRemoteSwiftPackageReference "AusweisApp2-SDK-iOS" */;
 			productName = AusweisApp2;
+		};
+		88ABD93327CE1D7A00EE3311 /* Mediator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 88ABD93227CE1D7A00EE3311 /* XCRemoteSwiftPackageReference "id-wallet-2-ios-mediator-sdk" */;
+			productName = Mediator;
 		};
 		8EAF840B275EEEA000283D0B /* CocoaLumberjack */ = {
 			isa = XCSwiftPackageProductDependency;
