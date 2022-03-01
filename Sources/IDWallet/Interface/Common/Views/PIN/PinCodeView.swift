@@ -14,17 +14,15 @@
 import CocoaLumberjackSwift
 import UIKit
 
-class PinCodeView: UIView {
-    
-    // MARK: - Storage
-    
-    // MARK: Configuration
-    
-    var style: Style = Style.regular {
-        didSet {
-            updateForChangedState()
-        }
+private enum Constants {
+    struct Styles {
+        static let spacing: CGFloat = 24.0
+        static let digitStyle: PinCodeDigitView.Style = PinCodeDigitView.Style()
     }
+}
+
+class PinCodeView: UIView {
+    fileprivate typealias Styles = Constants.Styles
     
     // MARK: Presentation State
     
@@ -40,28 +38,31 @@ class PinCodeView: UIView {
     
     private func updateForChangedState() {
         updateViews()
-        
-        setNeedsLayout()
     }
     
     // MARK: - Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.accessibilityIdentifier = "PinCodeView"
+        setupOnce()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.accessibilityIdentifier = "PinCodeView"
+        setupOnce()
     }
     
-    convenience init(style: Style, pin: [PinCharacterRepresentation] = []) {
+    convenience init(pin: [PinCharacterRepresentation] = []) {
         self.init(frame: .zero)
-        self.style = style
+        self.pin = pin
     }
     
     // MARK: - Setup
-    
+
+    func setupOnce() {
+        self.accessibilityIdentifier = "PinCodeView"
+        setContentHuggingPriority(.required, for: .horizontal)
+    }
+
     func updateViews() {
         let lastIndexToUpdate = min(controlledViews.count, pin.count) - 1
         if controlledViews.count > pin.count {
@@ -70,7 +71,7 @@ class PinCodeView: UIView {
             }
             controlledViews.removeLast(controlledViews.count - pin.count)
         } else if controlledViews.count < pin.count {
-            let digitViewStyle = style.digitStyle
+            let digitViewStyle = Constants.Styles.digitStyle
             let first = controlledViews.count
             let last = pin.count - 1
             for index in first...last {
@@ -94,17 +95,19 @@ class PinCodeView: UIView {
 
 extension PinCodeView {
     override var intrinsicContentSize: CGSize {
-        let digitSize: CGFloat = style.digitStyle.size
+        let digitSize: CGFloat = Constants.Styles.digitStyle.size
         let count: CGFloat = CGFloat(pin.count)
-        let spacing = style.spacing
-        return CGSize(
-            width: count * digitSize + max(0, count - 1) * spacing,
-            height: self.style.digitStyle.size
+        let spacing = Constants.Styles.spacing
+        let result = CGSize(
+            width: count * digitSize + max(0, count - 1) * spacing + 2,
+            height: Constants.Styles.digitStyle.size + 2
         )
+        DDLogDebug("PinCodeView: contentSize called: frame=\(frame.size.debugDescription), result=\(result.debugDescription)")
+        return result
     }
 
     override func layoutSubviews() {
-        let space = style.spacing
+        let space = Constants.Styles.spacing
         var deltaX = bounds.origin.x + 0.0
         let deltaY = bounds.origin.y
         
@@ -118,38 +121,8 @@ extension PinCodeView {
             deltaX += view.frame.width + space
         }
     }
+
     override func sizeThatFits(_ size: CGSize) -> CGSize {
         return intrinsicContentSize
-    }
-}
-
-// MARK: - Local Types
-
-extension PinCodeView {
-    struct Style {
-        static let small = Style(
-            spacing: 16.0,
-            digitStyle: .small
-        )
-        static let regular = Style()
-        static let compressed = regular
-        
-        let colors: ColorScheme
-        let spacing: CGFloat
-        let digitStyle: PinCodeDigitView.Style
-        
-        init(
-            colors: ColorScheme = .main,
-            spacing: CGFloat = 24.0,
-            digitStyle: PinCodeDigitView.Style? = nil
-        ) {
-            self.colors = colors
-            self.spacing = spacing
-            if let digitStyle = digitStyle {
-                self.digitStyle = digitStyle
-            } else {
-                self.digitStyle = PinCodeDigitView.Style(colors: colors)
-            }
-        }
     }
 }

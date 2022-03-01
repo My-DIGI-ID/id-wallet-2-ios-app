@@ -34,7 +34,7 @@ class AppCoordinator: Coordinator {
         self.presenter = presenter
         self.appState = appState
     }
-    
+
     func start() {
         Task {
             switch await appState.authenticator.authenticationState() {
@@ -57,20 +57,14 @@ class AppCoordinator: Coordinator {
 extension AppCoordinator {
     
     private func startSetup() {
-        let setupCoordinator = SetupCoordinator(
-            presenter: presenter,
-            model: appState.authenticator,
-            completion: { [weak self] in
-                self?.startWallet()
-            }
-        )
-        setupCoordinator.start()
+        SetupCoordinator(presenter: presenter, model: appState.authenticator) { [weak self] in
+            self?.startWallet()
+        }.start()
     }
 
     private func startAuthentication(attempt: Int = 0, from previous: UIViewController? = nil) {
-        let viewController = PinEntryViewController(
-            style: .regular,
-            viewModel: PinEntryViewModel.viewModelForPinEntry(
+        presenter.present(
+            PinEntryViewController(viewModel: .viewModelForPinEntry(
                 resultHandler: { result, previous in
                     switch result {
                     case .pin(let pin, _):
@@ -97,8 +91,8 @@ extension AppCoordinator {
                     }
                 },
                 length: 6
-            ))
-        presenter.present(viewController, replacing: previous)
+            )),
+            replacing: previous)
     }
     
     private func startWallet(from viewController: UIViewController? = nil) {

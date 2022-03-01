@@ -17,7 +17,7 @@ import WebKit
 private enum Constants {
     
     enum NavigationBar {
-        static let titleFont = Typography.regular.titleFont
+        static let titleFont: UIFont = .plexSansBold(15)
     }
     
     enum Layout {
@@ -29,18 +29,18 @@ private enum Constants {
     }
 }
 
-class WebViewController: BareBaseViewController {
+class WebViewController: BaseViewController {
     
     private lazy var doneButton: UIBarButtonItem = {
         let button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(closeView))
         button.tintColor = .primaryBlue
         button.setTitleTextAttributes([
             .foregroundColor: UIColor.primaryBlue,
-            .font: Typography.regular.bodyFont
+            .font: UIFont.plexSans(15)
         ], for: .normal)
         button.setTitleTextAttributes([
             .foregroundColor: UIColor.primaryBlue,
-            .font: Typography.regular.bodyFont
+            .font: UIFont.plexSans(15)
         ], for: .highlighted)
         return button
     }()
@@ -74,7 +74,7 @@ class WebViewController: BareBaseViewController {
     
     init(viewModel: WebViewViewModelProtocol) {
         self.viewModel = viewModel
-        super.init(style: nil)
+        super.init()
     }
     
     @available(*, unavailable)

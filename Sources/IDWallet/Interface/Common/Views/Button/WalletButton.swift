@@ -127,14 +127,14 @@ class WalletButton: UIButton {
                 string: titleText ?? "",
                 attributes: [
                     .foregroundColor: styleColor.textColor,
-                    .font: Typography.regular.buttonFont,
+                    .font: UIFont.plexSansBold(15),
                     .underlineStyle: NSUnderlineStyle.single.rawValue]), for: .normal)
         } else {
             setAttributedTitle(NSAttributedString(
                 string: titleText ?? "",
                 attributes: [
                     .foregroundColor: styleColor.textColor,
-                    .font: Typography.regular.buttonFont]), for: .normal)
+                    .font: UIFont.plexSansBold(15)]), for: .normal)
         }
     }
 }

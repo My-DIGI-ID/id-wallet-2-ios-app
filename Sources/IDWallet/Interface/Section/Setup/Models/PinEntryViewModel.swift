@@ -69,55 +69,6 @@ class PinEntryViewModel {
     /// Representation of the PIN that does not reveal its contents (except the last character if so configured)
     @Published var pin: [PinCharacterRepresentation]
     
-    // MARK: - Initialization
-    
-    /// Initializes the view model with the specified parameters
-    ///
-    /// - Parameter presentation: Presentation related parameters
-    /// - Parameter resultHandler: A closure called with the result when the entry process is finished
-    /// - Parameter maximumLength: The maximum length of the PIN in characters
-    /// - Parameter minimumLength: The minimum length of the PIN in characters
-    /// - Parameter originalPin: If defined: will be used by `commit` to compare the entered PIN with  `originalPin`
-    /// - Parameter revealLastCharacterDuration The duration for how long the last typed character
-    ///     is displayed as clear text (not yet implemented)
-    /// - Parameter characterValidation: A regular expression defining the set of valid characters for
-    ///     the PIN, applicable to a single character, defaults to digits
-    required init(
-        presentation: PinEntryViewModel.Presentation,
-        resultHandler: @escaping (PinEntryViewModel.Result, PinEntryViewController) -> Void,
-        maximumLength: UInt?,
-        minimumLength: UInt?,
-        originalPin: String? = nil,
-        autoCommit: Bool = false,
-        attempt: Int = 0,
-        maxAttempts: Int = 5,
-        revealLastCharacterDuration: CGFloat? = nil,
-        characterValidation: NSRegularExpression? = allowOnlyDigitsRegExp
-    ) {
-        assert(maximumLength == nil || minimumLength == nil || minimumLength! <= maximumLength!)
-        
-        // Configuration
-        self.presentation = presentation
-        self.maximumLength = maximumLength
-        self.minimumLength = minimumLength
-        self.characterValidation = characterValidation
-        self.handleResult = resultHandler
-        self.revealLastCharacterDuration = revealLastCharacterDuration
-        
-        // Internal State
-        self.clearTextPin = ""
-        
-        // Published State
-        self.pin = []
-        self.canAdd = false
-        self.canRemove = false
-        self.canCommit = false
-        self.autoCommit = autoCommit
-        self.attempt = attempt
-        self.maxAttempts = maxAttempts
-        updateStateForPinChange()
-    }
-    
     // MARK: - Exposed Actions
     
     /// Adds a character to the end of the current PIN code. Requires `canAdd`
@@ -182,7 +133,54 @@ class PinEntryViewModel {
     }
     
     // MARK: - Initialization
-    
+
+    /// Initializes the view model with the specified parameters
+    ///
+    /// - Parameter presentation: Presentation related parameters
+    /// - Parameter resultHandler: A closure called with the result when the entry process is finished
+    /// - Parameter maximumLength: The maximum length of the PIN in characters
+    /// - Parameter minimumLength: The minimum length of the PIN in characters
+    /// - Parameter originalPin: If defined: will be used by `commit` to compare the entered PIN with  `originalPin`
+    /// - Parameter revealLastCharacterDuration The duration for how long the last typed character
+    ///     is displayed as clear text (not yet implemented)
+    /// - Parameter characterValidation: A regular expression defining the set of valid characters for
+    ///     the PIN, applicable to a single character, defaults to digits
+    required init(
+        presentation: PinEntryViewModel.Presentation,
+        resultHandler: @escaping (PinEntryViewModel.Result, PinEntryViewController) -> Void,
+        maximumLength: UInt?,
+        minimumLength: UInt?,
+        originalPin: String? = nil,
+        autoCommit: Bool = false,
+        attempt: Int = 0,
+        maxAttempts: Int = 5,
+        revealLastCharacterDuration: CGFloat? = nil,
+        characterValidation: NSRegularExpression? = allowOnlyDigitsRegExp
+    ) {
+        assert(maximumLength == nil || minimumLength == nil || minimumLength! <= maximumLength!)
+
+        // Configuration
+        self.presentation = presentation
+        self.maximumLength = maximumLength
+        self.minimumLength = minimumLength
+        self.characterValidation = characterValidation
+        self.handleResult = resultHandler
+        self.revealLastCharacterDuration = revealLastCharacterDuration
+
+        // Internal State
+        self.clearTextPin = ""
+
+        // Published State
+        self.pin = []
+        self.canAdd = false
+        self.canRemove = false
+        self.canCommit = false
+        self.autoCommit = autoCommit
+        self.attempt = attempt
+        self.maxAttempts = maxAttempts
+        updateStateForPinChange()
+    }
+
     /// Initializes the view model with the specified parameters
     ///
     /// - Parameter presentation: Presentation related parameters
@@ -379,36 +377,33 @@ extension PinEntryViewModel {
                     "",
                     comment: "Action instructions"),
                 commitActionTitle: NSLocalizedString(
-                    "Weiter", comment: "Commit button title, next step"),
-                themeContext: .main
+                    "Weiter", comment: "Commit button title, next step")
             )
         }
         static var initialPinEntry: PinEntryViewModel.Presentation {
             Presentation(
                 title: NSLocalizedString(
-                    "Richte Deine ID Wallet ein", comment: "Navigation context"),
+                    "ID Wallet einrichten", comment: "Navigation context"),
                 heading: NSLocalizedString(
                     "Zugangscode festlegen", comment: "Action title"),
                 subHeading: NSLocalizedString(
                     "Den Zugangscode brauchst Du bei jeder Nutzung der ID Wallet App",
                     comment: "Action instructions"),
                 commitActionTitle: NSLocalizedString(
-                    "Weiter", comment: "Commit button title, next step"),
-                themeContext: .main
+                    "Weiter", comment: "Commit button title, next step")
             )
         }
         static var confirmationPinEntry: PinEntryViewModel.Presentation {
             Presentation(
                 title: NSLocalizedString(
-                    "Richte Deine ID Wallet ein", comment: "Navigation context"),
+                    "ID Wallet einrichten", comment: "Navigation context"),
                 heading: NSLocalizedString(
                     "Zugangscode bestätigen", comment: "Action title"),
                 subHeading: NSLocalizedString(
                     "Bitte gib jetzt Deinen Zugangscode zur Bestätigung erneut ein",
                     comment: "Action instructions"),
                 commitActionTitle: NSLocalizedString(
-                    "Bestätigen", comment: "Commit button title, confirm"),
-                themeContext: .main
+                    "Bestätigen", comment: "Commit button title, confirm")
             )
         }
         
@@ -416,8 +411,6 @@ extension PinEntryViewModel {
         let heading: String
         let subHeading: String
         let commitActionTitle: String
-        
-        let themeContext: ThemeContext
     }
     
     enum Result: Equatable {

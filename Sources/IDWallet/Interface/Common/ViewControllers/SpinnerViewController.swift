@@ -20,6 +20,8 @@ class SpinnerViewController: UIViewController {
         return view
     }()
 
+    override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
+    
     override func loadView() {
         view = UIView()
         view.backgroundColor = .primaryBlue

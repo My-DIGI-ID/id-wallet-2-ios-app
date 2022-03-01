@@ -44,7 +44,7 @@ fileprivate extension ImageNameIdentifier {
 }
 
 // MARK: - Onboarding View Controller
-final class OnboardingViewController: BareBaseViewController {
+final class OnboardingViewController: BaseViewController {
     fileprivate typealias Styles = Constants.Styles
     fileprivate typealias Layout = Constants.Layout
     fileprivate typealias Padding = Constants.Layout.Padding
@@ -138,7 +138,7 @@ final class OnboardingViewController: BareBaseViewController {
     init(viewModel: ViewModel, completion: ((OnboardingViewController) -> Void)? = nil) {
         self.viewModel = viewModel
         self.completion = completion
-        super.init(style: nil)
+        super.init()
     }
 
     required init?(coder: NSCoder) {
@@ -218,7 +218,7 @@ final class OnboardingViewController: BareBaseViewController {
         view.addSubview(showInfoButton)
         
         let constraints = [
-            "H:|-(hPad)-[pageContainer]-(hPad)-|",
+            "H:|[pageContainer]|",
             "H:|[pageControl]|",
             "H:|[showInfo]|",
             
@@ -293,7 +293,7 @@ extension OnboardingViewController {
                     "Deine persönliche digitale Brieftasche",
                     comment: "Onboarding Page 1 Heading"),
                 subHeading: NSLocalizedString(
-                    "Ausweise, Dokumente und Nachweise digital speichern — " +
+                    "Ausweise, Dokumente und Nachweise digital speichern und online nutzen — " +
                     "zum Beispiel beim digitalen Hotel Check-In oder beim Kauf einer Prepaid SIM-Karte.",
                     comment: "Onboarding Page 1 Sub Heading")
             ),
@@ -315,7 +315,7 @@ extension OnboardingViewController {
                     comment: "Onboarding Page 3 Heading"),
                 subHeading: NSLocalizedString(
                     "Die Bundesregierung und die größten deutschen Unternehmen arbeiten zusammen daran, " +
-                    "dass du ID in Zukunft für immer mehr Anwendungen einsetzen kannst.",
+                    "dass du ID Wallet in Zukunft für immer mehr Anwendungen einsetzen kannst.",
                     comment: "Onboarding Page 3 Sub Heading")
             )
         ]

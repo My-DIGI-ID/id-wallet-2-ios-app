@@ -16,6 +16,24 @@ import UIKit
 // MARK: - Configuration
 // MARK: -
 
+private enum Constants {
+    enum Style {
+        static let numberPadFont: UIFont = .plexSans(25)
+        static let numberPadAuxiliaryFont: UIFont = .plexSans(10)
+        static let color: UIColor = .white
+        static let constrastColor: UIColor = color.withAlphaComponent(0.5)
+
+        static let touchAnimationDuration = 0.25
+    }
+
+    enum Layout {
+        static let horizontalPadding = 30.0
+        static let verticalPadding = 20.0
+        static let auxiliarySpacing = -2.0
+        static let aixilliaryMinPadding = 10.0
+    }
+}
+
 extension NumberPadKey {
     enum ViewID: BaseViewID {
         case container
@@ -38,81 +56,7 @@ extension NumberPadKey {
             }
         }
     }
-    
-    /// Parameters affecting the appearance of key views and their layout
-    struct Style {
-        
-        let themeContext: ThemeContext
-        
-        let layout: Layout
-        
-        let touchAnimationDuration: CGFloat
-        
-        static let regular = Style(.main)
-        
-        init(
-            _ themeContext: ThemeContext,
-            layout: Layout? = nil,
-            touchAnimationDuration: CGFloat = 0.25
-        ) {
-            self.themeContext = themeContext
-            self.layout =
-            layout
-            ?? (UIScreen.main.bounds.size.height < 750
-                ? .compressed
-                : .regular)
-            self.touchAnimationDuration = touchAnimationDuration
-        }
-        
-        fileprivate func applyTo(_ view: NumberPadKey) {
-            view.primaryKeyLabel.font = themeContext.typography.numberPadFont
-            view.secondaryKeysLabel.font = themeContext.typography.numberPadAuxiliaryFont
-            
-            if view.isEnabled {
-                view.primaryKeyLabel.textColor = themeContext.colors.textColor
-                view.secondaryKeysLabel.textColor = themeContext.colors.textSecondaryColor
-            } else {
-                view.primaryKeyLabel.textColor = themeContext.colors.tintInactiveColor
-                view.secondaryKeysLabel.textColor = themeContext.colors.tintInactiveColor
-            }
-        }
-    }
-    struct Layout {
-        static let regular = Layout(
-            hPadding: 20,
-            vPadding: 20,
-            auxiliarySpacing: -2,
-            auxiliaryMinPadding: 10
-        )
-        static let compressed = Layout(
-            hPadding: 20,
-            vPadding: 10,
-            auxiliarySpacing: -2,
-            auxiliaryMinPadding: 10
-        )
-        
-        /// Autolayout metric defining the horizontal padding between primary label and the container view
-        let hPadding: Int
-        
-        /// Autolayout metric defining the vertical padding between primary label and the container view
-        let vPadding: Int
-        
-        /// Autolayout metric defining the vertical spacing between primary and secondary labels
-        let auxiliarySpacing: Int
-        
-        /// Autolayout metric defining the minimumg padding between secondary label and container view
-        let auxiliaryMinPadding: Int
-        
-        var metrics: [String: Any] {
-            [
-                "hPadding": hPadding,
-                "vPadding": vPadding,
-                "secondarySpacing": auxiliarySpacing,
-                "secondaryMinPadding": auxiliaryMinPadding
-            ]
-        }
-    }
-    
+
     enum TouchState {
         case idle
         case down
@@ -130,25 +74,11 @@ extension NumberPadKey {
 /// Displays the primary key label (a number) and optionally secondary key labels (letters).
 ///
 class NumberPadKey: UIControl {
-    
-    // MARK: - Storage
-    var style: NumberPadKey.Style = .regular {
-        didSet {
-            DispatchQueue.main.async {
-                self.setNeedsUpdateStyles()
-                self.updateStylesIfNeeded()
-            }
-        }
-    }
+
     var primaryKey: String {
         get { primaryKeyLabel.text ?? "" }
         set(value) {
-            guard value.count <= 1 else {
-                fatalError(
-                    "Invalid number pad key \(value), expected empty string or a single digit or letter")
-            }
             if primaryKeyLabel.text != value {
-                setNeedsUpdateStyles()
                 primaryKeyLabel.text = value
                 self.accessibilityIdentifier = "Key_CodeChar_\(value)"
             }
@@ -158,7 +88,6 @@ class NumberPadKey: UIControl {
         get { secondaryKeysLabel.text ?? "" }
         set(value) {
             if secondaryKeysLabel.text != value {
-                setNeedsUpdateStyles()
                 secondaryKeysLabel.text = value
             }
         }
@@ -171,17 +100,56 @@ class NumberPadKey: UIControl {
         set(value) {
             if super.isEnabled != value {
                 super.isEnabled = value
-                setNeedsUpdateStyles()
-                updateStylesIfNeeded()
             }
         }
     }
+
+    fileprivate lazy var container: UIStackView = {
+        let result = UIStackView()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+
+        result.axis = .vertical
+        result.spacing = Constants.Layout.auxiliarySpacing
+        result.alignment = .fill
+
+        result.addArrangedSubview(primaryKeyLabel)
+        result.addArrangedSubview(secondaryKeysLabel)
+
+        result.isUserInteractionEnabled = false
+
+        return result
+    }()
+
+    fileprivate lazy var primaryKeyLabel: UILabel = {
+        let result = UILabel()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+
+        result.textColor = Constants.Style.color
+        result.font = Constants.Style.numberPadFont
+        result.backgroundColor = .clear
+        result.textAlignment = .center
+
+        result.isUserInteractionEnabled = false
+
+        return result
+    }()
     
-    fileprivate var primaryKeyLabel: UILabel!
-    
-    fileprivate var secondaryKeysLabel: UILabel!
-    
-    private var controlledConstraints = NSHashTable<NSLayoutConstraint>.weakObjects()
+    fileprivate var secondaryKeysLabel: UILabel = {
+        let result = UILabel()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+
+        result.textColor = Constants.Style.color
+        result.font = Constants.Style.numberPadAuxiliaryFont
+        result.backgroundColor = .clear
+        result.textAlignment = .center
+
+        result.isUserInteractionEnabled = false
+
+        return result
+    }()
     
     private var touchState: TouchState = .idle {
         didSet {
@@ -203,18 +171,18 @@ class NumberPadKey: UIControl {
             }
         }
     }
-    private var _needsUpdateStyles: Bool = true
+
     override var intrinsicContentSize: CGSize {
         return CGSize(
             width: (
-                CGFloat(style.layout.hPadding * 2) + max(
+                CGFloat(Constants.Layout.horizontalPadding * 2) + max(
                     primaryKeyLabel.intrinsicContentSize.width,
                     secondaryKeysLabel.intrinsicContentSize.width)),
             height: (
-                CGFloat(style.layout.vPadding * 2) +
+                CGFloat(Constants.Layout.verticalPadding * 2) +
                 primaryKeyLabel.intrinsicContentSize.height +
                 secondaryKeysLabel.intrinsicContentSize.height +
-                CGFloat(style.layout.auxiliarySpacing))
+                CGFloat(Constants.Layout.auxiliarySpacing))
         )
     }
     
@@ -226,88 +194,66 @@ class NumberPadKey: UIControl {
     
     /// Uses the (primary) key label for baseline alignment
     override var forLastBaselineLayout: UIView { primaryKeyLabel }
-    
+
+    // MARK: - Initialization
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+
+    convenience init(_ primaryKey: String, withSecondaryKeys secondaryKeys: String = "") {
+        self.init(frame: CGRect.zero)
+
+        self.primaryKey = primaryKey
+        self.secondaryKeys = secondaryKeys
+    }
+
+    convenience init(_ primaryKey: String) {
+        self.init(primaryKey, withSecondaryKeys: "")
+    }
+
     // MARK: - Setup
     
     private func setup() {
         translatesAutoresizingMaskIntoConstraints = false
-        
-        primaryKeyLabel = UILabel()
-        primaryKeyLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(primaryKeyLabel)
-        
-        secondaryKeysLabel = UILabel()
-        secondaryKeysLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(secondaryKeysLabel)
-        
-        setNeedsUpdateStyles()
+
+        self.addSubview(container)
+
+        setupConstraints()
     }
     
     // MARK: - Layout
-    
-    private func setNeedsUpdateStyles() {
-        if !_needsUpdateStyles {
-            _needsUpdateStyles = true
-            setNeedsUpdateConstraints()
-        }
-    }
-    private func updateStylesIfNeeded() {
-        if _needsUpdateStyles {
-            _needsUpdateStyles = false
-            style.applyTo(self)
-        }
-    }
-    private func removeControlledConstraints() {
-        for constraint in controlledConstraints.allObjects {
-            constraint.isActive = false
-            if let first = constraint.firstItem {
-                first.removeConstraint(constraint)
-            }
-            if let second = constraint.secondItem {
-                second.removeConstraint(constraint)
-            }
-        }
-        controlledConstraints.removeAllObjects()
-    }
+
     /// Sets up constraints if controlledConstraints is empty
-    override func updateConstraints() {
-        removeControlledConstraints()
-        updateStylesIfNeeded()
+    func setupConstraints() {
         let views = [
-            "container": self,
+            "container": container,
             "primary": primaryKeyLabel,
             "secondary": secondaryKeysLabel
         ]
-        let metrics = style.layout.metrics
-        var constraints = [
-            primaryKeyLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            primaryKeyLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+        let metrics = [
+            "hPadding": Constants.Layout.horizontalPadding,
+            "vPadding": Constants.Layout.verticalPadding,
+            "auxSpacing": Constants.Layout.auxiliarySpacing,
+            "auxMinPadding": Constants.Layout.auxiliarySpacing,
         ]
-        constraints.append(
-            contentsOf: NSLayoutConstraint.constraints(
-                withVisualFormat: "H:|-(hPadding@249)-[primary]-(hPadding@249)-|", metrics: metrics,
-                views: views as [String: Any])
-        )
-        constraints.append(
-            contentsOf: NSLayoutConstraint.constraints(
-                withVisualFormat: "V:|-(vPadding)-[primary]-(vPadding@249)-|", metrics: metrics,
-                views: views as [String: Any])
-        )
-        
-        constraints.append(
-            secondaryKeysLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor)
-        )
-        constraints.append(
-            contentsOf: NSLayoutConstraint.constraints(
-                withVisualFormat:
-                    "V:[primary]-(secondarySpacing)-[secondary]-(>=secondaryMinPadding@251)-|",
-                metrics: metrics, views: views as [String: Any]))
-        
-        for constraint in constraints {
-            constraint.isActive = true
-            controlledConstraints.add(constraint)
-        }
-        
+
+        [
+            "H:|-(hPadding@249)-[container]-(hPadding@249)-|",
+            "V:|-(vPadding)-[container]-(vPadding@249)-|",
+        ].constraints(with: views, metrics: metrics, options: []).activate()
+
+        [
+            primaryKeyLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            primaryKeyLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+            secondaryKeysLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+        ].activate()
+
         super.updateConstraints()
     }
     
@@ -318,33 +264,6 @@ class NumberPadKey: UIControl {
     /// Uses the (primary) key label for alignment
     override func frame(forAlignmentRect alignmentRect: CGRect) -> CGRect {
         primaryKeyLabel.frame(forAlignmentRect: alignmentRect)
-    }
-    
-    // MARK: - Initialization
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setup()
-    }
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setup()
-    }
-    
-    convenience init(
-        _ primaryKey: String, withSecondaryKeys secondaryKeys: String = "", style: NumberPadKey.Style?
-    ) {
-        self.init(frame: CGRect.zero)
-        
-        self.primaryKey = primaryKey
-        self.secondaryKeys = secondaryKeys
-        if let style = style {
-            self.style = style
-        }
-    }
-    
-    convenience init(_ primaryKey: String, withStyle style: NumberPadKey.Style?) {
-        self.init(primaryKey, withSecondaryKeys: "", style: style)
     }
 }
 
@@ -397,16 +316,16 @@ extension NumberPadKey {
         color: UIColor, completion: @escaping (Bool) -> Void = { _ in }
     ) {
         UIView.animate(
-            withDuration: self.style.touchAnimationDuration,
+            withDuration: Constants.Style.touchAnimationDuration,
             animations: {
                 UIView.transition(
-                    with: self.primaryKeyLabel, duration: self.style.touchAnimationDuration,
+                    with: self.primaryKeyLabel, duration: Constants.Style.touchAnimationDuration,
                     options: .transitionCrossDissolve,
                     animations: {
                         self.primaryKeyLabel.textColor = color
                     }, completion: nil)
                 UIView.transition(
-                    with: self.primaryKeyLabel, duration: self.style.touchAnimationDuration,
+                    with: self.primaryKeyLabel, duration: Constants.Style.touchAnimationDuration,
                     options: .transitionCrossDissolve,
                     animations: {
                         self.secondaryKeysLabel.textColor = color
@@ -419,16 +338,16 @@ extension NumberPadKey {
     
     private func performTouchDownAnimations(_ completion: @escaping (Bool) -> Void = { _ in }) {
         animateLabelTextColor(
-            color: style.themeContext.colors.tintInactiveContrastColor, completion: completion)
+            color: Constants.Style.constrastColor, completion: completion)
     }
     
     fileprivate func performTouchUpAnimations(_ completion: @escaping (Bool) -> Void = { _ in }) {
-        animateLabelTextColor(color: style.themeContext.colors.textColor, completion: completion)
+        animateLabelTextColor(color: Constants.Style.color, completion: completion)
     }
     
     fileprivate func performTouchCancelledAnimations(
         _ completion: @escaping (Bool) -> Void = { _ in }
     ) {
-        animateLabelTextColor(color: style.themeContext.colors.textColor, completion: completion)
+        animateLabelTextColor(color: Constants.Style.color, completion: completion)
     }
 }

@@ -59,7 +59,7 @@ enum ConnectionConfirmationResult {
     case deny
 }
 
-class ConnectionConfirmationViewController: BareBaseViewController {
+class ConnectionConfirmationViewController: BaseViewController {
     
     private let viewModel: ConnectionConfirmationViewModel
     
@@ -94,10 +94,10 @@ class ConnectionConfirmationViewController: BareBaseViewController {
     //        button.tintColor = .primaryBlue
     //        button.setTitleTextAttributes([
     //            .foregroundColor: UIColor.primaryBlue,
-    //            .font: Typography.regular.bodyFont], for: .normal)
+    //            .font: UIFont.plexSans(15)], for: .normal)
     //        button.setTitleTextAttributes([
     //            .foregroundColor: UIColor.primaryBlue,
-    //            .font: Typography.regular.bodyFont], for: .highlighted)
+    //            .font: UIFont.plexSans(15)], for: .highlighted)
     //        return button
     //    }()
     //
@@ -227,7 +227,7 @@ class ConnectionConfirmationViewController: BareBaseViewController {
     init(viewModel: ConnectionConfirmationViewModel, completion: @escaping (ConnectionConfirmationResult) -> Void) {
         self.viewModel = viewModel
         self.completion = completion
-        super.init(style: nil)
+        super.init()
     }
     
     @available(*, unavailable)

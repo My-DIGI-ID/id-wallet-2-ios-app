@@ -26,7 +26,7 @@ private enum Constants {
     }
     
     enum NavigationBar {
-        static let titleFont = Typography.regular.headingFont
+        static let titleFont: UIFont = .plexSansBold(25)
     }
     
     enum Layout {
@@ -67,7 +67,7 @@ enum QRScannerResult {
     case cancelled
 }
 
-class QRScannerViewController: BareBaseViewController {
+class QRScannerViewController: BaseViewController {
     
     var completion: (QRScannerResult) -> Void
     
@@ -76,11 +76,11 @@ class QRScannerViewController: BareBaseViewController {
         button.tintColor = .primaryBlue
         button.setTitleTextAttributes([
             .foregroundColor: UIColor.primaryBlue,
-            .font: Typography.regular.bodyFont
+            .font: UIFont.plexSans(15)
         ], for: .normal)
         button.setTitleTextAttributes([
             .foregroundColor: UIColor.primaryBlue,
-            .font: Typography.regular.bodyFont
+            .font: UIFont.plexSans(15)
         ], for: .highlighted)
         return button
     }()
@@ -120,7 +120,7 @@ class QRScannerViewController: BareBaseViewController {
             string: Constants.Text.hint,
             attributes: [
                 .foregroundColor: UIColor.grey1,
-                .font: Typography.regular.subHeadingFont
+                .font: UIFont.plexSans(17)
             ]
         )
         return label
@@ -166,7 +166,7 @@ class QRScannerViewController: BareBaseViewController {
     
     init(completion: @escaping (QRScannerResult) -> Void) {
         self.completion = completion
-        super.init(style: nil)
+        super.init()
     }
     
     @available(*, unavailable)

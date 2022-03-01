@@ -36,7 +36,7 @@ fileprivate extension ImageNameIdentifier {
     static let mesaBackground = ImageNameIdentifier(rawValue: "MesaBackground")
 }
 
-final class WalletViewController: BareBaseViewController {
+final class WalletViewController: BaseViewController {
     fileprivate typealias Style = Constants.Styles
     fileprivate typealias Layout = Constants.Layouts
     
@@ -83,13 +83,6 @@ final class WalletViewController: BareBaseViewController {
     }()
     
     // MARK: - Lifecycle
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) is not supported. Use init() instead")
-    }
-    
-    init() {
-        super.init()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

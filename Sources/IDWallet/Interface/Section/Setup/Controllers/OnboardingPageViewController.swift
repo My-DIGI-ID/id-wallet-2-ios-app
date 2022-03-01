@@ -25,10 +25,11 @@ private enum Constants {
     enum Layout {
         static let verticalSpacing = 40.0
         static let verticalTextSpacing = 18.0
-        static let horizontalTextPadding = 24.0
-        static let horizontalImageMargin = 0.0
-        
-        static let imageWidthToViewWidthRatio: CGFloat = 235 / 414
+        static let horizontalTextPadding = 30.0
+
+        static let minImageWidth = 220.0
+        static let minImageHeight = 240.0
+
         static let contentStackViewInset: UIEdgeInsets = .init(
             top: 0,
             left: horizontalTextPadding,
@@ -38,7 +39,7 @@ private enum Constants {
     }
 }
 
-final class OnboardingPageViewController: BareBaseViewController {
+final class OnboardingPageViewController: BaseViewController {
     fileprivate typealias Styles = Constants.Styles
     fileprivate typealias Layout = Constants.Layout
     
@@ -49,7 +50,7 @@ final class OnboardingPageViewController: BareBaseViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.accessibilityIdentifier = ViewID.imageView.key
         imageView.image = viewModel.image
-        
+
         [
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor), // ratio 1:1
         ].activate()
@@ -76,7 +77,7 @@ final class OnboardingPageViewController: BareBaseViewController {
         textView.accessibilityIdentifier = ViewID.subHeadingLabel.key
         textView.label.text = viewModel.subHeading
         textView.label.font = .plexSans(17)
-        textView.label.textColor = .black
+        textView.label.textColor = .grey1
         textView.label.lineBreakMode = .byWordWrapping
         textView.label.textAlignment = .center
         return textView
@@ -97,7 +98,7 @@ final class OnboardingPageViewController: BareBaseViewController {
             with: ["heading": headingLabel, "subHeading": subHeadingLabel],
             metrics: ["textspc": Layout.verticalTextSpacing]
         ).activate()
-        
+
         return view
     }()
     
@@ -132,7 +133,7 @@ final class OnboardingPageViewController: BareBaseViewController {
     // MARK: - Initialization
     init(viewModel: ViewModel) {
         self.viewModel = viewModel
-        super.init(style: nil)
+        super.init()
     }
     
     required init?(coder: NSCoder) {
@@ -144,9 +145,14 @@ final class OnboardingPageViewController: BareBaseViewController {
         super.viewDidLoad()
         view.backgroundColor = Styles.backgroundColor
         view.embed(stackView, insets: Layout.contentStackViewInset)
-        
+
+        let size = imageView.image?.size ?? CGSize.zero
+        let aspectRatio = size.width / size.height
+
         [
-            imageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: Layout.imageWidthToViewWidthRatio)
+            imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor, multiplier: aspectRatio),
+            imageView.widthAnchor.constraint(greaterThanOrEqualToConstant: Constants.Layout.minImageWidth),
+            imageView.heightAnchor.constraint(greaterThanOrEqualToConstant: Constants.Layout.minImageHeight)
         ].activate()
     }
 }

@@ -16,318 +16,346 @@ import UIKit
 
 // MARK: - Configuration
 
-extension PinEntryViewController {
-    
-    enum ViewID: String, BaseViewID {
-        case containerView
-        case titleContainer
-        case titleLabel
-        case titleSpacer
-        case cancelButton
-        case headingLabel
-        case subHeadingLabel
-        case pinCodeView
-        case numberPad
-        case commitButton
-        
-        var key: String { rawValue }
+private enum Constants {
+    enum Styles {
+        static let backgroundColor: UIColor = .primaryBlue
+        static let textColor: UIColor = .white
+        static let titleFont: UIFont = .plexSansBold(15.0)
+        static let headerFont: UIFont = .plexSansBold(25.0)
+        static let subHeaderFont: UIFont = .plexSans(17.0)
+        static let subHeaderTextColor: UIColor = .white
+        static let commitButtonFont: UIFont = .plexSansBold(15.0)
     }
-    
-    struct Style: BaseViewControllerStyle {
-        static let regular = Style()
-        let themeContext: ThemeContext
-        let layout: Layout
-        let pinCodeViewStyle: PinCodeView.Style
-        let numberPadStyle: NumberPad.Style
-        
-        init() {
-            self.init(themeContext: ThemeContext.main)
-        }
-        
-        init(
-            themeContext: ThemeContext,
-            layout: Layout? = nil,
-            pinCodeViewStyle: PinCodeView.Style = .regular,
-            numberPadStyle: NumberPad.Style = .regular
-        ) {
-            self.themeContext = themeContext
-            self.layout = layout ?? defaultOrCompressed(.regular, .compressed)
-            self.pinCodeViewStyle = pinCodeViewStyle
-            self.numberPadStyle = numberPadStyle
-        }
-    }
-    
-    struct Layout: BaseViewControllerLayout {
-        static let regular = Layout(
-            views: [
-                .containerView: .init(
-                    padding: Padding(20, top: 60, bottom: 40)),
-                .headingLabel: .init(
-                    // wrap text evenly across lines:
-                    padding: Padding(
-                        horizontal: [.greaterThanOrEqual(1000, 50)]
-                    )),
-                .titleSpacer: .init(
-                    // Force title and button to the sides:
-                    size: .init(width: .equal(1000, 50), height: .equal(0)))
-            ],
-            labelVerticalSpacing: 20.0,
-            verticalSpacing: 50.0
-        )
-        
-        static let compressed = Layout(
-            views: [
-                .containerView: .init(
-                    padding: Padding(20, top: 30, bottom: 20)),
-                .headingLabel: .init(
-                    // wrap text evenly across lines:
-                    padding: Padding(
-                        horizontal: [.equal(1000, 50)]
-                    )),
-                .subHeadingLabel: .init(
-                    // wrap text evenly across lines:
-                    padding: Padding(
-                        horizontal: [.equal(1000, 50)]
-                    )),
-                .titleSpacer: .init(
-                    // Force title and button to the sides:
-                    size: .init(width: .equal(1000, 50), height: .equal(0)))
-            ],
-            labelVerticalSpacing: 0.0,
-            verticalSpacing: 20.0
-        )
-        
-        let views: ViewsLayout<ViewID>
-        let labelVerticalSpacing: CGFloat
-        let verticalSpacing: CGFloat
+
+    enum Layout {
+        static let paddingTop = 60.0
+        static let paddingBottom = 48.0
+        static let paddingHorizontal = 24.0
+
+        static let primaryButtonWidth = 200.0
     }
 }
 
 // MARK: -
 // MARK: - PinEntryViewController
 
-class PinEntryViewController: BaseViewController<
-PinEntryViewController.ViewID,
-PinEntryViewController.Style,
-PinEntryViewModel>,
-NumberPadDelegate {
+class PinEntryViewController: BaseViewController, NumberPadDelegate {
     
     // MARK: - Views
-    
-    // swiftlint:disable function_body_length
-    override func createOrUpdateViews() {
-        super.createOrUpdateViews()
-        
-        var didCreate = false
-        
-        style.themeContext.applyPageBackgroundStyles(view: view)
-        
-        makeOrUpdateVStack(
-            id: .containerView,
-            alignment: .center, distribution: .equalCentering, spacing: style.layout.verticalSpacing,
-            removeExistingArrangedViews: false,
-            in: view, didMake: &didCreate
-        ) { vstack, didCreate in
-            vstack.translatesAutoresizingMaskIntoConstraints = false
-            
-            self.makeOrUpdateHStack(
-                id: .titleContainer,
-                alignment: .firstBaseline,
-                distribution: .fill,
-                removeExistingArrangedViews: false,
-                in: vstack, didMake: &didCreate
-            ) { hstack, didCreate in
-                hstack.translatesAutoresizingMaskIntoConstraints = false
-                
-                self.makeOrUpdateTitle(
-                    id: .titleLabel,
-                    text: self.viewModel.presentation.title,
-                    in: hstack, didMake: &didCreate
-                ) { label in
-                    label.translatesAutoresizingMaskIntoConstraints = false
-                    label.textAlignment = .left
-                }
-                
-                self.makeOrUpdateView(
-                    id: .titleSpacer,
-                    in: hstack, didMake: &didCreate
-                ) { spacer in
-                    spacer.translatesAutoresizingMaskIntoConstraints = false
-                    spacer.backgroundColor = .red
-                }
-                
-                self.makeOrUpdateSymbolButton(
-                    id: .cancelButton,
-                    systemName: "xmark",
-                    in: hstack, didMake: &didCreate
-                ) { cancelButton in
-                    cancelButton.translatesAutoresizingMaskIntoConstraints = false
-                }
-            }
-            
-            self.makeOrUpdateHeading(
-                id: .headingLabel,
-                text: self.viewModel.presentation.heading,
-                in: vstack, didMake: &didCreate
-            ) { label in
-                label.translatesAutoresizingMaskIntoConstraints = false
-                label.numberOfLines = 0
-                label.lineBreakMode = .byWordWrapping
-                label.textAlignment = .center
-                label.makeOrUpdateHeightConstraint(
-                    height: self.style.themeContext.typography.headingFont.lineHeight * 2,
-                    relation: .greaterThanOrEqual,
-                    priority: .init(251))
-            }
-            
-            self.makeOrUpdateSubHeading(
-                id: .subHeadingLabel,
-                text: self.viewModel.presentation.subHeading,
-                in: vstack, didMake: &didCreate
-            ) { label in
-                label.translatesAutoresizingMaskIntoConstraints = false
-                label.numberOfLines = 0
-                label.lineBreakMode = .byWordWrapping
-                label.textAlignment = .center
-                
-                label.makeOrUpdateHeightConstraint(
-                    height: self.style.themeContext.typography.subHeadingFont.lineHeight * 3,
-                    relation: .greaterThanOrEqual,
-                    priority: .init(251))
-            }
-            
-            self.makeOrUpdatePinCodeView(
-                id: .pinCodeView, pin: self.viewModel.pin,
-                in: vstack, didMake: &didCreate
-            ) { pinCodeView in
-                pinCodeView.translatesAutoresizingMaskIntoConstraints = false
-            }
-            
-            self.makeOrUpdateNumberPad(
-                id: .numberPad,
-                in: vstack, didMake: &didCreate
-            ) { view in
-                view.translatesAutoresizingMaskIntoConstraints = false
-                vstack.setCustomSpacing(0, after: view)
-            }
-            
-            self.makeOrUpdatePrimaryActionButton(
-                id: .commitButton,
-                title: self.viewModel.presentation.commitActionTitle,
-                in: vstack, didMake: &didCreate
-            ) { button in
-                button.translatesAutoresizingMaskIntoConstraints = false
-            }
-        }
-        
-        // Trigger layout if views have been created
-        
-        if didCreate {
-            resetConstraints()
-            view.setNeedsUpdateConstraints()
-        }
+
+    enum ViewID: String, BaseViewID {
+        case containerView
+        case headerContainer
+        case titleLabel
+        case cancelButton
+
+        case textContentContainer
+        case headingLabel
+        case subHeadingLabel
+        case pinCodeView
+
+        case footerContainer
+        case numberPad
+        case commitButton
+
+        var key: String { rawValue }
     }
-    
-    // MARK: - Layout
-    
-    override func createOrUpdateConstraints() {
-        super.createOrUpdateConstraints()
-        guard !hasControlledConstraints else { return }
-        
-        addConstraintsForViewsLayout()
-    }
-    
-    // MARK: - Bindings
-    
-    // swiftlint:disable function_body_length
-    override func activateBindings() {
-        super.activateBindings()
-        
-        guard
-            !areBindingsActive,
-            let viewModel = viewModel,
-            let numberPad = controlledView(.numberPad) as? NumberPad,
-            let commitButton = controlledView(.commitButton) as? UIButton,
-            let cancelButton = controlledView(.cancelButton) as? UIButton,
-            let titleLabel = controlledView(.titleLabel) as? UILabel,
-            let headingLabel = controlledView(.headingLabel) as? UILabel,
-            let subHeadingLabel = controlledView(.subHeadingLabel) as? UILabel,
-            let pinCodeView = controlledView(.pinCodeView) as? PinCodeView
-        else {
-            return
-        }
-        
-        bind(
-            activate: { numberPad.delegate = self },
-            deactivate: { [weak numberPad] in numberPad?.delegate = nil }
+
+    lazy var containerView: UIStackView = {
+        let result = UIStackView()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.containerView.key
+
+        result.axis = .vertical
+
+        result.addArrangedSubview(headerContainer)
+        result.addArrangedSubview(textContentContainer)
+        result.addArrangedSubview(pinCodeContainer)
+        result.addArrangedSubview(footerContainer)
+
+        return result
+    }()
+
+    lazy var headerContainer: UIStackView = {
+        let result = UIStackView()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.headerContainer.key
+
+        result.axis = .horizontal
+
+        result.addArrangedSubview(titleLabel)
+        result.addArrangedSubview(cancelButton)
+
+        return result
+    }()
+
+    lazy var titleLabel: UILabel = {
+        let result = UILabel()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.titleLabel.key
+
+        result.text = viewModel.presentation.title
+        result.font = Constants.Styles.titleFont
+        result.textColor = Constants.Styles.textColor
+        result.textAlignment = .center
+
+        return result
+    }()
+
+    lazy var cancelButton: UIButton = {
+        let result = UIButton()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.cancelButton.key
+
+        result.setImage(.init(systemName: "xmark")?.withRenderingMode(.alwaysOriginal).withTintColor(.white), for: .normal)
+
+        result.addAction(.init(handler: { [weak self] _ in if let self = self {
+            self.viewModel.cancel(self)
+        }}), for: .touchUpInside)
+
+        return result
+    }()
+
+    lazy var textContentContainer: UIStackView = {
+        let result = UIStackView()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.textContentContainer.key
+
+        result.axis = .vertical
+
+        result.addArrangedSubview(headingLabel)
+        result.addArrangedSubview(subHeadingLabel)
+
+        return result
+    }()
+
+    lazy var headingLabel: UILabel = {
+        let result = UILabel()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.headerContainer.key
+
+        result.text = viewModel.presentation.heading
+        result.font = Constants.Styles.headerFont
+        result.textColor = Constants.Styles.textColor
+        result.textAlignment = .center
+        result.numberOfLines = 0
+        result.lineBreakMode = .byWordWrapping
+
+        return result
+    }()
+
+    lazy var subHeadingLabel: UILabel = {
+        let result = UILabel()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.subHeadingLabel.key
+
+        result.text = viewModel.presentation.subHeading
+        result.font = Constants.Styles.subHeaderFont
+        result.textColor = Constants.Styles.subHeaderTextColor
+        result.textAlignment = .center
+        result.numberOfLines = 0
+        result.lineBreakMode = .byWordWrapping
+
+        return result
+    }()
+
+    lazy var pinCodeContainer: AlignmentWrapperView = {
+        let result = AlignmentWrapperView()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+
+        result.horizontalAlignment = .center
+        result.verticalAlignment = .center
+
+        result.arrangedView = pinCodeView
+
+        return result
+    }()
+
+    lazy var pinCodeView: PinCodeView = {
+        let result = PinCodeView(pin: viewModel.pin)
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.pinCodeView.key
+
+        return result
+    }()
+
+    lazy var footerContainer: UIStackView = {
+        let result = UIStackView()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.footerContainer.key
+
+        result.axis = .vertical
+
+        result.addArrangedSubview(numberPad)
+        result.addArrangedSubview(commitButton)
+
+        return result
+    }()
+
+    lazy var numberPad: NumberPad = {
+        let result = NumberPad()
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.numberPad.key
+
+        return result
+    }()
+
+    lazy var commitButton: WalletButton = {
+        let result = WalletButton(
+            titleText: viewModel.presentation.commitActionTitle,
+            image: nil,
+            imageAlignRight: false,
+            style: WalletButton.Style(
+                normal: WalletButton.Style.Color(
+                    backgroundColor: .white,
+                    borderColor: .clear,
+                    textColor: .primaryBlue
+                ),
+                disabled: WalletButton.Style.Color(
+                    backgroundColor: .white.withAlphaComponent(0.15),
+                    borderColor: .clear,
+                    textColor: .white.withAlphaComponent(0.3)
+                )
+            ),
+            primaryAction: .init(handler: { [weak self] _ in if let self = self {
+                guard self.viewModel.canCommit else {
+                    return
+                }
+                self.viewModel.commit(self)
+            }})
         )
-        
-        bind(
-            control: commitButton, target: self, action: #selector(commitButtonTapped(sender:)),
-            for: .touchUpInside)
-        bind(
-            control: cancelButton, target: self, action: #selector(cancelButtonTapped(sender:)),
-            for: .touchUpInside)
-        
+
+        result.translatesAutoresizingMaskIntoConstraints = false
+        result.accessibilityIdentifier = ViewID.commitButton.key
+
+        return result
+    }()
+
+    // MARK: - Configuration & State
+
+    let viewModel: PinEntryViewModel
+
+    var subscriptions: [AnyCancellable] = []
+
+    // MARK: - Initialization
+
+    init(viewModel: PinEntryViewModel) {
+        self.viewModel = viewModel
+        super.init()
+        self.preferredStatusBarStyle = .lightContent
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // MARK: - Life Cycle
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        view.backgroundColor = .primaryBlue
+        view.addSubview(containerView)
+        setupLayout()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        guard subscriptions.isEmpty else { return }
+
+        numberPad.delegate = self
+
         let animationDuration = 0.25
-        bind(subscriptions: [
+        subscriptions = [
             viewModel.$presentation.sink { presentation in
-                titleLabel.text = presentation.title
-                headingLabel.text = presentation.heading
-                subHeadingLabel.text = presentation.subHeading
-                commitButton.setTitle(presentation.commitActionTitle, for: .normal)
+                self.titleLabel.text = presentation.title
+                self.headingLabel.text = presentation.heading
+                self.subHeadingLabel.text = presentation.subHeading
+                self.commitButton.setTitle(presentation.commitActionTitle, for: .normal)
             },
-            viewModel.$canAdd.sink { value in
-                UIView.animate(withDuration: animationDuration) {
-                    numberPad.canAddDigit = value
+            viewModel.$canCommit.sink { canCommit in
+                if self.viewModel.autoCommit {
+                    self.commitButton.isHidden = true
                 }
-            },
-            viewModel.$canRemove.sink { value in
-                UIView.animate(withDuration: animationDuration) {
-                    numberPad.canRemoveLastDigit = value
-                }
-            },
-            viewModel.$canCommit.sink { value in
-                if viewModel.autoCommit {
-                    commitButton.isHidden = true
-                }
-                UIView.animate(withDuration: animationDuration) {
-                    commitButton.isEnabled = value
-                    viewModel.presentation.themeContext.applyPrimaryActionButtonStyles(
-                        button: commitButton)
-                }
+                self.commitButton.isEnabled = canCommit
             },
             viewModel.$pin.sink { value in
                 UIView.animate(withDuration: animationDuration) {
-                    pinCodeView.pin = value
+                    self.pinCodeView.pin = value
                 }
             }
-        ])
+        ]
     }
-    // swiftlint:enable function_body_length
-    
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        numberPad.delegate = nil
+
+        subscriptions = []
+    }
+
+    // MARK: - Actions
+
     func numberPadDidRemoveLastDigit(_ numberPad: NumberPad) {
-        if let viewModel = viewModel, viewModel.canRemove {
+        if viewModel.canRemove {
             viewModel.remove()
         }
     }
-    
+
     func numberPad(_ numberPad: NumberPad, didAddDigit digit: String) {
-        if let viewModel = viewModel, viewModel.canAdd && viewModel.isValidPinCharacter(digit) {
+        if viewModel.canAdd && viewModel.isValidPinCharacter(digit) {
             viewModel.add(digit, viewController: self)
         }
     }
-    
-    @objc
-    func commitButtonTapped(sender: UIButton) {
-        guard let viewModel = self.viewModel, viewModel.canCommit else {
-            return
-        }
-        viewModel.commit(self)
-    }
-    
-    @objc
-    func cancelButtonTapped(sender: UIButton) {
-        viewModel?.cancel(self)
+
+    // MARK: - Layout
+
+    func setupLayout() {
+        containerView.distribution = .equalSpacing
+        containerView.alignment = .fill
+
+        headerContainer.distribution = .fill
+        headerContainer.alignment = .firstBaseline
+
+        textContentContainer.spacing = 24.0
+        textContentContainer.alignment = .fill
+
+        footerContainer.spacing = 0
+        footerContainer.alignment = .center
+
+        [
+            "V:|-(padTop)-[container]-(padBot)-|",
+            "H:|-(padH)-[container]-(padH)-|",
+        ].constraints(
+            with: [
+                "container": containerView
+            ], metrics: [
+                "padTop": Constants.Layout.paddingTop,
+                "padBot": Constants.Layout.paddingBottom,
+                "padH": Constants.Layout.paddingHorizontal
+            ]
+        ).activate()
+
+        [
+            commitButton.centerXAnchor.constraint(
+                equalTo: containerView.centerXAnchor),
+            commitButton.widthAnchor.constraint(
+                equalToConstant: Constants.Layout.primaryButtonWidth),
+            // Just testing:
+            pinCodeView.widthAnchor.constraint(equalToConstant: 206.0)
+        ].activate()
     }
 }

@@ -70,20 +70,52 @@ class AlignmentWrapperView: UIView {
                 arrangedViewConstraints![1].identifier = "arrangedView-trailing"
                 arrangedViewConstraints![2].identifier = "arrangedView-bottom"
                 arrangedViewConstraints![3].identifier = "arrangedView-leading"
-                NSLayoutConstraint.activate(arrangedViewConstraints!)
-                
-                addConstraints(arrangedViewConstraints!)
+                arrangedViewConstraints?.activate()
                 
                 setNeedsLayout()
             }
         }
     }
+
     private var arrangedViewConstraints: [NSLayoutConstraint]?
     
-    private var topGuide: UILayoutGuide!
-    private var trailingGuide: UILayoutGuide!
-    private var bottomGuide: UILayoutGuide!
-    private var leadingGuide: UILayoutGuide!
+    private lazy var topGuide: UILayoutGuide = {
+        let result = UILayoutGuide()
+
+        result.identifier = "topGuide"
+        addLayoutGuide(result)
+        result.topAnchor.constraint(equalTo: topAnchor).isActive = true
+
+        return result
+    }()
+    private lazy var trailingGuide: UILayoutGuide = {
+        let result = UILayoutGuide()
+
+        result.identifier = "trailingGuide"
+        addLayoutGuide(result)
+        result.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+
+        return result
+    }()
+    private lazy var bottomGuide: UILayoutGuide = {
+        let result = UILayoutGuide()
+
+        result.identifier = "bottomGuide"
+        addLayoutGuide(result)
+        result.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+
+        return result
+    }()
+    private lazy var leadingGuide: UILayoutGuide = {
+        let result = UILayoutGuide()
+
+        result.identifier = "leadingGuide"
+        addLayoutGuide(result)
+        result.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+
+        return result
+    }()
+
     private var guideConstraints: [NSLayoutConstraint]!
     
     var verticalAlignment: VerticalAlignment = .center {
@@ -91,6 +123,7 @@ class AlignmentWrapperView: UIView {
             updateVerticalAlignmentConstraints()
         }
     }
+
     private var verticalAlignmentConstraints = [VerticalAlignment: [NSLayoutConstraint]]()
     
     var horizontalAlignment: HorizontalAlignment = .center {
@@ -98,41 +131,15 @@ class AlignmentWrapperView: UIView {
             updateHorizontalAlignmentConstraints()
         }
     }
+
     private var horizontalAlignmentConstraints = [HorizontalAlignment: [NSLayoutConstraint]]()
         
     // MARK: - Layout Guides
     private func setupOnce() {
-        setupLayoutGuides()
         setupVerticalAlignmentConstraints()
         setupHorizontalAlignmentConstraints()
     }
-    
-    private func setupLayoutGuides() {
-        topGuide = UILayoutGuide()
-        topGuide.identifier = "topGuide"
-        addLayoutGuide(topGuide)
-        
-        trailingGuide = UILayoutGuide()
-        trailingGuide.identifier = "trailingGuide"
-        addLayoutGuide(trailingGuide)
-        
-        bottomGuide = UILayoutGuide()
-        bottomGuide.identifier = "bottomGuide"
-        addLayoutGuide(bottomGuide)
-        
-        leadingGuide = UILayoutGuide()
-        leadingGuide.identifier = "leadingGuide"
-        addLayoutGuide(leadingGuide)
-        
-        guideConstraints = [
-            topGuide.topAnchor.constraint(equalTo: topAnchor),
-            trailingGuide.trailingAnchor.constraint(equalTo: trailingAnchor),
-            bottomGuide.bottomAnchor.constraint(equalTo: bottomAnchor),
-            leadingGuide.leadingAnchor.constraint(equalTo: leadingAnchor)
-        ]
-        NSLayoutConstraint.activate(guideConstraints)
-    }
-    
+
     // MARK: - Vertical Alignment
     private func setupVerticalAlignmentConstraints() {
         verticalAlignmentConstraints = [
@@ -154,12 +161,13 @@ class AlignmentWrapperView: UIView {
         ]
         updateHorizontalAlignmentConstraints()
     }
+
     private func updateVerticalAlignmentConstraints() {
         for key in verticalAlignmentConstraints.keys {
             if key == verticalAlignment {
-                NSLayoutConstraint.activate(verticalAlignmentConstraints[key]!)
+                verticalAlignmentConstraints[key]?.activate()
             } else {
-                NSLayoutConstraint.deactivate(verticalAlignmentConstraints[key]!)
+                verticalAlignmentConstraints[key]?.deactivate()
             }
         }
     }
@@ -185,17 +193,19 @@ class AlignmentWrapperView: UIView {
         ]
         updateHorizontalAlignmentConstraints()
     }
+
     private func updateHorizontalAlignmentConstraints() {
         for key in horizontalAlignmentConstraints.keys {
             if key == horizontalAlignment {
-                NSLayoutConstraint.activate(horizontalAlignmentConstraints[key]!)
+                horizontalAlignmentConstraints[key]?.activate()
             } else {
-                NSLayoutConstraint.deactivate(horizontalAlignmentConstraints[key]!)
+                horizontalAlignmentConstraints[key]?.deactivate()
             }
         }
     }
     
     // MARK: - Initialization
+
     init(
         _ arrangedView: UIView? = nil,
         horizontalAlignment: HorizontalAlignment = .fill,
@@ -212,6 +222,7 @@ class AlignmentWrapperView: UIView {
         super.init(frame: frame)
         setupOnce()
     }
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setupOnce()
