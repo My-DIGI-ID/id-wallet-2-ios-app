@@ -38,38 +38,38 @@
         }
       },
       {
-        "package": "HelpScreens",
-        "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/help-screens.git",
+        "package": "Aries",
+        "repositoryURL": "git@github.com:My-DIGI-ID/id-wallet-2-ios-aries-sdk.git",
         "state": {
           "branch": "development",
-          "revision": "ede587f95a17285c62b7f03c2bd7787f35e42650",
+          "revision": "f49fbcf5c6f3f3388641adebfc6b329eaf1b625a",
           "version": null
         }
       },
       {
-        "package": "Aries",
-        "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-aries-sdk",
+        "package": "HelpScreens",
+        "repositoryURL": "git@github.com:My-DIGI-ID/id-wallet-2-ios-dialog-web-content.git",
         "state": {
           "branch": "development",
-          "revision": "0d24e411e2ed8c2e3d17f6f5aefe017106015eae",
+          "revision": "43d81f4e8a1151588418141efcb61eb1ff04befe",
           "version": null
         }
       },
       {
         "package": "Indy",
-        "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-indy-sdk",
+        "repositoryURL": "git@github.com:My-DIGI-ID/id-wallet-2-ios-indy-sdk.git",
         "state": {
-          "branch": "development",
-          "revision": "16b646a6942a206a9dd9e423cfcf4880942c3758",
-          "version": null
+          "branch": null,
+          "revision": "9af41c219f1d1a6d31f6251be3289a844cbbf106",
+          "version": "0.1.0"
         }
       },
       {
         "package": "Mediator",
-        "repositoryURL": "https://eu-de.git.cloud.ibm.com/blockchain-practice-dach/projects/ssi-bundeskanzleramt/id-wallet/ios-mediator-sdk",
+        "repositoryURL": "git@github.com:My-DIGI-ID/id-wallet-2-ios-mediator-sdk.git",
         "state": {
           "branch": "development",
-          "revision": "d344cd0740ce4d7ba583d91ab4253b682a366ce3",
+          "revision": "c31465633c44a1d514fa701ca53a5a7f2057b01a",
           "version": null
         }
       },
